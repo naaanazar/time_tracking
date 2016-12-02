@@ -12,6 +12,6 @@ class TimeManageController extends Controller
      */
     public function index()
     {
-        echo 'home page';
+        return view('time_manage.index');
     }
 }
