@@ -4,17 +4,18 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Auth;
 
 class Permision
 {
     protected $router;
     protected $permision_list = [
-        'Admin' => ['logout', 'login', 'index'],
-        'Supervisor' => ['logout', 'login', 'index'],
-        'Lead' => ['logout', 'login', 'index'],
-        'Developer' => ['logout', 'login', 'index'],
-        'QA_Engineer' => ['logout', 'login', 'index'],
-        'HR_Manager' => ['logout', 'login', 'index']
+        'Admin' => ['logout', 'index'],
+        'Supervisor' => ['logout', 'index'],
+        'Lead' => ['logout', 'index'],
+        'Developer' => ['logout', 'index'],
+        'QA_Engineer' => ['logout', 'index'],
+        'HR_Manager' => ['logout', 'index']
     ];
 
     public function __construct(Router $router)
@@ -26,12 +27,14 @@ class Permision
     {
         $action_name = explode('@', $this->router->getRoutes()->match($request)->getActionName());
 
-        if(false/*for unlogin user*/) {
-           return redirect('/users/login');
-        } elseif (in_array($action_name[1], $this->permision_list['Admin'])) {
+        return $next($request);
+
+        if(Auth::check() == false ) {
+           return redirect('/login');
+        } elseif (in_array($action_name[1], $this->permision_list[Auth::user()['original']['employe']])) {
             return $next($request);
         } else {
-            return $next($request);//redirect()->back();
+            return redirect()->back();
         }
     }
 }
