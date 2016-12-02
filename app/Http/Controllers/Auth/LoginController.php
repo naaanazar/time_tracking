@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Socialite;
 use App\Users;
 
@@ -58,24 +59,33 @@ class LoginController extends Controller
     {
         //****** ADD if
 
-        $user = Socialite::driver('google')->user();
+        if (Input::get('denied') != '') {
+
+            echo "bad";
 
 
+        }  else {
+
+            $user = Socialite::driver('google')->user();
 
 
-        $data = [
-            'name' => $user->getName(),
-            'email' => $user->getEmail()
-        ];
+            $data = [
+                'name' => $user->getName(),
+                'email' => $user->getEmail()
+            ];
 
-        $id = Users::getId('na@ukr.net');
+            $id = Users::getId('na@ukr.net');
 
-        if ($id) {
-            Auth::loginUsingId($id);
-            return redirect()->route('/');
+            if ($id) {
+                Auth::loginUsingId($id);
 
-        } else {
-            return redirect()->route('/login');
+                return redirect('/');
+                //return redirect()->route('/home');
+
+            } else {
+                return redirect()->route('/login');
+            }
+
         }
 
 
