@@ -11,10 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => ['permision']], function () {
+
+    // Auth
+
+    Auth::routes();
+
+    // Users Controller
+
+    //Route::get('/user/logout', 'UsersController@logout');
+    //Route::get('/user/login', 'UsersController@login');
+    Route::get('/user/create', 'UsersController@create_user');
+    Route::get('/user/update/{id}', 'UsersController@update_user');
+    Route::get('/user/delete/{id}', 'UsersController@delete_user');
+
+    // TimeManage Controller
+
+    Route::get('/', 'TimeManageController@index');
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
