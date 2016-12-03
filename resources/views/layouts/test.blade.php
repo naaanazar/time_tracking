@@ -68,11 +68,11 @@
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-static-top">
+   <!-- <nav class="navbar navbar-static-top">
         <div class="container">
             <div class="navbar-header">
 
-                <!-- Collapsed Hamburger -->
+
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                     <span class="sr-only">Toggle Navigation</span>
                     <span class="icon-bar"></span>
@@ -80,13 +80,14 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <!-- Branding Image -->
+
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="images/ignatiuz-logo.png" width="247" height="76" />
                 </a>
             </div>
         </div>
-    </nav>
+    </nav>-->
+    <div class="alert alert-success"><a href="{{ url('/') }}"><img src="images/ignatiuz-logo.png" width="247" height="76" /></a></div>
 
     @yield('content')
 </div>

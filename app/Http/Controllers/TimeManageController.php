@@ -14,6 +14,11 @@ class TimeManageController extends Controller
      */
     public function index()
     {
-        return view('time_manage.index');
+        if (Auth::guest()) {
+            return view('auth.login');
+        }
+        else {
+            return view('time_manage.index');
+        }
     }
 }

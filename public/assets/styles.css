@@ -38,6 +38,7 @@ body {
     margin-bottom: 10px;
 }
 #login .form-signin input[type="text"],
+#login .form-signin input[type="email"],
 #login .form-signin input[type="password"] {
     font-size: 16px;
     height: auto;
@@ -426,3 +427,4 @@ textarea.input-xlarge {
     border-radius: 0;
     width: 35.5% !important;
 }
+

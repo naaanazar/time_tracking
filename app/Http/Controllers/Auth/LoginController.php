@@ -57,17 +57,15 @@ class LoginController extends Controller
      */
     public function handleProviderCallback()
     {
-        //****** ADD if
+
 
         if (Input::get('denied') != '') {
 
-            echo "bad";
-
+            return redirect()->route('/login');
 
         }  else {
 
             $user = Socialite::driver('google')->user();
-
 
             $data = [
                 'name' => $user->getName(),
