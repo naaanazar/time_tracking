@@ -9,7 +9,6 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 
 use Mail;
-
 use App\Mail\mailCreateUser;
 
 

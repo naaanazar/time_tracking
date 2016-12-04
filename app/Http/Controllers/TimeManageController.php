@@ -7,10 +7,6 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-use Mail;
-
-use App\Mail\mailCreateUser;
-
 
 
 class TimeManageController extends Controller
@@ -23,7 +19,7 @@ class TimeManageController extends Controller
     public function index()
     {
 
-       // Mail::to('naaa@ukr.net')->send(new mailCreateUser);
+
 
         if (Auth::guest()) {
             return view('auth.login');
