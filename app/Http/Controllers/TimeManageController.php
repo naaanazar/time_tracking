@@ -18,7 +18,8 @@ class TimeManageController extends Controller
             return view('auth.login');
         }
         else {
-            return view('time_manage.index');
+           // return view('time_manage.index');
+            return view('layouts.index_template');
         }
     }
 }

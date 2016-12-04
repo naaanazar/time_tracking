@@ -8,10 +8,10 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
-use Socialite;
+//use Socialite;
 use App\Users;
 
-//use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -72,7 +72,7 @@ class LoginController extends Controller
                 'email' => $user->getEmail()
             ];
 
-            $id = Users::getId('na@ukr.net');
+            $id = Users::getId($data['email']);
 
             if ($id) {
                 Auth::loginUsingId($id);
@@ -81,7 +81,9 @@ class LoginController extends Controller
                 //return redirect()->route('/home');
 
             } else {
-                return redirect()->route('/login');
+
+                return view('auth.login', ['loginStatus' => 'You account do not register']);
+
             }
 
         }

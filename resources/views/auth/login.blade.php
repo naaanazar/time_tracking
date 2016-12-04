@@ -17,6 +17,11 @@
                                     <strong>{{ $errors->first('email') }}</strong>
                                 </span>
                             @endif
+                            @if ( isset($loginStatus))
+                                <span style="color: #a94442">
+                                    <strong>{{ $loginStatus }}</strong>
+                                </span>
+                            @endif
                         </div>
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <div class="usericon"><i class="fa fa-key"></i></div>
@@ -26,6 +31,7 @@
                                     <strong>{{ $errors->first('password') }}</strong>
                                 </span>
                             @endif
+
                         </div>
                             <div>
                                     <input type="checkbox" name="remember"> Remember Me |
