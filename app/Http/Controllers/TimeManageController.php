@@ -8,13 +8,26 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\User;
 
+
+
 class TimeManageController extends Controller
 {
     /**
      * home page
      */
+
+
     public function index()
     {
-        return view('time_manage.index');
+
+
+
+        if (Auth::guest()) {
+            return view('auth.login');
+        }
+        else {
+           // return view('time_manage.index');
+            return view('layouts.index_template');
+        }
     }
 }

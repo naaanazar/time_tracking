@@ -27,6 +27,8 @@ Route::group(['middleware' => ['permision']], function () {
 
 // Auth
 
+Route::get('/', 'TimeManageController@index');
+
 Auth::routes();
 
 Route::get('auth/google', 'Auth\LoginController@redirectToProvider');

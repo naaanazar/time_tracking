@@ -1,4 +1,4 @@
-@extends('layouts.test')
+@extends('layouts.archive.test')
 
 @section('content')
 

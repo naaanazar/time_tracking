@@ -7,10 +7,11 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Auth;
-use Socialite;
+use Illuminate\Support\Facades\Input;
+//use Socialite;
 use App\Users;
 
-//use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -56,26 +57,35 @@ class LoginController extends Controller
      */
     public function handleProviderCallback()
     {
-        //****** ADD if
-
-        $user = Socialite::driver('google')->user();
 
 
+        if (Input::get('denied') != '') {
 
-
-        $data = [
-            'name' => $user->getName(),
-            'email' => $user->getEmail()
-        ];
-
-        $id = Users::getId('na@ukr.net');
-
-        if ($id) {
-            Auth::loginUsingId($id);
-            return redirect()->route('/');
-
-        } else {
             return redirect()->route('/login');
+
+        }  else {
+
+            $user = Socialite::driver('google')->user();
+
+            $data = [
+                'name' => $user->getName(),
+                'email' => $user->getEmail()
+            ];
+
+            $id = Users::getId($data['email']);
+
+            if ($id) {
+                Auth::loginUsingId($id);
+
+                return redirect('/');
+                //return redirect()->route('/home');
+
+            } else {
+
+                return view('auth.login', ['loginStatus' => 'You account do not register']);
+
+            }
+
         }
 
 

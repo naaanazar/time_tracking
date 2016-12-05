@@ -7,6 +7,12 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+
+use Mail;
+use App\Mail\mailCreateUser;
+
+
+
 class RegisterController extends Controller
 {
     /*
@@ -27,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -68,4 +74,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+
+    //Mail::to('naaa@ukr.net')->send(new mailCreateUser);
 }
