@@ -34,15 +34,15 @@
                     <li class="active"> <a href="{{ url('/user/create') }}">Create User</a> </li>
                     <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle">Report <i class="caret"></i></a>
                         <ul class="dropdown-menu">
-                            <li> <a tabindex="-1" href="#">Activity</a> </li>
-                            <li> <a tabindex="-1" href="#">Dashboard</a> </li>
+                            <li> <a tabindex="-1" href="#">A--</a> </li>
+                            <li> <a tabindex="-1" href="#">--</a> </li>
                         </ul>
                     </li>
                     <li class="dropdown"> <a href="manage-client.html" role="button" class="dropdown-toggle" data-toggle="dropdown">Manage <i class="caret"></i></a>
                         <ul class="dropdown-menu">
                             <li> <a tabindex="-1" href="manage-client.html">Clients</a> </li>
-                            <li> <a tabindex="-1" href="#">Projects</a> </li>
-                            <li> <a tabindex="-1" href="#">Tasks</a> </li>
+                            <li> <a tabindex="-1" href="#">--</a> </li>
+                            <li> <a tabindex="-1" href="#">--</a> </li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -78,7 +78,7 @@
         color: #ccc;
         padding: 10px 60px;
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;">
-        <strong>Admin<strong>
+        <strong><?= isset($_SESSION['user_type'])? $_SESSION['user_type'] :'' ?><strong>
         <span>
     </div>
 </div>

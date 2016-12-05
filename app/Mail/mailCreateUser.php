@@ -16,9 +16,14 @@ class mailCreateUser extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $name;
+    public $email;
+    public $password;
+    public function __construct($name, $password, $email)
     {
-        //
+       $this->name = $name;
+       $this->email = $email;
+       $this->password = $password;
     }
 
     /**
@@ -28,6 +33,7 @@ class mailCreateUser extends Mailable
      */
     public function build()
     {
-        return $this->from('example@example.com')->view('mail.createUser');
+        return $this->from('example@example.com')->
+        view('mail.createUser');
     }
 }

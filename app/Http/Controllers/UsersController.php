@@ -7,11 +7,15 @@ use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Mail;
+use App\Mail\mailCreateUser;
+
 class UsersController extends Controller
 {
     /*
      * login
      * */
+    public $name1 = 'sdfdsfdsdsfdsf';
     public function login()
     {
         echo 'login';
@@ -28,18 +32,19 @@ class UsersController extends Controller
      * */
     public function create()
     {
-
         if(Input::all() == true) {
             $user = Input::all();
-
+            $password =$this->password_generate();
             User::create([
                 'name' => $user['name'],
                 'email' => $user['email'],
-                'password' => bcrypt($this->password_generate()),
+                'password' => bcrypt($password),
                 'employe' => $user['employe'],
                 'team_name' => $user['team_name'],
                 'remember_token' => $user['_token']
             ]);
+
+            Mail::to($user['email'])->send(new mailCreateUser($user['name'], $password, $user['email']));
 
             return redirect('/');
         }

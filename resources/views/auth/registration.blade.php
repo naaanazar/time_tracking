@@ -21,7 +21,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="focusedInput">User type</label>
                                     <div class="controls">
-                                        <select name="employe" class="input-xlarge focused" id="focusedInput" >
+                                        <select name="employe" class="input-xlarge focused" id="focusedInput" style="height: 42px"; >
                                             <option>Admin</option>
                                             <option>Supervisor</option>
                                             <option>Lead</option>
@@ -53,7 +53,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="focusedInput">Email</label>
                                     <div class="controls">
-                                        <input name="email" class="input-xlarge focused" id="focusedInput"  type="email" required>
+                                        <input name="email" class="input-xlarge focused"   type="email" required>
                                     </div>
                                     @if ($errors->has('email'))
                                         <span class="help-block">
@@ -64,7 +64,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="focusedInput">Team</label>
                                     <div class="controls">
-                                        <input name="team_name" class="input-xlarge focused" id="focusedInput"  type="textl" required>
+                                        <input name="team_name" class="input-xlarge focused"   type="textl" required>
                                     </div>
                                     @if ($errors->has('team_name'))
                                         <span class="help-block">
