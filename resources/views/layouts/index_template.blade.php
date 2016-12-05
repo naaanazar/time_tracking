@@ -64,7 +64,7 @@
 </div>
 <div class="alert alert-success"><a href="login.html"><img src="images/ignatiuz-logo.png" width="247" height="76" /></a></div>
 
-<a href="#" data-toggle="tooltip" title="Текст всплывающей подсказки">
+<a href="#" data-toggle="tooltip" title="">
 
 <div class="container">
     <div class="row-fluid">
