@@ -16,12 +16,12 @@
                 <!-- block -->
                 <div class="block-content collapse in">
                     <div class="span12">
-                        <form class="form-horizontal" role="form" method="POST" action=">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/user/create') }}">
                             {{ csrf_field() }}
                                 <div class="control-group">
                                     <label class="control-label" for="focusedInput">User type</label>
                                     <div class="controls">
-                                        <select class="input-xlarge focused" id="focusedInput" >
+                                        <select name="employe" class="input-xlarge focused" id="focusedInput" >
                                             <option>Admin</option>
                                             <option>Supervisor</option>
                                             <option>Lead</option>
@@ -41,7 +41,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="focusedInput">Name</label>
                                     <div class="controls">
-                                        <input class="input-xlarge focused" id="focusedInput"  type="text">
+                                        <input name="name" class="input-xlarge focused" id="focusedInput"  type="text">
                                     </div>
                                     @if ($errors->has('name'))
                                         <span class="help-block">
@@ -53,7 +53,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="focusedInput">Email</label>
                                     <div class="controls">
-                                        <input class="input-xlarge focused" id="focusedInput"  type="email" required>
+                                        <input name="email" class="input-xlarge focused" id="focusedInput"  type="email" required>
                                     </div>
                                     @if ($errors->has('email'))
                                         <span class="help-block">
@@ -64,7 +64,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="focusedInput">Team</label>
                                     <div class="controls">
-                                        <input class="input-xlarge focused" id="focusedInput"  type="textl" required>
+                                        <input name="team_name" class="input-xlarge focused" id="focusedInput"  type="textl" required>
                                     </div>
                                     @if ($errors->has('team_name'))
                                         <span class="help-block">
@@ -73,7 +73,7 @@
                                     @endif
                                 </div>
                                 <div class="form-actions">
-                                    <button type="submit" class="btn btn-large btn-primary" formaction="{{ url('/user/create') }}">Save</button> &nbsp;&nbsp;
+                                    <button type="submit" class="btn btn-large btn-primary" formaction="">Save</button> &nbsp;&nbsp;
                                     <button type="submit" class="btn btn-large btn-primary" formaction="{{ url('/') }}">Cancel</button>
                                 </div>
                     </div>
