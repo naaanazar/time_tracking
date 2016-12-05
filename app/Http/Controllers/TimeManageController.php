@@ -7,8 +7,6 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-
-
 class TimeManageController extends Controller
 {
     /**
@@ -22,9 +20,7 @@ class TimeManageController extends Controller
             return view('auth.login');
         }
         else {
-
-           return view('layouts.index_template');
-
+            return view('layouts.index_template');
         }
     }
 }
