@@ -62,7 +62,7 @@
         </div>
     </div>
 </div>
-<div class="alert alert-success"><a href="/"><img src="images/ignatiuz-logo.png" width="247" height="76" /></a></div>
+<div class="alert alert-success"><a href="/"><img src="/images/ignatiuz-logo.png" width="247" height="76" /></a></div>
 
 @yield('content')
 
