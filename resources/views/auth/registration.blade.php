@@ -1,6 +1,7 @@
 @extends('layouts.index_template')
 
 @section('content')
+        
         <div class="container">
             <div class="row-fluid">
                 <div class="span12 heading-top-margin">
@@ -94,6 +95,6 @@
                 <!-- /block -->
             </div>
         </div>
-
+        <script src="/js/jquery/jquery-3.1.1.min.js"></script>
         <script src="/js/registration.js"></script>
 @endsection
