@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Input;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -27,16 +28,17 @@ class UsersController extends Controller
      * */
     public function create()
     {
+
         if(Input::all() == true) {
             $user = Input::all();
-            $user['password'] = $this->password_generate();
 
             User::create([
                 'name' => $user['name'],
                 'email' => $user['email'],
-                'password' => bcrypt($user['password']),
+                'password' => bcrypt($this->password_generate()),
                 'employe' => $user['employe'],
-                'team_name' => $user['team_name']
+                'team_name' => $user['team_name'],
+                'remember_token' => $user['_token']
             ]);
 
             return redirect('/');
