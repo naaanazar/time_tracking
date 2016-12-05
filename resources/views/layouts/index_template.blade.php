@@ -25,13 +25,13 @@
     </script>
 </head>
 
-<body id="login">
+<body id="">
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container-fluid"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li class="active"> <a href="#">Create User</a> </li>
+                    <li class="active"> <a href="{{ url('/user/create') }}">Create User</a> </li>
                     <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle">Report <i class="caret"></i></a>
                         <ul class="dropdown-menu">
                             <li> <a tabindex="-1" href="#">Activity</a> </li>
