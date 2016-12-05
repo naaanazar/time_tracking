@@ -1,8 +1,6 @@
 @extends('layouts.index_template')
 
 @section('content')
-
-
         <div class="container">
             <div class="row-fluid">
                 <div class="span12 heading-top-margin">
@@ -63,9 +61,24 @@
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label" for="focusedInput">Team</label>
+
+                                    @if( $teams == true )
+
                                     <div class="controls">
-                                        <input name="team_name" class="input-xlarge focused" id="focusedInput"  type="textl" required>
+                                        <select name="team" class="input-xlarge focused" id="focusedInput" >
+
+                                        @foreach( $teams as $team )
+
+                                        <!--<input name="team_name" class="input-xlarge focused" id="focusedInput"  type="textl" required> -->
+                                            <option>{{ $team->team_name }}</option>
+
+                                        @endforeach
+
+                                        </select>
                                     </div>
+
+                                    @endif
+
                                     @if ($errors->has('team_name'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('team_name') }}</strong>

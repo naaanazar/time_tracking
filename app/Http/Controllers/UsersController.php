@@ -1,5 +1,8 @@
 <?php
 namespace App\Http\Controllers;
+
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\User;
 use Validator;
@@ -42,7 +45,10 @@ class UsersController extends Controller
 
             //return redirect('/');
         }
-        return view('auth.registration');
+
+        $teams = DB::table('teams')->get();
+
+        return view('auth.registration', compact('teams'));
     }
     /*
      * update user
