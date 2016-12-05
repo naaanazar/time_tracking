@@ -93,8 +93,5 @@
                 </div>
                 <!-- /block -->
             </div>
-
-
-
         </div>
 @endsection
