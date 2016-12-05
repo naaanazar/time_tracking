@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\User;
@@ -43,7 +42,7 @@ class UsersController extends Controller
                 'remember_token' => $user['_token']
             ]);
 
-            //return redirect('/');
+            return redirect('/');
         }
 
         $teams = DB::table('teams')->get();
@@ -87,8 +86,7 @@ class UsersController extends Controller
         $this->validate($request, [
             'name' => 'required|min:2|max:30',
             'email' => 'required|unique:users|email',
-            'employe' => 'required|max:20',
-            'team_name' => 'required|min:2|max:20'
+            'employe' => 'required|max:20'
         ]);
     }
 

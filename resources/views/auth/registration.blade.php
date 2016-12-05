@@ -65,7 +65,7 @@
                                     @if( $teams == true )
 
                                     <div class="controls">
-                                        <select name="team" class="input-xlarge focused" id="focusedInput" >
+                                        <select name="team_name" class="input-xlarge focused" id="focusedInput" >
 
                                         @foreach( $teams as $team )
 
@@ -93,8 +93,7 @@
                 </div>
                 <!-- /block -->
             </div>
-
-
-
         </div>
+
+        <script src="/js/registration.js"></script>
 @endsection
