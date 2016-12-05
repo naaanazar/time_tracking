@@ -34,15 +34,15 @@
                     <li class="active"> <a href="{{ url('/user/create') }}">Create User</a> </li>
                     <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle">Report <i class="caret"></i></a>
                         <ul class="dropdown-menu">
-                            <li> <a tabindex="-1" href="#">Activity</a> </li>
-                            <li> <a tabindex="-1" href="#">Dashboard</a> </li>
+                            <li> <a tabindex="-1" href="#">A--</a> </li>
+                            <li> <a tabindex="-1" href="#">--</a> </li>
                         </ul>
                     </li>
                     <li class="dropdown"> <a href="manage-client.html" role="button" class="dropdown-toggle" data-toggle="dropdown">Manage <i class="caret"></i></a>
                         <ul class="dropdown-menu">
                             <li> <a tabindex="-1" href="manage-client.html">Clients</a> </li>
-                            <li> <a tabindex="-1" href="#">Projects</a> </li>
-                            <li> <a tabindex="-1" href="#">Tasks</a> </li>
+                            <li> <a tabindex="-1" href="#">--</a> </li>
+                            <li> <a tabindex="-1" href="#">--</a> </li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -62,7 +62,26 @@
         </div>
     </div>
 </div>
-<div class="alert alert-success"><a href="login.html"><img src="images/ignatiuz-logo.png" width="247" height="76" /></a></div>
+
+<div class="alert alert-success"><a href="{{ url('/') }}"><img src="{{ url('/images/ignatiuz-logo.png') }}" width="247" height="76" /></a></a>
+    <div style="    display: inline-block;
+    float: right;
+        position: relative;
+    margin-top: 71px;">
+        <img src="{{ url('/images/log.png') }}"  width="60" height="60" style="position: absolute;
+        left: -27px;
+        bottom: -2px;"/>
+        <span style="    display: inline-block;
+
+
+        background-color: #808080;
+        color: #ccc;
+        padding: 10px 60px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;">
+        <strong><?= isset($_SESSION['user_type'])? $_SESSION['user_type'] :'' ?><strong>
+        <span>
+    </div>
+</div>
 
 @yield('content')
 
