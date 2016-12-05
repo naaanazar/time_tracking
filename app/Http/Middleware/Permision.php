@@ -26,7 +26,7 @@ class Permision
     public function handle($request,  Closure $next)
     {
         $action_name = explode('@', $this->router->getRoutes()->match($request)->getActionName());
-        
+
         return $next($request);
 
         if(Auth::check() == false ) {
