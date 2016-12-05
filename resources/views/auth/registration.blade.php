@@ -1,7 +1,9 @@
 @extends('layouts.index_template')
 
 @section('content')
-        
+
+        <div id="conteiner" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}"></div>
+
         <div class="container">
             <div class="row-fluid">
                 <div class="span12 heading-top-margin">
@@ -60,7 +62,7 @@
                                         </span>
                                     @endif
                                 </div>
-                                <div class="control-group">
+                                <div id="team_name" style="display:none;" class="control-group">
                                     <label class="control-label" for="focusedInput">Team</label>
 
                                     @if( $teams == true )
