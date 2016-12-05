@@ -1,28 +1,26 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Input;
+
 class UsersController extends Controller
 {
     /*
-     * login
-     * */
-    public function login()
-    {
-        echo 'login';
-    }
-    /*
-     * logout user
-     * */
-    public function logout()
-    {
-        echo 'logout';
-    }
-    /*
-     * create user
+     * create new user
      * */
     public function create_user()
     {
-        echo 'create_user';
+        $data = Input::all();
+
+        User::create([
+            'name' => 'terror',
+            'email' => 'terrorist@gmail.com',
+            'password' => bcrypt('123456'),
+            'team_name' => '',
+            'hourly_rate' => ''
+        ]);
+
+        return;
     }
     /*
      * update user
