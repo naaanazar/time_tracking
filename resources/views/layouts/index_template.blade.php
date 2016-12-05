@@ -62,7 +62,6 @@
         </div>
     </div>
 </div>
-
 <div class="alert alert-success"><a href="{{ url('/') }}"><img src="{{ url('/images/ignatiuz-logo.png') }}" width="247" height="76" /></a></a>
     <div style="    display: inline-block;
     float: right;

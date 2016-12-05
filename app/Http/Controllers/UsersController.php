@@ -1,11 +1,11 @@
 <?php
 namespace App\Http\Controllers;
-use Illuminate\Routing\Controller;
+
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 use Mail;
 use App\Mail\mailCreateUser;
@@ -30,11 +30,13 @@ class UsersController extends Controller
     /*
      * create user
      * */
-    public function create()
+    public function create(Request $request)
     {
-        if(Input::all() == true) {
+
+       if(Input::all() == true) {
+            $this->validation($request);
             $user = Input::all();
-            $password =$this->password_generate();
+            $password = $this->password_generate();
             User::create([
                 'name' => $user['name'],
                 'email' => $user['email'],
@@ -48,7 +50,10 @@ class UsersController extends Controller
 
             return redirect('/');
         }
-        return view('auth.registration');
+
+        $teams = DB::table('teams')->get();
+
+        return view('auth.registration', compact('teams'));
     }
     /*
      * update user
@@ -82,20 +87,18 @@ class UsersController extends Controller
         return redirect('/');
     }
 
-    protected function store (Request $request)
+    protected function validation ($request)
     {
         $this->validate($request, [
             'name' => 'required|min:2|max:30',
             'email' => 'required|unique:users|email',
-            'password' => 'required|min:6|max:20',
-            'employe' => 'required|max:20',
-            'team_name' => 'required|min:2|max:20'
+            'employe' => 'required|max:20'
         ]);
     }
 
     protected function password_generate()
     {
-        $chars = 'abdefhiknsdfdsfdfdghhjDASDFFFDFewrewrererewerewrrstyzABDEFGHKNQRSTYZ23456789';
+        $chars = 'qSwDerfRtyuiopasdfghjklmnbvcxz';
         $numChars = strlen($chars);
         $string = '';
         for ($i = 0; $i < 10; $i++) {
