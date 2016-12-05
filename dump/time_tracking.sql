@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Дек 05 2016 г., 12:13
+-- Время создания: Дек 05 2016 г., 17:34
 -- Версия сервера: 5.6.26
 -- Версия PHP: 5.6.12
 
@@ -90,6 +90,27 @@ CREATE TABLE IF NOT EXISTS `Project` (
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `teams`
+--
+
+CREATE TABLE IF NOT EXISTS `teams` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `team_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Дамп данных таблицы `teams`
+--
+
+INSERT INTO `teams` (`id`, `team_name`) VALUES
+(1, 'php'),
+(2, 'js'),
+(3, 'ruby');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `users`
 --
 
@@ -107,14 +128,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `hourly_rate` decimal(5,2) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=22 ;
 
 --
 -- Дамп данных таблицы `users`
 --
 
 INSERT INTO `users` (`id`, `google_id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `employe`, `team_name`, `hourly_rate`) VALUES
-(2, NULL, 'terr', 'terr@gmail.com', '$2y$10$oHZj9FU1lHC3hctB90asLuGaSmqRk2ZYWzNd0jqZjpZ7tlW48RAFK', 'dIdaFP6LhEXkpZSfuwf8H5VXjKarQtV1fzWhhqvXXbWr1b8hnITmc0zoxq0T', '2016-12-02 07:13:16', '2016-12-05 06:10:25', 'Admin', NULL, NULL);
+(2, NULL, 'terr', 'terr@gmail.com', '$2y$10$oHZj9FU1lHC3hctB90asLuGaSmqRk2ZYWzNd0jqZjpZ7tlW48RAFK', 'r91fZ7IGzTTjrld41JN2S4NL2miDxYOi3FeLrxLfWcKzC6kXGaGILlsUvYn7', '2016-12-02 07:13:16', '2016-12-05 12:20:16', 'Admin', NULL, NULL),
+(19, NULL, '', 'asdasd@dfggfd.com', '$2y$10$Ja1fPBlziBJ/.IxTQFTb/eGAq/d0pzrX7VUuOLWmqR1THT50mrphC', '1E6YQr0pwBOMccPqGrE7ldwUvkM89ZEAEtzd52zJ', '2016-12-05 12:12:20', '2016-12-05 12:12:20', 'Admin', 'php', NULL),
+(21, NULL, 'Dimon', 'terr83@gmail.com', '$2y$10$riKLtYoevHmMIqrtlcVU9.V03FhA.P86EDPxMUG1RIeNLi6toC4XO', 'ZeLXfUJX2kn2zdiq8XeQa1YJkv77C6SKPzq3wePYJQOHghAjDIiJnBiuCSur', '2016-12-05 12:18:52', '2016-12-05 12:24:34', 'Admin', 'js', NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

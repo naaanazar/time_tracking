@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Input;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
-
 use Mail;
 use App\Mail\mailCreateUser;
 
