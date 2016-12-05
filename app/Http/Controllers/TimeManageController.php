@@ -7,13 +7,20 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+
+
 class TimeManageController extends Controller
 {
     /**
      * home page
      */
+
+
     public function index()
     {
+
+
+
         if (Auth::guest()) {
             return view('auth.login');
         }
