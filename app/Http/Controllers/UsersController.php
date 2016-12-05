@@ -1,11 +1,9 @@
 <?php
 namespace App\Http\Controllers;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -26,10 +24,11 @@ class UsersController extends Controller
     /*
      * create user
      * */
-    public function create()
+    public function create(Request $request)
     {
+       if(Input::all() == true) {
+           $this->validation($request);
 
-        if(Input::all() == true) {
             $user = Input::all();
 
             User::create([
@@ -41,7 +40,7 @@ class UsersController extends Controller
                 'remember_token' => $user['_token']
             ]);
 
-            return redirect('/');
+            //return redirect('/');
         }
         return view('auth.registration');
     }
@@ -77,12 +76,11 @@ class UsersController extends Controller
         return redirect('/');
     }
 
-    protected function store (Request $request)
+    protected function validation ($request)
     {
         $this->validate($request, [
             'name' => 'required|min:2|max:30',
             'email' => 'required|unique:users|email',
-            'password' => 'required|min:6|max:20',
             'employe' => 'required|max:20',
             'team_name' => 'required|min:2|max:20'
         ]);
@@ -90,7 +88,7 @@ class UsersController extends Controller
 
     protected function password_generate()
     {
-        $chars = 'abdefhiknsdfdsfdfdghhjDASDFFFDFewrewrererewerewrrstyzABDEFGHKNQRSTYZ23456789';
+        $chars = 'qSwDerfRtyuiopasdfghjklmnbvcxz';
         $numChars = strlen($chars);
         $string = '';
         for ($i = 0; $i < 10; $i++) {
