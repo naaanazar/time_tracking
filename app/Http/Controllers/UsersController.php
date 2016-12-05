@@ -29,18 +29,19 @@ class UsersController extends Controller
     {
         if(Input::all() == true) {
             $user = Input::all();
+            $user['password'] = $this->password_generate();
 
             User::create([
-                'name' => $user('name'),
-                'email' => $user('email'),
-                'password' => bcrypt($user('password')),
-                'employe' => $user('employe'),
-                'team_name' => $user('team_nmae')
+                'name' => $user['name'],
+                'email' => $user['email'],
+                'password' => bcrypt($user['password']),
+                'employe' => $user['employe'],
+                'team_name' => $user['team_name']
             ]);
 
             return redirect('/');
         }
-        return view('layouts.index_template');
+        return view('auth.registration');
     }
     /*
      * update user
@@ -83,5 +84,17 @@ class UsersController extends Controller
             'employe' => 'required|max:20',
             'team_name' => 'required|min:2|max:20'
         ]);
+    }
+
+    protected function password_generate()
+    {
+        $chars = 'abdefhiknsdfdsfdfdghhjDASDFFFDFewrewrererewerewrrstyzABDEFGHKNQRSTYZ23456789';
+        $numChars = strlen($chars);
+        $string = '';
+        for ($i = 0; $i < 10; $i++) {
+            $string .= substr($chars, rand(1, $numChars) - 1, 1);
+        }
+
+        return substr(md5(rand(1, 10000) . 'pass' . $string), rand(0 , 6), 6);
     }
 }

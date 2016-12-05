@@ -18,15 +18,13 @@ class TimeManageController extends Controller
 
     public function index()
     {
-
-
-
         if (Auth::guest()) {
             return view('auth.login');
         }
         else {
-           // return view('time_manage.index');
-            return view('layouts.index_template');
+
+           return view('layouts.index_template');
+
         }
     }
 }

@@ -15,9 +15,9 @@ Route::group(['middleware' => ['permision']], function () {
 
     // User Controller
 
-    Route::get('/user/create', 'UserController@create');
-    Route::post('/user/create', 'UserController@create');
-    Route::post('post', 'UserController@store');
+    Route::get('/user/create', 'UsersController@create');
+    Route::post('/user/create', 'UsersController@create');
+    Route::post('post', 'UsersController@store');
 
     // TimeManage Controller
 
