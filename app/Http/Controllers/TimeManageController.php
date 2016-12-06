@@ -34,7 +34,7 @@ class TimeManageController extends Controller
 
     public function team_all()
     {
-        $teams = DB::table('users')->get();
+        $teams = DB::table('teams')->get();
 
         return view('', compact('teams'));
     }
