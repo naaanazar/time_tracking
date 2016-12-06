@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Дек 06 2016 г., 16:39
+-- Время создания: Дек 06 2016 г., 17:40
 -- Версия сервера: 5.6.26
 -- Версия PHP: 5.6.12
 
@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `employe` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `team_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `hourly_rate` decimal(5,2) DEFAULT NULL,
+  `hourly_rate` float(5,2) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=27 ;
@@ -148,8 +148,8 @@ INSERT INTO `users` (`id`, `google_id`, `name`, `email`, `password`, `remember_t
 (2, NULL, '     terr ', 'terr@gmail.coms', '$2y$10$oHZj9FU1lHC3hctB90asLuGaSmqRk2ZYWzNd0jqZjpZ7tlW48RAFK', 'ne9kCi10JEKFS1RITjQwRXfCKPjbBA2rUV93R8r7ysyASTH3v3l57vVl5oxg', '2016-12-02 07:13:16', '2016-12-06 06:27:19', 'Admin', 'php', NULL),
 (21, NULL, 'Dimon', 'terr83@gmail.com', '$2y$10$riKLtYoevHmMIqrtlcVU9.V03FhA.P86EDPxMUG1RIeNLi6toC4XO', 'ZeLXfUJX2kn2zdiq8XeQa1YJkv77C6SKPzq3wePYJQOHghAjDIiJnBiuCSur', '2016-12-05 12:18:52', '2016-12-05 12:24:34', 'Admin', 'js', NULL),
 (22, NULL, 'terri', 'terri@gmail.com', '$2y$10$9ShoW/vNKAX245w1IU.vD.fyscR.ZdQiGzADrXcWFsoT8zmFyDMqO', 'R4wASBj002TNY6EFM7mnNWBezYfummvLfGkuWUFG', '2016-12-05 13:03:10', '2016-12-05 13:03:10', 'Admin', 'php', NULL),
-(23, NULL, 'asdasd', 'asdas@dsfdfs.com', '$2y$10$rvJvGqoTiyLOtuwwBZWuBuVEd61l92/8l1nLjuG1Ah6TYi./hKps2', NULL, '2016-12-06 07:32:45', '2016-12-06 07:32:45', 'Admin', '', NULL),
-(24, NULL, 'Anton', 'anton@gmail.com', '$2y$10$jmK4Kf09EyHZaKUHGLC.luCzQnB30bppQfrdgay6pdXFQngp9zb16', NULL, '2016-12-06 11:01:52', '2016-12-06 11:01:52', 'Developer', 'js', NULL),
+(23, NULL, 'kiikiki141111111', 'asdas@dsfdfs.com', '$2y$10$rvJvGqoTiyLOtuwwBZWuBuVEd61l92/8l1nLjuG1Ah6TYi./hKps2', NULL, '2016-12-06 07:32:45', '2016-12-06 07:32:45', 'Admin', NULL, NULL),
+(24, NULL, ' Anton', 'anton@gmail.com', '$2y$10$jmK4Kf09EyHZaKUHGLC.luCzQnB30bppQfrdgay6pdXFQngp9zb16', NULL, '2016-12-06 11:01:52', '2016-12-06 11:01:52', 'Developer', 'php', 8.65),
 (25, NULL, 'Nazal', 'nazar@gmail.com', '$2y$10$SBqmNY8Lfpyk7yJhoyQPE.2cW5wcwiAOdODV7jmGwa9dOFAWPA0gG', NULL, '2016-12-06 11:02:48', '2016-12-06 11:02:48', 'Developer', 'php', NULL),
 (26, NULL, 'Voldemort', 'vold@gmail.com', '$2y$10$KokVdfiMx7dSpXZZr/E7BezipXq4lBmNz0rNE4FxzRYj.XGux3rIG', NULL, '2016-12-06 11:03:15', '2016-12-06 11:03:15', 'HR Manager', '', NULL);
 

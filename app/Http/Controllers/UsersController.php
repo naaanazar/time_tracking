@@ -49,12 +49,19 @@ class UsersController extends Controller
 
             $user = Input::all();
 
-           DB::table('users')->where('id', '=', $id)->update([
+           /* DB::table('users')->where('id', '=', $id)->update([
                 'name' => $user['name'],
                 'employe' => $user['employe'],
                 'team_name' => ($user['team_name']) ? $user['team_name'] : null,
                 'hourly_rate' => ($user['hourlyRate']) ? $user['hourlyRate'] : null
-            ]);
+            ]);*/
+
+            User::update([
+                'name' => $user['name'],
+                'employe' => $user['employe'],
+                'team_name' => ($user['team_name']) ? $user['team_name'] : null,
+                'hourly_rate' => ($user['hourlyRate']) ? $user['hourlyRate'] : null
+            ])->where('id', '=', $id);
 
             return redirect('/user/all');
         }
