@@ -72,7 +72,7 @@ class UsersController extends Controller
     {
         User::where('id', '=', $id)->delete();
 
-        return redirect('/');
+        return redirect('/user/all');
     }
 
     protected function validation_create ($request)
