@@ -16,6 +16,7 @@
     <link href="/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <link href="/assets/styles.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="/assets/font-awesome.css">
+    <link rel="stylesheet" href="/assets/DT_bootstrap.css">
 
     <!-- Scripts -->
     <script>
@@ -40,7 +41,7 @@
                     </li>
                     <li class="dropdown"> <a href="manage-client.html" role="button" class="dropdown-toggle" data-toggle="dropdown">Manage <i class="caret"></i></a>
                         <ul class="dropdown-menu">
-                            <li> <a tabindex="-1" href="manage-client.html">Clients</a> </li>
+                            <li> <a tabindex="-1" href="/user/all">Clients</a> </li>
                             <li> <a tabindex="-1" href="#">--</a> </li>
                             <li> <a tabindex="-1" href="#">--</a> </li>
                         </ul>
@@ -91,5 +92,13 @@
 <!-- /container -->
 <script src="/assets/jquery-1.9.1.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/datatables/js/jquery.dataTables.min.js"></script>
+<script src="/assets/scripts.js"></script>
+<script src="/assets/DT_bootstrap.js"></script>
+<script>
+    $(function() {
+
+    });
+</script>
 </body>
 </html>
