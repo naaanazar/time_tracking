@@ -11,6 +11,12 @@ $(document).ready(function(){
             Registration.hourlyRate($( this ).text());
         });
     });
+
+    $( "#selectTeam option:selected" ).each(function() {
+        Registration.hourlyRate($( this ).text());
+        Registration.selectTeam($(this).text());
+    });
+
 });
 
 var Registration = {
