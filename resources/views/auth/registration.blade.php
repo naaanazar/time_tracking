@@ -8,7 +8,7 @@
             <div class="row-fluid">
                 <div class="span12 heading-top-margin">
 
-                    <div class="heading-without-datepicker">Manage Client</div>
+                    <div class="heading-without-datepicker">Add user</div>
                 </div>
             </div>
             <div class="row-fluid" id="login" >
@@ -59,7 +59,7 @@
                                     <label class="control-label" for="hourlyRateId">Hourly rate</label>
                                     <div class="controls">
 
-                                        <input name="hourlyRate" class="input-xlarge"  id="hourlyRateId" value=""  type="number" step="0.01">
+                                        <input name="hourlyRate" class="input-xlarge  focused"  id="hourlyRateId" value=""  type="number" step="0.01">
 
                                         @if ($errors->has('hourlyRate'))
                                             <span class="help-block">

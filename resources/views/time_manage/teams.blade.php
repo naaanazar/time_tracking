@@ -5,7 +5,7 @@
     <div id="conteiner" class="container" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
         <div class="row-fluid">
             <div class="span12">
-                <h3 style="display:inline-block">Users</h3>
+                <h3 style="display:inline-block">Teams</h3>
                 <a href="/team/create" style="display:inline-block; margin-left: 25px" class="btn btn-large btn-primary">
                     <i class="glyphicon glyphicon-plus"></i>Add Team</a>
             </div>

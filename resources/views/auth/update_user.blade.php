@@ -8,7 +8,7 @@
         <div class="row-fluid">
             <div class="span12 heading-top-margin">
 
-                <div class="heading-without-datepicker">Manage Client</div>
+                <div class="heading-without-datepicker">Edit User</div>
             </div>
         </div>
         <div class="row-fluid" id="login" >
