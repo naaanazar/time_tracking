@@ -1,7 +1,7 @@
 @extends('layouts.index_template')
 
 @section('content')
-
+    <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
 <div id="conteiner" class="container" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
     <div class="row-fluid">
         <div class="span12">
@@ -29,10 +29,9 @@
                             <th>User type</th>
                             <th width="160px"  class="center">Created at</th>
 
-
-                            <th width="125px">
-
-                            </th>
+                            @if ($status == 'HR Manager' || $status == 'Admin')
+                                 <th width="125px">Action</th>
+                            @endif
                         </tr>
                         </thead>
                         <tbody>
@@ -45,10 +44,17 @@
                                 <td  style="text-align: center" class="center">{{ $user->hourly_rate }}</td>
                                 <td>{{ $user->employe }}</td>
                                 <td style="text-align: center">{{ $user->created_at }}</td>
-                                <td>
-                                    <a href="/user/update/{{ $user->id }}" class="btn btn-info"><span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>Edit</a>
-                                    <a href="/user/delete/{{ $user->id }}" class="btn btn-danger"><span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>Delete</a>
-                                </td>
+
+                                @if ($status == 'HR Manager' || $status == 'Admin')
+                                    <td>
+                                        @if ($status == 'Admin' ||
+                                         ($status == 'HR Manager' &&
+                                         ($user->employe == "Developer" || $user->employe == "QA Engineer" || $user->employe == "Lead")))
+                                            <a href="/user/update/{{ $user->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>Edit</a>
+                                            <a href="/user/delete/{{ $user->id }}" class="btn btn-danger"><span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>Delete</a>
+                                        @endif
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
 

@@ -1,7 +1,7 @@
 @extends('layouts.index_template')
 
 @section('content')
-
+    <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
     <div id="conteiner" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}"></div>
 
     <div class="container">
@@ -22,14 +22,14 @@
                             <label class="control-label" for="focusedInput">User type</label>
                             <div class="controls">
                                 <select name="employe" class="input-xlarge focused" id="selectTeam" style="height: 42px;width: 37%" >
-
-                                    <option selected>{{ $user->employe }}</option>
-                                    <option>Admin</option>
-                                    <option>Supervisor</option>
+                                    @if ($status == 'Admin')
+                                        <option>Admin</option>
+                                        <option>Supervisor</option>
+                                        <option>HR Manager</option>
+                                    @endif
                                     <option>Lead</option>
                                     <option>Developer</option>
                                     <option>QA Engineer</option>
-                                    <option>HR Manager</option>
                                 </select>
 
                             </div>
