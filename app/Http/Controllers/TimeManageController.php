@@ -28,6 +28,6 @@ class TimeManageController extends Controller
     {
         $users = DB::table('users')->get();
 
-        return view('', compact('users'));
+        return view('time_manage.users', compact('users'));
     }
 }
