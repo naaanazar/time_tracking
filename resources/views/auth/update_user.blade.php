@@ -22,6 +22,7 @@
                             <label class="control-label" for="focusedInput">User type</label>
                             <div class="controls">
                                 <select name="employe" class="input-xlarge focused" id="focusedInput" style="height: 42px"; >
+                                    <option>{{ $user->employe }}</option>
                                     <option>Admin</option>
                                     <option>Supervisor</option>
                                     <option>Lead</option>
