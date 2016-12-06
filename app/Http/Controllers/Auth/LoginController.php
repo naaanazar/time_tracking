@@ -82,7 +82,8 @@ class LoginController extends Controller
 
             } else {
 
-                return view('auth.login', ['loginStatus' => 'You account do not register']);
+               // return view('auth.login', ['loginStatus' => 'You account do not register']);
+                return redirect('?loginStatus=You account do not register');
 
             }
 

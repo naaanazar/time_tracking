@@ -77,7 +77,7 @@
         color: #ccc;
         padding: 10px 60px;
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;">
-        <strong><?= isset($_SESSION['user_type'])? $_SESSION['user_type'] :'' ?><strong>
+        <strong>{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}<strong>
         <span>
     </div>
 </div>
