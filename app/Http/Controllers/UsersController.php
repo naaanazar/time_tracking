@@ -52,8 +52,8 @@ class UsersController extends Controller
             User::where('id', '=', $id)->update([
                 'name' => $user['name'],
                 'employe' => $user['employe'],
-                'team_name' => ($user['team_name']) ? $user['team_name'] : null,
-                'hourly_rate' => ($user['hourlyRate']) ? $user['hourlyRate'] : null
+                'team_name' => $user['team_name'],
+                'hourly_rate' => $user['hourlyRate']
             ]);
 
             return redirect('/user/all');
