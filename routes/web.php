@@ -25,6 +25,7 @@ Route::group(['middleware' => ['permision']], function () {
     // TimeManage Controller
 
     Route::get('/', 'TimeManageController@index');
+    Route::get('/client/create', 'TimeManageController@create_client');
     Route::get('/register', 'TimeManageController@index');
 });
 
