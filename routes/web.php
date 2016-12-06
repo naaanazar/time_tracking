@@ -27,6 +27,7 @@ Route::group(['middleware' => ['permision']], function () {
     Route::get('/', 'TimeManageController@index');
     Route::get('/client/create', 'TimeManageController@create_client');
     Route::get('/team/create', 'TimeManageController@create_team');
+    Route::post('/team/create', 'TimeManageController@create_team');
     Route::get('/team/delete/{id}', 'TimeManageController@delete_team');
     Route::get('/team/all', 'TimeManageController@team_all');
 
@@ -36,6 +37,8 @@ Route::group(['middleware' => ['permision']], function () {
 // Auth
 
 Auth::routes();
+
+// google
 
 Route::get('auth/google', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallback');
