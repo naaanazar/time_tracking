@@ -24,7 +24,8 @@ class UsersController extends Controller
                 'email' => $user['email'],
                 'password' => bcrypt($password),
                 'employe' => $user['employe'],
-                'team_name' => $user['team_name']
+                'team_name' => $user['team_name'],
+                'hourly_rate' => $user['hourlyRate']
             ]);
 
             Mail::to($user['email'])->send(new mailCreateUser($user['name'], $password, $user['email']));
@@ -52,7 +53,8 @@ class UsersController extends Controller
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'employe' => $user['employe'],
-                'team_name' => $user['team_name']
+                'team_name' => $user['team_name'],
+                'hourly_rate' => $user['hourlyRate']
             ]);
 
             return redirect('/');
