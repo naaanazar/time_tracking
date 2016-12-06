@@ -51,13 +51,12 @@ class UsersController extends Controller
 
             DB::table('users')->where('id', '=', $id)->update([
                 'name' => $user['name'],
-                'email' => $user['email'],
                 'employe' => $user['employe'],
                 'team_name' => $user['team_name'],
                 'hourly_rate' => $user['hourlyRate']
             ]);
 
-            return redirect('/');
+            return redirect('/user/all');
         }
 
         $this->user_id = $id;
@@ -92,7 +91,6 @@ class UsersController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|min:2|max:30',
-            'email' => 'required|email',
             'employe' => 'required|max:20',
             'hourlyRate' => 'numeric'
         ]);
