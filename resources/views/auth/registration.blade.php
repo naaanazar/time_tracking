@@ -58,7 +58,9 @@
                                 <div class="control-group" id="hourlyRate"  style="display:none;">
                                     <label class="control-label" for="hourlyRateId">Hourly rate</label>
                                     <div class="controls">
-                                        <input name="hourlyRate" class="input-xlarge focused"  id="hourlyRateId"  type="number" step="0.01">
+
+                                        <input name="hourlyRate" class="input-xlarge"  id="hourlyRateId" value=""  type="number" step="0.01">
+
                                         @if ($errors->has('hourlyRate'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('hourlyRate') }}</strong>

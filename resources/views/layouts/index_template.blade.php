@@ -15,7 +15,10 @@
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <link href="/assets/styles.css" rel="stylesheet" media="screen">
+    <link href="/css/main.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="/assets/font-awesome.css">
+    <link rel="" href="/assets/fonts/glyphicons-halflings-regular.eot">
+    <link rel="stylesheet" href="/assets/DT_bootstrap.css">
 
     <!-- Scripts -->
     <script>
@@ -31,7 +34,7 @@
         <div class="container-fluid"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li class="active"> <a href="{{ url('/user/create') }}">Create User</a> </li>
+                    <li class=""> <a href="{{ url('/user/create') }}">Create User</a> </li>
                     <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle">Report <i class="caret"></i></a>
                         <ul class="dropdown-menu">
                             <li> <a tabindex="-1" href="#">A--</a> </li>
@@ -40,7 +43,7 @@
                     </li>
                     <li class="dropdown"> <a href="manage-client.html" role="button" class="dropdown-toggle" data-toggle="dropdown">Manage <i class="caret"></i></a>
                         <ul class="dropdown-menu">
-                            <li> <a tabindex="-1" href="manage-client.html">Clients</a> </li>
+                            <li> <a tabindex="-1" href="/user/all">Users</a> </li>
                             <li> <a tabindex="-1" href="#">--</a> </li>
                             <li> <a tabindex="-1" href="#">--</a> </li>
                         </ul>
@@ -62,25 +65,30 @@
         </div>
     </div>
 </div>
-<div class="alert alert-success"><a href="{{ url('/') }}"><img src="{{ url('/images/ignatiuz-logo.png') }}" width="247" height="76" /></a></a>
-    <div style="    display: inline-block;
-    float: right;
-        position: relative;
-    margin-top: 71px;">
-        <img src="{{ url('/images/log.png') }}"  width="60" height="60" style="position: absolute;
-        left: -27px;
-        bottom: -2px;"/>
-        <span style="    display: inline-block;
+<div style=" border-bottom: solid 3px #808080">
+    <div class="container"
+        <div class="alert alert-success"><a href="{{ url('/') }}"><img src="{{ url('/images/ignatiuz-logo.png') }}" width="247" height="76" /></a></a>
+
+            <div style="    display: inline-block;
+            float: right;
+                position: relative;
+            margin-top: 71px;">
+                <img src="{{ url('/images/log.png') }}"  width="60" height="60" style="position: absolute;
+                left: -27px;
+                bottom: -2px;"/>
+                <span style="    display: inline-block;
 
 
-        background-color: #808080;
-        color: #ccc;
-        padding: 10px 60px;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;">
-        <strong>{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}<strong>
-        <span>
+                background-color: #808080;
+                color: #ccc;
+                padding: 10px 60px;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;">
+                <strong>{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}</strong>
+                <span>
+            </div>
+        </div>
     </div>
-</div>
+<div>
 
 @yield('content')
 
@@ -91,5 +99,13 @@
 <!-- /container -->
 <script src="/assets/jquery-1.9.1.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/datatables/js/jquery.dataTables.min.js"></script>
+<script src="/assets/scripts.js"></script>
+<script src="/assets/DT_bootstrap.js"></script>
+<script>
+    $(function() {
+
+    });
+</script>
 </body>
 </html>

@@ -29,7 +29,14 @@ class TimeManageController extends Controller
     {
         $users = DB::table('users')->get();
 
-        return view('time_manage.user', compact('users'));
+        return view('time_manage.users', compact('users'));
+    }
+
+    public function team_all()
+    {
+        $teams = DB::table('users')->get();
+
+        return view('', compact('teams'));
     }
 
     public function create_client(Request $request)
@@ -57,15 +64,24 @@ class TimeManageController extends Controller
     {
         if(Input::all() == true) {
             $this->validation($request);
+
+            $team = Input::all();
             
             DB::table('teams')->insert([
-                'team_name' => 'new team'
+                'team_name' => $team['team_name']
             ]);
 
             return redirect('/user/all');
         }
 
         // return view('');
+    }
+
+    public function delete_team(Request $request, $id)
+    {
+        DB::table('teams')->where('id', '=', $id)->delete();
+
+        return redirect('/user/all');
     }
 
     private function validation($request)
