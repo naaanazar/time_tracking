@@ -12,8 +12,6 @@ use App\Mail\mailCreateUser;
 
 class UsersController extends Controller
 {
-    protected $user_id;
-
     public function create(Request $request)
     {
        if(Input::all() == true) {

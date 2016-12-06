@@ -23,4 +23,11 @@ class TimeManageController extends Controller
             return view('layouts.index_template');
         }
     }
+
+    public function all()
+    {
+        $users = DB::table('users')->get();
+
+        return view('', compact('users'));
+    }
 }
