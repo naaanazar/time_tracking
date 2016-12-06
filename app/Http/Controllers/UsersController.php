@@ -12,12 +12,10 @@ use App\Mail\mailCreateUser;
 
 class UsersController extends Controller
 {
-    protected $user_id;
-
     public function create(Request $request)
     {
        if(Input::all() == true) {
-            $this->validation($request);
+            $this->validation_create($request);
             $user = Input::all();
             $password = $this->password_generate();
 
@@ -26,7 +24,8 @@ class UsersController extends Controller
                 'email' => $user['email'],
                 'password' => bcrypt($password),
                 'employe' => $user['employe'],
-                'team_name' => $user['team_name']
+                'team_name' => $user['team_name'],
+                'hourly_rate' => $user['hourlyRate']
             ]);
 
             Mail::to($user['email'])->send(new mailCreateUser($user['name'], $password, $user['email']));
@@ -45,20 +44,17 @@ class UsersController extends Controller
     public function update(Request $request, $id = false)
     {
         if(Input::all() == true && User::where('id', '=', $id) == true) {
-            if( $this->user_id != $id )
-            {
-                return redirect('/');
-            }
-            $this->validation($request);
+
+            $this->validation_update($request);
 
             $user = Input::all();
 
-            User::where('id', '=', $id)->update([
-                'name' => $user('name'),
-                'email' => $user('email'),
-                'password' => bcrypt($user('password')),
-                'employe' => $user('employe'),
-                'team_name' => $user('team_nmae')
+            DB::table('users')->where('id', '=', $id)->update([
+                'name' => $user['name'],
+                'email' => $user['email'],
+                'employe' => $user['employe'],
+                'team_name' => $user['team_name'],
+                'hourly_rate' => $user['hourlyRate']
             ]);
 
             return redirect('/');
@@ -82,12 +78,23 @@ class UsersController extends Controller
         return redirect('/');
     }
 
-    protected function validation ($request)
+    protected function validation_create ($request)
     {
         $this->validate($request, [
             'name' => 'required|min:2|max:30',
             'email' => 'required|unique:users|email',
-            'employe' => 'required|max:20'
+            'employe' => 'required|max:20',
+            'hourlyRate' => 'numeric'
+        ]);
+    }
+
+    protected function validation_update ($request)
+    {
+        $this->validate($request, [
+            'name' => 'required|min:2|max:30',
+            'email' => 'required|email',
+            'employe' => 'required|max:20',
+            'hourlyRate' => 'numeric'
         ]);
     }
 

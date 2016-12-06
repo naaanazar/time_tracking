@@ -21,9 +21,7 @@
                                 <div class="control-group" >
                                     <label class="control-label" for="focusedInput">User type</label>
                                     <div class="controls">
-
-                                        <select name="employe" class="input-xlarge focused" id="focusedInput" style="height: 42px;width: 37%" >
-
+                                        <select name="employe" class="input-xlarge focused" id="selectTeam" style="height: 42px;width: 37%" >
                                             <option>Admin</option>
                                             <option>Supervisor</option>
                                             <option>Lead</option>
@@ -40,7 +38,7 @@
                                         <input name="name" class="input-xlarge focused" id="focusedInput"  type="text">
                                         @if ($errors->has('name'))
                                             <span class="help-block">
-                                            <strong style="color:#802420">{{ $errors->first('name') }}</strongstyle>
+                                            <strong style="color:#802420">{{ $errors->first('name') }}</strong>
                                         </span>
                                         @endif
                                     </div>
@@ -55,6 +53,19 @@
                                         </span>
                                         @endif
                                     </div>
+
+                                </div>
+                                <div class="control-group" id="hourlyRate"  style="display:none;">
+                                    <label class="control-label" for="hourlyRateId">Hourly rate</label>
+                                    <div class="controls">
+                                        <input name="hourlyRate" class="input-xlarge focused"  id="hourlyRateId"  type="number" step="0.01">
+                                        @if ($errors->has('hourlyRate'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('hourlyRate') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+
                                 </div>
                                 <div id="team_name" style="display:none;" class="control-group">
                                     <label class="control-label" for="focusedInput">Team</label>
@@ -63,7 +74,7 @@
 
                                     <div class="controls">
                                         <select name="team_name" class="input-xlarge focused" style="height: 42px;width: 37%">
-                                            <option value="" disabled selected>Select team</option>
+                                            <option value="" selected>Select team</option>
 
                                         @foreach( $teams as $team )
 

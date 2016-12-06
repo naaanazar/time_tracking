@@ -20,11 +20,15 @@ Route::group(['middleware' => ['permision']], function () {
     Route::get('/user/delete/{id}', 'UsersController@delete');
     Route::get('/user/update/{id}', 'UsersController@update');
     Route::post('/user/update/{id}', 'UsersController@update');
+    Route::get('/user/all', 'TimeManageController@all');
 
     // TimeManage Controller
 
     Route::get('/', 'TimeManageController@index');
+    Route::get('/client/create', 'TimeManageController@create_client');
+    Route::get('/team/create', 'TimeManageController@create_team');
 
+    Route::get('/register', 'TimeManageController@index');
 });
 
 // Auth
