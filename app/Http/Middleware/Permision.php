@@ -25,6 +25,7 @@ class Permision
 
     public function handle($request,  Closure $next)
     {
+        $_SESSION['user_type'] = Auth::user()['original']['employe'];
         $action_name = explode('@', $this->router->getRoutes()->match($request)->getActionName());
 
        // return $next($request);

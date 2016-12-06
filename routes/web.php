@@ -13,11 +13,13 @@
 
 Route::group(['middleware' => ['permision']], function () {
 
-    // Users Controller
+    // User Controller
 
-    Route::get('/user/create', 'UsersController@create_user');
-    Route::get('/user/update/{id}', 'UsersController@update_user');
-    Route::get('/user/delete/{id}', 'UsersController@delete_user');
+    Route::get('/user/create', 'UsersController@create');
+    Route::post('/user/create', 'UsersController@create');
+    Route::get('/user/delete/{id}', 'UsersController@delete');
+    Route::get('/user/update/{id}', 'UsersController@update');
+    Route::post('/user/update/{id}', 'UsersController@update');
 
     // TimeManage Controller
 
@@ -26,8 +28,6 @@ Route::group(['middleware' => ['permision']], function () {
 });
 
 // Auth
-
-Route::get('/', 'TimeManageController@index');
 
 Auth::routes();
 

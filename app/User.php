@@ -24,7 +24,6 @@ class User extends Authenticatable
         'team_name',
         'hourle_rate'
     ];
-
     /**
      * The attributes that should be hidden for arrays.
      *
