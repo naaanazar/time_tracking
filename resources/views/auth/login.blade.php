@@ -1,6 +1,8 @@
 @extends('layouts.template')
 
 @section('content')
+
+
 <div class="container" id="login">
     <div class="row">
         <form class="form-signin" role="form" method="POST" action="{{ url('/login') }}">
@@ -15,9 +17,10 @@
                         <strong>{{ $errors->first('email') }}</strong>
                     </span>
                 @endif
-                @if ( isset($loginStatus))
+
+                @if ( isset($_GET['loginStatus']))
                     <span style="color: #a94442">
-                        <strong>{{ $loginStatus }}</strong>
+                        <strong>{{ $_GET['loginStatus'] }}</strong>
                     </span>
                 @endif
             </div>

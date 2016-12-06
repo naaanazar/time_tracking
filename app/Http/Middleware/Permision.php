@@ -28,7 +28,7 @@ class Permision
         $_SESSION['user_type'] = Auth::user()['original']['employe'];
         $action_name = explode('@', $this->router->getRoutes()->match($request)->getActionName());
 
-        return $next($request);
+       return $next($request);
 
         if(Auth::check() == false ) {
            return redirect('/login');

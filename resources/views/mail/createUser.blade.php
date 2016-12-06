@@ -15,7 +15,6 @@
     </style>
 </head>
 
-
 <body style="color:grey">
 
 <img src="http://<?= $_SERVER['SERVER_NAME'] ?>/images/ignatiuz-logo.png" width="247" height="76">

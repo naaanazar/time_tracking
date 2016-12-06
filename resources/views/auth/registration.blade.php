@@ -11,18 +11,19 @@
                     <div class="heading-without-datepicker">Manage Client</div>
                 </div>
             </div>
-
-
             <div class="row-fluid" id="login" >
                 <!-- block -->
                 <div class="block-content collapse in">
                     <div class="span12">
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/user/create') }}">
                             {{ csrf_field() }}
-                                <div class="control-group">
+
+                                <div class="control-group" >
                                     <label class="control-label" for="focusedInput">User type</label>
                                     <div class="controls">
-                                        <select name="employe" class="input-xlarge focused" id="selectTeam" style="height: 42px"; >
+
+                                        <select name="employe" class="input-xlarge focused" id="focusedInput" style="height: 42px;width: 37%" >
+
                                             <option>Admin</option>
                                             <option>Supervisor</option>
                                             <option>Lead</option>
@@ -32,35 +33,28 @@
                                         </select>
 
                                     </div>
-                                    @if ($errors->has('name'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('name') }}</strong>
-                                        </span>
-                                    @endif
-
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label" for="focusedInput">Name</label>
                                     <div class="controls">
                                         <input name="name" class="input-xlarge focused" id="focusedInput"  type="text">
-                                    </div>
-                                    @if ($errors->has('name'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('name') }}</strong>
+                                        @if ($errors->has('name'))
+                                            <span class="help-block">
+                                            <strong style="color:#802420">{{ $errors->first('name') }}</strong>
                                         </span>
-                                    @endif
-
+                                        @endif
+                                    </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label" for="focusedInput">Email</label>
                                     <div class="controls">
                                         <input name="email" class="input-xlarge focused"   type="email" required>
-                                    </div>
-                                    @if ($errors->has('email'))
-                                        <span class="help-block">
+                                        @if ($errors->has('email'))
+                                            <span class="help-block">
                                             <strong>{{ $errors->first('email') }}</strong>
                                         </span>
-                                    @endif
+                                        @endif
+                                    </div>
                                 </div>
                                 <div id="team_name" style="display:none;" class="control-group">
                                     <label class="control-label" for="focusedInput">Team</label>
@@ -68,7 +62,8 @@
                                     @if( $teams == true )
 
                                     <div class="controls">
-                                        <select name="team_name" class="input-xlarge focused" id="focusedInput" >
+                                        <select name="team_name" class="input-xlarge focused" id="selectTeam" style="height: 42px;width: 37%">
+                                            <option value="" disabled selected>Select team</option>
 
                                         @foreach( $teams as $team )
 
@@ -90,8 +85,10 @@
                                 </div>
                                 <div class="form-actions">
                                     <button type="submit" class="btn btn-large btn-primary" formaction="">Save</button> &nbsp;&nbsp;
-                                    <button type="submit" class="btn btn-large btn-primary" formaction="{{ url('/') }}">Cancel</button>
+                                    <a  href="{{ url('/') }}" class="btn btn-large btn-primary" style="font-weight: normal;" >Cancel</a>
                                 </div>
+
+                        </form>
                     </div>
                 </div>
                 <!-- /block -->
