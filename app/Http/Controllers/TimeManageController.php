@@ -53,6 +53,21 @@ class TimeManageController extends Controller
             //return view('');
     }
 
+    public function create_team(Request $request)
+    {
+        if(Input::all() == true) {
+            $this->validation($request);
+            
+            DB::table('teams')->insert([
+                'team_name' => 'new team'
+            ]);
+
+            return redirect('/user/all');
+        }
+
+        // return view('');
+    }
+
     private function validation($request)
     {
         $this->validate($request, [
@@ -61,7 +76,8 @@ class TimeManageController extends Controller
             'website' => 'required|url',
             'contact_person' => 'required|min:4|max:30',
             'email' => 'required|email',
-            'phone_number' => 'required|regex:/[0-9-]/|max:30'
+            'phone_number' => 'required|regex:/[0-9-]/|max:30',
+            'team' => 'required|min:4|max:30'
         ]);
     }
 }
