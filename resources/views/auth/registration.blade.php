@@ -22,7 +22,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="focusedInput">User type</label>
                                     <div class="controls">
-                                        <select name="employe" class="input-xlarge focused" id="focusedInput" style="height: 42px"; >
+                                        <select name="employe" class="input-xlarge focused" id="selectTeam" style="height: 42px"; >
                                             <option>Admin</option>
                                             <option>Supervisor</option>
                                             <option>Lead</option>

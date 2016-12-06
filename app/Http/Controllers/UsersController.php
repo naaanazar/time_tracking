@@ -12,38 +12,21 @@ use App\Mail\mailCreateUser;
 
 class UsersController extends Controller
 {
-    /*
-     * login
-     * */
-    public $name1 = 'sdfdsfdsdsfdsf';
-    public function login()
-    {
-        echo 'login';
-    }
-    /*
-     * logout user
-     * */
-    public function logout()
-    {
-        echo 'logout';
-    }
-    /*
-     * create user
-     * */
+    protected $user_id;
+
     public function create(Request $request)
     {
-
        if(Input::all() == true) {
             $this->validation($request);
             $user = Input::all();
             $password = $this->password_generate();
+
             User::create([
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'password' => bcrypt($password),
                 'employe' => $user['employe'],
-                'team_name' => $user['team_name'],
-                'remember_token' => $user['_token']
+                'team_name' => $user['team_name']
             ]);
 
             Mail::to($user['email'])->send(new mailCreateUser($user['name'], $password, $user['email']));
@@ -59,9 +42,15 @@ class UsersController extends Controller
      * update user
      * $id - user id
      * */
-    public function update($id)
+    public function update(Request $request, $id = false)
     {
-        if(User::where('id', '=', $id) == true) {
+        if(Input::all() == true && User::where('id', '=', $id) == true) {
+            if( $this->user_id != $id )
+            {
+                return redirect('/');
+            }
+            $this->validation($request);
+
             $user = Input::all();
 
             User::where('id', '=', $id)->update([
@@ -74,7 +63,13 @@ class UsersController extends Controller
 
             return redirect('/');
         }
-        return view('layouts.index_template');
+
+        $this->user_id = $id;
+
+        $user = DB::table('users')->where('id', '=', $id)->first();
+        $teams = DB::table('teams')->get();
+
+        return view('auth.update_user', compact('user', 'teams'));
     }
     /*
      * delete user

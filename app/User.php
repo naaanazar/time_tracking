@@ -22,8 +22,7 @@ class User extends Authenticatable
         'password',
         'employe',
         'team_name',
-        'hourly_rate',
-        'remember_token'
+        'hourly_rate'
     ];
 
     /**

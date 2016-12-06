@@ -13,7 +13,6 @@ class TimeManageController extends Controller
      * home page
      */
 
-
     public function index()
     {
         if (Auth::guest()) {
