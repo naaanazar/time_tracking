@@ -44,7 +44,7 @@
                     <li class="dropdown"> <a href="manage-client.html" role="button" class="dropdown-toggle" data-toggle="dropdown">Manage <i class="caret"></i></a>
                         <ul class="dropdown-menu">
                             <li> <a tabindex="-1" href="/user/all">Users</a> </li>
-                            <li> <a tabindex="-1" href="#">--</a> </li>
+                            <li> <a tabindex="-1" href="/team/all">Teams</a> </li>
                             <li> <a tabindex="-1" href="#">--</a> </li>
                         </ul>
                     </li>
@@ -52,7 +52,7 @@
                         <a href="{{ url('/logout') }}"
                            onclick="event.preventDefault();
                            document.getElementById('logout-form').submit();">
-                            Sing Out
+                            Sign Out
                         </a>
 
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
