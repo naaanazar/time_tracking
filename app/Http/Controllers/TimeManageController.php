@@ -34,9 +34,10 @@ class TimeManageController extends Controller
 
     public function team_all()
     {
-        $teams = DB::table('users')->get();
+        $teams = DB::table('teams')->get();
 
-        return view('', compact('teams'));
+
+        return view('time_manage.teams', compact('teams'));
     }
 
     public function create_client(Request $request)
@@ -63,7 +64,8 @@ class TimeManageController extends Controller
     public function create_team(Request $request)
     {
         if(Input::all() == true) {
-            $this->validation($request);
+
+        //   $this->validation($request);
 
             $team = Input::all();
             
@@ -71,17 +73,17 @@ class TimeManageController extends Controller
                 'team_name' => $team['team_name']
             ]);
 
-            return redirect('/user/all');
+           return redirect('/team/all');
         }
 
-        // return view('');
+         return view('time_manage.forms.createTeamsForm');
     }
 
     public function delete_team(Request $request, $id)
     {
         DB::table('teams')->where('id', '=', $id)->delete();
 
-        return redirect('/user/all');
+        return redirect('/team/all');
     }
 
     private function validation($request)
@@ -93,7 +95,7 @@ class TimeManageController extends Controller
             'contact_person' => 'required|min:4|max:30',
             'email' => 'required|email',
             'phone_number' => 'required|regex:/[0-9-]/|max:30',
-            'team' => 'required|min:4|max:30'
+            'team_name' => 'required|min:4|max:30'
         ]);
     }
 }

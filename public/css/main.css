@@ -1,8 +1,15 @@
 
 td {
     vertical-align: inherit !important;
+    border-left: none !important;
+    border-right: none !important;
 }
 
 th {
     text-align: center  !important;
+    border-left: none !important;
+    border-right: none !important;
+}
+table {
+    border-right: none !important;
 }
