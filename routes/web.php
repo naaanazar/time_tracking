@@ -30,6 +30,7 @@ Route::group(['middleware' => ['permision']], function () {
 
     // client
     Route::get('/client/create', 'TimeManageController@create_client');
+    Route::post('/client/create', 'TimeManageController@create_client');
 
     // project
     Route::get('/project/create', 'TimeManageController@create_project');
@@ -53,7 +54,7 @@ Route::group(['middleware' => ['permision']], function () {
 
 Auth::routes();
 
-// google
+// google login
 
 Route::get('auth/google', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallback');
