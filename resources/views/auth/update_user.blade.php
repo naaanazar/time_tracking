@@ -18,10 +18,11 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/user/update/' . $user->id) }}">
                         {{ csrf_field() }}
 
-                        <div class="control-group" >
-                            <label class="control-label" for="focusedInput">User type</label>
+                        <div class="control-group row" >
+                            <label class="control-label col-sm-2" for="focusedInput">User type</label>
                             <div class="controls">
-                                <select name="employe" class="input-xlarge focused" id="selectTeam" style="height: 42px;width: 37%" >
+                                <select name="employe" class="input-xlarge focused" id="selectTeam" style="height: 42px;" >
+                                    <option>{{ $user->employe }}</option>
                                     @if ($status == 'Admin')
                                         <option>Admin</option>
                                         <option>Supervisor</option>
@@ -34,8 +35,8 @@
 
                             </div>
                         </div>
-                        <div class="control-group">
-                            <label class="control-label" for="focusedInput">Name</label>
+                        <div class="control-group row">
+                            <label class="control-label col-sm-2" for="focusedInput">Name</label>
                             <div class="controls">
                                 <input name="name" class="input-xlarge focused" id="focusedInput" value=" {{ $user->name }}"  type="text">
                                 @if ($errors->has('name'))
@@ -45,8 +46,8 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="control-group" id="hourlyRate"  style="display:none;">
-                            <label class="control-label" for="hourlyRateId">Hourly rate</label>
+                        <div class="control-group row" id="hourlyRate"  style="display:none;">
+                            <label class="control-label col-sm-2" for="hourlyRateId">Hourly rate</label>
                             <div class="controls">
 
                                 <input name="hourlyRate" class="input-xlarge focused"  id="hourlyRateId" value="<?= $user->hourly_rate ?>" type="number" step="0.01">
@@ -59,13 +60,13 @@
                             </div>
 
                         </div>
-                        <div id="team_name" style="display:none;" class="control-group">
-                            <label class="control-label" for="focusedInput">Team</label>
+                        <div id="team_name" style="display:none;" class="control-group row">
+                            <label class="control-label col-sm-2" for="focusedInput">Team</label>
 
                             @if( $teams == true )
 
                                 <div class="controls">
-                                    <select name="team_name" class="input-xlarge focused" style="height: 42px;width: 37%">
+                                    <select name="team_name" class="input-xlarge focused" style="height: 42px;">
                                         <option value="{{ $user->team_name }}" selected>{{ $user->team_name }}</option>
 
                                         @foreach( $teams as $team )
@@ -86,9 +87,10 @@
                                         </span>
                             @endif
                         </div>
-                        <div class="form-actions">
-                            <button type="submit" class="btn btn-large btn-primary" formaction="">Save</button> &nbsp;&nbsp;
-                            <a  href="{{ url('/') }}" class="btn btn-large btn-primary" style="font-weight: normal;" >Cancel</a>
+                        <div class="form-actions row">
+                            <label class="control-label col-sm-2" for=""></label>
+                            <button type="submit" class="btn btn-large button-orange" formaction="">Save</button> &nbsp;&nbsp;
+                            <a  href="{{ url('/user/all') }}" class="btn btn-large button-orange" style="font-weight: normal;" >Cancel</a>
                         </div>
 
                     </form>

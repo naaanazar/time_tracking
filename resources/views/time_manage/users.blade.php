@@ -5,9 +5,9 @@
 <div id="conteiner" class="container" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
     <div class="row-fluid">
         <div class="span12">
-            <h3 style="display:inline-block">Users</h3>
-            <a href="/user/create" style="display:inline-block; margin-left: 25px" class="btn btn-large btn-primary">
-                <i class="glyphicon glyphicon-plus"></i>Add User</a>
+            <h3 class="h3-my">Users</h3>
+            <a href="/user/create" style="display:inline-block; margin-left: 25px" class="btn btn-large button-orange">
+                <i class="glyphicon glyphicon-plus"></i> Add User</a>
         </div>
 
     </div>
@@ -18,8 +18,13 @@
 
             <div class="block-content collapse in">
                 <div class="span12">
+                    <script>
+                        $(document).ready(function() {
+                            $('#usersTable').DataTable();
+                        } );
+                    </script>
 
-                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="usersTable">
                         <thead>
                         <tr>
                             <th width="130px">Users</th>
@@ -27,10 +32,10 @@
                             <th>Team</th>
                             <th>Hourly rate</th>
                             <th>User type</th>
-                            <th width="160px"  class="center">Created at</th>
+                            <th style="min-width: 160px"  class="center">Created at</th>
 
                             @if ($status == 'HR Manager' || $status == 'Admin')
-                                 <th width="125px">Action</th>
+                                 <th width="140px">Action</th>
                             @endif
                         </tr>
                         </thead>
@@ -50,8 +55,8 @@
                                         @if ($status == 'Admin' ||
                                          ($status == 'HR Manager' &&
                                          ($user->employe == "Developer" || $user->employe == "QA Engineer" || $user->employe == "Lead")))
-                                            <a href="/user/update/{{ $user->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>Edit</a>
-                                            <a href="/user/delete/{{ $user->id }}" class="btn btn-danger"><span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>Delete</a>
+                                            <a href="/user/update/{{ $user->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
+                                            <a href="/user/delete/{{ $user->id }}" class="btn btn-danger"><span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</a>
                                         @endif
                                     </td>
                                 @endif

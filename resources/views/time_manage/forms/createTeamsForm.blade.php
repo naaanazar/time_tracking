@@ -17,8 +17,8 @@
                     <div class="span12">
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/team/create') }}">
                             {{ csrf_field() }}
-                                <div class="control-group">
-                                    <label class="control-label" for="focusedInput">Team name</label>
+                                <div class="control-group row">
+                                    <label class="control-label col-sm-2" for="focusedInput">Team name</label>
                                     <div class="controls">
                                         <input name="team_name" class="input-xlarge focused" id="focusedInput" autofocus type="text">
                                         @if ($errors->has('team_name'))
@@ -28,9 +28,10 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="form-actions">
-                                    <button type="submit" class="btn btn-large btn-primary" formaction="">Save</button> &nbsp;&nbsp;
-                                    <a  href="{{ url('/') }}" class="btn btn-large btn-primary" style="font-weight: normal;" >Cancel</a>
+                                <div class="form-actions row">
+                                    <label class="control-label col-sm-2" for="focusedInput"></label>
+                                    <button type="submit" class="btn btn-large button-orange" formaction="">Save</button> &nbsp;&nbsp;
+                                    <a  href="{{ url('/') }}" class="btn btn-large button-orange" style="font-weight: normal;" >Cancel</a>
                                 </div>
 
                         </form>
