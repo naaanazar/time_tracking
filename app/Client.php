@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TimeManage extends Model
+class Client extends Model
 {
     protected $table = 'Clients';
     /**

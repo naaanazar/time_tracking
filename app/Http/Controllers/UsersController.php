@@ -30,7 +30,7 @@ class UsersController extends Controller
 
             Mail::to($user['email'])->send(new mailCreateUser($user['name'], $password, $user['email']));
 
-            return redirect('/');
+            return redirect('/user/all');
         }
 
         $teams = DB::table('teams')->get();

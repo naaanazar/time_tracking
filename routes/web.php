@@ -24,14 +24,28 @@ Route::group(['middleware' => ['permision']], function () {
 
     // TimeManage Controller
 
+    //home
     Route::get('/', 'TimeManageController@index');
+    Route::get('/home', 'TimeManageController@index');
+
+    // client
     Route::get('/client/create', 'TimeManageController@create_client');
+
+    // project
+    Route::get('/project/create', 'TimeManageController@create_project');
+    Route::post('/project/create', 'TimeManageController@create_project');
+
+    //task
+    Route::get('/task/create', 'TimeManageController@create_task');
+    Route::post('/task/create', 'TimeManageController@create_task');
+
+    // team
     Route::get('/team/create', 'TimeManageController@create_team');
     Route::post('/team/create', 'TimeManageController@create_team');
     Route::get('/team/delete/{id}', 'TimeManageController@delete_team');
     Route::get('/team/all', 'TimeManageController@team_all');
-    Route::post('/team/create', 'TimeManageController@create_team');
 
+    // forbidden
     Route::get('/register', 'TimeManageController@index');
 });
 
