@@ -35,8 +35,10 @@ class TimeManageController extends Controller
     public function all( $team = false )
     {
         if( $team != false ) {
+
             $users = User::where('team_name', '=', $team)->get();
         } else {
+            
             $users = DB::table('users')->get();
         }
 
