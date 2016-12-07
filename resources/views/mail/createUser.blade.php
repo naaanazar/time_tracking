@@ -19,11 +19,11 @@
 
 <img src="http://<?= $_SERVER['SERVER_NAME'] ?>/images/ignatiuz-logo.png" width="247" height="76">
 <div>
-    <h1>Hellow, {{ $name }} </h1>
+    <h1>Hello, {{ $name }} </h1>
     <p>Your account is registered!</p>
     <p>Your login: {{ $email }}</p>
     <p>Your password: {{ $password }}</p>
-    <p><a href="http://<?= $_SERVER['SERVER_NAME'] ?>"> Login</a></p><br><br>
+    <p><a href="http://<?= $_SERVER['SERVER_NAME'] ?>">Login</a></p><br><br>
 
     Regards,<br>Ignatius
 </div>

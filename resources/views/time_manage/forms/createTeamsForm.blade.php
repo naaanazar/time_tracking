@@ -20,7 +20,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="focusedInput">Team name</label>
                                     <div class="controls">
-                                        <input name="team_name" class="input-xlarge focused" id="focusedInput"  type="text">
+                                        <input name="team_name" class="input-xlarge focused" id="focusedInput" autofocus type="text">
                                         @if ($errors->has('team_name'))
                                             <span class="help-block">
                                             <strong style="color:#802420">{{ $errors->first('team_name') }}</strong>

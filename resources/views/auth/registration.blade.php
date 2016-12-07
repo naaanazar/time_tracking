@@ -30,6 +30,7 @@
                                             <option>Lead</option>
                                             <option>Developer</option>
                                             <option>QA Engineer</option>
+
                                         </select>
 
                                     </div>
@@ -37,7 +38,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="focusedInput">Name</label>
                                     <div class="controls">
-                                        <input name="name" class="input-xlarge focused" id="focusedInput"  type="text">
+                                        <input name="name" class="input-xlarge focused" id="focusedInput"  autofocus type="text">
                                         @if ($errors->has('name'))
                                             <span class="help-block">
                                             <strong style="color:#802420">{{ $errors->first('name') }}</strong>

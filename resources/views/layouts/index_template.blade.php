@@ -34,7 +34,7 @@
         <div class="container-fluid"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li class=""> <a href="#}">Create User</a> </li>
+                    <!--<li class=""> <a href="#}">Create User</a> </li>-->
                     <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle">Report <i class="caret"></i></a>
                         <ul class="dropdown-menu">
                             <li> <a tabindex="-1" href="#">A--</a> </li>
