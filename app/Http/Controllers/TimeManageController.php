@@ -38,7 +38,7 @@ class TimeManageController extends Controller
 
             $users = User::where('team_name', '=', $team)->get();
         } else {
-            
+
             $users = DB::table('users')->get();
         }
 
@@ -178,7 +178,7 @@ class TimeManageController extends Controller
             'website' => 'required|url',
             'contact_person' => 'required|min:4|max:30',
             'email' => 'required|email',
-            'phone_number' => 'required|regex:/[0-9-]/|max:30'
+            'phone_number' => 'required|regex:/[0-9-]+/|max:30'
         ]);
     }
 
@@ -192,7 +192,7 @@ class TimeManageController extends Controller
             'company' => 'required|min:2|max:30',
             'project_name' => 'required|min:2|max:30',
             'hourly_rate' => 'numeric',
-            'notes' => 'regex:/[a-zA-Z0-9]/|max:1000'
+            'notes' => 'regex:/[a-zA-Z0-9]+/|max:1000'
         ]);
     }
 
@@ -206,7 +206,7 @@ class TimeManageController extends Controller
             'company_id' => 'integer|max:10',
             'project_id' => 'integer|max:10',
             'task_type' => 'required|min:2|max:30',
-            'task_description' => 'required|regex:/[a-zA-Z0-9]/|max:1000'
+            'task_description' => 'required|regex:/[a-zA-Z0-9]+/|max:1000'
         ]);
     }
 
