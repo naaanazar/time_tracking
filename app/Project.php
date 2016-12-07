@@ -13,6 +13,7 @@ class Project extends Model
      * @var array
      */
     protected $fillable = [
+        'client_id',
         'company',
         'project_name',
         'hourly_rate',

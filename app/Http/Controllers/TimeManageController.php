@@ -45,7 +45,6 @@ class TimeManageController extends Controller
     {
         $teams = DB::table('teams')->get();
 
-
         return view('time_manage.teams', compact('teams'));
     }
 
@@ -84,6 +83,7 @@ class TimeManageController extends Controller
             $project = Input::all();
 
             Project::create([
+                'client_id' => $project['company_id'],
                 'company' => $project['company'],
                 'project_name' => $project['project_name'],
                 'hourly_rate' => $project['hourly_rate'],
