@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Input;
 use App\Client;
 use App\Project;
 use App\Task;
+use App\User;
 use Validator;
 
 class TimeManageController extends Controller
@@ -26,13 +27,18 @@ class TimeManageController extends Controller
             return view('layouts.index_template');
         }
     }
+
     /*
      * return all users
      * */
 
-    public function all()
+    public function all( $team = false )
     {
-        $users = DB::table('users')->get();
+        if( $team != false ) {
+            $users = User::where('team_name', '=', $team)->get();
+        } else {
+            $users = DB::table('users')->get();
+        }
 
         return view('time_manage.users', compact('users'));
     }
@@ -51,6 +57,7 @@ class TimeManageController extends Controller
     /*
      * create new clients
      * */
+
     public function create_client(Request $request)
     {
         if(Input::all() == true) {
@@ -75,6 +82,7 @@ class TimeManageController extends Controller
     /*
      * create project for company
      * */
+
     public function create_project(Request $request)
     {
         if(Input::all() == true) {
@@ -99,6 +107,7 @@ class TimeManageController extends Controller
     /*
      * create tack for project
      * */
+
     public function create_task(Request $request)
     {
         if(Input::all() == true) {
@@ -122,10 +131,11 @@ class TimeManageController extends Controller
     /*
      * create new team
      * */
+
     public function create_team(Request $request)
     {
         if(Input::all() == true) {
-
+            $this->validation_team($request);
             $team = Input::all();
             
             DB::table('teams')->insert([
@@ -143,6 +153,7 @@ class TimeManageController extends Controller
      * and change team_name field in table users
      * where this team used
      * */
+
     public function delete_team($id)
     {
         DB::table('users')
@@ -156,6 +167,7 @@ class TimeManageController extends Controller
     /*
      * validation for clients action
      * */
+
     private function validation_client($request)
     {
         $this->validate($request, [
@@ -171,6 +183,7 @@ class TimeManageController extends Controller
     /*
      * validation for project
      * */
+
     private function validation_project($request)
     {
         $this->validate($request, [
@@ -184,6 +197,7 @@ class TimeManageController extends Controller
     /*
      * validation for task
      * */
+
     private function validation_task($request)
     {
         $this->validate($request, [
@@ -191,6 +205,17 @@ class TimeManageController extends Controller
             'project_id' => 'integer|max:10',
             'task_type' => 'required|min:2|max:30',
             'task_description' => 'required|regex:/[a-zA-Z0-9]/|max:1000'
+        ]);
+    }
+
+    /*
+     * validation for create team
+     * */
+
+    private function validation_team($request)
+    {
+        $this->validate($request, [
+            'team_name' => 'required|min:2|max:30'
         ]);
     }
 }

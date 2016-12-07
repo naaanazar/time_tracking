@@ -44,7 +44,6 @@ class UsersController extends Controller
     public function update(Request $request, $id = false)
     {
         if(Input::all() == true && User::where('id', '=', $id) == true) {
-
             $this->validation_update($request);
 
             $user = Input::all();
