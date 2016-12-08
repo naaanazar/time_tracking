@@ -78,13 +78,35 @@ class TimeManageController extends Controller
 
             return redirect('/');
         }
-        return view('');
+        return view('time_manage.forms.client');
     }
 
     /*
-     * update 
+     * update client
+     * id - client id
      * */
+    public function update_client(Request $request, $id)
+    {
+        if( Input::all() == true && Client::where('id', '=', $id) == true ) {
+            $this->validation_client($request);
 
+            $client = Input::all();
+
+            Client::where('id', '=', $id)->update([
+                'company_name' => $client['company_name'],
+                'company_address' => $client['company_address'],
+                'website' => $client['website'],
+                'contact_person' => $client['contact_person'],
+                'email' => $client['email'],
+                'phone_number' => $client['phone_number']
+            ]);
+            return redirect('/');
+        }
+
+        $client = Client::where( 'id', '=', $id );
+
+        return view('time_manage.forms.client', compact('client'));
+    }
     /*
      * create project for company
      * */
@@ -106,8 +128,8 @@ class TimeManageController extends Controller
 
             return redirect('/');
         }
-        //$clients = Client::all();
-        //return view('', compact('clients'));
+        $client = Client::all();
+        return view('time_manage.forms.client', compact('client'));
     }
 
     /*
