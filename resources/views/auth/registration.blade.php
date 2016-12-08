@@ -19,7 +19,6 @@
                         <div class="span12">
                             <form class="form-horizontal" role="form" method="POST" action="{{ url('/user/create') }}">
                                 {{ csrf_field() }}
-
                                     <div class="control-group row" >
                                         <label class="control-label col-sm-2" for="focusedInput">User type</label>
                                         <div class="controls">

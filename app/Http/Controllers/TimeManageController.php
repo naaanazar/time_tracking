@@ -123,8 +123,8 @@ class TimeManageController extends Controller
      * */
     public function create_project(Request $request)
     {
-
         if(Input::all() == true) {
+
             $this->validation_project($request);
 
             $project = Input::all();
@@ -300,7 +300,7 @@ class TimeManageController extends Controller
     private function validation_project($request)
     {
         $this->validate($request, [
-            'client_id' => 'required|integer',
+            'company_id' => 'required|integer',
             'project_name' => 'required|min:2|max:30',
             'hourly_rate' => 'numeric',
             'notes' => 'regex:/[a-zA-Z0-9]+/|max:1000'

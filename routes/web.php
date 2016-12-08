@@ -58,7 +58,7 @@ Route::group(['middleware' => ['permision']], function () {
     Route::get('/team/all', 'TimeManageController@team_all');
 
     // forbidden
-    Route::get('/register', 'TimeManageController@index');
+    //Route::get('/register', 'TimeManageController@index');
 });
 
 // Auth
