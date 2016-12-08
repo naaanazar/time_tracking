@@ -92,7 +92,7 @@
 </div>
 </div>
 <div style=" border-bottom: solid 3px #808080">
-    <div class="container" <div=""><a href="http://webdevelop.it-dev-lab.com"><img src="http://webdevelop.it-dev-lab.com/images/ignatiuz-logo.png" width="247" height="76" style="margin-top:18px"></a>
+    <div class="container" <div=""><a href="http://webdevelop.it-dev-lab.com"><img src="http://webdevelop.it-dev-lab.com/images/ignatiuz-logo.png" width="247" height="102" style="margin-top:7px"></a>
 
         <div style="    display: inline-block;
                 float: right;
@@ -112,6 +112,7 @@
     </div>
 </div>
 
+
 @yield('content')
 
 
@@ -122,12 +123,14 @@
     padding-right: 20px;
     padding-left: 20px;
     background-color: #808080;
-    border: 1px solid #d4d4d4;">
+    border: 1px solid #d4d4d4;
+        margin-top: 50px">
     <div style="    color: #cccccc;
     font-size: 20px;
     margin: 0 auto;
     padding: 20px 0 0;
-    width: 83%;">&copy Ignatiuz</div>
+    width: 83%;
+    ">&copy Ignatiuz</div>
 </div>
 <!-- /container -->
 <script src="/assets/jquery-1.9.1.min.js"></script>

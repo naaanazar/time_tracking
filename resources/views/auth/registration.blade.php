@@ -20,9 +20,12 @@
                             <form class="form-horizontal" role="form" method="POST" action="{{ url('/user/create') }}">
                                 {{ csrf_field() }}
                                     <div class="control-group row" >
-                                        <label class="control-label col-sm-2" for="focusedInput">User type</label>
-                                        <div class="controls">
-                                            <select name="employe" class="input-xlarge focused" id="selectTeam" style="height: 42px;" >
+                                        <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
+                                        <label class="control-label " for="focusedInput">User type</label>
+                                        </div>
+
+                                        <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
+                                            <select name="employe" class="input-xlarge focused my_input" id="selectTeam" style="height: 42px;" >
                                                 @if( old('employe') )
                                                     <option>{{ old('employe') }}</option>
 
@@ -39,10 +42,13 @@
 
                                         </div>
                                     </div>
+
                                     <div class="control-group row">
-                                        <label class="control-label col-sm-2" for="focusedInput">Name</label>
-                                        <div class="controls">
-                                            <input name="name" class="input-xlarge focused" id="focusedInput"  autofocus type="text" value="{{ old('name') }}">
+                                        <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
+                                        <label class="control-label" for="focusedInput">Name</label>
+                                        </div>
+                                        <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
+                                            <input name="name" class="input-xlarge focused my_input" id="focusedInput"  autofocus type="text" value="{{ old('name') }}">
                                             @if ($errors->has('name'))
                                                 <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('name') }}</strong>
@@ -51,10 +57,12 @@
                                         </div>
                                     </div>
                                     <div class="control-group  row">
-                                        <label class="control-label col-sm-2" for="focusedInput">Email</label>
-                                        <div class="controls">
+                                        <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
+                                        <label class="control-label" for="focusedInput">Email</label>
+                                        </div>
+                                        <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
-                           <input name="email" class="input-xlarge focused" value="{{ old('email') }}" type="email" required>
+                           <input name="email" class="input-xlarge focused my_input" value="{{ old('email') }}" type="email" required>
 
                                             @if ($errors->has('email'))
                                                 <span class="help-block">
@@ -65,10 +73,12 @@
 
                                     </div>
                                     <div class="control-group  row" id="hourlyRate"  style="display:none;">
-                                        <label class="control-label col-sm-2" for="hourlyRateId">Hourly rate</label>
-                                        <div class="controls">
+                                        <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
+                                        <label class="control-label" for="hourlyRateId">Hourly rate</label>
+                                        </div>
+                                        <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
-                                            <input name="hourlyRate" class="input-xlarge  focused"  id="hourlyRateId" value=""  type="number" step="0.01">
+                                            <input name="hourlyRate" class="input-xlarge  focused my_input"  id="hourlyRateId" value=""  type="number" step="0.01">
 
                                             @if ($errors->has('hourlyRate'))
                                                 <span class="help-block">
@@ -79,12 +89,13 @@
 
                                     </div>
                                     <div id="team_name" style="display:none;" class="control-group  row">
-                                        <label class="control-label col-sm-2" for="focusedInput">Team</label>
-
+                                        <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
+                                            <label class="control-label" for="focusedInput">Team</label>
+                                        </div>
                                         @if( $teams == true )
 
-                                        <div class="controls">
-                                            <select name="team_name" class="input-xlarge focused" style="height: 42px">
+                                            <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
+                                            <select name="team_name" class="input-xlarge focused my_input" style="height: 42px">
                                                 <option value="" selected>Select team</option>
 
                                             @foreach( $teams as $team )
@@ -106,9 +117,13 @@
                                         @endif
                                     </div>
                                     <div class="form-actions row">
-                                        <label class="control-label col-sm-2" for=""></label>
-                                        <button type="submit" class="btn btn-large button-orange" formaction="">Save</button> &nbsp;&nbsp;
-                                        <a  href="{{ url('/user/all') }}" class="btn btn-large button-orange" style="font-weight: normal;" >Cancel</a>
+                                        <div  class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+                                        </div>
+                                        <label class="control-label " for=""></label>
+                                        <div class="col-xs-8 col-sm-6 col-md-5 col-lg-4">
+                                            <button type="submit" class="btn btn-large button-orange" formaction="">Save</button> &nbsp;&nbsp;
+                                            <a  href="{{ url('/user/all') }}" class="btn btn-large button-orange" style="font-weight: normal;" >Cancel</a>
+                                        </div>
                                     </div>
 
                             </form>
