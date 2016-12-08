@@ -30,7 +30,7 @@ class UsersController extends Controller
 
             Mail::to($user['email'])->send(new mailCreateUser($user['name'], $password, $user['email']));
 
-            return redirect('/');
+            return redirect('/user/all');
         }
 
         $teams = DB::table('teams')->get();
@@ -44,7 +44,6 @@ class UsersController extends Controller
     public function update(Request $request, $id = false)
     {
         if(Input::all() == true && User::where('id', '=', $id) == true) {
-
             $this->validation_update($request);
 
             $user = Input::all();
@@ -52,8 +51,8 @@ class UsersController extends Controller
             User::where('id', '=', $id)->update([
                 'name' => $user['name'],
                 'employe' => $user['employe'],
-                'team_name' => ($user['team_name']) ? $user['team_name'] : null,
-                'hourly_rate' => ($user['hourlyRate']) ? $user['hourlyRate'] : null
+                'team_name' => $user['team_name'],
+                'hourly_rate' => $user['hourlyRate']
             ]);
 
             return redirect('/user/all');

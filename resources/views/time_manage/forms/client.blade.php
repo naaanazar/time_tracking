@@ -17,7 +17,7 @@
             <!-- block -->
             <div class="block-content collapse in">
                 <div class="span12">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/client/create') }}">
                         {{ csrf_field() }}
 
                         <div class="control-group row">
@@ -25,10 +25,10 @@
                                 <label class="control-label" for="companeMameId" style="text-align: left;">Company Name</label>
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                <input name="" class="input-xlarge focused my_input" id="companeMameId"  autofocus type="text">
-                                @if ($errors->has(''))
+                                <input name="company_name" class="input-xlarge focused my_input" id="companeMameId"  autofocus type="text">
+                                @if ($errors->has('company_name'))
                                     <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('') }}</strong>
+                                                <strong style="color:#802420">{{ $errors->first(''company_name') }}</strong>
                                             </span>
                                 @endif
                             </div>
@@ -39,10 +39,10 @@
                                 <label class="control-label" for="AddressId" style="text-align: left;">Address</label>
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                <input name="" class="input-xlarge focused my_input" id="AddressId"   type="text">
-                                @if ($errors->has(''))
+                                <input name="company_address" class="input-xlarge focused my_input" id="AddressId"   type="text">
+                                @if ($errors->has('compane_address'))
                                     <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('') }}</strong>
+                                                <strong style="color:#802420">{{ $errors->first('compane_address') }}</strong>
                                             </span>
                                 @endif
                             </div>
@@ -53,10 +53,10 @@
                                 <label class="control-label" for="WebsiteId" style="text-align: left;">Website</label>
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                <input name="" class="input-xlarge focused my_input" id="WebsiteId"  type="text">
-                                @if ($errors->has(''))
+                                <input name="website" class="input-xlarge focused my_input" id="WebsiteId"  type="text">
+                                @if ($errors->has('website'))
                                     <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('') }}</strong>
+                                                <strong style="color:#802420">{{ $errors->first('website') }}</strong>
                                             </span>
                                 @endif
                             </div>
@@ -67,10 +67,10 @@
                                 <label class="control-label" for="ContactPersonId" style="text-align: left;">Contact Person</label>
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                <input name="" class="input-xlarge focused my_input" id="ContactPersonId"   type="text">
-                                @if ($errors->has(''))
+                                <input name="contact_person" class="input-xlarge focused my_input" id="ContactPersonId"   type="text">
+                                @if ($errors->has('contact_person'))
                                     <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('') }}</strong>
+                                                <strong style="color:#802420">{{ $errors->first('contact_person') }}</strong>
                                             </span>
                                 @endif
                             </div>
@@ -81,10 +81,10 @@
                                 <label class="control-label" for="emailClientId" style="text-align: left;">Email</label>
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                <input name="" class="input-xlarge focused my_input" id="emailClientId"   type="email">
-                                @if ($errors->has(''))
+                                <input name="email" class="input-xlarge focused my_input" id="emailClientId"   type="email">
+                                @if ($errors->has('email'))
                                     <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('') }}</strong>
+                                                <strong style="color:#802420">{{ $errors->first('email') }}</strong>
                                             </span>
                                 @endif
                             </div>
@@ -95,10 +95,10 @@
                                 <label class="control-label" for="PhoneNumberId" style="text-align: left;">Phone Number</label>
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                <input name="" class="input-xlarge focused my_input" id="PhoneNumberId"   type="text">
-                                @if ($errors->has(''))
+                                <input name="phone_number" class="input-xlarge focused my_input" id="PhoneNumberId"   type="text">
+                                @if ($errors->has('phone_number'))
                                     <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('') }}</strong>
+                                                <strong style="color:#802420">{{ $errors->first('phone_number') }}</strong>
                                             </span>
                                 @endif
                             </div>
