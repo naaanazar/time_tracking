@@ -139,7 +139,7 @@ label{
     border-top: 1px solid #e5e5e5!important;
 }
 
-select, input, textarea{
+select, input{
     border: 1px solid #CCC!important;
 }
 
@@ -154,9 +154,7 @@ select, input, textarea{
     border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25)!important;
 }
 
-.my_input {
-    width: 100%!important;
-}
+
 
 
 /*old style*/
@@ -569,7 +567,7 @@ select, input, textarea{
 
     textarea.input-xlarge {
         border-radius: 0;
-        /*width: 35.5% !important;*/
+        width: 35.5% !important;
     }
 
 
