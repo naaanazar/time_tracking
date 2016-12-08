@@ -130,7 +130,6 @@ class TimeManageController extends Controller
 
             Project::create([
                 'client_id' => $project['company_id'],
-                'company' => $project['company'],
                 'project_name' => $project['project_name'],
                 'hourly_rate' => $project['hourly_rate'],
                 'notes' => $project['notes']
