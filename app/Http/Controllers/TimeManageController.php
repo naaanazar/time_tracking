@@ -78,23 +78,59 @@ class TimeManageController extends Controller
 
             return redirect('/');
         }
-            //return view('');
+        return view('time_manage.forms.client');
+    }
+
+    /*
+     * update client
+     * id - client id
+     * */
+    public function update_client(Request $request, $id)
+    {
+        if( Input::all() == true && Client::where('id', '=', $id) == true ) {
+            $this->validation_client($request);
+
+            $client = Input::all();
+
+            Client::where('id', '=', $id)->update([
+                'company_name' => $client['company_name'],
+                'company_address' => $client['company_address'],
+                'website' => $client['website'],
+                'contact_person' => $client['contact_person'],
+                'email' => $client['email'],
+                'phone_number' => $client['phone_number']
+            ]);
+            return redirect('/');
+        }
+
+        $client = Client::where( 'id', '=', $id );
+
+        return view('time_manage.forms.client', compact('client'));
+    }
+
+    /*
+     * delete client
+     * */
+    public function delete_client($id)
+    {
+        Client::where('id', '=', $id)->delete();
+
+        return redirect('/');
     }
 
     /*
      * create project for company
      * */
-
     public function create_project(Request $request)
     {
+
         if(Input::all() == true) {
             $this->validation_project($request);
 
             $project = Input::all();
 
             Project::create([
-                'client_id' => $project['company_id'],
-                'company' => $project['company'],
+                'company_id' => $project['company_id'],
                 'project_name' => $project['project_name'],
                 'hourly_rate' => $project['hourly_rate'],
                 'notes' => $project['notes']
@@ -102,14 +138,19 @@ class TimeManageController extends Controller
 
             return redirect('/');
         }
-        //$clients = Client::all();
-        //return view('', compact('clients'));
+        $client = Client::all();
+
+        return view('time_manage.forms.project', compact('client'));
     }
+
+    /*
+     * update project
+     * */
+
 
     /*
      * create tack for project
      * */
-
     public function create_task(Request $request)
     {
         if(Input::all() == true) {
@@ -174,7 +215,7 @@ class TimeManageController extends Controller
     {
         $this->validate($request, [
             'company_name' => 'required|min:4|max:30',
-            'compane_address' => 'required|min:4|max:100',
+            'company_address' => 'required|min:4|max:100',
             'website' => 'required|url',
             'contact_person' => 'required|min:4|max:30',
             'email' => 'required|email',
@@ -189,7 +230,7 @@ class TimeManageController extends Controller
     private function validation_project($request)
     {
         $this->validate($request, [
-            'company' => 'required|min:2|max:30',
+            'client_id' => 'required|integer',
             'project_name' => 'required|min:2|max:30',
             'hourly_rate' => 'numeric',
             'notes' => 'regex:/[a-zA-Z0-9]+/|max:1000'

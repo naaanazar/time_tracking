@@ -28,7 +28,7 @@
                                 <input name="company_name" class="input-xlarge focused my_input" id="companeMameId"  autofocus type="text">
                                 @if ($errors->has('company_name'))
                                     <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first(''company_name') }}</strong>
+                                                <strong style="color:#802420">{{ $errors->first('company_name') }}</strong>
                                             </span>
                                 @endif
                             </div>

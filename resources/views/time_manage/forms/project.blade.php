@@ -25,7 +25,18 @@
                                     <label class="control-label" for="CompanyProjectId" style="text-align: left;">Company</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <input name="client_id" class="input-xlarge focused my_input" id="CompanyProjectId"  autofocus type="text">
+
+                                    <select name="company_id" class="input-xlarge focused my_input"  id="CompanyProjectId" style="height: 42px;">
+                                        @if (isset($client->company_name))
+                                        <option value="{{ $client->id }}" selected>{{ $client->company_name }}</option>
+                                        @endif
+
+                                        @foreach( $client as $key )
+                                                <option  value="{{ $key->id}}">{{ $key->company_name }}</option>
+                                        @endforeach
+
+                                    </select>
+
                                     @if ($errors->has('company'))
                                         <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('company') }}</strong>
@@ -53,7 +64,7 @@
                                     <label class="control-label" for="HourlyRateProhectId" style="text-align: left;">Hourly Rate</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <input name="hourly_rate" class="input-xlarge focused my_input" id="HourlyRateProhectId"  type="text">
+                                    <input name="hourly_rate" class="input-xlarge focused my_input" id="HourlyRateProhectId"  type="number" step="0.01">
                                     @if ($errors->has('hourly_rate'))
                                         <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('hourly_rate') }}</strong>
