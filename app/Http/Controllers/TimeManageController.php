@@ -78,8 +78,12 @@ class TimeManageController extends Controller
 
             return redirect('/');
         }
-            //return view('');
+        return view('');
     }
+
+    /*
+     * update 
+     * */
 
     /*
      * create project for company

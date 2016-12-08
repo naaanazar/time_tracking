@@ -60,3 +60,4 @@ Auth::routes();
 Route::get('auth/google', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallback');
 //Route::get('auth/google/callback', 'TestController@test');
+

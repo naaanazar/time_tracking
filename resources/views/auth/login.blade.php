@@ -10,7 +10,7 @@
             <h2 class="form-signin-heading"><i class="fa-li fa fa-lock"></i> Login</h2>
             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                 <div class="usericon"><i class="fa fa-envelope"></i></div>
-                <input id="email" type="email" class="input-block-level" placeholder="Email" name="email" value="{{ old('email') }}" required>
+                <input id="email" type="email" class="input-block-level" placeholder="Email" name="email" autofocus value="{{ old('email') }}" required>
 
                 @if ($errors->has('email'))
                     <span class="help-block">

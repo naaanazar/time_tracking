@@ -1,3 +1,4 @@
+<?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,15 +11,21 @@
 
     <title>Ignatiuz</title>
 
-    <!-- Styles -->
-   <!-- <link href="/css/app.css" rel="stylesheet">-->
-    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-    <link href="/assets/styles.css" rel="stylesheet" media="screen">
     <link href="/css/main.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="/assets/font-awesome.css">
     <link rel="" href="/assets/fonts/glyphicons-halflings-regular.eot">
-    <link rel="stylesheet" href="/assets/DT_bootstrap.css">
+
+    <link href="/bootstrap3/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/bootstrap3/css/bootstrap-theme.css.map" rel="stylesheet" media="screen">
+
+    <link rel="stylesheet" type="text/css" href="/datatables/DataTables-1.10.12/css/dataTables.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/datatables/Buttons-1.2.2/css/buttons.bootstrap.min.css"/>
+    <script type="text/javascript" src="/datatables/jQuery-2.2.3/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="/datatables/DataTables-1.10.12/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/datatables/DataTables-1.10.12/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/buttons.bootstrap.min.js"></script>
+    <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/buttons.colVis.min.js"></script>
 
     <!-- Scripts -->
     <script>
@@ -27,81 +34,117 @@
         ]); ?>
     </script>
 </head>
-
 <body id="">
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container-fluid"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
-            <div class="nav-collapse collapse">
-                <ul class="nav">
-                    <li class=""> <a href="{{ url('/user/create') }}">Create User</a> </li>
-                    <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle">Report <i class="caret"></i></a>
-                        <ul class="dropdown-menu">
-                            <li> <a tabindex="-1" href="#">A--</a> </li>
-                            <li> <a tabindex="-1" href="#">--</a> </li>
+<div class="navbar-inner navbar-style">
+    <nav class="navbar navbar-fixed-top nav-my" style="float:right; display:inline-block;">
+        <div class="container-fluid" style="min-height: 61px;">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Report<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" >
+                            <li><a href="#">-----</a></li>
+                            <li><a href="#">------</a></li>
+                            <li><a href="#">------</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">------</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"> <a href="manage-client.html" role="button" class="dropdown-toggle" data-toggle="dropdown">Manage <i class="caret"></i></a>
-                        <ul class="dropdown-menu">
-                            <li> <a tabindex="-1" href="/user/all">Users</a> </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Manage<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" >
+                            @if ($status == 'Admin' || $status == 'HR Manager')
+                                <li> <a tabindex="-1" href="/user/all">Users</a> </li>
+                            @endif
                             <li> <a tabindex="-1" href="/team/all">Teams</a> </li>
+                            <li role="separator" class="divider"></li>
                             <li> <a tabindex="-1" href="#">--</a> </li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="{{ url('/logout') }}"
-                           onclick="event.preventDefault();
+                        <a href="{{ url('/logout') }}" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();
                            document.getElementById('logout-form').submit();">
                             Sign Out
                         </a>
-
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                         </form>
                     </li>
                 </ul>
-            </div>
-            <!--/.nav-collapse -->
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+</div>
+<div style=" border-bottom: solid 3px #808080">
+    <div class="container" <div=""><a href="http://webdevelop.it-dev-lab.com"><img src="http://webdevelop.it-dev-lab.com/images/ignatiuz-logo.png" width="247" height="76" style="margin-top:12px"></a>
+
+        <div style="    display: inline-block;
+                float: right;
+                    position: relative;
+                margin-top: 71px;">
+            <img src="http://webdevelop.it-dev-lab.com/images/log.png" width="60" height="60" style="position: absolute;
+                    left: -27px;
+                    bottom: -2px;">
+                    <span style="    display: inline-block;
+                    background-color: #808080;
+                    color: #ccc;
+                    padding: 10px 60px;">
+            <strong>{{\Illuminate\Support\Facades\Auth::user()['original']['name']}}</strong>
+                    <span>
+                </span></span>
         </div>
     </div>
 </div>
-<div style=" border-bottom: solid 3px #808080">
-    <div class="container"
-        <div class="alert alert-success"><a href="{{ url('/') }}"><img src="{{ url('/images/ignatiuz-logo.png') }}" width="247" height="76" /></a></a>
-
-            <div style="    display: inline-block;
-            float: right;
-                position: relative;
-            margin-top: 71px;">
-                <img src="{{ url('/images/log.png') }}"  width="60" height="60" style="position: absolute;
-                left: -27px;
-                bottom: -2px;"/>
-                <span style="    display: inline-block;
-
-
-                background-color: #808080;
-                color: #ccc;
-                padding: 10px 60px;
-                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;">
-                <strong>{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}</strong>
-                <span>
-            </div>
-        </div>
-    </div>
-<div>
 
 @yield('content')
 
-<div class="navbar-inner ftr">
-    <div>&copy; Ignatiuz</div>
-</div>
 
+<div class="navbar-inner" style="bottom: 0;
+    position: fixed;
+    width: 100%;
+    min-height: 63px;
+    padding-right: 20px;
+    padding-left: 20px;
+    background-color: #808080;
+    border: 1px solid #d4d4d4;">
+    <div style="    color: #cccccc;
+    font-size: 20px;
+    margin: 0 auto;
+    padding: 20px 0 0;
+    width: 83%;">&copy Ignatiuz</div>
+</div>
 <!-- /container -->
 <script src="/assets/jquery-1.9.1.min.js"></script>
-<script src="/bootstrap/js/bootstrap.min.js"></script>
-<script src="/assets/datatables/js/jquery.dataTables.min.js"></script>
+
 <script src="/assets/scripts.js"></script>
-<script src="/assets/DT_bootstrap.js"></script>
+
+    <script type="text/javascript" src="/datatables/jQuery-2.2.3/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="/datatables/DataTables-1.10.12/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/datatables/DataTables-1.10.12/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/buttons.bootstrap.min.js"></script>
+    <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/buttons.colVis.min.js"></script>
+
+    <script src="/bootstrap3/js/bootstrap.min.js"></script>
+
+  <!--  <script src="/assets/datatables/js/jquery.dataTables.min.js"></script>
+<script src="/assets/DT_bootstrap.js"></script>-->
 <script>
     $(function() {
 
