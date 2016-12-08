@@ -31,7 +31,6 @@ class TimeManageController extends Controller
     /*
      * return all users
      * */
-
     public function all( $team = false )
     {
         if( $team != false ) {
@@ -48,7 +47,6 @@ class TimeManageController extends Controller
     /*
      * return all teams
      * */
-
     public function team_all()
     {
         $teams = DB::table('teams')->get();
@@ -122,7 +120,7 @@ class TimeManageController extends Controller
      * */
     public function all_client()
     {
-        $clients = Client::all();
+        $clients = DB::table('clients')->get();
 
         return view('time_manage.', compact('clients'));
     }
