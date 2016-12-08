@@ -29,9 +29,7 @@
 
     <!-- Scripts -->
     <script>
-        window.Laravel = <?php echo json_encode([
-                'csrfToken' => csrf_token(),
-        ]); ?>
+        window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(), ]); ?>
     </script>
 </head>
 <body id="">
@@ -71,7 +69,9 @@
                             <ul class="dropdown-menu" >
                                 @if ($status == 'Admin' || $status == 'HR Manager')
                                     <li> <a tabindex="-1" href="/user/all">Users</a> </li>
+                                    <li> <a tabindex="-1" href="/client/all">Clients</a> </li>
                                 @endif
+
                                 <li> <a tabindex="-1" href="/team/all">Teams</a> </li>
                                 <li role="separator" class="divider"></li>
                                 <li> <a tabindex="-1" href="#">--</a> </li>

@@ -75,7 +75,7 @@ class TimeManageController extends Controller
                 'phone_number' => $client['phone_number']
             ]);
 
-            return redirect('/');
+            return redirect('/client/all');
         }
         return view('time_manage.forms.client');
     }
@@ -99,10 +99,11 @@ class TimeManageController extends Controller
                 'email' => $client['email'],
                 'phone_number' => $client['phone_number']
             ]);
-            return redirect('/');
+            return redirect('/client/all');
         }
+        $client = DB::table('clients')->where('id', '=', $id)->first();
+        //$client = Client::where( 'id', '=', $id );
 
-        $client = Client::where( 'id', '=', $id );
 
         return view('time_manage.forms.client', compact('client'));
     }
@@ -114,7 +115,7 @@ class TimeManageController extends Controller
     {
         Client::where('id', '=', $id)->delete();
 
-        return redirect('/');
+        return redirect('/client/all');
     }
 
     /*
@@ -124,7 +125,7 @@ class TimeManageController extends Controller
     {
         $clients = Client::all();
 
-        return view('time_manage.', compact('clients'));
+        return view('time_manage.clients', compact('clients'));
     }
 
     /*
@@ -295,11 +296,11 @@ class TimeManageController extends Controller
     {
         $this->validate($request, [
             'company_name' => 'required|min:4|max:30',
-            'company_address' => 'required|min:4|max:100',
-            'website' => 'required|url',
+            'company_address' => 'min:4|max:100',
+            'website' => 'url',
             'contact_person' => 'required|min:4|max:30',
             'email' => 'required|email',
-            'phone_number' => 'required|regex:/[0-9-]+/|max:30'
+            'phone_number' => 'regex:/[0-9-]+/|max:30'
         ]);
     }
 

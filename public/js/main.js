@@ -15,11 +15,17 @@ $(document).ready(function(){
         e.preventDefault();
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
-        console.log('sdfdsdsdsf')
+
         Teams.displayModal('#delete-user', delUrl,  'You really want to delete this user?', element, '#modalConfirmDeleteUser');
     });
 
+    $(document).on( "click", ".deleteClient", function(e) {
+        e.preventDefault();
+        var delUrl = $(e.target).data('url');
+        var element = $(e.target).data('element');
 
+        Teams.displayModal('#delete-client', delUrl,  'You really want to delete this client?', element, '#modalConfirmDeleteClient');
+    });
 
 
 });
@@ -38,7 +44,7 @@ var Teams = {
                 '<a href="' + delUrl + '" type="button" class="btn btn-danger" >Delete</a>' +
                 '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
                 '</div>';
-        console.log(htmlDelete);
+
         $(appendContainer).html(htmlDelete)
         $(idModal).modal('toggle');
     },
