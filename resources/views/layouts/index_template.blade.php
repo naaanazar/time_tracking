@@ -36,7 +36,7 @@
 </head>
 <body id="">
 <div class="navbar-inner navbar-style">
-    <nav class="navbar navbar-fixed-top nav-my" style="float:right; display:inline-block;">
+    <nav class="navbar navbar-top nav-my" style="float:right; display:inline-block;">
         <div class="container-fluid" style="min-height: 61px;">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -49,65 +49,65 @@
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Report<span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" >
-                            <li><a href="#">-----</a></li>
-                            <li><a href="#">------</a></li>
-                            <li><a href="#">------</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">------</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Manage<span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" >
-                            @if ($status == 'Admin' || $status == 'HR Manager')
-                                <li> <a tabindex="-1" href="/user/all">Users</a> </li>
-                            @endif
-                            <li> <a tabindex="-1" href="/team/all">Teams</a> </li>
-                            <li role="separator" class="divider"></li>
-                            <li> <a tabindex="-1" href="#">--</a> </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="{{ url('/logout') }}" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();
-                           document.getElementById('logout-form').submit();">
-                            Sign Out
-                        </a>
-                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
+            <div>
+                <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Report<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" >
+                                <li><a href="#">-----</a></li>
+                                <li><a href="#">------</a></li>
+                                <li><a href="#">------</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">------</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Manage<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" >
+                                @if ($status == 'Admin' || $status == 'HR Manager')
+                                    <li> <a tabindex="-1" href="/user/all">Users</a> </li>
+                                @endif
+                                <li> <a tabindex="-1" href="/team/all">Teams</a> </li>
+                                <li role="separator" class="divider"></li>
+                                <li> <a tabindex="-1" href="#">--</a> </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="{{ url('/logout') }}" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();
+                               document.getElementById('logout-form').submit();">
+                                Sign Out
+                            </a>
+                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div>
         </div><!-- /.container-fluid -->
     </nav>
 </div>
 </div>
 <div style=" border-bottom: solid 3px #808080">
-    <div class="container" <div=""><a href="http://webdevelop.it-dev-lab.com"><img src="http://webdevelop.it-dev-lab.com/images/ignatiuz-logo.png" width="247" height="102" style="margin-top:7px"></a>
+    <div class="container" style="position: relative">
+          <a href="http://webdevelop.it-dev-lab.com"><img src="http://webdevelop.it-dev-lab.com/images/ignatiuz-logo.png" width="247" height="102" style="margin-top:7px"></a>
 
-        <div style="    display: inline-block;
-                float: right;
-                    position: relative;
-                margin-top: 71px;">
+        <div style="display: inline-block; float: right; position: relative; margin-top: 61px;     position: absolute;
+    right: 10px;">
             <img src="http://webdevelop.it-dev-lab.com/images/log.png" width="65" height="65" style="position: absolute;
                     left: -27px;
                     bottom: -2px;">
-                    <span style="    display: inline-block;
-                    background-color: #808080;
-                    color: #ccc;
-                    padding: 5px 60px;">
-            <strong>{{\Illuminate\Support\Facades\Auth::user()['original']['name']}}<br> {{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}</strong>
-                    <span>
-                </span></span>
+            <span style="    display: inline-block;
+                background-color: #808080;
+                color: #ccc;
+                padding: 5px 60px;">
+                 <strong>{{\Illuminate\Support\Facades\Auth::user()['original']['name']}}<br> {{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}</strong>
+            </span>
         </div>
     </div>
 </div>

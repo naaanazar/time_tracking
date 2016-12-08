@@ -59,7 +59,7 @@ Route::group(['middleware' => ['permision']], function () {
 
     // forbidden
 
-   Route::get('/register', 'TimeManageController@index');
+    Route::get('/register', 'TimeManageController@index');
 
 });
 
