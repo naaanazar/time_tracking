@@ -196,8 +196,8 @@ class TimeManageController extends Controller
     {
         $projects = DB::table('Project')->join('Clients', 'Project.client_id', '=', 'Clients.id')->get();
         //$projects = Client::find(2)->project;
-        echo '<pre>'; var_dump($projects); echo '</pre>';
-        //return view('', compact('projects'));
+        //echo '<pre>'; var_dump($projects); echo '</pre>';
+        return view('', compact('projects'));
     }
 
     /*
