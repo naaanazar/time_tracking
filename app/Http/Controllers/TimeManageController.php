@@ -107,10 +107,20 @@ class TimeManageController extends Controller
 
         return view('time_manage.forms.client', compact('client'));
     }
+
+    /*
+     * delete client
+     * */
+    public function delete_client($id)
+    {
+        Client::where('id', '=', $id)->delete();
+
+        return redirect('/');
+    }
+
     /*
      * create project for company
      * */
-
     public function create_project(Request $request)
     {
         if(Input::all() == true) {
@@ -133,9 +143,13 @@ class TimeManageController extends Controller
     }
 
     /*
+     * update project
+     * */
+    public function  
+
+    /*
      * create tack for project
      * */
-
     public function create_task(Request $request)
     {
         if(Input::all() == true) {
