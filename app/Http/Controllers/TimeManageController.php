@@ -59,7 +59,6 @@ class TimeManageController extends Controller
     /*
      * create new clients
      * */
-
     public function create_client(Request $request)
     {
         if(Input::all() == true) {
@@ -116,6 +115,16 @@ class TimeManageController extends Controller
         Client::where('id', '=', $id)->delete();
 
         return redirect('/');
+    }
+
+    /*
+     * return all Client
+     * */
+    public function all_client()
+    {
+        $clients = Client::all();
+
+        return view('time_manage.', compact('clients'));
     }
 
     /*
@@ -202,8 +211,9 @@ class TimeManageController extends Controller
         }
 
         $clients = Client::all();
+        $projects = Project::all();
 
-        return view('', compact('clients'));
+        return view('', compact('clients', 'projects'));
     }
 
     /*
