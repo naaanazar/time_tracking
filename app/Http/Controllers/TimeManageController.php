@@ -211,8 +211,9 @@ class TimeManageController extends Controller
         }
 
         $clients = Client::all();
+        $projects = Project::all();
 
-        return view('', compact('clients'));
+        return view('', compact('clients', 'projects'));
     }
 
     /*
