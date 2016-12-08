@@ -123,6 +123,7 @@ class TimeManageController extends Controller
      * */
     public function create_project(Request $request)
     {
+
         if(Input::all() == true) {
             $this->validation_project($request);
 
@@ -140,12 +141,13 @@ class TimeManageController extends Controller
 
         $client = Client::all();
 
-        return view('time_manage.forms.client', compact('client'));
+        return view('time_manage.forms.project', compact('client'));
     }
 
     /*
      * update project
      * */
+
     public function update_project(Request $request, $id)
     {
         if( Input::all() == true && Project::where( 'id', '=', $id) == true ) {
@@ -298,7 +300,7 @@ class TimeManageController extends Controller
     private function validation_project($request)
     {
         $this->validate($request, [
-            'company' => 'required|min:2|max:30',
+            'client_id' => 'required|integer',
             'project_name' => 'required|min:2|max:30',
             'hourly_rate' => 'numeric',
             'notes' => 'regex:/[a-zA-Z0-9]+/|max:1000'

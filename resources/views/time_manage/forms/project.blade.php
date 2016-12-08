@@ -17,7 +17,7 @@
                 <!-- block -->
                 <div class="block-content collapse in">
                     <div class="span12">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/project/create') }}">
                             {{ csrf_field() }}
 
                             <div class="control-group row">
@@ -25,10 +25,21 @@
                                     <label class="control-label" for="CompanyProjectId" style="text-align: left;">Company</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <input name="" class="input-xlarge focused my_input" id="CompanyProjectId"  autofocus type="text">
-                                    @if ($errors->has(''))
+
+                                    <select name="company_id" class="input-xlarge focused my_input"  id="CompanyProjectId" style="height: 42px;">
+                                        @if (isset($client->company_name))
+                                        <option value="{{ $client->id }}" selected>{{ $client->company_name }}</option>
+                                        @endif
+
+                                        @foreach( $client as $key )
+                                                <option  value="{{ $key->id}}">{{ $key->company_name }}</option>
+                                        @endforeach
+
+                                    </select>
+
+                                    @if ($errors->has('company'))
                                         <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('') }}</strong>
+                                                <strong style="color:#802420">{{ $errors->first('company') }}</strong>
                                             </span>
                                     @endif
                                 </div>
@@ -39,10 +50,10 @@
                                     <label class="control-label" for="ProjectNameId" style="text-align: left;">Project Name</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <input name="" class="input-xlarge focused my_input" id="ProjectNameId"   type="text">
-                                    @if ($errors->has(''))
+                                    <input name="project_name" class="input-xlarge focused my_input" id="ProjectNameId"   type="text">
+                                    @if ($errors->has('project_name'))
                                         <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('') }}</strong>
+                                                <strong style="color:#802420">{{ $errors->first('project_name') }}</strong>
                                             </span>
                                     @endif
                                 </div>
@@ -53,10 +64,10 @@
                                     <label class="control-label" for="HourlyRateProhectId" style="text-align: left;">Hourly Rate</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <input name="" class="input-xlarge focused my_input" id="HourlyRateProhectId"  type="text">
-                                    @if ($errors->has(''))
+                                    <input name="hourly_rate" class="input-xlarge focused my_input" id="HourlyRateProhectId"  type="number" step="0.01">
+                                    @if ($errors->has('hourly_rate'))
                                         <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('') }}</strong>
+                                                <strong style="color:#802420">{{ $errors->first('hourly_rate') }}</strong>
                                             </span>
                                     @endif
                                 </div>
@@ -67,10 +78,10 @@
                                     <label class="control-label" for="NotesProjectId" style="text-align: left;">Notes</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <textarea name="" class="input-xlarge focused my_input" id="NotesProjectId" rows="6"  type="text" ></textarea>
-                                    @if ($errors->has(''))
+                                    <textarea name="notes" class="input-xlarge focused my_input" id="NotesProjectId" rows="6"  type="text" ></textarea>
+                                    @if ($errors->has('notes'))
                                         <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('') }}</strong>
+                                                <strong style="color:#802420">{{ $errors->first('notes') }}</strong>
                                             </span>
                                     @endif
                                 </div>
