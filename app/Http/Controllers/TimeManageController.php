@@ -75,6 +75,7 @@ class TimeManageController extends Controller
 
             return redirect('/');
         }
+
         return view('time_manage.forms.client');
     }
 
@@ -179,13 +180,24 @@ class TimeManageController extends Controller
     }
 
     /*
-     * delete
+     * delete project
      * */
     public function delete_project($id)
     {
         Project::where('id', '=', $id)->delete();
 
         return redirect('/');
+    }
+
+    /*
+     * return all project
+     * */
+    public function all_project()
+    {
+        $projects = DB::table('Project')->join('Clients', 'Project.client_id', '=', 'Clients.id')->get();
+        //$projects = Client::find(2)->project;
+        echo '<pre>'; var_dump($projects); echo '</pre>';
+        //return view('', compact('projects'));
     }
 
     /*
