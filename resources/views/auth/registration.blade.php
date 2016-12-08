@@ -24,6 +24,9 @@
                                         <label class="control-label col-sm-2" for="focusedInput">User type</label>
                                         <div class="controls">
                                             <select name="employe" class="input-xlarge focused" id="selectTeam" style="height: 42px;" >
+                                                @if(old('employe'))
+                                                    <option> {{ old('employe') }}</option>
+                                                @endif
                                                 @if ($status == 'Admin')
                                                 <option>Admin</option>
                                                 <option>Supervisor</option>
@@ -32,7 +35,6 @@
                                                 <option>Lead</option>
                                                 <option>Developer</option>
                                                 <option>QA Engineer</option>
-
                                             </select>
 
                                         </div>
@@ -40,7 +42,7 @@
                                     <div class="control-group row">
                                         <label class="control-label col-sm-2" for="focusedInput">Name</label>
                                         <div class="controls">
-                                            <input name="name" class="input-xlarge focused" id="focusedInput"  autofocus type="text">
+                                            <input name="name" class="input-xlarge focused" id="focusedInput"  autofocus type="text" value="{{ old('name') }}">
                                             @if ($errors->has('name'))
                                                 <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('name') }}</strong>
@@ -51,7 +53,7 @@
                                     <div class="control-group  row">
                                         <label class="control-label col-sm-2" for="focusedInput">Email</label>
                                         <div class="controls">
-                                            <input name="email" class="input-xlarge focused"   type="email" required>
+                                            <input name="email" class="input-xlarge focused"  value="{{ old('email') }}" type="email" required>
                                             @if ($errors->has('email'))
                                                 <span class="help-block">
                                                 <strong>{{ $errors->first('email') }}</strong>
@@ -104,7 +106,7 @@
                                     <div class="form-actions row">
                                         <label class="control-label col-sm-2" for=""></label>
                                         <button type="submit" class="btn btn-large button-orange" formaction="">Save</button> &nbsp;&nbsp;
-                                        <a  href="{{ url('/') }}" class="btn btn-large button-orange" style="font-weight: normal;" >Cancel</a>
+                                        <a  href="{{ url('/user/all') }}" class="btn btn-large button-orange" style="font-weight: normal;" >Cancel</a>
                                     </div>
 
                             </form>
@@ -114,6 +116,7 @@
                 </div>
             </div>
         </div>
+
         <script src="/js/jquery/jquery-3.1.1.min.js"></script>
         <script src="/js/registration.js"></script>
 @endsection

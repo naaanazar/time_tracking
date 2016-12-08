@@ -35,7 +35,8 @@
                                 <tr class="odd gradeX">
                                     <td>{{ $team->team_name }}</td>
                                     <td>
-                                        <a href="/team/delete/{{ $team->id }}" class="btn btn-danger"><span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</a>
+                                        <a href="/team/delete/{{ $team->id }}"
+                                           onclick=' if(confirm("You really want to delete this?")) { location.href = "/user/delete/{{ $user->id }}";}' class="btn btn-danger"><span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

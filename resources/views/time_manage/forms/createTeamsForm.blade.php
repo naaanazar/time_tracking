@@ -20,7 +20,7 @@
                                 <div class="control-group row">
                                     <label class="control-label col-sm-2" for="focusedInput">Team name</label>
                                     <div class="controls">
-                                        <input name="team_name" class="input-xlarge focused" id="focusedInput" autofocus type="text">
+                                        <input name="team_name" class="input-xlarge focused" id="focusedInput" autofocus required type="text">
                                         @if ($errors->has('team_name'))
                                             <span class="help-block">
                                             <strong style="color:#802420">{{ $errors->first('team_name') }}</strong>
@@ -31,7 +31,7 @@
                                 <div class="form-actions row">
                                     <label class="control-label col-sm-2" for="focusedInput"></label>
                                     <button type="submit" class="btn btn-large button-orange" formaction="">Save</button> &nbsp;&nbsp;
-                                    <a  href="{{ url('/') }}" class="btn btn-large button-orange" style="font-weight: normal;" >Cancel</a>
+                                    <a  href="{{ url('/team/all') }}" class="btn btn-large button-orange" style="font-weight: normal;" >Cancel</a>
                                 </div>
 
                         </form>

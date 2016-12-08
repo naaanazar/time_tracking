@@ -92,20 +92,20 @@
 </div>
 </div>
 <div style=" border-bottom: solid 3px #808080">
-    <div class="container" <div=""><a href="http://webdevelop.it-dev-lab.com"><img src="http://webdevelop.it-dev-lab.com/images/ignatiuz-logo.png" width="247" height="76" style="margin-top:12px"></a>
+    <div class="container" <div=""><a href="http://webdevelop.it-dev-lab.com"><img src="http://webdevelop.it-dev-lab.com/images/ignatiuz-logo.png" width="247" height="76" style="margin-top:18px"></a>
 
         <div style="    display: inline-block;
                 float: right;
                     position: relative;
                 margin-top: 71px;">
-            <img src="http://webdevelop.it-dev-lab.com/images/log.png" width="60" height="60" style="position: absolute;
+            <img src="http://webdevelop.it-dev-lab.com/images/log.png" width="65" height="65" style="position: absolute;
                     left: -27px;
                     bottom: -2px;">
                     <span style="    display: inline-block;
                     background-color: #808080;
                     color: #ccc;
-                    padding: 10px 60px;">
-            <strong>{{\Illuminate\Support\Facades\Auth::user()['original']['name']}}</strong>
+                    padding: 5px 60px;">
+            <strong>{{\Illuminate\Support\Facades\Auth::user()['original']['name']}}<br> {{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}</strong>
                     <span>
                 </span></span>
         </div>

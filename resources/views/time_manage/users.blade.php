@@ -56,7 +56,8 @@
                                          ($status == 'HR Manager' &&
                                          ($user->employe == "Developer" || $user->employe == "QA Engineer" || $user->employe == "Lead")))
                                             <a href="/user/update/{{ $user->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
-                                            <a href="/user/delete/{{ $user->id }}" class="btn btn-danger"><span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</a>
+                                            <a href="#" onclick=' if(confirm("You really want to delete this?")) { location.href = "/user/delete/{{ $user->id }}";}'
+                                               class="btn btn-danger"><span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</a>
                                         @endif
                                     </td>
                                 @endif

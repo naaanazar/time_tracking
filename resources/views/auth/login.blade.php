@@ -37,7 +37,7 @@
                 <div>
 
                         <a   class="" href="{{ url('/password/reset') }}"> <small>Forgot Password?</small></a>
-                    <button style="margin-top: -2px" type="submit" class="btn btn-large btn-primary">Sing In </button>&nbsp
+                    <button style="margin-top: -2px" type="submit" class="btn btn-large btn-primary">Sign In </button>&nbsp
                     <a style="float: right; margin-top: -2px;  margin-right: 10px; border-radius: 0px" href="{{ url('auth/google') }}" class="btn btn-danger  btn-large  btn-social btn-google">
                         <span class="fa fa-google"></span></a>
 
