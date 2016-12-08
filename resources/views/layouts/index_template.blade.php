@@ -147,6 +147,8 @@
 
     <script src="/bootstrap3/js/bootstrap.min.js"></script>
 
+    <script src="/js/main.js"></script>
+
   <!--  <script src="/assets/datatables/js/jquery.dataTables.min.js"></script>
 <script src="/assets/DT_bootstrap.js"></script>-->
 <script>

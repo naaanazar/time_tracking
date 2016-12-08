@@ -210,10 +210,10 @@ class TimeManageController extends Controller
             return redirect('/');
         }
 
-        $clients = Client::all();
-        $projects = Project::all();
+        $client = Client::all();
+        $project = Project::all();
 
-        return view('', compact('clients', 'projects'));
+        return view('time_manage.forms.taskForm', compact('client', 'project'));
     }
 
     /*
