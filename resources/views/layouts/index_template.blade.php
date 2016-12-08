@@ -124,7 +124,8 @@
     padding-left: 20px;
     background-color: #808080;
     border: 1px solid #d4d4d4;
-        margin-top: 50px">
+        margin-top: 50px;
+        z-index:10;">
     <div style="    color: #cccccc;
     font-size: 20px;
     margin: 0 auto;
