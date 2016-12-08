@@ -123,14 +123,14 @@ class TimeManageController extends Controller
      * */
     public function create_project(Request $request)
     {
-
         if(Input::all() == true) {
+
             $this->validation_project($request);
 
             $project = Input::all();
 
             Project::create([
-                'company_id' => $project['company_id'],
+                'client_id' => $project['company_id'],
                 'project_name' => $project['project_name'],
                 'hourly_rate' => $project['hourly_rate'],
                 'notes' => $project['notes']
@@ -138,6 +138,7 @@ class TimeManageController extends Controller
 
             return redirect('/');
         }
+
         $client = Client::all();
 
         return view('time_manage.forms.project', compact('client'));
@@ -147,6 +148,38 @@ class TimeManageController extends Controller
      * update project
      * */
 
+    public function update_project(Request $request, $id)
+    {
+        if( Input::all() == true && Project::where( 'id', '=', $id) == true ) {
+            $this->create_project($request);
+
+            $project = Input::all();
+
+            Project::where('id', '=', $id)->update([
+                'client_id' => $project['company_id'],
+                'company' => $project['company'],
+                'project_name' => $project['project_name'],
+                'hourly_rate' => $project['hourly_rate'],
+                'notes' => $project['notes']
+            ]);
+
+            return redirect('/');
+        }
+
+        $project = Project::all();
+
+        return view('', compact('project'));
+    }
+
+    /*
+     * delete
+     * */
+    public function delete_project($id)
+    {
+        Project::where('id', '=', $id)->delete();
+
+        return redirect('/');
+    }
 
     /*
      * create tack for project
@@ -167,14 +200,51 @@ class TimeManageController extends Controller
 
             return redirect('/');
         }
+
         $clients = Client::all();
+
         return view('', compact('clients'));
+    }
+
+    /*
+     *
+     * update task
+     * */
+    public function update_task(Request $request, $id)
+    {
+        if( Input::all() == true && Task::where( 'id', '=', $id ) == true ) {
+            $this->validation_task($request);
+
+            $task = Input::all();
+
+            Task::where( 'id', '=', $id )->update([
+                'company_id' => $task['company_id'],
+                'project_id' => $task['project_id'],
+                'task_type' => $task['task_type'],
+                'task_description' => $task['task_description']
+            ]);
+
+            return redirect('/');
+        }
+
+        $task = Task::where( 'id', '=', $id )->get();
+
+        return view('', compact('task'));
+    }
+
+    /*
+     * delete task
+     * */
+    public function delete_task($id)
+    {
+        Task::where('id', '=', $id)->delete();
+
+        return redirect('/');
     }
 
     /*
      * create new team
      * */
-
     public function create_team(Request $request)
     {
         if(Input::all() == true) {
@@ -230,7 +300,7 @@ class TimeManageController extends Controller
     private function validation_project($request)
     {
         $this->validate($request, [
-            'client_id' => 'required|integer',
+            'company_id' => 'required|integer',
             'project_name' => 'required|min:2|max:30',
             'hourly_rate' => 'numeric',
             'notes' => 'regex:/[a-zA-Z0-9]+/|max:1000'

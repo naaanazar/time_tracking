@@ -19,13 +19,13 @@
                         <div class="span12">
                             <form class="form-horizontal" role="form" method="POST" action="{{ url('/user/create') }}">
                                 {{ csrf_field() }}
-
                                     <div class="control-group row" >
                                         <label class="control-label col-sm-2" for="focusedInput">User type</label>
                                         <div class="controls">
                                             <select name="employe" class="input-xlarge focused" id="selectTeam" style="height: 42px;" >
-                                                @if(old('employe'))
-                                                    <option> {{ old('employe') }}</option>
+                                                @if( old('employe') )
+                                                    <option>{{ old('employe') }}</option>
+
                                                 @endif
                                                 @if ($status == 'Admin')
                                                 <option>Admin</option>
@@ -53,7 +53,9 @@
                                     <div class="control-group  row">
                                         <label class="control-label col-sm-2" for="focusedInput">Email</label>
                                         <div class="controls">
-                                            <input name="email" class="input-xlarge focused"  value="{{ old('email') }}" type="email" required>
+
+                           <input name="email" class="input-xlarge focused" value="{{ old('email') }}" type="email" required>
+
                                             @if ($errors->has('email'))
                                                 <span class="help-block">
                                                 <strong>{{ $errors->first('email') }}</strong>
