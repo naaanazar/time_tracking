@@ -124,10 +124,10 @@ class TimeManageController extends Controller
                 'task_description' => $task['task_description']
             ]);
 
-            //return redirect('/');
+            return redirect('/');
         }
-        //$clients = Client::all();
-        //return view('', compact('clients'));
+        $clients = Client::all();
+        return view('', compact('clients'));
     }
 
     /*
