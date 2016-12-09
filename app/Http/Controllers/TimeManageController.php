@@ -314,9 +314,12 @@ class TimeManageController extends Controller
     {
         $result = Project::where('id', '=', $project_id)
                 ->get()[0]->lead_id;
-        
-        $lead = User::where('id', '=', $result)->first();
-        var_dump($lead); die;
+
+        $lead = User::where('id', '=', $result)->get();
+        $team = User::where('team_name', '=', $lead[0]->team_name)->get();
+        $qa = User::where('employe', '=', 'QA Engineer')->get();
+
+        $result = [$lead, $team, $qa];
 
         if ($result) {
             return response()->json(['data' => (object)$result]);
