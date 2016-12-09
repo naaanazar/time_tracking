@@ -39,6 +39,15 @@ $(document).ready(function(){
         Main.displayModal('#delete-project', delUrl,  massage, '#modalConfirmDeleteProject');
     });
 
+    $(document).on( "click", ".deleteTask", function(e) {
+        e.preventDefault();
+        var delUrl = $(e.target).data('url');
+        var element = $(e.target).data('element');
+        var massage = 'Do you want to remove <strong> ' + element + '</strong>?'
+
+        Main.displayModal('#delete-task', delUrl,  massage, '#modalConfirmDeleteTask');
+    });
+
 
 
     $(document).on("change", "#CompanyTaskId", function () {

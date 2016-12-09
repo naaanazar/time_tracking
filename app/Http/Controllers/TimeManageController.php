@@ -269,7 +269,7 @@ class TimeManageController extends Controller
                 'billable' => true//$task['billable']
             ]);
 
-            return redirect('/');
+            return redirect('/task/all');
         }
 
         $client = Client::all();
@@ -296,12 +296,14 @@ class TimeManageController extends Controller
                 'task_description' => $task['task_description']
             ]);
 
-            return redirect('/');
+            return redirect('/task/all');
         }
 
         $task = Task::where( 'id', '=', $id )->get();
+        $client = Client::all();
+        $project = Project::all();
 
-        return view('', compact('task'));
+        return view('time_manage.forms.taskForm', compact('task', 'client', 'project'));
     }
 
     /*
@@ -311,7 +313,7 @@ class TimeManageController extends Controller
     {
         Task::where('id', '=', $id)->delete();
 
-        return redirect('/');
+        return redirect('/task/all');
     }
 
     /*
@@ -321,9 +323,25 @@ class TimeManageController extends Controller
     public function all_tasks()
     {
         $tasks = Task::with(['project','client'])->get();
+        $i=1;
+        foreach($tasks as $task){
+            $tasksRes[$i]['user_name'] = User::where('id', '=', '40')->get()[0]->name;
+            $tasksRes[$i]['id'] = $task->id;
+            $tasksRes[$i]['title'] = $task->task_titly;
+            $tasksRes[$i]['type'] = $task->task_type;
+            $tasksRes[$i]['assign_to'] = $task->assign_to;
+            $tasksRes[$i]['alloceted_hours'] = $task->alloceted_hours;
+            $tasksRes[$i]['task_description'] = $task->task_description;
+            $tasksRes[$i]['billable'] = $task->billable;
+            $tasksRes[$i]['created_at'] = $task->created_at;
+            $tasksRes[$i]['company'] = $task->client['company_name'];
+            $tasksRes[$i]['project_name'] = $task->project['project_name'];
+            $i++;
+        }
 
-        return view('', compact('tasks'));
+      return view('time_manage.tasks', compact('tasksRes'));
     }
+
     /*
      * get team on project id
      *
