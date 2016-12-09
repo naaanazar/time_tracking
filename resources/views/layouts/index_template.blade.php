@@ -12,6 +12,9 @@
     <title>Ignatiuz</title>
 
     <link href="/css/main.css" rel="stylesheet" media="screen">
+
+
+
     <link rel="stylesheet" href="/assets/font-awesome.css">
     <link rel="" href="/assets/fonts/glyphicons-halflings-regular.eot">
 
@@ -149,6 +152,10 @@
     <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/dataTables.buttons.min.js"></script>
     <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/buttons.bootstrap.min.js"></script>
     <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/buttons.colVis.min.js"></script>
+
+
+
+
 
     <script src="/bootstrap3/js/bootstrap.min.js"></script>
 
