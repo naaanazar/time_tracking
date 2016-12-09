@@ -1,19 +1,19 @@
 @extends('layouts.index_template')
 
 @section('content')
-
-    <div id="conteiner" class="container" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
+<div id="conteiner" class="container" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
 
         <div class="modal fade" id="delete-team" role="dialog">
             <div class="modal-dialog"  >
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <div id="modalConfirmDeleteTeam"></div>
+                    <div id="modalConfirmDeleteTeam">
+
+                    </div>
                 </div>
             </div>
         </div>
 
-    </div>
         <div class="row-fluid">
             <div class="span12">
                 <h3 class="h3-my">Teams</h3>
@@ -32,7 +32,7 @@
             <div class="block" style="border-bottom: 1px solid #ccc; border-left: none; border-right: none">
                 <div class="block-content collapse in">
                     <div class="span12">
-                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="teamsTable" width="400px">
+                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="teamsTable">
                             <thead>
                             <tr>
                                 <th width="300px">Teams</th>
@@ -45,7 +45,7 @@
                             @foreach( $teams as $team )
                                 <tr class="odd gradeX">
                                     <td>{{ $team->team_name }}</td>
-                                    <td>
+                                    <td style="text-align: center">
                      <button type="button" class="btn btn-danger  deleteTeam" data-url="/team/delete/{{ $team->id }}" data-element="{{ $team->team_name }}">
                                             <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
 
@@ -61,6 +61,7 @@
             <!-- /block -->
         </div>
     </div>
+</div>
 
 
 

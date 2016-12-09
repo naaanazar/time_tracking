@@ -47,24 +47,19 @@
 
                             <div class="control-group row">
                                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                    <label class="control-label" for="ProjectTaskId" style="text-align: left;">Project</label>
+                                    <label class="control-label" for="CompanyProjectId" style="text-align: left;">Project</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
-                                    <select name="project_id" class="input-xlarge focused my_input"  id="ProjectTaskId" style="height: 42px;">
-                                        @if (isset($project->project_name))
-                                            <option value="{{ $project->id }}" selected>{{ $project->project_name }}</option>
+                                    <select name="company_id" class="input-xlarge focused my_input"  id="CompanyProjectId" style="height: 42px;">
+                                        @if (isset($client->company_name))
+                                            <option value="{{ $client->id }}" selected>{{ $client->company_name }}</option>
                                         @endif
-
-                                        @foreach( $project as $key )
-                                            <option  value="{{ $key->id}}">{{ $key->project_name }}</option>
-                                        @endforeach
-
                                     </select>
 
-                                    @if ($errors->has('$project_id'))
+                                    @if ($errors->has('company_id'))
                                         <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('$project_id') }}</strong>
+                                                <strong style="color:#802420">{{ $errors->first('company_id') }}</strong>
                                             </span>
                                     @endif
                                 </div>

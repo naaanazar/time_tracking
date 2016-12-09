@@ -56,7 +56,6 @@ class TimeManageController extends Controller
 
     public function getProjects($client_id)
     {
-        // $result = Project::where('client_id', '=', $client_id)->get();
         $result = DB::table('project')->where('client_id', '=', $client_id)->get();
         if ($result) {
             return response()->json(['data' => (object)$result]);
@@ -64,7 +63,9 @@ class TimeManageController extends Controller
             return response()->json(['data' => 'false']);
         }
 
+        return response()->json(['data' => (object)$result]);
     }
+
     /*
      * create new clients
      * */
@@ -157,12 +158,15 @@ class TimeManageController extends Controller
     {
         if(Input::all() == true) {
 
-            $this->validation_project($request);
+            //$this->validation_project($request);
 
             $project = Input::all();
 
+            var_dump($project);
+
             Project::create([
                 'client_id' => $project['company_id'],
+                'lead_id' => $project['lead_id'],
                 'project_name' => $project['project_name'],
                 'hourly_rate' => $project['hourly_rate'],
                 'notes' => $project['notes']
@@ -174,7 +178,7 @@ class TimeManageController extends Controller
         $client = Client::all();
         $leads = User::where('employe', '=', 'Lead')->get();
 
-        return view('time_manage.forms.project', compact('client'));
+        return view('time_manage.forms.project', compact('client' ,'leads'));
     }
 
     /*
@@ -321,7 +325,6 @@ class TimeManageController extends Controller
      * and change team_name field in table users
      * where this team used
      * */
-
     public function delete_team($id)
     {
         DB::table('users')
@@ -336,7 +339,6 @@ class TimeManageController extends Controller
     /*
      * validation for clients action
      * */
-
     private function validation_client($request)
     {
         $this->validate($request, [
@@ -352,11 +354,11 @@ class TimeManageController extends Controller
     /*
      * validation for project
      * */
-
     private function validation_project($request)
     {
         $this->validate($request, [
             'company_id' => 'required|integer',
+            'lead_id' => 'integer',
             'project_name' => 'required|min:2|max:30',
             'hourly_rate' => 'numeric',
             'notes' => 'regex:/[a-zA-Z0-9]+/|max:1000'

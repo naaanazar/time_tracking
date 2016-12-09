@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Дек 07 2016 г., 13:44
+-- Время создания: Дек 09 2016 г., 12:27
 -- Версия сервера: 5.6.26
 -- Версия PHP: 5.6.12
 
@@ -37,7 +37,16 @@ CREATE TABLE IF NOT EXISTS `Clients` (
   `updated_at` date NOT NULL,
   `created_at` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Дамп данных таблицы `Clients`
+--
+
+INSERT INTO `Clients` (`id`, `company_name`, `company_address`, `website`, `contact_person`, `email`, `phone_number`, `updated_at`, `created_at`) VALUES
+(2, 'test', 'fdsfdsf', 'https://laravel.com', 'dasdasdds', 'asdasd@dfggfd.com', '34545435', '2016-12-08', '2016-12-08'),
+(3, 'tuzik', 'dee', 'https://laracasts.com', 'sadas', 'sad@gmail.com', '2344234', '2016-12-09', '2016-12-09'),
+(4, 'tuziki', 'asdasd', 'http://pa1.php.net/manual/ru/function.substr.php', 'dfdsfdfdsf', 'dsds@dsfds.com', '2343434234', '2016-12-09', '2016-12-09');
 
 -- --------------------------------------------------------
 
@@ -83,15 +92,24 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 CREATE TABLE IF NOT EXISTS `Project` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `client_id` int(10) NOT NULL,
+  `lead_id` int(10) NOT NULL,
   `project_name` varchar(255) NOT NULL,
   `hourly_rate` decimal(5,2) NOT NULL,
   `notes` text NOT NULL,
-  `company` varchar(255) NOT NULL,
   `updated_at` date NOT NULL,
   `created_at` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `client_id` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Дамп данных таблицы `Project`
+--
+
+INSERT INTO `Project` (`id`, `client_id`, `lead_id`, `project_name`, `hourly_rate`, `notes`, `updated_at`, `created_at`) VALUES
+(3, 2, 0, 'qweqwe', '10.00', 'qwewqeqwe', '2016-12-08', '2016-12-08'),
+(4, 2, 0, 'tester', '10.00', 'dasddasdasdds', '2016-12-08', '2016-12-08'),
+(5, 2, 0, 'testing', '10.00', 'sdsdsdsd sdasdsa asdsdasd', '2016-12-08', '2016-12-08');
 
 -- --------------------------------------------------------
 
@@ -104,7 +122,11 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `company_id` int(10) NOT NULL,
   `project_id` int(10) NOT NULL,
   `task_type` varchar(255) NOT NULL,
+  `task_titly` varchar(255) NOT NULL,
+  `alloceted_hours` varchar(255) NOT NULL,
+  `assign_to` varchar(255) NOT NULL,
   `task_description` text NOT NULL,
+  `billable` tinyint(1) NOT NULL,
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL,
   PRIMARY KEY (`id`),
@@ -153,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `hourly_rate` float(5,2) DEFAULT '0.00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=45 ;
 
 --
 -- Дамп данных таблицы `users`
@@ -161,16 +183,19 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `google_id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `employe`, `team_name`, `hourly_rate`) VALUES
 (2, NULL, '  terr ', 'terr@gmail.coms', '$2y$10$oHZj9FU1lHC3hctB90asLuGaSmqRk2ZYWzNd0jqZjpZ7tlW48RAFK', 'UzpDLGbrN2d6sa6x3Z9UKhzKhbo2oszSoYP6wAjcf56BOMS8IGVSuTtO9bi0', '2016-12-02 07:13:16', '2016-12-06 13:38:55', 'Admin', 'php', 9.11),
-(21, NULL, 'Dimon', 'terr83@gmail.com', '$2y$10$riKLtYoevHmMIqrtlcVU9.V03FhA.P86EDPxMUG1RIeNLi6toC4XO', 'ZeLXfUJX2kn2zdiq8XeQa1YJkv77C6SKPzq3wePYJQOHghAjDIiJnBiuCSur', '2016-12-05 12:18:52', '2016-12-06 13:18:46', 'Admin', 'js', 0.04),
-(22, NULL, ' terri', 'terri@gmail.com', '$2y$10$9ShoW/vNKAX245w1IU.vD.fyscR.ZdQiGzADrXcWFsoT8zmFyDMqO', 'R4wASBj002TNY6EFM7mnNWBezYfummvLfGkuWUFG', '2016-12-05 13:03:10', '2016-12-06 13:04:39', 'Admin', 'php', 10.10),
-(23, NULL, 'Masik', 'asdas@dsfdfs.com', '$2y$10$rvJvGqoTiyLOtuwwBZWuBuVEd61l92/8l1nLjuG1Ah6TYi./hKps2', NULL, '2016-12-06 07:32:45', '2016-12-06 13:13:23', 'Developer', 'js', 0.06),
-(24, NULL, 'Anton', 'anton@gmail.com', '$2y$10$jmK4Kf09EyHZaKUHGLC.luCzQnB30bppQfrdgay6pdXFQngp9zb16', NULL, '2016-12-06 11:01:52', '2016-12-06 12:56:39', 'Developer', 'php', 8.65),
 (25, NULL, ' Nazal', 'nazar@gmail.com', '$2y$10$SBqmNY8Lfpyk7yJhoyQPE.2cW5wcwiAOdODV7jmGwa9dOFAWPA0gG', NULL, '2016-12-06 11:02:48', '2016-12-06 12:50:37', 'Developer', 'js', 10.10),
 (26, NULL, ' Voldemort', 'vold@gmail.com', '$2y$10$KokVdfiMx7dSpXZZr/E7BezipXq4lBmNz0rNE4FxzRYj.XGux3rIG', NULL, '2016-12-06 11:03:15', '2016-12-06 13:05:18', 'Developer', 'js', 8.00),
-(27, NULL, '  Anton', 'an@gmail.com', '$2y$10$mEzQ.b0mX8H9qTSR27vrN.uq64KQF9O0jW4mdVBFEPY4N8gXIpiu6', NULL, '2016-12-06 13:40:59', '2016-12-06 13:42:29', 'Admin', 'php', 10.00),
-(30, NULL, 'Terrorist', 'anton.soft.gr@gmail.com', '$2y$10$jA9MMTGxmCbRwiEpMWsm1OaoFArIkKnyB4C612K7ANUS9sdkkJWy.', NULL, '2016-12-07 05:23:32', '2016-12-07 05:23:32', 'Admin', 'no team', 0.00),
-(31, NULL, 'New Admin', 'new@gmail.com', '$2y$10$dhHa2OHYFDIUSjuEk73UhuMIDpjEeUnv7bw4/flzTAdJhA/0kLndi', NULL, '2016-12-07 05:42:39', '2016-12-07 05:42:39', 'Admin', '', NULL),
-(32, NULL, ' Toxic', 'tex@gmail.com', '$2y$10$zwihoNnJcMOr0BDad.xAB.6woYxhQhnDL531OVT1QCaaL2XpQc2k.', NULL, '2016-12-07 05:43:46', '2016-12-07 05:44:13', 'Developer', 'php', 10.10);
+(27, NULL, 'Anton', 'an@gmail.com', '$2y$10$mEzQ.b0mX8H9qTSR27vrN.uq64KQF9O0jW4mdVBFEPY4N8gXIpiu6', 'OcZMjjPCMn7fQrJPrQ7b3qdqKzblx7v0jGUZXDiogG0EOOiyWkr1jOtiyOTJ', '2016-12-06 13:40:59', '2016-12-09 06:44:34', 'Admin', 'php', 10.00),
+(31, NULL, '  New Admins', 'new@gmail.com', '$2y$10$dhHa2OHYFDIUSjuEk73UhuMIDpjEeUnv7bw4/flzTAdJhA/0kLndi', NULL, '2016-12-07 05:42:39', '2016-12-07 08:51:43', 'Admin', 'php', 0.00),
+(32, NULL, ' Toxic', 'tex@gmail.com', '$2y$10$zwihoNnJcMOr0BDad.xAB.6woYxhQhnDL531OVT1QCaaL2XpQc2k.', NULL, '2016-12-07 05:43:46', '2016-12-07 05:44:13', 'Developer', 'php', 10.10),
+(35, NULL, 'sadddas', 'ssdd@sdad.com', '$2y$10$Yusihul3N5glb2usRRbRMusGltwqscHjLrR914e43JKOUIla8ymX.', NULL, '2016-12-08 10:27:47', '2016-12-08 10:27:47', 'Admin', '', 0.00),
+(36, NULL, 'xzcxzc', 'dsadsasd@sad.com', '$2y$10$svOm7vbbIAsVFI7WcFL8MeJgkRerTRrWD3HHa.4.ddZJbingkz9g6', NULL, '2016-12-08 10:28:05', '2016-12-08 10:28:05', 'Admin', '', 0.00),
+(37, NULL, 'sdasff', 'dfdas@df.com', '$2y$10$yNuZhWV81ZEbhWwMhpZe3eEPLV9vxAnZj9NDD9ovj7g1c/E42sCf2', NULL, '2016-12-08 10:28:18', '2016-12-08 10:28:18', 'Admin', '', 0.00),
+(39, NULL, 'Anton', 'tester@gmail.com', '$2y$10$SznzVfJCuXIlE6hW3qE2Suw0YZib0Xo1yVRF7AaRHna/EgJjUfdAq', 'cCi2ghSlQUb9AYUG7CkWo1J4MFuWRBHJAWiXt3jtcAmWTleITEP4PGgU24iF', '2016-12-08 10:31:45', '2016-12-08 12:00:36', 'Admin', 'no team', 0.00),
+(40, NULL, 'Testing', 'testin@gmail.com', '$2y$10$oGSqALqndFdiLBqMleXXvOiX8aZ7Ck8kGjujJcDfk6C42eMAxhckq', NULL, '2016-12-09 05:23:42', '2016-12-09 05:23:42', 'Admin', '', 0.00),
+(42, NULL, '  AAAa', 'asdasdd@erewr.com', '$2y$10$TrQSU.RpCZwCne.yoEYES.iyp8vRFcDVDQTvVrxNH6r88xvZJ47V.', NULL, '2016-12-09 05:25:02', '2016-12-09 06:28:54', 'Lead', 'php', 10.00),
+(43, NULL, 'Tyzik', 'tyz@gmail.com', '$2y$10$57jm6RTHxfSUKG7otDggruIqXHUK7RWOp/YgjwaLh/aXCUqPHyI9i', NULL, '2016-12-09 06:33:11', '2016-12-09 06:33:11', 'Admin', '', 0.00),
+(44, NULL, 'add', 'admin@admin.com', '$2y$10$098xVr3AdbpptAkhtYtUCOWYUEqiaVD/RBEL86W8W0qWDl6cd4DRC', 'GL1JQJlh6PiluMr1rrzhX6u42t7ydvcXT8lfuFih66cMNW9EA2p8OFf27ooE', '2016-12-09 06:43:22', '2016-12-09 06:44:11', 'Admin', 'no team', 0.00);
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц

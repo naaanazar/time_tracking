@@ -41,19 +41,13 @@
 
                             <div class="control-group row">
                                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                    <label class="control-label" for="CompanyProjectId" style="text-align: left;">Project</label>
+                                    <label class="control-label" for="ProjectNameId" style="text-align: left;">Project</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-
-                                    <select name="company_id" class="input-xlarge focused my_input"  id="CompanyProjectId" style="height: 42px;">
-                                        @if (isset($client->company_name))
-                                            <option value="{{ $client->id }}" selected>{{ $client->company_name }}</option>
-                                        @endif
-                                    </select>
-
-                                    @if ($errors->has('company_id'))
+                                    <input name="project_name" class="input-xlarge focused my_input" id="ProjectNameId"  type="text">
+                                    @if ($errors->has('project_name'))
                                         <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('company_id') }}</strong>
+                                                <strong style="color:#802420">{{ $errors->first('project_name') }}</strong>
                                             </span>
                                     @endif
                                 </div>
@@ -88,17 +82,18 @@
                             </div>
                             <div class="control-group row">
                                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                    <label class="control-label" for="TeamLeaProjectId" style="text-align: left;">TeamLead</label>
+                                    <label class="control-label" for="TeamLeadProjectId" style="text-align: left;">TeamLead</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <select name="company_id" class="input-xlarge focused my_input"  id="TeamLeaProjectId" style="height: 42px;">
-                                        <option selected>Please change Project</option>
-                                        @if (isset($client->company_name))
-                                            <option value="{{ $client->id }}" selected>{{ $client->company_name }}</option>
+                                    <select name="lead_id" class="input-xlarge focused my_input"  id="TeamLeadProjectId" style="height: 42px;">
+                                        <option selected>Please change lead</option>
+
+                                        @if (isset($leads->company_name))
+                                            <option value="{{ $leads->id }}" selected>{{ $leads->company_name }}</option>
                                         @endif
 
-                                        @foreach( $client as $key )
-                                            <option  value="{{ $key->id}}">{{ $key->company_name }}</option>
+                                        @foreach( $leads as $key )
+                                            <option  value="{{ $key->id}}">{{ $key->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

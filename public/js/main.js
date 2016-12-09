@@ -8,23 +8,26 @@ $(document).ready(function(){
         e.preventDefault();
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
-        Main.displayModal('#delete-team', delUrl,  'You really want to delete this team?', element, '#modalConfirmDeleteTeam');
+        var massage = 'Do you want to remove <strong> ' + element + '</strong>?'
+        Main.displayModal('#delete-team', delUrl,   massage, '#modalConfirmDeleteTeam');
     });
 
     $(document).on( "click", ".deleteUser", function(e) {
         e.preventDefault();
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
+        var massage = 'Do you want to remove <strong> ' + element + '</strong>?'
 
-        Main.displayModal('#delete-user', delUrl,  'You really want to delete this user?', element, '#modalConfirmDeleteUser');
+        Main.displayModal('#delete-user', delUrl, massage, '#modalConfirmDeleteUser');
     });
 
     $(document).on( "click", ".deleteClient", function(e) {
         e.preventDefault();
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
+        var massage = 'Do you want to remove <strong> ' + element + '</strong>?'
 
-        Main.displayModal('#delete-client', delUrl,  'You really want to delete this client?', element, '#modalConfirmDeleteClient');
+        Main.displayModal('#delete-client', delUrl,  massage, '#modalConfirmDeleteClient');
     });
 
     $(document).on("change", "#SelectBuckets", function () {
@@ -59,14 +62,14 @@ $(document).ready(function(){
 });
 
 var Main = {
-    displayModal: function(idModal, delUrl, massage, element , appendContainer) {
+    displayModal: function(idModal, delUrl, massage, appendContainer) {
         var htmlDelete = '' +
             '<div class="modal-header">' +
                 '<button type="button" class="close" data-dismiss="modal">&times;</button>' +
                 '<h4 class="modal-title">Delete</h4>' +
             '</div>' +
             '<div class="modal-body">' +
-                '<p>' + massage + '<strong> ' + element + '</strong></p>' +
+                '<p>' + massage + '</p>' +
             '</div>' +
             '<div class="modal-footer">' +
                 '<a href="' + delUrl + '" type="button" class="btn btn-danger" >Delete</a>' +
