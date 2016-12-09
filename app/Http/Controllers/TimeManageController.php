@@ -58,12 +58,14 @@ class TimeManageController extends Controller
 
     public function getProjects($client_id)
     {
-
-         $result = Project::where('client_id', '=', $client_id)->get();
+        // $result = Project::where('client_id', '=', $client_id)->get();
         $result = DB::table('project')->where('client_id', '=', $client_id)->get();
+        if ($result) {
+            return response()->json(['data' => (object)$result]);
+        } else {
+            return response()->json(['data' => 'false']);
+        }
 
-
-        return response()->json(['data' => (object)$result]);
     }
     /*
      * create new clients

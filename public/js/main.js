@@ -37,15 +37,22 @@ $(document).ready(function(){
 
     $(document).on("change", "#CompanyNameProjectId", function () {
          console.log('1111');
-        var clientId = $("#CompanyProjectId option:selected").value();
-        $.get('/project/getProjects/' + clientId, function (response) {
-            var result = '';
+        var clientId = $("#CompanyNameProjectId option:selected").val();
+        if (clientId) {
+            console.log(clientId);
+            var urlSend = '/project/getProjects/' + clientId;
+            $.get(urlSend, function (response) {
+                console.log('2');
+                var result = '';
+                for (var key in response.data) {
+                    result += '<option value="' + response.data[key].id + '">' + response.data[key].project_name + '</option>';
+                };
+                $("#CompanyProjectId").html(result);
+            });
+        } else {
+            $("#CompanyProjectId").html('');
+        }
 
-            for (var key in response.data) {
-                result += '<option value="' + response.data[key].id + '">' + response.data[key].project_name + '</option>';
-            };
-            $("#CompanyProjectId").html(result);
-        });
     });
 
 
