@@ -57,14 +57,15 @@ $(document).ready(function(){
         var clientId = $("#taskProjectId option:selected").val();
         if (clientId) {
             console.log(clientId);
-            var urlSend = '/task/get_team/' + clientId;
+            var urlSend = '/get/team/' + clientId;
+            var result = '';
             $.get(urlSend, function (response) {
                 console.log('2');
-                /*var result = '';
-                for (var key in response.data) {
-                    result += '<option value="' + response.data[key].id + '">' + response.data[key].project_name + '</option>';
+                console.log(response);
+               /* for (var type in response.data.qa) {
+                    result += '<option value="' + response.data[key][qa].id + '">' + response.data[key].project_name + '</option>';
                 };*/
-                $("#AssignToId").html(result);
+                $("#AssignToId").html('<option>eweswfdsfdsfdsfdsf</option>');
             });
         } else {
             $("#AssignToId").html('');
