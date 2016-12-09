@@ -307,6 +307,25 @@ class TimeManageController extends Controller
     }
 
     /*
+     * get team on project id
+     *
+     * */
+    public function get_team( $project_id )
+    {
+        $result = Project::where('id', '=', $project_id)
+                ->get()[0]->lead_id;
+        
+        $lead = User::where('id', '=', $result)->first();
+        var_dump($lead); die;
+
+        if ($result) {
+            return response()->json(['data' => (object)$result]);
+        }
+
+        return response()->json(['data' => 'false']);
+    }
+
+    /*
      * create new team
      * */
     public function create_team(Request $request)
