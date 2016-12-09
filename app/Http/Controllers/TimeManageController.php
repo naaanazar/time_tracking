@@ -161,6 +161,7 @@ class TimeManageController extends Controller
 
             Project::create([
                 'client_id' => $project['company_id'],
+                'lead_id' => $project['lead_id'],
                 'project_name' => $project['project_name'],
                 'hourly_rate' => $project['hourly_rate'],
                 'notes' => $project['notes']
@@ -355,6 +356,7 @@ class TimeManageController extends Controller
     {
         $this->validate($request, [
             'company_id' => 'required|integer',
+            'lead_id' => 'integer',
             'project_name' => 'required|min:2|max:30',
             'hourly_rate' => 'numeric',
             'notes' => 'regex:/[a-zA-Z0-9]+/|max:1000'
