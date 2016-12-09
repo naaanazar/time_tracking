@@ -201,7 +201,7 @@ class TimeManageController extends Controller
 
         $project = Project::all();
 
-        return view('', compact('project'));
+        return view('time_manage.forms.project', compact('project'));
     }
 
     /*

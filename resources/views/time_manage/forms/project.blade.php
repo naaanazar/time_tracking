@@ -22,7 +22,7 @@
 
                             <div class="control-group row">
                                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                    <label class="control-label" for="CompanyNameProjectId" style="text-align: left;">Project</label>
+                                    <label class="control-label" for="CompanyNameProjectId" style="text-align: left;">Company</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
@@ -41,7 +41,7 @@
 
                             <div class="control-group row">
                                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                    <label class="control-label" for="CompanyProjectId" style="text-align: left;">Company</label>
+                                    <label class="control-label" for="CompanyProjectId" style="text-align: left;">Project</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
@@ -54,20 +54,6 @@
                                     @if ($errors->has('company_id'))
                                         <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('company_id') }}</strong>
-                                            </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="control-group row">
-                                <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                    <label class="control-label" for="ProjectNameId" style="text-align: left;">Project Name</label>
-                                </div>
-                                <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <input name="project_name" class="input-xlarge focused my_input" id="ProjectNameId"   type="text">
-                                    @if ($errors->has('project_name'))
-                                        <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('project_name') }}</strong>
                                             </span>
                                     @endif
                                 </div>
