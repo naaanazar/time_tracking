@@ -33,26 +33,26 @@ $(document).ready(function(){
 
 
     $(document).on("change", "#CompanyTaskId", function () {
-         console.log('1111');
+
         var clientId = $("#CompanyTaskId option:selected").val();
         if (clientId) {
             console.log(clientId);
             var urlSend = '/project/getProjects/' + clientId;
             $.get(urlSend, function (response) {
-                console.log('2');
                 var result = '';
                 for (var key in response.data) {
                     result += '<option value="' + response.data[key].id + '">' + response.data[key].project_name + '</option>';
                 };
-                $("#CompanyProjectId").html(result);
+                console.log(result);
+                $("#taskProjectId").html(result);
             });
         } else {
-            $("#CompanyProjectId").html('');
+            $("#taskProjectId").html('');
         }
 
     });
 
-    $(document).on("change", "#taskProjectId", function () {
+    $(document).on("click", "#taskProjectId", function () {
         console.log('1111');
         var clientId = $("#taskProjectId option:selected").val();
         if (clientId) {

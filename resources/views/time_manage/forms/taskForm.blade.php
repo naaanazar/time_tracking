@@ -52,6 +52,7 @@
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
                                     <select name="project_id" class="input-xlarge focused my_input"  id="taskProjectId" style="height: 42px;">
+                                        <option selected disabled>Please change Project</option>
 
                                     </select>
 
@@ -130,6 +131,7 @@
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                     <select name="assign_to" class="input-xlarge focused my_input"  id="AssignToId" style="height: 42px;">
+                                        <option selected disabled></option>
                                     </select>
                                     @if ($errors->has('assign_to'))
                                         <span class="help-block">
