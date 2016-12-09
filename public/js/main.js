@@ -45,14 +45,14 @@ $(document).ready(function(){
 
         var clientId = $("#CompanyTaskId option:selected").val();
         if (clientId) {
-            console.log(clientId);
+
             var urlSend = '/project/getProjects/' + clientId;
             $.get(urlSend, function (response) {
                 var result = '';
                 for (var key in response.data) {
                     result += '<option value="' + response.data[key].id + '">' + response.data[key].project_name + '</option>';
                 };
-                console.log(result);
+
                 $("#taskProjectId").html(result);
             });
         } else {
@@ -61,25 +61,30 @@ $(document).ready(function(){
 
     });
 
-    $(document).on("click", "#taskProjectId", function () {
-        console.log('1111');
+    $(document).on("change", "#taskProjectId", function () {
+
         var clientId = $("#taskProjectId option:selected").val();
         if (clientId) {
-            console.log(clientId);
+
             var urlSend = '/get/team/' + clientId;
             var result = '';
+
             $.get(urlSend, function (response) {
-                console.log('2');
-                console.log(response);
-               /* for (var type in response.data.qa) {
-                    result += '<option value="' + response.data[key][qa].id + '">' + response.data[key].project_name + '</option>';
-                };*/
-                $("#AssignToId").html('<option>eweswfdsfdsfdsfdsf</option>');
+                var result = '<option value="' + response.data.lead[0].id + '">' + response.data.lead[0].name + ' - ' + response.data.lead[0].employe + '</option>';
+
+                for ( var i  in response.data.team) {
+                    result += '<option value="' + response.data.team[i].id + '">' + response.data.team[i].name + ' - ' + response.data.team[i].employe + '</option>';
+                };
+
+                for ( var i  in response.data.qa) {
+                    result += '<option value="' + response.data.qa[i].id + '">' + response.data.qa[i].name + ' - ' + response.data.qa[i].employe + '</option>';
+                };
+
+               $("#AssignToId").html(result);
             });
         } else {
             $("#AssignToId").html('');
         }
-
     });
 
 

@@ -24,4 +24,9 @@ class Project extends Model
     {
         return $this->belongsTo('App\Client');
     }
+
+    public function task()
+    {
+        return $this->hasMany('App\task');
+    }
 }

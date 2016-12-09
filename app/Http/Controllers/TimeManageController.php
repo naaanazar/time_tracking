@@ -266,7 +266,7 @@ class TimeManageController extends Controller
                 'assign_to' => $task['assign_to'],
                 'task_type' => $task['task_type'],
                 'task_description' => $task['task_description'],
-                'billable' => $task['billable']
+                'billable' => true//$task['billable']
             ]);
 
             return redirect('/');
@@ -314,6 +314,16 @@ class TimeManageController extends Controller
         return redirect('/');
     }
 
+    /*
+     * return all tasks
+     * */
+
+    public function all_tasks()
+    {
+        $tasks = Task::with(['project','client'])->get();
+
+        return view('', compact('tasks'));
+    }
     /*
      * get team on project id
      *
