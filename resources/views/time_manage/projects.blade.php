@@ -15,9 +15,9 @@
     <div id="conteiner" class="container" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
         <div class="row-fluid">
             <div class="span12">
-                <h3 class="h3-my">Clients</h3>
+                <h3 class="h3-my">Projects</h3>
                 <a href="/client/create" style="display:inline-block; margin-left: 25px" class="btn btn-large button-orange">
-                    <i class="glyphicon glyphicon-plus"></i> Add Client</a>
+                    <i class="glyphicon glyphicon-plus"></i>Add Projectt</a>
             </div>
         </div>
 
@@ -57,7 +57,7 @@
                                     <td>{{ $client->company_address }}</td>
                                     <td>
                                         <a href="{{ $client->website }}">{{ $client->website }}</a>
-                                        </td>
+                                    </td>
                                     <td>{{ $client->contact_person }}</td>
                                     <td>{{ $client->email }}</td>
                                     <td>{{ $client->phone_number }}</td>

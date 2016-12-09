@@ -8,7 +8,7 @@ $(document).ready(function(){
         e.preventDefault();
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
-        Teams.displayModal('#delete-team', delUrl,  'You really want to delete this team?', element, '#modalConfirmDeleteTeam');
+        Main.displayModal('#delete-team', delUrl,  'You really want to delete this team?', element, '#modalConfirmDeleteTeam');
     });
 
     $(document).on( "click", ".deleteUser", function(e) {
@@ -16,7 +16,7 @@ $(document).ready(function(){
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
 
-        Teams.displayModal('#delete-user', delUrl,  'You really want to delete this user?', element, '#modalConfirmDeleteUser');
+        Main.displayModal('#delete-user', delUrl,  'You really want to delete this user?', element, '#modalConfirmDeleteUser');
     });
 
     $(document).on( "click", ".deleteClient", function(e) {
@@ -24,13 +24,34 @@ $(document).ready(function(){
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
 
-        Teams.displayModal('#delete-client', delUrl,  'You really want to delete this client?', element, '#modalConfirmDeleteClient');
+        Main.displayModal('#delete-client', delUrl,  'You really want to delete this client?', element, '#modalConfirmDeleteClient');
+    });
+
+    $(document).on("change", "#SelectBuckets", function () {
+        var bucket = $("#SelectBuckets option:selected").text();
+
+        selectDataFromS3('/ml/select-S3objects', '#SelectDataLocationS3', '.create-datasource-form', bucket);
+
+        $('.select-datasource-field').slideDown();
+    });
+
+    $(document).on("change", "#CompanyNameProjectId", function () {
+         console.log('1111');
+        var clientId = $("#CompanyProjectId option:selected").value();
+        $.get('/project/getProjects/' + clientId, function (response) {
+            var result = '';
+
+            for (var key in response.data) {
+                result += '<option value="' + response.data[key].id + '">' + response.data[key].project_name + '</option>';
+            };
+            $("#CompanyProjectId").html(result);
+        });
     });
 
 
 });
 
-var Teams = {
+var Main = {
     displayModal: function(idModal, delUrl, massage, element , appendContainer) {
         var htmlDelete = '' +
             '<div class="modal-header">' +

@@ -50,6 +50,7 @@
             <div>
                 <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
+                        @if ($status != 'HR Manager')
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Report<span class="caret"></span>
@@ -62,6 +63,7 @@
                                 <li><a href="#">------</a></li>
                             </ul>
                         </li>
+                        @endif
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Manage<span class="caret"></span>
@@ -69,10 +71,12 @@
                             <ul class="dropdown-menu" >
                                 @if ($status == 'Admin' || $status == 'HR Manager')
                                     <li> <a tabindex="-1" href="/user/all">Users</a> </li>
-                                    <li> <a tabindex="-1" href="/client/all">Clients</a> </li>
                                 @endif
-
-                                <li> <a tabindex="-1" href="/team/all">Teams</a> </li>
+                                @if ($status != 'HR Manager')
+                                    <li> <a tabindex="-1" href="/client/all">Clients</a> </li>
+                                    <li> <a tabindex="-1" href="/project/all">Projects</a> </li>
+                                    <li> <a tabindex="-1" href="/team/all">Teams</a> </li>
+                                @endif
                                 <li role="separator" class="divider"></li>
                                 <li> <a tabindex="-1" href="#">--</a> </li>
                             </ul>
