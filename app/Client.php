@@ -23,6 +23,6 @@ class Client extends Model
 
     public function project()
     {
-        return $this->hasOne('App\Project');
+        return $this->hasMany('App\Project');
     }
 }
