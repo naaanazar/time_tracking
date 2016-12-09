@@ -108,7 +108,7 @@
                             <div class="form-actions row">
                                 <label class="control-label col-sm-2" for=""></label>
                                 <button type="submit" class="btn btn-large button-orange" formaction="">Save</button> &nbsp;&nbsp;
-                                <a  href="{{ url('') }}" class="btn btn-large button-orange" style="font-weight: normal;" >Cancel</a>
+                                <a  href="{{ url('/project/all') }}" class="btn btn-large button-orange" style="font-weight: normal;" >Cancel</a>
                             </div>
 
                         </form>

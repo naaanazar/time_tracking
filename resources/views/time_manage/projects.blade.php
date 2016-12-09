@@ -3,11 +3,11 @@
 @section('content')
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
 
-    <div class="modal fade" id="delete-client" role="dialog">
+    <div class="modal fade" id="delete-project" role="dialog">
         <div class="modal-dialog"  >
             <!-- Modal content-->
             <div class="modal-content">
-                <div id="modalConfirmDeleteClient"></div>
+                <div id="modalConfirmDeleteProject"></div>
             </div>
         </div>
     </div>
@@ -16,8 +16,8 @@
         <div class="row-fluid">
             <div class="span12">
                 <h3 class="h3-my">Projects</h3>
-                <a href="/client/create" style="display:inline-block; margin-left: 25px" class="btn btn-large button-orange">
-                    <i class="glyphicon glyphicon-plus"></i>Add Projectt</a>
+                <a href="/project/create" style="display:inline-block; margin-left: 25px" class="btn btn-large button-orange">
+                    <i class="glyphicon glyphicon-plus"></i> Add Project</a>
             </div>
         </div>
 
@@ -34,42 +34,39 @@
                             } );
                         </script>
 
+
+
                         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="usersTable">
                             <thead>
                             <tr>
-                                <th style="min-width: 130px">Company Name</th>
-                                <th>Address</th>
-                                <th>Website</th>
-                                <th>Contact Persone</th>
-                                <th>Email</th>
-                                <th>Phone Number</th>
-                                <th style="min-width: 160px"  class="center">Created at</th>
-                                @if ($status == 'HR Manager' || $status == 'Admin')
+
+                                <th>Project</th>
+                                <th>Company</th>
+                                <th>Lead</th>
+                                <th>Hourly Rate</th>
+                                <th>Created at</th>
+                                @if ($status == 'Admin')
                                     <th style="min-width: 140px">Action</th>
                                 @endif
                             </tr>
                             </thead>
                             <tbody>
 
-                            @foreach( $clients as $client )
+
+                            @foreach( $projects as $project )
                                 <tr class="odd gradeX">
-                                    <td>{{ $client->company_name }}</td>
-                                    <td>{{ $client->company_address }}</td>
-                                    <td>
-                                        <a href="{{ $client->website }}">{{ $client->website }}</a>
-                                    </td>
-                                    <td>{{ $client->contact_person }}</td>
-                                    <td>{{ $client->email }}</td>
-                                    <td>{{ $client->phone_number }}</td>
-                                    <td style="text-align: center">{{ $client->created_at }}</td>
+                                    <td>{{ $project->project_name }}</td>
+                                    <td>{{ $project->company_name }}</td>
+                                    <td>{{ $project->name }}</td>
+                                    <td>{{ $project->hourly_rate }}</td>
+                                    <td style="text-align: center">{{ $project->created_at }}</td>
 
-                                    @if ($status == 'HR Manager' || $status == 'Admin')
+                                    @if ($status == 'Admin')
                                         <td>
-                                            @if ($status == 'Admin' ||
-                                             ($status == 'HR Manager'))
+                                            @if ($status == 'Admin' )
 
-                                                <a href="/client/update/{{ $client->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
-                                                <button type="button" class="btn btn-danger  deleteClient" data-url="/client/delete/{{ $client->id }}" data-element="{{  $client->company_name  }}">
+                                                <a href="/project/update/{{ $project->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
+                                                <button type="button" class="btn btn-danger  deleteProject" data-url="/project/delete/{{ $project->id }}" data-element="{{  $project->project_name  }}">
                                                     <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
                                             @endif
                                         </td>

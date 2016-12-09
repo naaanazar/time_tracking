@@ -173,7 +173,7 @@ class TimeManageController extends Controller
                 'notes' => $project['notes']
             ]);
 
-            return redirect('/');
+            return redirect('/project/all');
         }
 
         $client = Client::all();
@@ -215,7 +215,7 @@ class TimeManageController extends Controller
     {
         Project::where('id', '=', $id)->delete();
 
-        return redirect('/');
+        return redirect('/project/all');
     }
 
     /*
@@ -223,10 +223,18 @@ class TimeManageController extends Controller
      * */
     public function all_project()
     {
-        //$projects = DB::table('Project')->join('Clients', 'Project.client_id', '=', 'Clients.id')->get();
-        $projects = Project::with('client')->get();
+        $projects = DB::table('Project')
+            ->join('users', 'Project.lead_id', '=', 'users.id')
+            ->join('Clients', 'Project.client_id', '=', 'Clients.id')
+            ->select('Project.project_name',
+                    'Project.id',
+                    'Project.hourly_rate',
+                    'Project.notes',
+                    'Project.created_at',
+                    'users.name', 'Clients.company_name' )
+            ->get();
 
-        return view('', compact('projects'));
+        return view('time_manage.projects', compact('projects'));
     }
 
     /*
