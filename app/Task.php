@@ -15,7 +15,11 @@ class Task extends Model
     protected $fillable = [
         'company_id',
         'project_id',
+        'task_titly',
+        'alloceted_hours',
+        'assign_to',
         'task_type',
-        'task_description'
+        'task_description',
+        'billable'
     ];
 }
