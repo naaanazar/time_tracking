@@ -54,10 +54,10 @@ $(document).ready(function(){
 
         var clientId = $("#CompanyTaskId option:selected").val();
         if (clientId) {
-
+            var result = '<option selected disabled>Please change Project</option>';
             var urlSend = '/project/getProjects/' + clientId;
             $.get(urlSend, function (response) {
-                var result = '';
+
                 for (var key in response.data) {
                     result += '<option value="' + response.data[key].id + '">' + response.data[key].project_name + '</option>';
                 };
@@ -76,10 +76,10 @@ $(document).ready(function(){
         if (clientId) {
 
             var urlSend = '/get/team/' + clientId;
-            var result = '';
+            var result = '<option selected disabled>Please change User</option>';
 
             $.get(urlSend, function (response) {
-                var result = '<option value="' + response.data.lead[0].id + '">' + response.data.lead[0].name + ' - ' + response.data.lead[0].employe + '</option>';
+                result += '<option value="' + response.data.lead[0].id + '">' + response.data.lead[0].name + ' - ' + response.data.lead[0].employe + '</option>';
 
                 for ( var i  in response.data.team) {
                     result += '<option value="' + response.data.team[i].id + '">' + response.data.team[i].name + ' - ' + response.data.team[i].employe + '</option>';

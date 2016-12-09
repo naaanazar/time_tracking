@@ -26,7 +26,8 @@
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
-                                    <select name="company_id" class="input-xlarge focused my_input"  id="CompanyTaskId" style="height: 42px;">
+                                    <select name="company_id" class="input-xlarge focused my_input"  id="CompanyTaskId" style="height: 42px;" required>
+                                        <option  defaul>Please change Company</option>
                                         @if (isset($client->company_name))
                                             <option value="{{ $client->id }}" selected>{{ $client->company_name }}</option>
                                         @endif
@@ -51,8 +52,7 @@
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
-                                    <select name="project_id" class="input-xlarge focused my_input"  id="taskProjectId" style="height: 42px;">
-                                        <option selected disabled>Please change Project</option>
+                                    <select name="project_id" class="input-xlarge focused my_input"  id="taskProjectId" style="height: 42px;" required>
 
                                     </select>
 
@@ -88,7 +88,7 @@
                                     <label class="control-label" for="taskTittleId" style="text-align: left;">Title</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <input name="task_titly" class="input-xlarge focused my_input" id="taskTittleId"   type="text">
+                                    <input name="task_titly" class="input-xlarge focused my_input" id="taskTittleId"   type="text" required />
                                     @if ($errors->has('task_titly'))
                                         <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('task_titly') }}</strong>

@@ -327,8 +327,9 @@ class TimeManageController extends Controller
     {
         $tasks = Task::with(['project','client'])->get();
         $i=1;
+
         foreach($tasks as $task){
-            $tasksRes[$i]['user_name'] = User::where('id', '=', '40')->get()[0]->name;
+            $tasksRes[$i]['user_name'] = User::where('id', '=', $task->assign_to)->get()[0]->name;
             $tasksRes[$i]['id'] = $task->id;
             $tasksRes[$i]['title'] = $task->task_titly;
             $tasksRes[$i]['type'] = $task->task_type;
