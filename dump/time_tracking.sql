@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Дек 09 2016 г., 12:27
+-- Время создания: Дек 09 2016 г., 14:07
 -- Версия сервера: 5.6.26
 -- Версия PHP: 5.6.12
 
@@ -94,13 +94,13 @@ CREATE TABLE IF NOT EXISTS `Project` (
   `client_id` int(10) NOT NULL,
   `lead_id` int(10) NOT NULL,
   `project_name` varchar(255) NOT NULL,
-  `hourly_rate` decimal(5,2) NOT NULL,
+  `hourly_rate` decimal(5,2) NOT NULL DEFAULT '0.00',
   `notes` text NOT NULL,
   `updated_at` date NOT NULL,
   `created_at` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `client_id` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Дамп данных таблицы `Project`
@@ -109,7 +109,10 @@ CREATE TABLE IF NOT EXISTS `Project` (
 INSERT INTO `Project` (`id`, `client_id`, `lead_id`, `project_name`, `hourly_rate`, `notes`, `updated_at`, `created_at`) VALUES
 (3, 2, 0, 'qweqwe', '10.00', 'qwewqeqwe', '2016-12-08', '2016-12-08'),
 (4, 2, 0, 'tester', '10.00', 'dasddasdasdds', '2016-12-08', '2016-12-08'),
-(5, 2, 0, 'testing', '10.00', 'sdsdsdsd sdasdsa asdsdasd', '2016-12-08', '2016-12-08');
+(5, 2, 0, 'testing', '10.00', 'sdsdsdsd sdasdsa asdsdasd', '2016-12-08', '2016-12-08'),
+(6, 2, 0, 'testing', '11.00', 'dasdasd', '2016-12-09', '2016-12-09'),
+(7, 3, 0, 'tttop', '0.00', 'dsdsada', '2016-12-09', '2016-12-09'),
+(8, 2, 0, 'asdasd', '0.00', 'sadasd', '2016-12-09', '2016-12-09');
 
 -- --------------------------------------------------------
 
@@ -123,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `project_id` int(10) NOT NULL,
   `task_type` varchar(255) NOT NULL,
   `task_titly` varchar(255) NOT NULL,
-  `alloceted_hours` varchar(255) NOT NULL,
+  `alloceted_hours` decimal(5,2) NOT NULL,
   `assign_to` varchar(255) NOT NULL,
   `task_description` text NOT NULL,
   `billable` tinyint(1) NOT NULL,

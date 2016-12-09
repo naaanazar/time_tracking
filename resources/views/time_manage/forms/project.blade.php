@@ -1,6 +1,7 @@
 @extends('layouts.index_template')
 
 @section('content')
+
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
     <div class="container" id="conteiner" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
 

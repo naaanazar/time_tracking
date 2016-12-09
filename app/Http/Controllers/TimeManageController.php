@@ -157,12 +157,13 @@ class TimeManageController extends Controller
     public function create_project(Request $request)
     {
         if(Input::all() == true) {
-
-            //$this->validation_project($request);
+            $this->validation_project($request);
 
             $project = Input::all();
 
-            var_dump($project);
+            if( $project['hourly_rate'] == '' ) {
+                $project['hourly_rate'] = '0';
+            }
 
             Project::create([
                 'client_id' => $project['company_id'],
@@ -252,8 +253,12 @@ class TimeManageController extends Controller
             Task::create([
                 'company_id' => $task['company_id'],
                 'project_id' => $task['project_id'],
+                'task_titly' => $task['task_titly'],
+                'alloceted_hours' => $task['alloceted_hours'],
+                'assign_to' => $task['assign_to'],
                 'task_type' => $task['task_type'],
-                'task_description' => $task['task_description']
+                'task_description' => $task['task_description'],
+                'billable' => $task['billable']
             ]);
 
             return redirect('/');
@@ -299,6 +304,28 @@ class TimeManageController extends Controller
         Task::where('id', '=', $id)->delete();
 
         return redirect('/');
+    }
+
+    /*
+     * get team on project id
+     *
+     * */
+    public function get_team( $project_id )
+    {
+        $result = Project::where('id', '=', $project_id)
+                ->get()[0]->lead_id;
+
+        $lead = User::where('id', '=', $result)->get();
+        $team = User::where('team_name', '=', $lead[0]->team_name)->get();
+        $qa = User::where('employe', '=', 'QA Engineer')->get();
+
+        $result = ['lead' =>$lead, 'team' => $team, 'qa' => $qa];
+
+        if ($result) {
+            return response()->json(['data' => (object)$result]);
+        }
+
+        return response()->json(['data' => 'false']);
     }
 
     /*
@@ -375,7 +402,11 @@ class TimeManageController extends Controller
             'company_id' => 'integer|max:10',
             'project_id' => 'integer|max:10',
             'task_type' => 'required|min:2|max:30',
-            'task_description' => 'required|regex:/[a-zA-Z0-9]+/|max:1000'
+            'task_description' => 'required|regex:/[a-zA-Z0-9]+/|max:1000',
+            'task_titly' => 'min:2|max:30',
+            'alloceted_hours' => 'numeric',
+            'assign_to' => 'min:2|max:30',
+            'billable' => 'boolean'
         ]);
     }
 
