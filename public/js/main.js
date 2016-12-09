@@ -30,6 +30,15 @@ $(document).ready(function(){
         Main.displayModal('#delete-client', delUrl,  massage, '#modalConfirmDeleteClient');
     });
 
+    $(document).on( "click", ".deleteProject", function(e) {
+        e.preventDefault();
+        var delUrl = $(e.target).data('url');
+        var element = $(e.target).data('element');
+        var massage = 'Do you want to remove <strong> ' + element + '</strong>?'
+
+        Main.displayModal('#delete-project', delUrl,  massage, '#modalConfirmDeleteProject');
+    });
+
 
 
     $(document).on("change", "#CompanyTaskId", function () {
