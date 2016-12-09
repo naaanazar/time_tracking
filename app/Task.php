@@ -22,4 +22,14 @@ class Task extends Model
         'task_description',
         'billable'
     ];
+
+    public function client()
+    {
+        return $this->belongsTo('App\Client');
+    }
+
+    public function project()
+    {
+        return $this->belongsTo('App\Project');
+    }
 }
