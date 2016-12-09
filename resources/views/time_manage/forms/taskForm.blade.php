@@ -47,44 +47,17 @@
 
                             <div class="control-group row">
                                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                    <label class="control-label" for="CompanyProjectId" style="text-align: left;">Project</label>
+                                    <label class="control-label" for="taskProjectId" style="text-align: left;">Project</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
-                                    <select name="company_id" class="input-xlarge focused my_input"  id="CompanyProjectId" style="height: 42px;">
-                                        @if (isset($client->company_name))
-                                            <option value="{{ $client->id }}" selected>{{ $client->company_name }}</option>
-                                        @endif
-                                    </select>
-
-                                    @if ($errors->has('company_id'))
-                                        <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('company_id') }}</strong>
-                                            </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="control-group row">
-                                <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                    <label class="control-label" for="ProjectTaskId" style="text-align: left;">Project</label>
-                                </div>
-                                <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-
-                                    <select name="project_id" class="input-xlarge focused my_input"  id="ProjectTaskId" style="height: 42px;">
-                                        @if (isset($project->project_name))
-                                            <option value="{{ $project->id }}" selected>{{ $project->project_name }}</option>
-                                        @endif
-
-                                        @foreach( $project as $key )
-                                            <option  value="{{ $key->id}}">{{ $key->project_name }}</option>
-                                        @endforeach
+                                    <select name="project_id" class="input-xlarge focused my_input"  id="taskProjectId" style="height: 42px;">
 
                                     </select>
 
-                                    @if ($errors->has('$project_id'))
+                                    @if ($errors->has('project_id'))
                                         <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('$project_id') }}</strong>
+                                                <strong style="color:#802420">{{ $errors->first('project_id') }}</strong>
                                             </span>
                                     @endif
                                 </div>
@@ -92,13 +65,18 @@
 
                             <div class="control-group row">
                                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                    <label class="control-label" for="ProjectNameId" style="text-align: left;">Project Name</label>
+                                    <label class="control-label" for="taskTypeId" style="text-align: left;">Task Type</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <input name="project_name" class="input-xlarge focused my_input" id="ProjectNameId"   type="text">
-                                    @if ($errors->has('project_name'))
+                                    <select name="task_type" class="input-xlarge focused my_input"  id="taskTypeId" style="height: 42px;">
+                                        <option>New Feature</option>
+                                        <option>Bug Fixing</option>
+                                        <option>Quality Assurance</option>
+                                        <option>Estimates Required</option>
+                                    </select>
+                                    @if ($errors->has('task_type'))
                                         <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('project_name') }}</strong>
+                                                <strong style="color:#802420">{{ $errors->first('task_type') }}</strong>
                                             </span>
                                     @endif
                                 </div>
@@ -106,13 +84,13 @@
 
                             <div class="control-group row">
                                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                    <label class="control-label" for="HourlyRateProhectId" style="text-align: left;">Hourly Rate</label>
+                                    <label class="control-label" for="taskTittleId" style="text-align: left;">Title</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <input name="hourly_rate" class="input-xlarge focused my_input" id="HourlyRateProhectId"  type="number" step="0.01">
-                                    @if ($errors->has('hourly_rate'))
+                                    <input name="task_titly" class="input-xlarge focused my_input" id="taskTittleId"   type="text">
+                                    @if ($errors->has('task_titly'))
                                         <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('hourly_rate') }}</strong>
+                                                <strong style="color:#802420">{{ $errors->first('task_titly') }}</strong>
                                             </span>
                                     @endif
                                 </div>
@@ -120,15 +98,53 @@
 
                             <div class="control-group row">
                                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                    <label class="control-label" for="NotesProjectId" style="text-align: left;">Notes</label>
+                                    <label class="control-label" for="taskDescriptionId" style="text-align: left;">Description</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <textarea name="notes" class="input-xlarge focused my_input" id="NotesProjectId" rows="6"  type="text" ></textarea>
-                                    @if ($errors->has('notes'))
+                                    <textarea name="task_description" class="input-xlarge focused my_input" id="taskDescriptionId" rows="6"  type="text" ></textarea>
+                                    @if ($errors->has('task_description'))
                                         <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('notes') }}</strong>
+                                                <strong style="color:#802420">{{ $errors->first('task_description') }}</strong>
                                             </span>
                                     @endif
+                                </div>
+                            </div>
+
+                            <div class="control-group row">
+                                <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
+                                    <label class="control-label" for="HourlyRateProhectId" style="text-align: left;">Allocated Hours</label>
+                                </div>
+                                <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
+                                    <input name="alloceted_hours" class="input-xlarge focused my_input" id="HourlyRateProhectId"  type="number" />
+                                    @if ($errors->has('alloceted_hours'))
+                                        <span class="help-block">
+                                                <strong style="color:#802420">{{ $errors->first('alloceted_hours') }}</strong>
+                                            </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="control-group row">
+                                <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
+                                    <label class="control-label" for="AssignToId" style="text-align: left;">Assign To</label>
+                                </div>
+                                <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
+                                    <select name="assign_to" class="input-xlarge focused my_input"  id="AssignToId" style="height: 42px;">
+                                    </select>
+                                    @if ($errors->has('assign_to'))
+                                        <span class="help-block">
+                                                <strong style="color:#802420">{{ $errors->first('assign_to') }}</strong>
+                                            </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="control-group row">
+                                <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
+                                    <label class="control-label" for="BillableId" style="text-align: left;">Billable</label>
+                                </div>
+                                <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
+                                    <input type="checkbox"  name="billable" id="BillableId" value="1"><br>
                                 </div>
                             </div>
 

@@ -30,17 +30,11 @@ $(document).ready(function(){
         Main.displayModal('#delete-client', delUrl,  massage, '#modalConfirmDeleteClient');
     });
 
-    $(document).on("change", "#SelectBuckets", function () {
-        var bucket = $("#SelectBuckets option:selected").text();
 
-        selectDataFromS3('/ml/select-S3objects', '#SelectDataLocationS3', '.create-datasource-form', bucket);
 
-        $('.select-datasource-field').slideDown();
-    });
-
-    $(document).on("change", "#CompanyNameProjectId", function () {
+    $(document).on("change", "#CompanyTaskId", function () {
          console.log('1111');
-        var clientId = $("#CompanyNameProjectId option:selected").val();
+        var clientId = $("#CompanyTaskId option:selected").val();
         if (clientId) {
             console.log(clientId);
             var urlSend = '/project/getProjects/' + clientId;
@@ -54,6 +48,26 @@ $(document).ready(function(){
             });
         } else {
             $("#CompanyProjectId").html('');
+        }
+
+    });
+
+    $(document).on("change", "#taskProjectId", function () {
+        console.log('1111');
+        var clientId = $("#taskProjectId option:selected").val();
+        if (clientId) {
+            console.log(clientId);
+            var urlSend = '/task/get_team/' + clientId;
+            $.get(urlSend, function (response) {
+                console.log('2');
+                /*var result = '';
+                for (var key in response.data) {
+                    result += '<option value="' + response.data[key].id + '">' + response.data[key].project_name + '</option>';
+                };*/
+                $("#AssignToId").html(result);
+            });
+        } else {
+            $("#AssignToId").html('');
         }
 
     });
