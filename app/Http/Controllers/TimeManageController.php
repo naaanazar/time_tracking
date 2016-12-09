@@ -56,10 +56,8 @@ class TimeManageController extends Controller
 
     public function getProjects($client_id)
     {
-
-         $result = Project::where('client_id', '=', $client_id)->get();
+        $result = Project::where('client_id', '=', $client_id)->get();
         $result = DB::table('project')->where('client_id', '=', $client_id)->get();
-
 
         return response()->json(['data' => (object)$result]);
     }
@@ -320,7 +318,6 @@ class TimeManageController extends Controller
      * and change team_name field in table users
      * where this team used
      * */
-
     public function delete_team($id)
     {
         DB::table('users')
@@ -335,7 +332,6 @@ class TimeManageController extends Controller
     /*
      * validation for clients action
      * */
-
     private function validation_client($request)
     {
         $this->validate($request, [
@@ -351,7 +347,6 @@ class TimeManageController extends Controller
     /*
      * validation for project
      * */
-
     private function validation_project($request)
     {
         $this->validate($request, [
