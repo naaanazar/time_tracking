@@ -30,7 +30,6 @@ Route::group(['middleware' => ['permision']], function () {
     Route::get('/home', 'TimeManageController@index');
 
     // client
-
     Route::get('/client/create', 'TimeManageController@create_client');
     Route::post('/client/create', 'TimeManageController@create_client');
     Route::get('/client/update/{id}', 'TimeManageController@update_client')->where(['id' => '[0-9]+']);
@@ -44,9 +43,9 @@ Route::group(['middleware' => ['permision']], function () {
     Route::get('/project/update/{id}', 'TimeManageController@update_project')->where(['id' => '[0-9]+']);
     Route::post('/project/update/{id}', 'TimeManageController@update_project')->where(['id' => '[0-9]+']);
     Route::get('/project/delete/{id}', 'TimeManageController@delete_project')->where(['id' => '[0-9]+']);
-    Route::get('/project/all', 'TimeManageController@create_project');
+    Route::get('/project/all', 'TimeManageController@all_project');
     Route::get('/project/getProjects/{client_id}', 'TimeManageController@getProjects');
-
+    Route::get('/project/client/projects/{id}', 'TimeManageController@client_projects')->where(['id' => '[0-9]+']);
 
     //task
     Route::get('/task/create', 'TimeManageController@create_task');
@@ -62,7 +61,6 @@ Route::group(['middleware' => ['permision']], function () {
     Route::get('/team/all', 'TimeManageController@team_all');
 
     // forbidden
-
     Route::get('/register', 'TimeManageController@index');
 
 });

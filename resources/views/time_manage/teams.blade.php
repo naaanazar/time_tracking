@@ -46,8 +46,9 @@
                                 <tr class="odd gradeX">
                                     <td>{{ $team->team_name }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-danger  deleteTeam" data-url="/team/delete/{{ $team->id }}" data-element="{{ $team->team_name }}">
+                     <button type="button" class="btn btn-danger  deleteTeam" data-url="/team/delete/{{ $team->id }}" data-element="{{ $team->team_name }}">
                                             <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
+
                                     </td>
                                 </tr>
                             @endforeach

@@ -18,4 +18,9 @@ class Project extends Model
         'hourly_rate',
         'notes'
     ];
+
+    public function client()
+    {
+        return $this->belongsTo('App\Client');
+    }
 }

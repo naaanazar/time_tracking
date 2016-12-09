@@ -20,4 +20,9 @@ class Client extends Model
         'email',
         'phone_number'
     ];
+
+    public function project()
+    {
+        return $this->hasMany('App\Project');
+    }
 }

@@ -31,7 +31,6 @@ class TimeManageController extends Controller
     /*
      * return all users
      * */
-
     public function all( $team = false )
     {
         if( $team != false ) {
@@ -48,7 +47,6 @@ class TimeManageController extends Controller
     /*
      * return all teams
      * */
-
     public function team_all()
     {
         $teams = DB::table('teams')->get();
@@ -94,6 +92,7 @@ class TimeManageController extends Controller
 
             return redirect('/client/all');
         }
+
         return view('time_manage.forms.client');
     }
 
@@ -146,7 +145,7 @@ class TimeManageController extends Controller
      * */
     public function all_client()
     {
-        $clients = Client::all();
+        $clients = DB::table('clients')->get();
 
         return view('time_manage.clients', compact('clients'));
     }
@@ -173,6 +172,7 @@ class TimeManageController extends Controller
         }
 
         $client = Client::all();
+        $leads = User::where('employe', '=', 'Lead')->get();
 
         return view('time_manage.forms.project', compact('client'));
     }
@@ -180,7 +180,6 @@ class TimeManageController extends Controller
     /*
      * update project
      * */
-
     public function update_project(Request $request, $id)
     {
         if( Input::all() == true && Project::where( 'id', '=', $id) == true ) {
@@ -205,7 +204,7 @@ class TimeManageController extends Controller
     }
 
     /*
-     * delete
+     * delete project
      * */
     public function delete_project($id)
     {
@@ -213,6 +212,28 @@ class TimeManageController extends Controller
 
         return redirect('/');
     }
+
+    /*
+     * return all project
+     * */
+    public function all_project()
+    {
+        //$projects = DB::table('Project')->join('Clients', 'Project.client_id', '=', 'Clients.id')->get();
+        $projects = Project::with('client')->get();
+
+        return view('', compact('projects'));
+    }
+
+    /*
+     * return all projects
+     * with client id
+     */
+     public function client_projects(Request $request, $id)
+     {
+         $projects = Project::where('client_id', '=', $id)->get();
+
+         return view('', compact('projects'));
+     }
 
     /*
      * create tack for project
@@ -306,6 +327,7 @@ class TimeManageController extends Controller
         DB::table('users')
             ->where('team_name', '=', DB::table('teams')->where('id', '=', $id)->first()->team_name)
             ->update(['team_name' => 'no team']);
+
         DB::table('teams')->where('id', '=', $id)->delete();
 
         return redirect('/team/all');
