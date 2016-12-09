@@ -130,7 +130,7 @@
                                     <label class="control-label" for="AssignToId" style="text-align: left;">Assign To</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <select name="assign_to" class=" input-xlarge focused my_input "  id="AssignToId" style="height: 42px;">
+                                    <select name="assign_to" class=" input-xlarge focused my_input "   id="AssignToId" style="height: 42px;">
                                         <option selected disabled></option>
                                     </select>
                                     @if ($errors->has('assign_to'))

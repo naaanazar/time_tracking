@@ -358,8 +358,13 @@ class TimeManageController extends Controller
         $lead = User::where('id', '=', $result)->get();
         $team = User::where('team_name', '=', $lead[0]->team_name)->get();
         $qa = User::where('employe', '=', 'QA Engineer')->get();
+        $other = User::where([
+            ['id', '<>', $result],
+            ['team_name', '<>', $lead[0]->team_name],
+            ['employe', '<>', 'QA Engineer'],
+        ])->get();
 
-        $result = ['lead' =>$lead, 'team' => $team, 'qa' => $qa];
+        $result = ['lead' =>$lead, 'team' => $team, 'qa' => $qa, 'other' => $other];
 
         if ($result) {
             return response()->json(['data' => (object)$result]);

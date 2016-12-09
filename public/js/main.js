@@ -94,9 +94,15 @@ $(document).ready(function(){
                 for ( var i  in response.data.qa) {
                     qa += '<option value="' + response.data.qa[i].id + '">' + response.data.qa[i].name + ' - ' + response.data.qa[i].employe + '</option>';
                 };
-                qa += '</optgroup>'
+                qa += '</optgroup>';
 
-               $("#AssignToId").html(lead + team + qa);
+                var other = '<optgroup label="Other">';
+                for ( var i  in response.data.other) {
+                    other += '<option value="' + response.data.other[i].id + '">' + response.data.other[i].name + ' - ' + response.data.other[i].employe + '</option>';
+                };
+                other += '</optgroup>';
+
+               $("#AssignToId").html(lead + team + qa + other);
             });
         } else {
             $("#AssignToId").html('');
