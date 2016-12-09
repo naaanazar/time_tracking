@@ -54,6 +54,15 @@ class TimeManageController extends Controller
         return view('time_manage.teams', compact('teams'));
     }
 
+    public function getProjects($client_id)
+    {
+
+         $result = Project::where('client_id', '=', $client_id)->get();
+        $result = DB::table('project')->where('client_id', '=', $client_id)->get();
+
+
+        return response()->json(['data' => (object)$result]);
+    }
     /*
      * create new clients
      * */
@@ -64,16 +73,22 @@ class TimeManageController extends Controller
 
             $client = Input::all();
 
+            if(parse_url($client['website'], PHP_URL_SCHEME) == "http" || parse_url($client['website'], PHP_URL_SCHEME) == "https") {
+                $website = $client['website'];
+            } else {
+                $website = 'http://' . $client['website'];
+            }
+
             Client::create([
                 'company_name' => $client['company_name'],
                 'company_address' => $client['company_address'],
-                'website' => $client['website'],
+                'website' => $website,
                 'contact_person' => $client['contact_person'],
                 'email' => $client['email'],
                 'phone_number' => $client['phone_number']
             ]);
 
-            return redirect('/');
+            return redirect('/client/all');
         }
 
         return view('time_manage.forms.client');
@@ -90,18 +105,25 @@ class TimeManageController extends Controller
 
             $client = Input::all();
 
+            if(parse_url($client['website'], PHP_URL_SCHEME) == "http" || parse_url($client['website'], PHP_URL_SCHEME) == "https") {
+                $website = $client['website'];
+            } else {
+                $website = 'http://' . $client['website'];
+            }
+
             Client::where('id', '=', $id)->update([
                 'company_name' => $client['company_name'],
                 'company_address' => $client['company_address'],
-                'website' => $client['website'],
+                'website' => $website,
                 'contact_person' => $client['contact_person'],
                 'email' => $client['email'],
                 'phone_number' => $client['phone_number']
             ]);
-            return redirect('/');
+            return redirect('/client/all');
         }
+        $client = DB::table('clients')->where('id', '=', $id)->first();
+        //$client = Client::where( 'id', '=', $id );
 
-        $client = Client::where( 'id', '=', $id );
 
         return view('time_manage.forms.client', compact('client'));
     }
@@ -113,7 +135,7 @@ class TimeManageController extends Controller
     {
         Client::where('id', '=', $id)->delete();
 
-        return redirect('/');
+        return redirect('/client/all');
     }
 
     /*
@@ -123,7 +145,7 @@ class TimeManageController extends Controller
     {
         $clients = DB::table('clients')->get();
 
-        return view('time_manage.', compact('clients'));
+        return view('time_manage.clients', compact('clients'));
     }
 
     /*
@@ -220,10 +242,10 @@ class TimeManageController extends Controller
             return redirect('/');
         }
 
-        $clients = Client::all();
-        $projects = Project::all();
+        $client = Client::all();
+        $project = Project::all();
 
-        return view('', compact('clients', 'projects'));
+        return view('time_manage.forms.taskForm', compact('client', 'project'));
     }
 
     /*
@@ -305,11 +327,11 @@ class TimeManageController extends Controller
     {
         $this->validate($request, [
             'company_name' => 'required|min:4|max:30',
-            'company_address' => 'required|min:4|max:100',
-            'website' => 'required|url',
+            'company_address' => 'min:4|max:100',
+            'website' => 'string',
             'contact_person' => 'required|min:4|max:30',
             'email' => 'required|email',
-            'phone_number' => 'required|regex:/[0-9-]+/|max:30'
+            'phone_number' => 'regex:/[0-9-]+/|max:30'
         ]);
     }
 

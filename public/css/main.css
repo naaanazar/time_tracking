@@ -11,6 +11,11 @@ th {
     border-right: none !important;
 }
 
+body {
+
+    margin-bottom: 60px!important;
+}
+
 
 
 .table-striped > tbody > tr:nth-of-type(odd):hover,

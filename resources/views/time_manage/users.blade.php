@@ -2,6 +2,16 @@
 
 @section('content')
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
+
+    <div class="modal fade" id="delete-user" role="dialog">
+    <div class="modal-dialog"  >
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div id="modalConfirmDeleteUser"></div>
+        </div>
+    </div>
+</div>
+
 <div id="conteiner" class="container" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
     <div class="row-fluid">
         <div class="span12">
@@ -11,6 +21,7 @@
         </div>
 
     </div>
+
     <div class="row-fluid">
 
         <!-- block -->
@@ -56,8 +67,8 @@
                                          ($status == 'HR Manager' &&
                                          ($user->employe == "Developer" || $user->employe == "QA Engineer" || $user->employe == "Lead")))
                                             <a href="/user/update/{{ $user->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
-                                            <a href="#" onclick=' if(confirm("You really want to delete this?")) { location.href = "/user/delete/{{ $user->id }}";}'
-                                               class="btn btn-danger"><span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</a>
+                                            <button type="button" class="btn btn-danger  deleteUser" data-url="/user/delete/{{ $user->id }}" data-element="{{ $user->name }}">
+                                                <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
                                         @endif
                                     </td>
                                 @endif
@@ -72,13 +83,5 @@
         <!-- /block -->
     </div>
 </div>
-
-
-
-
-
-
-
-
 
 @endsection
