@@ -188,13 +188,12 @@ class TimeManageController extends Controller
     public function update_project(Request $request, $id)
     {
         if( Input::all() == true && Project::where( 'id', '=', $id) == true ) {
-            $this->create_project($request);
+            $this->validation_project($request);
 
             $project = Input::all();
 
             Project::where('id', '=', $id)->update([
                 'client_id' => $project['company_id'],
-                'company' => $project['company'],
                 'project_name' => $project['project_name'],
                 'hourly_rate' => $project['hourly_rate'],
                 'notes' => $project['notes']
@@ -203,9 +202,13 @@ class TimeManageController extends Controller
             return redirect('/');
         }
 
-        $project = Project::all();
+        $project = Project::where('id', '=', $id)->get();
+        $client = Client::all();
+        $project_client = Client::where('id', '=', $project[0]->client_id)->get();
+        $lead = User::where('id', '=', $project[0]->lead_id)->get();
+        $leads = User::where('employe', '=', 'Lead')->get();
 
-        return view('time_manage.forms.project', compact('project'));
+        return view('time_manage.forms.project', compact('project', 'client', 'lead', 'leads', 'project_client'));
     }
 
     /*

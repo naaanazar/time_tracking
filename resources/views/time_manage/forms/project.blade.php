@@ -9,7 +9,7 @@
             <div class="row-fluid">
                 <div class="heading-top-margin">
 
-                    <div class="heading-without-datepicker">Create project</div>
+                    <div class="heading-without-datepicker"><?= isset($project) ? 'Edit' : 'Create' ?> client project</div>
                 </div>
             </div>
         </div>
@@ -18,7 +18,7 @@
                 <!-- block -->
                 <div class="block-content collapse in">
                     <div class="span12">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/project/create') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="<?= ( isset($project) ) ? '/project/update/' . $project[0]->id : '/project/create/' ; ?>">
                             {{ csrf_field() }}
 
                             <div class="control-group row">
@@ -31,6 +31,10 @@
                                         <option selected disabled>Please change Project</option>
                                         @if (isset($client->company_name))
                                         <option value="{{ $client->id }}" selected>{{ $client->company_name }}</option>
+                                        @endif
+
+                                        @if( isset( $project[0]->client_id ) && $project[0]->client_id == $project_client[0]->id )
+                                            <option  value="{{ $project[0]->client_id }}" selected>{{ $project_client[0]->company_name }}</option>
                                         @endif
 
                                         @foreach( $client as $key )
@@ -50,11 +54,13 @@
                                     <label class="control-label" for="ProjectNameId" style="text-align: left;">Project</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <input name="project_name" class="input-xlarge focused my_input" id="ProjectNameId"  type="text">
+                                    <input name="project_name" class="input-xlarge focused my_input" id="ProjectNameId"  type="text"
+                                        value="<?= ( isset( $project[0]->project_name ) ) ? $project[0]->project_name : '' ?>"
+                                    >
                                     @if ($errors->has('project_name'))
                                         <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('project_name') }}</strong>
-                                            </span>
+                                        </span>
                                     @endif
                                 </div>
                             </div>
@@ -64,7 +70,9 @@
                                     <label class="control-label" for="HourlyRateProhectId" style="text-align: left;">Hourly Rate</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <input name="hourly_rate" class="input-xlarge focused my_input" id="HourlyRateProhectId"  type="number" step="0.01">
+                                    <input name="hourly_rate" class="input-xlarge focused my_input" id="HourlyRateProhectId"  type="number" step="0.01"
+                                           value="<?= ( isset( $project[0]->hourly_rate ) ) ? $project[0]->hourly_rate : '' ?>"
+                                    >
                                     @if ($errors->has('hourly_rate'))
                                         <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('hourly_rate') }}</strong>
@@ -78,7 +86,7 @@
                                     <label class="control-label" for="NotesProjectId" style="text-align: left;">Notes</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <textarea name="notes" class="input-xlarge focused my_input" id="NotesProjectId" rows="6"  type="text" ></textarea>
+                                    <textarea name="notes" class="input-xlarge focused my_input" id="NotesProjectId" rows="6"  type="text"><?= ( isset( $project[0]->notes ) ) ? $project[0]->notes : '' ?></textarea>
                                     @if ($errors->has('notes'))
                                         <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('notes') }}</strong>
@@ -91,7 +99,13 @@
                                     <label class="control-label" for="TeamLeadProjectId" style="text-align: left;">TeamLead</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
+
                                     <select name="lead_id" class="input-xlarge focused my_input"  id="TeamLeadProjectId" style="height: 42px;">
+
+                                        @if( isset( $lead[0] ) )
+                                            <option selected value="{{ $lead[0]->id }}">{{ $lead[0]->name }}</option>
+                                        @endif
+
                                         <option selected value="0">Please change lead</option>
 
                                         @if (isset($leads->company_name))
