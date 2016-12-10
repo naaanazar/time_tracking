@@ -167,11 +167,10 @@
                             </tfoot>
                             <tbody>
 
-
                             @foreach( $projects as $project )
                                 <tr class="odd gradeX">
                                     <td>{{ $project->project_name }}</td>
-                                    <td>{{ $project->company_name }}</td>
+                                    <td>{{ (isset($client->company_name)) ? $client->company_name : $project->company_name }}</td>
                                     <td>{{ $project->name }}</td>
                                     <td>{{ $project->hourly_rate }}</td>
                                     <td style="text-align: center">{{ $project->created_at }}</td>

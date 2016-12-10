@@ -266,7 +266,17 @@ class TimeManageController extends Controller
      */
      public function client_projects(Request $request, $id)
      {
-         $projects = Project::where('client_id', '=', $id)->get();
+         $projects = Project::where('client_id', '=', $id)
+             ->leftJoin('users', 'Project.lead_id', '=', 'users.id')
+             ->join('Clients', 'Project.client_id', '=', 'Clients.id')
+             ->select('Project.project_name',
+                 'Project.id',
+                 'Project.hourly_rate',
+                 'Project.notes',
+                 'Project.created_at',
+                 'users.name', 'Clients.company_name' )
+             ->get();
+
          $client = Client::where('id', '=', $id)->first();
          $projectsForClient = true;
 

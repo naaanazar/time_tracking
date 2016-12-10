@@ -13,6 +13,7 @@
     </div>
 
     <div id="conteiner" class="container" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
+        @if (!isset($projectsForClient))
         <div class="row-fluid">
             <div class="span12">
                 <h3 class="h3-my">Tasks</h3>
@@ -20,6 +21,103 @@
                     <i class="glyphicon glyphicon-plus"></i> Add Task</a>
             </div>
         </div>
+
+        @else
+
+            <div class="row-fluid">
+                <!--  <div class="span12 add-border-bottom">
+                    <h2 class="h3-my">Projects: <strong>{{ $client->company_name }}</strong></h2>
+                </div>-->
+            </div>
+            <br>
+            <div class="row my_row">
+                <div class = "col-lg-7 col-md-7 col-sm-8 col-xs-12">
+
+                    <div class="bs-calltoaction bs-calltoaction-default">
+                        <div class="row">
+                            <div class="col-md-9 cta-contents">
+                                <div class="span12 add-border-bottom">
+                                    <h1 class="h3-my">Projects: <strong>{{ $client->company_name }}</strong></h1>
+                                </div>
+                                <div class="cta-desc" style="margin-top: 20px">
+                                    <div class="row ">
+                                        <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5" style="text-align: right;">
+                                            <label class="control-label" for="ProjectNameId" style="text-align: left;">Company</label>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7">
+                                            {{ $client->company_name }}
+                                        </div>
+                                    </div>
+                                    <div class="row my_row">
+                                        <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5" style="text-align: right;">
+                                            <label class="control-label" for="ProjectNameId" style="text-align: left;">Address</label>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7">
+                                            {{ $client->company_address }}
+                                        </div>
+                                    </div>
+                                    <div class="row my_row">
+                                        <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5" style="text-align: right;">
+                                            <label class="control-label" for="ProjectNameId" style="text-align: left;">Website</label>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7" >
+                                            <a href="{{ $client->website }}">{{ $client->website }}</a>
+                                        </div>
+                                    </div>
+                                    <div class="row my_row">
+                                        <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5" style="text-align: right;">
+                                            <label class="control-label" for="ProjectNameId" style="text-align: left;">Contact Person</label>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7">
+                                            {{ $client->contact_person }}
+                                        </div>
+                                    </div
+
+                                </div>
+                                <div class="row my_row">
+                                    <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5" style="text-align: right;">
+                                        <label class="control-label" for="ProjectNameId" style="text-align: left;">Email</label>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7" >
+                                        {{ $client->email }}
+                                    </div>
+                                </div>
+                                <div class="row my_row">
+                                    <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5" style="text-align: right;">
+                                        <label class="control-label labelMy" for="ProjectNameId" style="text-align: left;">Phone number</label>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7" >
+                                        {{ $client->phone_number }}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3 cta-button">
+
+                            <a href="/client/update/{{ $client->id }}" style="display:inline-block; margin-left: 25px" class="btn btn-info">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Client
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+    </div>
+
+
+
+    <div class="row my_row">
+
+
+    </div>
+
+
+
+
 
         <div class="row-fluid">
 
