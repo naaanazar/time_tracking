@@ -177,7 +177,11 @@
                                     <label class="control-label" for="BillableId" style="text-align: left;">Billable</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <input type="checkbox"  name="billable" id="BillableId" value="1"><br>
+                                    <input type="checkbox"  name="billable" id="BillableId" value="1"
+                                        @if( isset( $task[0]->billable ) && $task[0]->billable == true )
+                                            checked
+                                        @endif
+                                    ><br>
                                 </div>
                             </div>
 

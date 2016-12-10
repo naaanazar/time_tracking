@@ -265,6 +265,10 @@ class TimeManageController extends Controller
 
             $task = Input::all();
 
+            if( !isset( $task['billable'] ) ) {
+                $task['billable'] = false;
+            }
+
             Task::create([
                 'company_id' => $task['company_id'],
                 'project_id' => $task['project_id'],
@@ -273,7 +277,7 @@ class TimeManageController extends Controller
                 'assign_to' => $task['assign_to'],
                 'task_type' => $task['task_type'],
                 'task_description' => $task['task_description'],
-                'billable' => true//$task['billable']
+                'billable' => $task['billable']
             ]);
 
             return redirect('/task/all');
@@ -296,6 +300,10 @@ class TimeManageController extends Controller
 
             $task = Input::all();
 
+            if( !isset( $task['billable'] ) ) {
+                $task['billable'] = false;
+            }
+
             Task::where( 'id', '=', $id )->update([
                 'company_id' => $task['company_id'],
                 'project_id' => $task['project_id'],
@@ -303,6 +311,7 @@ class TimeManageController extends Controller
                 'task_type' => $task['task_type'],
                 'task_description' => $task['task_description'],
                 'alloceted_hours' => $task['alloceted_hours'],
+                'billable' => $task['billable']
             ]);
 
             return redirect('/task/all');
