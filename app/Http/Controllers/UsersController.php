@@ -20,10 +20,10 @@ class UsersController extends Controller
             $this->validation_create($request);
             $user = Input::all();
 
-            if ( $user['users_team_id'] == '' || !isset($user['users_team_id']) ) {
-                $user['users_team_id'] = 0;
-            }
-           if ( $user['hourlyRate'] == '' || !isset($user['hourlyRate'])) {
+           if ( !isset($user['users_team_id']) || $user['users_team_id'] == '' )  {
+               $user['users_team_id'] = 0;
+           }
+           if ( !isset($user['hourlyRate']) || $user['hourlyRate'] == '') {
                $user['hourlyRate'] = 0;
            }
 
@@ -63,10 +63,10 @@ class UsersController extends Controller
                     ->update(['teams_lead_id' => 0]);
             }
 
-            if ( $user['users_team_id'] == '' || !isset($user['users_team_id']) ) {
+            if ( !isset($user['users_team_id']) || $user['users_team_id'] == '' )  {
                 $user['users_team_id'] = 0;
             }
-            if ( $user['hourlyRate'] == '' || !isset($user['hourlyRate'])) {
+            if ( !isset($user['hourlyRate']) || $user['hourlyRate'] == '') {
                 $user['hourlyRate'] = 0;
             }
 
@@ -97,6 +97,9 @@ class UsersController extends Controller
         DB::table('teams')->where('teams_lead_id', '=', $id)
             ->update(['teams_lead_id' => 0]);
         User::where('id', '=', $id)->delete();
+
+        DB::table('tasks')->where('assign_to', '=', $id)
+            ->update(['assign_to' => 0]);
 
         return redirect('/user/all');
     }

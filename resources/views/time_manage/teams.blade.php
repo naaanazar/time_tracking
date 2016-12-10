@@ -28,7 +28,7 @@
             <div class="block" style="border-bottom: 1px solid #ccc; border-left: none; border-right: none">
                 <div class="block-content collapse in">
                     <div class="span12">
-                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="teamsTable">
+                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="usersTable">
                             <thead>
                             <tr>
                                 <th width="300px">Teams</th>
