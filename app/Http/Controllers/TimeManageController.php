@@ -213,12 +213,13 @@ class TimeManageController extends Controller
 
             Project::where('id', '=', $id)->update([
                 'client_id' => $project['company_id'],
+                'lead_id' => $project['lead_id'],
                 'project_name' => $project['project_name'],
                 'hourly_rate' => $project['hourly_rate'],
                 'notes' => $project['notes']
             ]);
 
-            return redirect('/');
+            return redirect('/project/all');
         }
 
         $project = Project::where('id', '=', $id)->get();
@@ -246,7 +247,7 @@ class TimeManageController extends Controller
     public function all_project()
     {
         $projects = DB::table('Project')
-            ->join('users', 'Project.lead_id', '=', 'users.id')
+            ->leftJoin('users', 'Project.lead_id', '=', 'users.id')
             ->join('Clients', 'Project.client_id', '=', 'Clients.id')
             ->select('Project.project_name',
                     'Project.id',
@@ -290,6 +291,9 @@ class TimeManageController extends Controller
             }
             if ( !isset($task['task_description']) || $task['task_description'] == '') {
                 $task['task_description'] = '';
+            }
+            if( !isset( $task['billable'] ) ) {
+                $task['billable'] = false;
             }
 
             Task::create([

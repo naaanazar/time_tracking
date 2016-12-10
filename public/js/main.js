@@ -44,8 +44,6 @@ $(document).ready(function(){
  //   getProjects =
 
         $(document).on("click", ".getProjects", function (e) {
-            e.preventDefault();
-
           var  id = $(e.target).parent('tr').data('id');
             var urlGet = '/client/projects/' + id;
             console.log(urlGet);
