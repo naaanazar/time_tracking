@@ -17,6 +17,11 @@ class UsersController extends Controller
        if(Input::all() == true) {
             $this->validation_create($request);
             $user = Input::all();
+
+            if ( $user['users_team_id'] == '' ) {
+                $user['users_team_id'] = 0;
+            }
+
             $password = $this->password_generate();
 
             User::create([
@@ -24,6 +29,7 @@ class UsersController extends Controller
                 'email' => $user['email'],
                 'password' => bcrypt($password),
                 'employe' => $user['employe'],
+                'users_team_id' => $user['users_team_id'],
                 'team_name' => $user['team_name'],
                 'hourly_rate' => $user['hourlyRate']
             ]);

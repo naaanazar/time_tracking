@@ -21,6 +21,7 @@ class User extends Authenticatable
         'email',
         'password',
         'employe',
+        'users_team_id',
         'team_name',
         'hourle_rate'
     ];

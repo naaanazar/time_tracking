@@ -403,7 +403,7 @@ class TimeManageController extends Controller
            return redirect('/team/all');
         }
 
-        $leads = User::where('', '=', 'Lead');
+        $leads = User::where('employe', '=', 'Lead')->get();
 
         return view('time_manage.forms.createTeamsForm', compact('leads'));
     }
