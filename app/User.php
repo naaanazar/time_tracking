@@ -22,8 +22,7 @@ class User extends Authenticatable
         'password',
         'employe',
         'users_team_id',
-        'team_name',
-        'hourle_rate'
+        'hourly_rate'
     ];
 
     private $no_team = [
