@@ -322,7 +322,6 @@ class TimeManageController extends Controller
     /*
      * return all tasks
      * */
-
     public function all_tasks()
     {
         $tasks = Task::with(['project','client'])->get();
@@ -344,6 +343,16 @@ class TimeManageController extends Controller
         }
 
       return view('time_manage.tasks', compact('tasksRes'));
+    }
+
+    /*
+     * return all tasks belowes project
+     * */
+    public function get_project_tasks($project_id)
+    {
+        $tasks = Task::where('project_id', '=', $project_id);
+
+        return view('', compact('tasks'));
     }
 
     /*
@@ -381,15 +390,22 @@ class TimeManageController extends Controller
         if(Input::all() == true) {
             $this->validation_team($request);
             $team = Input::all();
-            
+
+            if( $team['teams_lead_id '] ) {
+                $team['teams_lead_id '] = 0;
+            }
+
             DB::table('teams')->insert([
-                'team_name' => $team['team_name']
+                'team_name' => $team['team_name'],
+                'teams_lead_id ' => $team['teams_lead_id ']
             ]);
 
            return redirect('/team/all');
         }
 
-         return view('time_manage.forms.createTeamsForm');
+        $leads = User::where('', '=', 'Lead');
+
+        return view('time_manage.forms.createTeamsForm', compact('leads'));
     }
 
     /*
@@ -440,7 +456,6 @@ class TimeManageController extends Controller
     /*
      * validation for task
      * */
-
     private function validation_task($request)
     {
         $this->validate($request, [
@@ -458,7 +473,6 @@ class TimeManageController extends Controller
     /*
      * validation for create team
      * */
-
     private function validation_team($request)
     {
         $this->validate($request, [
