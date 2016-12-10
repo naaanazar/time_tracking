@@ -20,6 +20,18 @@ body {
    /* overflow-x: scroll; */
 }
 
+.thFoot select {
+    max-width: 80px!important;
+    border-radius: 2px!important;
+    border: 1px solid #CCC!important;
+    padding: 5px!important;
+    }
+
+.thHead th {
+    width: 80px!important;
+
+}
+
 /*#usersTable > tfoot > tr > th > select{
     border: 1px solid #CCC!important;
     border-radius: 2px;

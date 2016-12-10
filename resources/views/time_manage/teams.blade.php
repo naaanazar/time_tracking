@@ -32,6 +32,7 @@
                             <thead>
                             <tr>
                                 <th width="300px">Teams</th>
+                                <th width="300px">Lead</th>
                                 <th width="60px">Action
                                 </th>
                             </tr>
@@ -41,6 +42,8 @@
                             @foreach( $teams as $team )
                                 <tr class="odd gradeX">
                                     <td>{{ $team->team_name }}</td>
+                                    <td>{{ $team->name }}</td>
+
                                     <td style="text-align: center">
                      <button type="button" class="btn btn-danger  deleteTeam" data-url="/team/delete/{{ $team->id }}" data-element="{{ $team->team_name }}">
                                             <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>

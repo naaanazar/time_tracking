@@ -35,7 +35,7 @@
                             <tr>
                                 <th style="min-width: 130px">Company Name</th>
                                 <th>Address</th>
-                                <th style="max-width: 60px; width:50px">Website</th>
+                                <th  class="thHead">Website</th>
                                 <th>Contact Persone</th>
                                 <th>Email</th>
                                 <th>Phone Number</th>
@@ -47,12 +47,12 @@
                             </thead>
                             <tfoot>
                             <tr>
-                                <th >Company Name</th>
-                                <th>Address</th>
-                                <th >Website</th>
-                                <th>Contact Persone</th>
-                                <th>Email</th>
-                                <th>Phone Number</th>
+                                <th class="thFoot" >Company Name</th>
+                                <th class="thFoot">Address</th>
+                                <th class="thFoot" >Website</th>
+                                <th class="thFoot">Contact Persone</th>
+                                <th class="thFoot">Email</th>
+                                <th class="thFoot">Phone Number</th>
                                 <!--  <th style="min-width: 160px"  class="center">Created at</th> -->
                                 @if ($status == 'HR Manager' || $status == 'Admin')
                                     <th ">Action</th>

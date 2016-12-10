@@ -38,10 +38,13 @@ class TimeManageController extends Controller
             $users = User::where('team_name', '=', $team)->get();
         } else {
 
-            $users = DB::table('users')->get();
+            $users = DB::table('users')
+                ->join('teams', 'users.users_team_id', '=', 'teams.id')->get();
+
         }
 
-        return view('time_manage.users', compact('users'));
+
+       return view('time_manage.users', compact('users'));
     }
 
     /*
@@ -49,7 +52,8 @@ class TimeManageController extends Controller
      * */
     public function team_all()
     {
-        $teams = DB::table('teams')->get();
+        $teams = DB::table('teams')
+                ->join('users', 'teams.teams_lead_id', '=', 'users.id')->get();
 
         return view('time_manage.teams', compact('teams'));
     }
@@ -365,11 +369,13 @@ class TimeManageController extends Controller
                 ->get()[0]->lead_id;
 
         $lead = User::where('id', '=', $result)->get();
-        $team = User::where('team_name', '=', $lead[0]->team_name)->get();
+
+        $team = User::where('users_team_id', '=', $lead[0]->users_team_id)->get();
+
         $qa = User::where('employe', '=', 'QA Engineer')->get();
         $other = User::where([
             ['id', '<>', $result],
-            ['team_name', '<>', $lead[0]->team_name],
+            ['users_team_id', '<>', $lead[0]->users_team_id],
             ['employe', '<>', 'QA Engineer'],
         ])->get();
 
@@ -391,19 +397,20 @@ class TimeManageController extends Controller
             $this->validation_team($request);
             $team = Input::all();
 
-            if( $team['teams_lead_id '] ) {
-                $team['teams_lead_id '] = 0;
+            if( !isset($team['teams_lead_id']) ) {
+                $team['teams_lead_id'] = 0;
             }
 
             DB::table('teams')->insert([
                 'team_name' => $team['team_name'],
-                'teams_lead_id ' => $team['teams_lead_id ']
+                'teams_lead_id' => $team['teams_lead_id']
             ]);
 
            return redirect('/team/all');
         }
 
-        $leads = User::where('', '=', 'Lead');
+        $leads = User::where('employe', '=', 'Lead')->get();
+
 
         return view('time_manage.forms.createTeamsForm', compact('leads'));
     }
