@@ -391,13 +391,13 @@ class TimeManageController extends Controller
             $this->validation_team($request);
             $team = Input::all();
 
-            if( $team['teams_lead_id '] ) {
-                $team['teams_lead_id '] = 0;
+            if( isset($team['teams_lead_id']) ) {
+                $team['teams_lead_id'] = 0;
             }
 
             DB::table('teams')->insert([
                 'team_name' => $team['team_name'],
-                'teams_lead_id ' => $team['teams_lead_id ']
+                'teams_lead_id ' => $team['teams_lead_id']
             ]);
 
            return redirect('/team/all');

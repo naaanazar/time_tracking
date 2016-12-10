@@ -51,8 +51,12 @@ class UsersController extends Controller
     {
         if(Input::all() == true && User::where('id', '=', $id) == true) {
             $this->validation_update($request);
-
             $user = Input::all();
+
+            if( $user['employe'] != 'Lead' ) {
+                DB::table('teams')->where('teams_lead_id', '=', $id)
+                    ->update(['teams_lead_id' => 0]);
+            }
 
             User::where('id', '=', $id)->update([
                 'name' => $user['name'],
@@ -75,6 +79,8 @@ class UsersController extends Controller
      * */
     public function delete($id)
     {
+        DB::table('teams')->where('teams_lead_id', '=', $id)
+            ->update(['teams_lead_id' => 0]);
         User::where('id', '=', $id)->delete();
 
         return redirect('/user/all');
