@@ -51,6 +51,11 @@ class User extends Authenticatable
         $this->notify(new MyResetPassword($token));
     }
 
+    public function task()
+    {
+        return $this->hasMany('App\Task', 'id', 'assign_to');
+    }
+
     public function update_user_fields( $data )
     {
         if( in_array($data['employe'], $this->no_team ) ) {

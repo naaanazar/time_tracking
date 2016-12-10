@@ -26,8 +26,4 @@ class Client extends Model
         return $this->hasMany('App\Project');
     }
 
-    public function task()
-    {
-        return $this->hasMany('App\task', 'id', 'company_id');
-    }
 }

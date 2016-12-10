@@ -32,4 +32,9 @@ class Task extends Model
     {
         return $this->belongsTo('App\Project', 'project_id', 'id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'assign_to', 'id');
+    }
 }

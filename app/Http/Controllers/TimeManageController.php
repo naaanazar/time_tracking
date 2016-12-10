@@ -426,8 +426,9 @@ class TimeManageController extends Controller
     public function get_client_tasks($client_id)
     {
         $tasks = Task::where('company_id', '=', $client_id)
-            ->with(['client'])->get();
+            ->with(['client', 'user'])->get();
 
+        echo '<pre>'; var_dump($tasks);echo '</pre>'; die;
         return view('', compact('tasks'));
     }
 
