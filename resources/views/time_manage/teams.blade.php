@@ -23,11 +23,7 @@
 
         </div>
         <div class="row-fluid">
-            <script>
-                $(document).ready(function() {
-                    $('#teamsTable').DataTable();
-                } );
-            </script>
+
             <!-- block -->
             <div class="block" style="border-bottom: 1px solid #ccc; border-left: none; border-right: none">
                 <div class="block-content collapse in">

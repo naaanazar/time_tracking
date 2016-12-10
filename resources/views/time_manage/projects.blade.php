@@ -29,9 +29,7 @@
                 <div class="block-content collapse in">
                     <div class="span12">
                         <script>
-                            $(document).ready(function() {
-                                $('#usersTable').DataTable();
-                            } );
+
                         </script>
 
 
@@ -50,6 +48,17 @@
                                 @endif
                             </tr>
                             </thead>
+                            <tfoot>
+                            <tr>
+
+                                <th>Project</th>
+                                <th>Company</th>
+                                <th>Lead</th>
+                                <th>Hourly Rate</th>
+                                <th>Created at</th>
+
+                            </tr>
+                            </tfoot>
                             <tbody>
 
 

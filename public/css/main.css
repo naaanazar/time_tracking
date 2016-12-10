@@ -20,6 +20,12 @@ body {
     overflow-x: scroll;
 }
 
+#usersTable > tfoot > tr > th > select{
+    width: 100%!important;
+    border: 1px solid #CCC!important;
+    border-radius: 2px;
+}
+
 
 
 .table-striped > tbody > tr:nth-of-type(odd):hover,

@@ -28,11 +28,6 @@
 
                 <div class="block-content collapse in">
                     <div class="span12">
-                        <script>
-                            $(document).ready(function() {
-                                $('#usersTable').DataTable();
-                            } );
-                        </script>
 
                         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="usersTable">
                             <thead>
@@ -50,6 +45,18 @@
                                 @endif
                             </tr>
                             </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Title</th>
+                                <th>Company</th>
+                                <th>Project</th>
+                                <th>Task Type</th>
+                                <th>Allocated Hours</th>
+                                <th>Assign To</th>
+                                <th>Billable</th>
+                                <th>Created at</th>
+                            </tr>
+                            </tfoot>
                             <tbody>
 
                             @foreach( $tasksRes as $key )
@@ -60,7 +67,7 @@
                                     <td>{{ $key['type'] }}</td>
                                     <td>{{ $key['alloceted_hours'] }}</td>
                                     <td>{{ $key['user_name'] }}</td>
-                                    <td style="text-align: center"><input type="checkbox" disabled <?= ( $key['billable'] == '1') ? 'checked' : '' ?> ></td>
+                                    <td style="text-align: center"> <?= ( $key['billable'] == '1') ? 'Yes' : 'No' ?> </td>
                                     <td style="text-align: center">{{ $key['created_at'] }}</td>
 
                                     @if ($status == 'Admin')

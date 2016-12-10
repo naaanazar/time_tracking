@@ -5,7 +5,41 @@
 $(document).ready(function(){
 
     //table x scroll
-    $('#usersTable').parent().addClass('table_container');
+
+
+    $(document).ready(function() {
+        $('#usersTable').DataTable({
+            scrollX : true,
+            scrollCollapse : true,
+            "sScrollXInner": "100%",
+
+
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
+            }
+        });
+    } );
+
+
+    //$('#usersTable').find('select').addClass('input-xlarge focused my_input');
+    //console.log ($('#usersTable').find("th").text());
 
     $(document).on( "click", ".deleteTeam", function(e) {
         e.preventDefault();
