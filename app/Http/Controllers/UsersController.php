@@ -12,6 +12,8 @@ use App\Mail\mailCreateUser;
 
 class UsersController extends Controller
 {
+    private $user;
+
     public function create(Request $request)
     {
        if(Input::all() == true) {
@@ -51,16 +53,22 @@ class UsersController extends Controller
     {
         if(Input::all() == true && User::where('id', '=', $id) == true) {
             $this->validation_update($request);
-            $user = Input::all();
+            $this->user = new User();
+            $user = $this->user->update_user_fields(Input::all());
 
             if( $user['employe'] != 'Lead' ) {
                 DB::table('teams')->where('teams_lead_id', '=', $id)
                     ->update(['teams_lead_id' => 0]);
             }
 
+            if( !isset( $user['users_team_id'] ) ) {
+                $user['users_team_id'] = 0;
+            }
+
             User::where('id', '=', $id)->update([
                 'name' => $user['name'],
                 'employe' => $user['employe'],
+                'users_team_id' => $user['users_team_id'],
                 'team_name' => $user['team_name'],
                 'hourly_rate' => $user['hourlyRate']
             ]);

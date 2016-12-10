@@ -25,6 +25,19 @@ class User extends Authenticatable
         'team_name',
         'hourle_rate'
     ];
+
+    private $no_team = [
+        'Supervisor',
+        'Admin',
+        'HR Manager',
+        'QA Engineer'
+    ];
+
+    private $no_hourle_rate = [
+        'Admin',
+        'HR Manager'
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -37,5 +50,19 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new MyResetPassword($token));
+    }
+
+    public function update_user_fields( $data )
+    {
+        if( in_array($data['employe'], $this->no_team ) ) {
+            $data['users_team_id'] = 0;
+            $data['team_name'] = 'no_team';
+        };
+
+        if( in_array($data['employe'], $this->no_hourle_rate ) ) {
+            $data['hourlyRate'] = 0;
+        };
+
+        return $data;
     }
 }
