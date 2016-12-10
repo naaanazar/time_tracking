@@ -66,15 +66,20 @@
                             @if( $teams == true )
 
                                 <div class="controls">
-                                    <select name="team_name" class="input-xlarge focused" style="height: 42px;">
-                                        <option value="{{ $user->team_name }}" selected>{{ $user->team_name }}</option>
+                                    <select name="users_team_id" class="input-xlarge focused" style="height: 42px;">
+                                        @if (isset($teamActive))
+                                            <option value="{{ $teamActive->id }}" selected>{{ $teamActive->team_name }}</option>
+                                        @else
+                                            <option selected disabled>Please change Team</option>
+                                        @endif
 
                                         @foreach( $teams as $team )
 
                                                 <!--<input name="team_name" class="input-xlarge focused" id="focusedInput"  type="textl" required> -->
-                                        <option>{{ $team->team_name }}</option>
+                                        <option value="{{ $team->id }}">{{ $team->team_name }}</option>
 
                                         @endforeach
+                                            <option></option>
 
                                     </select>
                                 </div>

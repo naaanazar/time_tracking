@@ -39,7 +39,17 @@ class TimeManageController extends Controller
         } else {
 
             $users = DB::table('users')
-                ->leftJoin('teams', 'users.users_team_id', '=', 'teams.id')->get();
+                ->leftJoin('teams', 'users.users_team_id', '=', 'teams.id')
+                ->select('users.id',
+                    'users.name',
+                    'users.email',
+                    'users.users_team_id',
+                    'users.hourly_rate',
+                    'users.created_at',
+                    'users.employe',
+                    'teams.teams_lead_id',
+                    'teams.team_name')
+                ->get();
 
         }
 

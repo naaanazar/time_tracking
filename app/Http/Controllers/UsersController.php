@@ -20,9 +20,12 @@ class UsersController extends Controller
             $this->validation_create($request);
             $user = Input::all();
 
-            if ( $user['users_team_id'] == '' ) {
+            if ( $user['users_team_id'] == '' || !isset($user['users_team_id']) ) {
                 $user['users_team_id'] = 0;
             }
+           if ( $user['hourlyRate'] == '' || !isset($user['hourlyRate'])) {
+               $user['hourlyRate'] = 0;
+           }
 
             $password = $this->password_generate();
 
@@ -60,15 +63,17 @@ class UsersController extends Controller
                     ->update(['teams_lead_id' => 0]);
             }
 
-            if( !isset( $user['users_team_id'] ) ) {
+            if ( $user['users_team_id'] == '' || !isset($user['users_team_id']) ) {
                 $user['users_team_id'] = 0;
+            }
+            if ( $user['hourlyRate'] == '' || !isset($user['hourlyRate'])) {
+                $user['hourlyRate'] = 0;
             }
 
             User::where('id', '=', $id)->update([
                 'name' => $user['name'],
                 'employe' => $user['employe'],
                 'users_team_id' => $user['users_team_id'],
-                'team_name' => $user['team_name'],
                 'hourly_rate' => $user['hourlyRate']
             ]);
 
@@ -76,9 +81,12 @@ class UsersController extends Controller
         }
 
         $user = DB::table('users')->where('id', '=', $id)->first();
+
+
+        $teamActive = DB::table('teams')->where('id', '=', $user->users_team_id)->first();
         $teams = DB::table('teams')->get();
 
-        return view('auth.update_user', compact('user', 'teams'));
+        return view('auth.update_user', compact('user', 'teams', 'teamActive' ));
     }
     /*
      * delete user
