@@ -12,6 +12,9 @@
     <title>Ignatiuz</title>
 
     <link href="/css/main.css" rel="stylesheet" media="screen">
+
+
+
     <link rel="stylesheet" href="/assets/font-awesome.css">
     <link rel="" href="/assets/fonts/glyphicons-halflings-regular.eot">
 
@@ -34,7 +37,7 @@
 </head>
 <body id="">
 <div class="navbar-inner navbar-style">
-    <nav class="navbar navbar-top nav-my" style="float:right; display:inline-block;">
+    <nav class="navbar navbar-top nav-my" style="float:right; display:inline-block; z-index: 3">
         <div class="container-fluid" style="min-height: 61px;">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -75,6 +78,7 @@
                                 @if ($status != 'HR Manager')
                                     <li> <a tabindex="-1" href="/client/all">Clients</a> </li>
                                     <li> <a tabindex="-1" href="/project/all">Projects</a> </li>
+                                    <li> <a tabindex="-1" href="/task/all">Tasks</a> </li>
                                     <li> <a tabindex="-1" href="/team/all">Teams</a> </li>
                                 @endif
                                 <li role="separator" class="divider"></li>
@@ -148,6 +152,10 @@
     <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/dataTables.buttons.min.js"></script>
     <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/buttons.bootstrap.min.js"></script>
     <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/buttons.colVis.min.js"></script>
+
+
+
+
 
     <script src="/bootstrap3/js/bootstrap.min.js"></script>
 

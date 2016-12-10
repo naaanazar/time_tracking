@@ -272,7 +272,7 @@ class TimeManageController extends Controller
                 'billable' => true//$task['billable']
             ]);
 
-            return redirect('/');
+            return redirect('/task/all');
         }
 
         $client = Client::all();
@@ -299,12 +299,14 @@ class TimeManageController extends Controller
                 'task_description' => $task['task_description']
             ]);
 
-            return redirect('/');
+            return redirect('/task/all');
         }
 
         $task = Task::where( 'id', '=', $id )->get();
+        $client = Client::all();
+        $project = Project::all();
 
-        return view('', compact('task'));
+        return view('time_manage.forms.taskForm', compact('task', 'client', 'project'));
     }
 
     /*
@@ -314,7 +316,7 @@ class TimeManageController extends Controller
     {
         Task::where('id', '=', $id)->delete();
 
-        return redirect('/');
+        return redirect('/task/all');
     }
 
     /*
@@ -323,8 +325,24 @@ class TimeManageController extends Controller
     public function all_tasks()
     {
         $tasks = Task::with(['project','client'])->get();
+        $i=1;
 
-        return view('', compact('tasks'));
+        foreach($tasks as $task){
+            $tasksRes[$i]['user_name'] = User::where('id', '=', $task->assign_to)->get()[0]->name;
+            $tasksRes[$i]['id'] = $task->id;
+            $tasksRes[$i]['title'] = $task->task_titly;
+            $tasksRes[$i]['type'] = $task->task_type;
+            $tasksRes[$i]['assign_to'] = $task->assign_to;
+            $tasksRes[$i]['alloceted_hours'] = $task->alloceted_hours;
+            $tasksRes[$i]['task_description'] = $task->task_description;
+            $tasksRes[$i]['billable'] = $task->billable;
+            $tasksRes[$i]['created_at'] = $task->created_at;
+            $tasksRes[$i]['company'] = $task->client['company_name'];
+            $tasksRes[$i]['project_name'] = $task->project['project_name'];
+            $i++;
+        }
+
+      return view('time_manage.tasks', compact('tasksRes'));
     }
 
     /*
@@ -349,8 +367,13 @@ class TimeManageController extends Controller
         $lead = User::where('id', '=', $result)->get();
         $team = User::where('team_name', '=', $lead[0]->team_name)->get();
         $qa = User::where('employe', '=', 'QA Engineer')->get();
+        $other = User::where([
+            ['id', '<>', $result],
+            ['team_name', '<>', $lead[0]->team_name],
+            ['employe', '<>', 'QA Engineer'],
+        ])->get();
 
-        $result = ['lead' =>$lead, 'team' => $team, 'qa' => $qa];
+        $result = ['lead' =>$lead, 'team' => $team, 'qa' => $qa, 'other' => $other];
 
         if ($result) {
             return response()->json(['data' => (object)$result]);
@@ -443,7 +466,6 @@ class TimeManageController extends Controller
     /*
      * validation for create team
      * */
-
     private function validation_team($request)
     {
         $this->validate($request, [

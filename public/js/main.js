@@ -4,6 +4,43 @@
 'use strict';
 $(document).ready(function(){
 
+    //table x scroll
+
+
+    $(document).ready(function() {
+        $('#usersTable').DataTable({
+         //   scrollX : true,
+        //    scrollCollapse : true,
+        //    "sScrollXInner": "100%",
+
+
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
+            }
+        });
+    } );
+
+
+    //$('#usersTable').find('select').addClass('input-xlarge focused my_input');
+    //console.log ($('#usersTable').find("th").text());
+
     $(document).on( "click", ".deleteTeam", function(e) {
         e.preventDefault();
         var delUrl = $(e.target).data('url');
@@ -39,16 +76,25 @@ $(document).ready(function(){
         Main.displayModal('#delete-project', delUrl,  massage, '#modalConfirmDeleteProject');
     });
 
+    $(document).on( "click", ".deleteTask", function(e) {
+        e.preventDefault();
+        var delUrl = $(e.target).data('url');
+        var element = $(e.target).data('element');
+        var massage = 'Do you want to remove <strong> ' + element + '</strong>?'
+
+        Main.displayModal('#delete-task', delUrl,  massage, '#modalConfirmDeleteTask');
+    });
+
 
 
     $(document).on("change", "#CompanyTaskId", function () {
 
         var clientId = $("#CompanyTaskId option:selected").val();
         if (clientId) {
-
+            var result = '<option selected disabled>Please change Project</option>';
             var urlSend = '/project/getProjects/' + clientId;
             $.get(urlSend, function (response) {
-                var result = '';
+
                 for (var key in response.data) {
                     result += '<option value="' + response.data[key].id + '">' + response.data[key].project_name + '</option>';
                 };
@@ -67,20 +113,33 @@ $(document).ready(function(){
         if (clientId) {
 
             var urlSend = '/get/team/' + clientId;
-            var result = '';
+            var result = '<option selected disabled>Please change User</option>';
 
             $.get(urlSend, function (response) {
-                var result = '<option value="' + response.data.lead[0].id + '">' + response.data.lead[0].name + ' - ' + response.data.lead[0].employe + '</option>';
+                var lead = '<optgroup label="Lead">' +
+                    '<option value="' + response.data.lead[0].id + '">' + response.data.lead[0].name + ' - ' + response.data.lead[0].employe + '</option>' +
+                    '</optgroup>';
 
+                var team = '<optgroup label="Team">';
                 for ( var i  in response.data.team) {
-                    result += '<option value="' + response.data.team[i].id + '">' + response.data.team[i].name + ' - ' + response.data.team[i].employe + '</option>';
+                    if ( response.data.team[i].employe != 'Lead')
+                    team += '<option value="' + response.data.team[i].id + '">' + response.data.team[i].name + ' - ' + response.data.team[i].employe + '</option>';
                 };
+                team += '</optgroup>';
 
+                var qa = '<optgroup label="QA Engineer">';
                 for ( var i  in response.data.qa) {
-                    result += '<option value="' + response.data.qa[i].id + '">' + response.data.qa[i].name + ' - ' + response.data.qa[i].employe + '</option>';
+                    qa += '<option value="' + response.data.qa[i].id + '">' + response.data.qa[i].name + ' - ' + response.data.qa[i].employe + '</option>';
                 };
+                qa += '</optgroup>';
 
-               $("#AssignToId").html(result);
+                var other = '<optgroup label="Other">';
+                for ( var i  in response.data.other) {
+                    other += '<option value="' + response.data.other[i].id + '">' + response.data.other[i].name + ' - ' + response.data.other[i].employe + '</option>';
+                };
+                other += '</optgroup>';
+
+               $("#AssignToId").html(lead + team + qa + other);
             });
         } else {
             $("#AssignToId").html('');

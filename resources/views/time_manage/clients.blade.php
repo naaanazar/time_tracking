@@ -13,6 +13,7 @@
     </div>
 
     <div id="conteiner" class="container" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
+
         <div class="row-fluid">
             <div class="span12">
                 <h3 class="h3-my">Clients</h3>
@@ -28,27 +29,36 @@
 
                 <div class="block-content collapse in">
                     <div class="span12">
-                        <script>
-                            $(document).ready(function() {
-                                $('#usersTable').DataTable();
-                            } );
-                        </script>
 
                         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="usersTable">
                             <thead>
                             <tr>
                                 <th style="min-width: 130px">Company Name</th>
                                 <th>Address</th>
-                                <th>Website</th>
+                                <th style="max-width: 60px; width:50px">Website</th>
                                 <th>Contact Persone</th>
                                 <th>Email</th>
                                 <th>Phone Number</th>
-                                <th style="min-width: 160px"  class="center">Created at</th>
+                              <!--  <th style="min-width: 160px"  class="center">Created at</th> -->
                                 @if ($status == 'HR Manager' || $status == 'Admin')
                                     <th style="min-width: 140px">Action</th>
                                 @endif
                             </tr>
                             </thead>
+                            <tfoot>
+                            <tr>
+                                <th >Company Name</th>
+                                <th>Address</th>
+                                <th >Website</th>
+                                <th>Contact Persone</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <!--  <th style="min-width: 160px"  class="center">Created at</th> -->
+                                @if ($status == 'HR Manager' || $status == 'Admin')
+                                    <th ">Action</th>
+                                @endif
+                            </tr>
+                            </tfoot>
                             <tbody>
 
                             @foreach( $clients as $client )
@@ -61,7 +71,7 @@
                                     <td>{{ $client->contact_person }}</td>
                                     <td>{{ $client->email }}</td>
                                     <td>{{ $client->phone_number }}</td>
-                                    <td style="text-align: center">{{ $client->created_at }}</td>
+                                  <!--  <td style="text-align: center">{{ $client->created_at }}</td> -->
 
                                     @if ($status == 'HR Manager' || $status == 'Admin')
                                         <td>

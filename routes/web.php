@@ -52,7 +52,7 @@ Route::group(['middleware' => ['permision']], function () {
     Route::post('/task/create', 'TimeManageController@create_task');
     Route::get('/task/update/{id}', 'TimeManageController@update_task')->where(['id' => '[0-9]+']);
     Route::post('/task/update/{id}', 'TimeManageController@update_task')->where(['id' => '[0-9]+']);
-    Route::get('/task/delete/{id}', 'TimeManageController@detele_task')->where(['id' => '[0-9]+']);
+    Route::get('/task/delete/{id}', 'TimeManageController@delete_task')->where(['id' => '[0-9]+']);
     Route::get('/get/team/{id}', 'TimeManageController@get_team')->where(['id' => '[0-9]+']);
     Route::get('/task/all', 'TimeManageController@all_tasks');
     Route::get('/project/tasks/{id}', 'TimeManageController@get_project_tasks')->where(['id' => '[0-9]+']);
@@ -61,7 +61,7 @@ Route::group(['middleware' => ['permision']], function () {
     Route::get('/team/create', 'TimeManageController@create_team');
     Route::post('/team/create', 'TimeManageController@create_team');
     Route::get('/team/delete/{id}', 'TimeManageController@delete_team')->where(['id' => '[0-9]+']);
-    Route::get('/team/all', 'TimeManageController@all_team');
+    Route::get('/team/all', 'TimeManageController@team_all');
 
     // forbidden
     //Route::get('/register', 'TimeManageController@index');

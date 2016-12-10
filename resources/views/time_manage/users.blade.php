@@ -29,11 +29,7 @@
 
             <div class="block-content collapse in">
                 <div class="span12">
-                    <script>
-                        $(document).ready(function() {
-                            $('#usersTable').DataTable();
-                        } );
-                    </script>
+
 
                     <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="usersTable">
                         <thead>
@@ -50,6 +46,17 @@
                             @endif
                         </tr>
                         </thead>
+                        <tfoot>
+                        <tr>
+                            <th width="130px">Users</th>
+                            <th>Email</th>
+                            <th>Team</th>
+                            <th>Hourly rate</th>
+                            <th>User type</th>
+                            <th style="min-width: 160px"  class="center">Created at</th>
+
+                        </tr>
+                        </tfoot>
                         <tbody>
 
                         @foreach( $users as $user )
