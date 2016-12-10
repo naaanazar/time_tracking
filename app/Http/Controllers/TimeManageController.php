@@ -425,7 +425,7 @@ class TimeManageController extends Controller
     public function get_project_tasks($project_id)
     {
         $tasks = Task::where('project_id', '=', $project_id)
-            ->whith(['project'])->get();
+            ->whith(['project', 'user'])->get();
 
         return view('', compact('tasks'));
     }
@@ -436,7 +436,7 @@ class TimeManageController extends Controller
     public function get_client_tasks($client_id)
     {
         $tasks = Task::where('company_id', '=', $client_id)
-            ->with(['client'])->get();
+            ->with(['client', 'user'])->get();
 
         return view('', compact('tasks'));
     }
@@ -503,8 +503,8 @@ class TimeManageController extends Controller
     public function delete_team($id)
     {
         DB::table('users')
-            ->where('team_name', '=', DB::table('teams')->where('id', '=', $id)->first()->team_name)
-            ->update(['team_name' => 'no team']);
+            ->where('users_team_id', '=', $id)
+            ->update(['users_team_id' => 0]);
 
         DB::table('teams')->where('id', '=', $id)->delete();
 

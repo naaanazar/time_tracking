@@ -122,45 +122,13 @@ $(document).ready(function(){
     });
 
     $(document).on("change", "#taskProjectId", function () {
-
-        var clientId = $("#taskProjectId option:selected").val();
-        if (clientId) {
-
-            var urlSend = '/get/team/' + clientId;
-            var result = '<option selected disabled>Please change User</option>';
-
-            $.get(urlSend, function (response) {
-                var lead = '<optgroup label="Lead">' +
-                    '<option value="' + response.data.lead[0].id + '">' + response.data.lead[0].name + ' - ' + response.data.lead[0].employe + '</option>' +
-                    '</optgroup>';
-
-                var team = '<optgroup label="Team">';
-                for ( var i  in response.data.team) {
-                    if ( response.data.team[i].employe != 'Lead')
-                    team += '<option value="' + response.data.team[i].id + '">' + response.data.team[i].name + ' - ' + response.data.team[i].employe + '</option>';
-                };
-                team += '</optgroup>';
-
-                var qa = '<optgroup label="QA Engineer">';
-                for ( var i  in response.data.qa) {
-                    qa += '<option value="' + response.data.qa[i].id + '">' + response.data.qa[i].name + ' - ' + response.data.qa[i].employe + '</option>';
-                };
-                qa += '</optgroup>';
-
-                var other = '<optgroup label="Other">';
-                for ( var i  in response.data.other) {
-                    other += '<option value="' + response.data.other[i].id + '">' + response.data.other[i].name + ' - ' + response.data.other[i].employe + '</option>';
-                };
-                other += '</optgroup>';
-
-               $("#AssignToId").html(lead + team + qa + other);
-            });
-        } else {
-            $("#AssignToId").html('');
-        }
+        Main.all_users();
     });
 
-
+    $(document).on("mouseenter", "#AssignToId", function () {
+        console.log('asdsd');
+        Main.all_users();
+    });
 });
 
 var Main = {
@@ -182,5 +150,42 @@ var Main = {
         $(idModal).modal('toggle');
     },
 
+    all_users: function() {
+        var clientId = $("#taskProjectId option:selected").val();
+        if (clientId) {
+
+            var urlSend = '/get/team/' + clientId;
+            var result = '<option selected disabled>Please change User</option>';
+
+            $.get(urlSend, function (response) {
+                var lead = '<optgroup label="Lead">' +
+                    '<option value="' + response.data.lead[0].id + '">' + response.data.lead[0].name + ' - ' + response.data.lead[0].employe + '</option>' +
+                    '</optgroup>';
+
+                var team = '<optgroup label="Team">';
+                for ( var i  in response.data.team) {
+                    if ( response.data.team[i].employe != 'Lead')
+                        team += '<option value="' + response.data.team[i].id + '">' + response.data.team[i].name + ' - ' + response.data.team[i].employe + '</option>';
+                };
+                team += '</optgroup>';
+
+                var qa = '<optgroup label="QA Engineer">';
+                for ( var i  in response.data.qa) {
+                    qa += '<option value="' + response.data.qa[i].id + '">' + response.data.qa[i].name + ' - ' + response.data.qa[i].employe + '</option>';
+                };
+                qa += '</optgroup>';
+
+                var other = '<optgroup label="Other">';
+                for ( var i  in response.data.other) {
+                    other += '<option value="' + response.data.other[i].id + '">' + response.data.other[i].name + ' - ' + response.data.other[i].employe + '</option>';
+                };
+                other += '</optgroup>';
+
+                $("#AssignToId").html(lead + team + qa + other);
+            });
+        } else {
+            $("#AssignToId").html('');
+        }
+    }
 
 };
