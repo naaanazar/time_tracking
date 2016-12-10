@@ -54,9 +54,9 @@
                                 <th class="thFoot">Email</th>
                                 <th class="thFoot">Phone Number</th>
                                 <!--  <th style="min-width: 160px"  class="center">Created at</th> -->
-                                @if ($status == 'HR Manager' || $status == 'Admin')
+                              <!--  @if ($status == 'HR Manager' || $status == 'Admin')
                                     <th ">Action</th>
-                                @endif
+                                @endif  -->
                             </tr>
                             </tfoot>
                             <tbody>

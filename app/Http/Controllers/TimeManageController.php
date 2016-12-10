@@ -425,9 +425,48 @@ class TimeManageController extends Controller
     public function get_project_tasks($project_id)
     {
         $tasks = Task::where('project_id', '=', $project_id)
-            ->whith(['project', 'user'])->get();
+        ->with(['project','client'])
+        ->get();
+        $i=0;
 
-        return view('', compact('tasks'));
+        foreach($tasks as $task){
+
+            $user = User::where('id', '=', $task->assign_to)->first();
+            if (isset($user) ) {
+                $user_name = $user->name;
+            } else {
+                $user_name = '';
+            }
+
+            $tasksRes[$i]['user_name'] = $user_name;
+            $tasksRes[$i]['id'] = $task->id;
+            $tasksRes[$i]['title'] = $task->task_titly;
+            $tasksRes[$i]['type'] = $task->task_type;
+            $tasksRes[$i]['assign_to'] = $task->assign_to;
+            $tasksRes[$i]['alloceted_hours'] = $task->alloceted_hours;
+            $tasksRes[$i]['task_description'] = $task->task_description;
+            $tasksRes[$i]['billable'] = $task->billable;
+            $tasksRes[$i]['created_at'] = $task->created_at;
+            $tasksRes[$i]['company'] = $task->client['company_name'];
+            $tasksRes[$i]['project_name'] = $task->project['project_name'];
+            $i++;
+        }
+
+        $project = DB::table('Project')
+            ->where('Project.id', '=', $project_id)
+            ->leftJoin('users', 'Project.lead_id', '=', 'users.id')
+            ->join('Clients', 'Project.client_id', '=', 'Clients.id')
+            ->select('Project.project_name',
+                'Project.id',
+                'Project.hourly_rate',
+                'Project.notes',
+                'Project.created_at',
+                'users.name', 'Clients.company_name' )
+            ->first();
+
+        $tasksForProject = true;
+
+        return view('time_manage.tasks', compact('tasksRes', 'tasksForProject', 'project'));
     }
 
     /*

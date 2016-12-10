@@ -17,18 +17,19 @@ body {
 }
 
 .table_container{
-   /* overflow-x: scroll; */
+    overflow-x: auto;
+
 }
 
 .thFoot select {
-    max-width: 80px!important;
+    max-width: 120px!important;
     border-radius: 2px!important;
     border: 1px solid #CCC!important;
-    padding: 5px!important;
+    /*padding: 3px!important;*/
     }
 
 .thHead th {
-    width: 80px!important;
+    max-width: 120px!important;
 
 }
 
@@ -50,6 +51,13 @@ body {
     border-radius: 2px;
 }*/
 
+tfoot {
+    display: table-header-group!important;
+}
+
+thead {
+    display: table-row-group;
+}
 
 
 

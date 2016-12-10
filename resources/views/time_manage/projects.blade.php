@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="col-md-9 cta-contents">
                             <div class="span12 add-border-bottom">
-                                <h1 class="h3-my">Projects: <strong>{{ $client->company_name }}</strong></h1>
+                                <h1 class="h3-my">Client: <strong>{{ $client->company_name }}</strong></h1>
                             </div>
                             <div class="cta-desc" style="margin-top: 20px">
                                 <div class="row ">
@@ -168,15 +168,15 @@
                             <tbody>
 
                             @foreach( $projects as $project )
-                                <tr class="odd gradeX">
+                                <tr class="odd gradeX getTasks" data-id="{{ $project->id }}">
                                     <td>{{ $project->project_name }}</td>
                                     <td>{{ (isset($client->company_name)) ? $client->company_name : $project->company_name }}</td>
                                     <td>{{ $project->name }}</td>
                                     <td>{{ $project->hourly_rate }}</td>
-                                    <td style="text-align: center">{{ $project->created_at }}</td>
+                                    <td style="text-align: center" >{{ $project->created_at }}</td>
 
                                     @if ($status == 'Admin')
-                                        <td>
+                                        <td class="actionForms">
                                             @if ($status == 'Admin' )
 
                                                 <a href="/project/update/{{ $project->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>

@@ -7,11 +7,11 @@ $(document).ready(function(){
     //table x scroll
 
 
-    $(document).ready(function() {
+
         $('#usersTable').DataTable({
-         //   scrollX : true,
-        //    scrollCollapse : true,
-        //    "sScrollXInner": "100%",
+           // scrollX : true,
+         //   scrollCollapse : true,
+          //  "sScrollXInner": "100%",
 
 
             initComplete: function () {
@@ -35,13 +35,15 @@ $(document).ready(function(){
                 });
             }
         });
-    } );
+    $('#usersTable tfoot tr').insertAfter($('#usersTable thead tr'))
 
+
+    $('#usersTable').parent().addClass('table_container');
 
     //$('#usersTable').find('select').addClass('input-xlarge focused my_input');
     //console.log ($('#usersTable').find("th").text());
 
- //   getProjects =
+    //   getProjects =
 
         $(document).on("click", ".getProjects", function (e) {
           var  id = $(e.target).parent('tr').data('id');
@@ -55,8 +57,21 @@ $(document).ready(function(){
 
         });
 
+    $(document).on("click", ".getTasks", function (e) {
+        var  id = $(e.target).parent('tr').data('id');
+        var urlGet = '/project/tasks/' + id;
+        console.log(urlGet);
+        if (urlGet) {
+            window.location.href = urlGet;
+        } else {
+
+        }
+
+    });
+
     $(document).on( "click", ".deleteTeam", function(e) {
         e.preventDefault();
+        e.stopImmediatePropagation();
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
         var massage = 'Do you want to remove <strong> ' + element + '</strong>?'
@@ -65,6 +80,7 @@ $(document).ready(function(){
 
     $(document).on( "click", ".deleteUser", function(e) {
         e.preventDefault();
+        e.stopImmediatePropagation();
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
         var massage = 'Do you want to remove <strong> ' + element + '</strong>?'
@@ -74,6 +90,7 @@ $(document).ready(function(){
 
     $(document).on( "click", ".deleteClient", function(e) {
         e.preventDefault();
+        e.stopImmediatePropagation();
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
         var massage = 'Do you want to remove <strong> ' + element + '</strong>?'
@@ -83,6 +100,7 @@ $(document).ready(function(){
 
     $(document).on( "click", ".deleteProject", function(e) {
         e.preventDefault();
+        e.stopImmediatePropagation();
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
         var massage = 'Do you want to remove <strong> ' + element + '</strong>?'

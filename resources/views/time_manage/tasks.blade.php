@@ -13,7 +13,7 @@
     </div>
 
     <div id="conteiner" class="container" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
-        @if (!isset($projectsForClient))
+        @if (!isset($tasksForProject))
         <div class="row-fluid">
             <div class="span12">
                 <h3 class="h3-my">Tasks</h3>
@@ -24,9 +24,10 @@
 
         @else
 
+
             <div class="row-fluid">
                 <!--  <div class="span12 add-border-bottom">
-                    <h2 class="h3-my">Projects: <strong>{{ $client->company_name }}</strong></h2>
+                    <h2 class="h3-my">Projects: <strong></strong></h2>
                 </div>-->
             </div>
             <br>
@@ -37,7 +38,7 @@
                         <div class="row">
                             <div class="col-md-9 cta-contents">
                                 <div class="span12 add-border-bottom">
-                                    <h1 class="h3-my">Projects: <strong>{{ $client->company_name }}</strong></h1>
+                                    <h1 class="h3-my">Projects: <strong>{{  $project->project_name }}</strong></h1>
                                 </div>
                                 <div class="cta-desc" style="margin-top: 20px">
                                     <div class="row ">
@@ -45,66 +46,55 @@
                                             <label class="control-label" for="ProjectNameId" style="text-align: left;">Company</label>
                                         </div>
                                         <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7">
-                                            {{ $client->company_name }}
+                                            {{ $project->company_name }}
                                         </div>
                                     </div>
                                     <div class="row my_row">
                                         <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5" style="text-align: right;">
-                                            <label class="control-label" for="ProjectNameId" style="text-align: left;">Address</label>
+                                            <label class="control-label" for="ProjectNameId" style="text-align: left;">Project</label>
                                         </div>
                                         <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7">
-                                            {{ $client->company_address }}
+                                            {{  $project->project_name }}
                                         </div>
                                     </div>
                                     <div class="row my_row">
                                         <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5" style="text-align: right;">
-                                            <label class="control-label" for="ProjectNameId" style="text-align: left;">Website</label>
+                                            <label class="control-label" for="ProjectNameId" style="text-align: left;">Hourly rate</label>
                                         </div>
                                         <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7" >
-                                            <a href="{{ $client->website }}">{{ $client->website }}</a>
+                                            {{  $project->hourly_rate }}
                                         </div>
                                     </div>
                                     <div class="row my_row">
                                         <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5" style="text-align: right;">
-                                            <label class="control-label" for="ProjectNameId" style="text-align: left;">Contact Person</label>
+                                            <label class="control-label" for="ProjectNameId" style="text-align: left;">Lead</label>
                                         </div>
                                         <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7">
-                                            {{ $client->contact_person }}
+                                            {{ $project->name }}
                                         </div>
                                     </div
 
                                 </div>
                                 <div class="row my_row">
                                     <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5" style="text-align: right;">
-                                        <label class="control-label" for="ProjectNameId" style="text-align: left;">Email</label>
+                                        <label class="control-label" for="ProjectNameId" style="text-align: left;">Notes</label>
                                     </div>
                                     <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7" >
-                                        {{ $client->email }}
+                                        {{ $project->notes }}
                                     </div>
                                 </div>
-                                <div class="row my_row">
-                                    <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5" style="text-align: right;">
-                                        <label class="control-label labelMy" for="ProjectNameId" style="text-align: left;">Phone number</label>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7" >
-                                        {{ $client->phone_number }}
-                                    </div>
-                                </div>
+
                             </div>
 
                         </div>
                         <div class="col-md-3 cta-button">
 
-                            <a href="/client/update/{{ $client->id }}" style="display:inline-block; margin-left: 25px" class="btn btn-info">
-                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Client
+                            <a href="/project/update/{{ $project->id }}" style="display:inline-block; margin-left: 25px" class="btn btn-info">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Project
                             </a>
                         </div>
                     </div>
                 </div>
-
-
-
-
             </div>
     </div>
 
@@ -112,11 +102,10 @@
 
     <div class="row my_row">
 
-
     </div>
 
 
-
+    @endif
 
 
         <div class="row-fluid">
