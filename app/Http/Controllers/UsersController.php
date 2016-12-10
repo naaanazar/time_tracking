@@ -12,11 +12,18 @@ use App\Mail\mailCreateUser;
 
 class UsersController extends Controller
 {
+    private $user;
+
     public function create(Request $request)
     {
        if(Input::all() == true) {
             $this->validation_create($request);
             $user = Input::all();
+
+            if ( $user['users_team_id'] == '' ) {
+                $user['users_team_id'] = 0;
+            }
+
             $password = $this->password_generate();
 
             User::create([
@@ -24,7 +31,7 @@ class UsersController extends Controller
                 'email' => $user['email'],
                 'password' => bcrypt($password),
                 'employe' => $user['employe'],
-                'team_name' => $user['team_name'],
+                'users_team_id' => $user['users_team_id'],
                 'hourly_rate' => $user['hourlyRate']
             ]);
 
@@ -45,12 +52,22 @@ class UsersController extends Controller
     {
         if(Input::all() == true && User::where('id', '=', $id) == true) {
             $this->validation_update($request);
+            $this->user = new User();
+            $user = $this->user->update_user_fields(Input::all());
 
-            $user = Input::all();
+            if( $user['employe'] != 'Lead' ) {
+                DB::table('teams')->where('teams_lead_id', '=', $id)
+                    ->update(['teams_lead_id' => 0]);
+            }
+
+            if( !isset( $user['users_team_id'] ) ) {
+                $user['users_team_id'] = 0;
+            }
 
             User::where('id', '=', $id)->update([
                 'name' => $user['name'],
                 'employe' => $user['employe'],
+                'users_team_id' => $user['users_team_id'],
                 'team_name' => $user['team_name'],
                 'hourly_rate' => $user['hourlyRate']
             ]);
@@ -69,6 +86,8 @@ class UsersController extends Controller
      * */
     public function delete($id)
     {
+        DB::table('teams')->where('teams_lead_id', '=', $id)
+            ->update(['teams_lead_id' => 0]);
         User::where('id', '=', $id)->delete();
 
         return redirect('/user/all');

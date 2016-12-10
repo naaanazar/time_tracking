@@ -95,13 +95,13 @@
                                         @if( $teams == true )
 
                                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                            <select name="team_name" class="input-xlarge focused my_input" style="height: 42px">
+                                            <select name="users_team_id" class="input-xlarge focused my_input" style="height: 42px">
                                                 <option value="" selected>Select team</option>
 
                                             @foreach( $teams as $team )
 
                                             <!--<input name="team_name" class="input-xlarge focused" id="focusedInput"  type="textl" required> -->
-                                                <option>{{ $team->team_name }}</option>
+                                                <option value="{{ $team->id }}">{{ $team->team_name }}</option>
 
                                             @endforeach
 
