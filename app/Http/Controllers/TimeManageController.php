@@ -320,13 +320,23 @@ class TimeManageController extends Controller
     /*
      * return all tasks
      * */
-
     public function all_tasks()
     {
         $tasks = Task::with(['project','client'])->get();
 
         return view('', compact('tasks'));
     }
+
+    /*
+     * return all tasks belowes project
+     * */
+    public function get_project_tasks($project_id)
+    {
+        $tasks = Task::where('project_id', '=', $project_id);
+
+        return view('', compact('tasks'));
+    }
+
     /*
      * get team on project id
      *
@@ -416,7 +426,6 @@ class TimeManageController extends Controller
     /*
      * validation for task
      * */
-
     private function validation_task($request)
     {
         $this->validate($request, [
