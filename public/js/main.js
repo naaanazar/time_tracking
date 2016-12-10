@@ -41,6 +41,22 @@ $(document).ready(function(){
     //$('#usersTable').find('select').addClass('input-xlarge focused my_input');
     //console.log ($('#usersTable').find("th").text());
 
+ //   getProjects =
+
+        $(document).on("click", ".getProjects", function (e) {
+            e.preventDefault();
+
+          var  id = $(e.target).parent('tr').data('id');
+            var urlGet = '/client/projects/' + id;
+            console.log(urlGet);
+            if (urlGet) {
+                window.location.href = urlGet;
+            } else {
+
+            }
+
+        });
+
     $(document).on( "click", ".deleteTeam", function(e) {
         e.preventDefault();
         var delUrl = $(e.target).data('url');

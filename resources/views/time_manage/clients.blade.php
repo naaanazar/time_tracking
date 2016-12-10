@@ -62,7 +62,7 @@
                             <tbody>
 
                             @foreach( $clients as $client )
-                                <tr class="odd gradeX">
+                                <tr class="odd gradeX getProjects" data-id="{{ $client->id }}">
                                     <td>{{ $client->company_name }}</td>
                                     <td>{{ $client->company_address }}</td>
                                     <td>
