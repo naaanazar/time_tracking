@@ -58,30 +58,31 @@
                             </tr>
                             </tfoot>
                             <tbody>
+                            @if (isset($tasksRes))
+                                @foreach( $tasksRes as $key )
+                                    <tr class="odd gradeX">
+                                        <td>{{ $key['title'] }}</td>
+                                        <td>{{ $key['company'] }}</td>
+                                        <td>{{ $key['project_name'] }}</td>
+                                        <td>{{ $key['type'] }}</td>
+                                        <td>{{ $key['alloceted_hours'] }}</td>
+                                        <td>{{ $key['user_name'] }}</td>
+                                        <td style="text-align: center"> <?= ( $key['billable'] == '1') ? 'Yes' : 'No' ?> </td>
+                                        <td style="text-align: center">{{ $key['created_at'] }}</td>
 
-                            @foreach( $tasksRes as $key )
-                                <tr class="odd gradeX">
-                                    <td>{{ $key['title'] }}</td>
-                                    <td>{{ $key['company'] }}</td>
-                                    <td>{{ $key['project_name'] }}</td>
-                                    <td>{{ $key['type'] }}</td>
-                                    <td>{{ $key['alloceted_hours'] }}</td>
-                                    <td>{{ $key['user_name'] }}</td>
-                                    <td style="text-align: center"> <?= ( $key['billable'] == '1') ? 'Yes' : 'No' ?> </td>
-                                    <td style="text-align: center">{{ $key['created_at'] }}</td>
+                                        @if ($status == 'Admin')
+                                            <td>
+                                                @if ($status == 'Admin' )
 
-                                    @if ($status == 'Admin')
-                                        <td>
-                                            @if ($status == 'Admin' )
-
-                                                <a href="/task/update/{{ $key['id']  }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
-                                                <button type="button" class="btn btn-danger  deleteTask" data-url="/task/delete/{{ $key['id'] }}" data-element="{{  $key['title'] }}">
-                                                    <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
-                                            @endif
-                                        </td>
-                                    @endif
-                                </tr>
-                            @endforeach
+                                                    <a href="/task/update/{{ $key['id']  }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
+                                                    <button type="button" class="btn btn-danger  deleteTask" data-url="/task/delete/{{ $key['id'] }}" data-element="{{  $key['title'] }}">
+                                                        <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
+                                                @endif
+                                            </td>
+                                        @endif
+                                    </tr>
+                                @endforeach
+                            @endif
 
                             </tbody>
                         </table>

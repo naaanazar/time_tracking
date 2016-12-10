@@ -159,7 +159,9 @@
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                     <select name="assign_to" class=" input-xlarge focused my_input "   id="AssignToId" style="height: 42px;">
                                         @if( isset( $task[0]->assign_to ) )
+                                            @if (isset($user->name))
                                             <option selected>{{ $user->name }}</option>
+                                            @endif
                                         @else
                                             <option selected disabled></option>
                                         @endif

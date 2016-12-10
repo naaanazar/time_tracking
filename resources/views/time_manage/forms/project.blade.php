@@ -9,7 +9,7 @@
             <div class="row-fluid">
                 <div class="heading-top-margin">
 
-                    <div class="heading-without-datepicker"><?= isset($project) ? 'Edit' : 'Create' ?> client project</div>
+                    <div class="heading-without-datepicker"><?= isset($project) ? 'Edit' : 'Create' ?> Project</div>
                 </div>
             </div>
         </div>
