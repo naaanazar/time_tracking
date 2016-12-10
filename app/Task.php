@@ -25,11 +25,11 @@ class Task extends Model
 
     public function client()
     {
-        return $this->belongsTo('App\Client');
+        return $this->belongsTo('App\Client', 'company_id', 'id');
     }
 
     public function project()
     {
-        return $this->belongsTo('App\Project');
+        return $this->belongsTo('App\Project', 'project_id', 'id');
     }
 }

@@ -28,6 +28,6 @@ class Client extends Model
 
     public function task()
     {
-        return $this->hasMany('App\task');
+        return $this->hasMany('App\task', 'id', 'company_id');
     }
 }

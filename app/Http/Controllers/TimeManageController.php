@@ -353,11 +353,23 @@ class TimeManageController extends Controller
     }
 
     /*
-     * return all tasks belowes project
+     * return all tasks belows project
      * */
     public function get_project_tasks($project_id)
     {
-        $tasks = Task::where('project_id', '=', $project_id);
+        $tasks = Task::where('project_id', '=', $project_id)
+            ->whith(['project'])->get();
+
+        return view('', compact('tasks'));
+    }
+
+    /*
+     * return all tasks belows client
+     * */
+    public function get_client_tasks($client_id)
+    {
+        $tasks = Task::where('company_id', '=', $client_id)
+            ->with(['client'])->get();
 
         return view('', compact('tasks'));
     }
