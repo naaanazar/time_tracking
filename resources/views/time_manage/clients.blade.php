@@ -39,7 +39,7 @@
                                 <th>Contact Persone</th>
                                 <th>Email</th>
                                 <th>Phone Number</th>
-                                <th style="min-width: 160px"  class="center">Created at</th>
+                              <!--  <th style="min-width: 160px"  class="center">Created at</th> -->
                                 @if ($status == 'HR Manager' || $status == 'Admin')
                                     <th style="min-width: 140px">Action</th>
                                 @endif
@@ -47,13 +47,13 @@
                             </thead>
                             <tfoot>
                             <tr>
-                                <th style="min-width: 130px">Company Name</th>
-                                <th>Address</th>
-                                <th>Website</th>
-                                <th>Contact Persone</th>
-                                <th>Email</th>
-                                <th>Phone Number</th>
-                                <th style="min-width: 160px"  class="center">Created at</th>
+                                <th style="min-width: 130px"></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                               <!-- <th style="min-width: 160px"  class="center"></th>-->
 
                             </tr>
                             </tfoot>
@@ -69,7 +69,7 @@
                                     <td>{{ $client->contact_person }}</td>
                                     <td>{{ $client->email }}</td>
                                     <td>{{ $client->phone_number }}</td>
-                                    <td style="text-align: center">{{ $client->created_at }}</td>
+                                  <!--  <td style="text-align: center">{{ $client->created_at }}</td> -->
 
                                     @if ($status == 'HR Manager' || $status == 'Admin')
                                         <td>
