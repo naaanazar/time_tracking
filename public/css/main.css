@@ -17,14 +17,13 @@ body {
 }
 
 .table_container{
-    overflow-x: scroll;
+   /* overflow-x: scroll; */
 }
 
-#usersTable > tfoot > tr > th > select{
-    width: 100%!important;
+/*#usersTable > tfoot > tr > th > select{
     border: 1px solid #CCC!important;
     border-radius: 2px;
-}
+}*/
 
 
 

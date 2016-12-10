@@ -47,14 +47,16 @@
                             </thead>
                             <tfoot>
                             <tr>
-                                <th style="min-width: 130px"></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                               <!-- <th style="min-width: 160px"  class="center"></th>-->
-
+                                <th >Company Name</th>
+                                <th>Address</th>
+                                <th >Website</th>
+                                <th>Contact Persone</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <!--  <th style="min-width: 160px"  class="center">Created at</th> -->
+                                @if ($status == 'HR Manager' || $status == 'Admin')
+                                    <th ">Action</th>
+                                @endif
                             </tr>
                             </tfoot>
                             <tbody>

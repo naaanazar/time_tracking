@@ -9,9 +9,9 @@ $(document).ready(function(){
 
     $(document).ready(function() {
         $('#usersTable').DataTable({
-            scrollX : true,
-            scrollCollapse : true,
-            "sScrollXInner": "100%",
+         //   scrollX : true,
+        //    scrollCollapse : true,
+        //    "sScrollXInner": "100%",
 
 
             initComplete: function () {

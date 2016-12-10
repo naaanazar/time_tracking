@@ -50,7 +50,6 @@
                             </thead>
                             <tfoot>
                             <tr>
-
                                 <th>Project</th>
                                 <th>Company</th>
                                 <th>Lead</th>
