@@ -28,6 +28,20 @@
                                         @endif
                                     </div>
                                 </div>
+
+                            <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
+
+                                <select name="teams_lead_id" class="input-xlarge focused my_input"  id="CompanyNameProjectId" style="height: 42px;">
+                                    <option selected disabled>Please change Lead</option>
+
+                                    @foreach( $leads as $key )
+                                        <option  value="{{ $leads->id}}">{{ $leads->employe }}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+
+
                                 <div class="form-actions row">
                                     <label class="control-label col-sm-2" for="focusedInput"></label>
                                     <button type="submit" class="btn btn-large button-orange" formaction="">Save</button> &nbsp;&nbsp;
