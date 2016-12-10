@@ -300,7 +300,7 @@ class TimeManageController extends Controller
                 'assign_to' => $task['assign_to'],
                 'task_type' => $task['task_type'],
                 'task_description' => $task['task_description'],
-                'billable' => true//$task['billable']
+                'billable' => $task['billable']
             ]);
 
             return redirect('/task/all');
@@ -323,6 +323,7 @@ class TimeManageController extends Controller
 
             $task = Input::all();
 
+
             if ( !isset($task['alloceted_hours']) || $task['alloceted_hours'] == '' )  {
                 $task['alloceted_hours'] = 0;
             }
@@ -332,22 +333,29 @@ class TimeManageController extends Controller
             if ( !isset($task['task_description']) || $task['task_description'] == '') {
                 $task['task_description'] = '';
             }
+            if( !isset( $task['billable'] ) ) {
+                $task['billable'] = false;
+            }
 
             Task::where( 'id', '=', $id )->update([
                 'company_id' => $task['company_id'],
                 'project_id' => $task['project_id'],
+                'task_titly' => $task['task_titly'],
                 'task_type' => $task['task_type'],
-                'task_description' => $task['task_description']
+                'task_description' => $task['task_description'],
+                'alloceted_hours' => $task['alloceted_hours'],
+                'billable' => $task['billable']
             ]);
 
             return redirect('/task/all');
         }
 
         $task = Task::where( 'id', '=', $id )->get();
+        $user = User::where('id', '=', $task[0]->assign_to)->first();
         $client = Client::all();
         $project = Project::all();
 
-        return view('time_manage.forms.taskForm', compact('task', 'client', 'project'));
+        return view('time_manage.forms.taskForm', compact('task', 'client', 'project', 'user'));
     }
 
     /*
@@ -398,11 +406,23 @@ class TimeManageController extends Controller
     }
 
     /*
-     * return all tasks belowes project
+     * return all tasks belows project
      * */
     public function get_project_tasks($project_id)
     {
-        $tasks = Task::where('project_id', '=', $project_id);
+        $tasks = Task::where('project_id', '=', $project_id)
+            ->whith(['project'])->get();
+
+        return view('', compact('tasks'));
+    }
+
+    /*
+     * return all tasks belows client
+     * */
+    public function get_client_tasks($client_id)
+    {
+        $tasks = Task::where('company_id', '=', $client_id)
+            ->with(['client'])->get();
 
         return view('', compact('tasks'));
     }
@@ -514,6 +534,7 @@ class TimeManageController extends Controller
         $this->validate($request, [
             'company_id' => 'integer',
             'project_id' => 'integer',
+
             'task_type' => 'required|min:2|max:30',
             'task_description' => 'required|regex:/[a-zA-Z0-9]+/|max:1000',
             'task_titly' => 'min:2|max:30',

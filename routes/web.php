@@ -56,6 +56,7 @@ Route::group(['middleware' => ['permision']], function () {
     Route::get('/get/team/{id}', 'TimeManageController@get_team')->where(['id' => '[0-9]+']);
     Route::get('/task/all', 'TimeManageController@all_tasks');
     Route::get('/project/tasks/{id}', 'TimeManageController@get_project_tasks')->where(['id' => '[0-9]+']);
+    Route::get('/client/tasks/{id}', 'TimeManageController@get_client_tasks')->where(['id' => '[0-9]+']);
 
     // team
     Route::get('/team/create', 'TimeManageController@create_team');
