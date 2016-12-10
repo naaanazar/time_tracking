@@ -489,8 +489,8 @@ class TimeManageController extends Controller
     public function delete_team($id)
     {
         DB::table('users')
-            ->where('team_name', '=', DB::table('teams')->where('id', '=', $id)->first()->team_name)
-            ->update(['team_name' => 'no team']);
+            ->where('users_team_id', '=', $id)
+            ->update(['users_team_id' => 0]);
 
         DB::table('teams')->where('id', '=', $id)->delete();
 
