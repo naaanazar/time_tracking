@@ -16,6 +16,10 @@ body {
     margin-bottom: 60px!important;
 }
 
+.table_container{
+    overflow-x: scroll;
+}
+
 
 
 .table-striped > tbody > tr:nth-of-type(odd):hover,

@@ -13,6 +13,7 @@
     </div>
 
     <div id="conteiner" class="container" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
+
         <div class="row-fluid">
             <div class="span12">
                 <h3 class="h3-my">Clients</h3>

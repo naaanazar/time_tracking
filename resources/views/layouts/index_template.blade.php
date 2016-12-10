@@ -37,7 +37,7 @@
 </head>
 <body id="">
 <div class="navbar-inner navbar-style">
-    <nav class="navbar navbar-top nav-my" style="float:right; display:inline-block;">
+    <nav class="navbar navbar-top nav-my" style="float:right; display:inline-block; z-index: 3">
         <div class="container-fluid" style="min-height: 61px;">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">

@@ -61,7 +61,7 @@ Route::group(['middleware' => ['permision']], function () {
     Route::get('/team/create', 'TimeManageController@create_team');
     Route::post('/team/create', 'TimeManageController@create_team');
     Route::get('/team/delete/{id}', 'TimeManageController@delete_team')->where(['id' => '[0-9]+']);
-    Route::get('/team/all', 'TimeManageController@all_team');
+    Route::get('/team/all', 'TimeManageController@team_all');
 
     // forbidden
     //Route::get('/register', 'TimeManageController@index');

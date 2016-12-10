@@ -4,6 +4,9 @@
 'use strict';
 $(document).ready(function(){
 
+    //table x scroll
+    $('#usersTable').parent().addClass('table_container');
+
     $(document).on( "click", ".deleteTeam", function(e) {
         e.preventDefault();
         var delUrl = $(e.target).data('url');
