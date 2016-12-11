@@ -355,6 +355,7 @@ class TimeManageController extends Controller
                 'company_id' => $task['company_id'],
                 'project_id' => $task['project_id'],
                 'task_titly' => $task['task_titly'],
+                'assign_to' => $task['assign_to'],
                 'task_type' => $task['task_type'],
                 'task_description' => $task['task_description'],
                 'alloceted_hours' => $task['alloceted_hours'],

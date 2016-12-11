@@ -143,10 +143,14 @@ $(document).ready(function(){
         Main.all_users();
     });
 
-    $(document).on("mouseenter", "#AssignToId", function () {
+    var list = $('#AssignToId').data('all');
+    console.log(list);
+    if(list) {
+        //  $(document).on("mouseenter", "#AssignToId", function () {
         console.log('asdsd');
         Main.all_users();
-    });
+    }
+   // });
 });
 
 var Main = {
@@ -199,7 +203,7 @@ var Main = {
                 };
                 other += '</optgroup>';
 
-                $("#AssignToId").html(lead + team + qa + other);
+                $("#AssignToId").append(lead + team + qa + other);
             });
         } else {
             $("#AssignToId").html('');

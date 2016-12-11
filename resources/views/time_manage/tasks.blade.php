@@ -134,14 +134,14 @@
                             </thead>
                             <tfoot>
                             <tr>
-                                <th>Title</th>
-                                <th>Company</th>
-                                <th>Project</th>
-                                <th>Task Type</th>
-                                <th>Allocated Hours</th>
-                                <th>Assign To</th>
-                                <th>Billable</th>
-                                <th>Created at</th>
+                                <th class="thFoot">Title</th>
+                                <th class="thFoot">Company</th>
+                                <th class="thFoot">Project</th>
+                                <th class="thFoot">Task Type</th>
+                                <th class="thFoot">Allocated Hours</th>
+                                <th class="thFoot">Assign To</th>
+                                <th class="thFoot">Billable</th>
+                                <th class="thFoot">Created at</th>
                             </tr>
                             </tfoot>
                             <tbody>

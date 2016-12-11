@@ -19,6 +19,9 @@
                     <div class="span12">
                         <form class="form-horizontal" role="form" method="POST" action="<?= ( isset( $task ) ) ? '/project/update' . $task[0]->id : '/project/create' ;?>">
                             {{ csrf_field() }}
+                            @if (isset($task))
+
+                            @endif
 
                             <div class="control-group row">
                                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
@@ -157,7 +160,7 @@
                                     <label class="control-label" for="AssignToId" style="text-align: left;">Assign To</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <select name="assign_to" class=" input-xlarge focused my_input "   id="AssignToId" style="height: 42px;">
+                                    <select name="assign_to" class=" input-xlarge focused my_input "   id="AssignToId" style="height: 42px;" data-all="true">
                                         @if( isset( $task[0]->assign_to ) )
                                             @if (isset($user->name))
                                             <option selected>{{ $user->name }}</option>
