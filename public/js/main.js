@@ -174,6 +174,7 @@ var Main = {
 
     all_users: function() {
         var clientId = $("#taskProjectId option:selected").val();
+        var employe = ($('#conteiner').data('status'));
         if (clientId) {
 
             var urlSend = '/get/team/' + clientId;
@@ -197,11 +198,16 @@ var Main = {
                 };
                 qa += '</optgroup>';
 
-                var other = '<optgroup label="Other">';
-                for ( var i  in response.data.other) {
-                    other += '<option value="' + response.data.other[i].id + '">' + response.data.other[i].name + ' - ' + response.data.other[i].employe + '</option>';
-                };
-                other += '</optgroup>';
+                console.log(employe);
+
+                if (employe == 'Admin' || employe == 'Lead' || employe == 'Supervisor') {
+                    var other = '<optgroup label="Other">';
+                    for (var i  in response.data.other) {
+                        other += '<option value="' + response.data.other[i].id + '">' + response.data.other[i].name + ' - ' + response.data.other[i].employe + '</option>';
+                    }
+                    ;
+                    other += '</optgroup>';
+                }
 
                 $("#AssignToId").append(lead + team + qa + other);
             });
