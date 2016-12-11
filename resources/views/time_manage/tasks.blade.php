@@ -127,7 +127,7 @@
                                 <th>Assign To</th>
                                 <th>Billable</th>
                                 <th>Created at</th>
-                                @if ($status == 'Admin')
+                                @if ($status == 'Admin' || $status == 'Lead' || $status == 'Supervisor' || $status == 'Developer' ||  $status == 'QA Engineer')
                                     <th style="min-width: 140px">Action</th>
                                 @endif
                             </tr>
@@ -157,11 +157,11 @@
                                         <td style="text-align: center"> <?= ( $key['billable'] == '1') ? 'Yes' : 'No' ?> </td>
                                         <td style="text-align: center">{{ $key['created_at'] }}</td>
 
-                                        @if ($status == 'Admin')
+                                        @if ($status == 'Admin' || $status == 'Lead' || $status == 'Supervisor' || $status == 'Developer' ||  $status == 'QA Engineer')
                                             <td>
-                                                @if ($status == 'Admin' )
+                                                <a href="/task/update/{{ $key['id']  }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
 
-                                                    <a href="/task/update/{{ $key['id']  }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
+                                                @if ($status == 'Admin' || $status == 'Lead' || $status == 'Supervisor')
                                                     <button type="button" class="btn btn-danger  deleteTask" data-url="/task/delete/{{ $key['id'] }}" data-element="{{  $key['title'] }}">
                                                         <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
                                                 @endif

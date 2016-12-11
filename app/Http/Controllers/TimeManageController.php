@@ -389,10 +389,15 @@ class TimeManageController extends Controller
     public function all_tasks()
     {
 
+        if (Auth::user()['original']['employe'] == 'Developer' || Auth::user()['original']['employe'] == 'QA Engineer')
+        $tasks = Task::where('assign_to', '=', Auth::user()['original']['id'])
+        ->with(['project','client'])->get();
+
+        if(Auth::user()['original']['employe'] == 'Supervisor' || Auth::user()['original']['employe'] == 'Admin' || Auth::user()['original']['employe'] == 'Lead')
         $tasks = Task::with(['project','client'])->get();
+
+
         $i=0;
-
-
         foreach($tasks as $task){
 
             $user = User::where('id', '=', $task->assign_to)->first();
