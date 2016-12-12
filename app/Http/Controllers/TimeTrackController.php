@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use App\Project;
 use App\Task;
 use App\TimeTrack;
 use App\TimeLog;
@@ -37,19 +36,24 @@ class TimeTrackController extends Controller
         if( in_array(Auth::user()->employe, $this->users ) ) {
             $tasks = Task::where('assign_to', '=', Auth::user()->id )
                 ->with('project', 'track', 'track_log')->get();
+
+            $task = new Task();
+            $tasks = $task->time_counter($tasks);
             
             return view('', compact('tasks'));
         }
 
         $tasks = Task::with('project', 'track', 'track_log')->get();
+        $task = new Task();
+        $tasks = $task->time_counter($tasks);
 
         return view('', compact('tasks'));
     }
 
     /*
      * create time log
+     * action works with ajax
      * */
-
     public function create_time_log()
     {
         if( Input::all() == true ) {
