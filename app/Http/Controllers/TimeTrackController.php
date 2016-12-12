@@ -33,18 +33,18 @@ class TimeTrackController extends Controller
             return true;
         }
 
+        $task = new Task();
+
         if( in_array(Auth::user()->employe, $this->users ) ) {
             $tasks = Task::where('assign_to', '=', Auth::user()->id )
                 ->with('project', 'track', 'track_log')->get();
 
-            $task = new Task();
             $tasks = $task->time_counter($tasks);
-            
+
             return view('', compact('tasks'));
         }
 
         $tasks = Task::with('project', 'track', 'track_log')->get();
-        $task = new Task();
         $tasks = $task->time_counter($tasks);
 
         return view('', compact('tasks'));
