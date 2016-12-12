@@ -319,7 +319,13 @@ class TimeManageController extends Controller
             $this->validation_task($request);
 
             $task = Input::all();
+            if( !isset( $task['company_id'] ) ) {
+                $client_id = Project::where('id', '=', $task['project_id'])
+                    ->select('client_id')->first();
 
+                $task['company_id'] = Client::where('id', '=', $client_id->client_id)
+                        ->select('id')->first()->id;
+            }
             if ( !isset($task['alloceted_hours']) || $task['alloceted_hours'] == '' )  {
                 $task['alloceted_hours'] = 0;
             }
@@ -345,6 +351,17 @@ class TimeManageController extends Controller
             ]);
 
             return redirect('/task/all');
+        }
+
+        if( Auth::user()->employe == 'Developer' || Auth::user()->employe == 'QA Engineer') {
+            $lead_id = DB::table('teams')->where('id', '=', Auth::user()->users_team_id)
+                    ->select('teams_lead_id')->first();
+
+            $projects = Project::where('lead_id', '=', $lead_id->teams_lead_id)
+                            ->with('client')
+                            ->get();
+
+            return view('time_manage.forms.taskForm', compact('projects'));
         }
 
         $client = Client::all();
@@ -390,6 +407,17 @@ class TimeManageController extends Controller
             ]);
 
             return redirect('/task/all');
+        }
+
+        if( Auth::user()->employe == 'Developer' || Auth::user()->employe == 'QA Engineer') {
+            $lead_id = DB::table('teams')->where('id', '=', Auth::user()->users_team_id)
+                ->select('teams_lead_id')->first();
+
+            $projects = Project::where('lead_id', '=', $lead_id->teams_lead_id)
+                ->with('client')
+                ->get();
+
+            return view('time_manage.forms.taskForm', compact('projects'));
         }
 
         $task = Task::where( 'id', '=', $id )->get();
