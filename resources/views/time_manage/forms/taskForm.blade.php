@@ -8,7 +8,7 @@
             <div class="row-fluid">
                 <div class="heading-top-margin">
 
-                    <div class="heading-without-datepicker"><?= ( isset( $task ) ) ? 'Update' : 'Create' ;?> task</div>
+                    <div class="heading-without-datepicker"><?= ( isset( $task ) ) ? 'Edit' : 'Create' ;?> task</div>
                 </div>
             </div>
         </div>
@@ -19,60 +19,73 @@
                     <div class="span12">
                         <form class="form-horizontal" role="form" method="POST" action="<?= ( isset( $task ) ) ? '/project/update' . $task[0]->id : '/project/create' ;?>">
                             {{ csrf_field() }}
+                            @if (isset($task))
 
+                            @endif
+                            @if( $status != 'Developer' || $status != 'Developer' )
                             <div class="control-group row">
                                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
                                     <label class="control-label" for="CompanyTaskId" style="text-align: left;">Company</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
-                                    <select name="company_id" class="input-xlarge focused my_input"  id="CompanyTaskId" style="height: 42px;" required>
+                                        <select name="company_id" class="input-xlarge focused my_input"  id="CompanyTaskId" style="height: 42px;" required>
 
-                                    @if( !isset( $task ) )
-                                        <option  defaul>Please change Company</option>
+                                        @if( !isset( $task ) )
+                                            <option  defaul>Please change Company</option>
 
-                                        @if (isset($client->company_name))
-                                            <option value="{{ $client->id }}" selected>{{ $client->company_name }}</option>
-                                        @endif
-
-                                        @foreach( $client as $key )
-
-                                            <option  value="{{ $key->id}}">{{ $key->company_name }}</option>
-                                        @endforeach
-
-                                    @elseif( isset( $task ) )
-                                        @foreach( $client as $key )
-                                            @if( $task[0]->company_id == $key->id )
-                                                <option value="{{ $key->id }}" selected>{{ $key->company_name }}</option>
+                                            @if (isset($client->company_name))
+                                                <option value="{{ $client->id }}" selected>{{ $client->company_name }}</option>
                                             @endif
-                                        @endforeach
-                                    @endif
-                                    </select>
 
-                                        @if ($errors->has('company_id'))
-                                            <span class="help-block">
-                                                    <strong style="color:#802420">{{ $errors->first('company_id') }}</strong>
-                                                </span>
+                                            @foreach( $client as $key )
+
+                                                <option  value="{{ $key->id}}">{{ $key->company_name }}</option>
+                                            @endforeach
+
+                                        @elseif( isset( $task ) )
+                                            @foreach( $client as $key )
+                                                @if( $task[0]->company_id == $key->id )
+                                                    <option value="{{ $key->id }}" selected>{{ $key->company_name }}</option>
+                                                @endif
+                                            @endforeach
                                         @endif
+                                        </select>
 
+                                            @if ($errors->has('company_id'))
+                                                <span class="help-block">
+                                                        <strong style="color:#802420">{{ $errors->first('company_id') }}</strong>
+                                                    </span>
+                                            @endif
                                 </div>
                             </div>
-
+                            @endif
                             <div class="control-group row">
                                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
                                     <label class="control-label" for="taskProjectId" style="text-align: left;">Project</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-
-                                    <select name="project_id" class="input-xlarge focused my_input"  id="taskProjectId" style="height: 42px;" required>
-                                        @if( isset( $task ) )
-                                            @foreach( $project as $key )
-                                                @if( $task[0]->project_id == $key->id )
-                                                    <option value="{{ $key->id }}" selected>{{ $key->project_name }}</option>
-                                                @endif
+                                    @if( $status == 'Developer' || $status == 'QA Engineer' )
+                                        <select name="project_id" class="input-xlarge focused my_input"  id="taskProjectId" style="height: 42px;" required>
+                                        @if( isset( $projects ) )
+                                            @foreach( $projects as $project )
+                                                    <option value="{{ $project->id }}" selected>{{ $project->project_name }}</option>
                                             @endforeach
+                                        @else
+                                            <option>No project avelable</option>
                                         @endif
-                                    </select>
+                                        </select>
+                                    @else
+                                        <select name="project_id" class="input-xlarge focused my_input"  id="taskProjectId" style="height: 42px;" required>
+                                            @if( isset( $task ) )
+                                                @foreach( $project as $key )
+                                                    @if( $task[0]->project_id == $key->id )
+                                                        <option value="{{ $key->id }}" selected>{{ $key->project_name }}</option>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    @endif
 
                                     @if ($errors->has('project_id'))
                                         <span class="help-block">
@@ -157,7 +170,7 @@
                                     <label class="control-label" for="AssignToId" style="text-align: left;">Assign To</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <select name="assign_to" class=" input-xlarge focused my_input "   id="AssignToId" style="height: 42px;">
+                                    <select name="assign_to" class=" input-xlarge focused my_input "   id="AssignToId" style="height: 42px;" data-all="true">
                                         @if( isset( $task[0]->assign_to ) )
                                             @if (isset($user->name))
                                             <option selected>{{ $user->name }}</option>

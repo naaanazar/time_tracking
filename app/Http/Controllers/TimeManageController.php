@@ -292,7 +292,13 @@ class TimeManageController extends Controller
             $this->validation_task($request);
 
             $task = Input::all();
+            if( !isset( $task['company_id'] ) ) {
+                $client_id = Project::where('id', '=', $task['project_id'])
+                    ->select('client_id')->first();
 
+                $task['company_id'] = Client::where('id', '=', $client_id->client_id)
+                        ->select('id')->first()->id;
+            }
             if ( !isset($task['alloceted_hours']) || $task['alloceted_hours'] == '' )  {
                 $task['alloceted_hours'] = 0;
             }
@@ -318,6 +324,17 @@ class TimeManageController extends Controller
             ]);
 
             return redirect('/task/all');
+        }
+
+        if( Auth::user()->employe == 'Developer' || Auth::user()->employe == 'QA Engineer') {
+            $lead_id = DB::table('teams')->where('id', '=', Auth::user()->users_team_id)
+                    ->select('teams_lead_id')->first();
+
+            $projects = Project::where('lead_id', '=', $lead_id->teams_lead_id)
+                            ->with('client')
+                            ->get();
+
+            return view('time_manage.forms.taskForm', compact('projects'));
         }
 
         $client = Client::all();
@@ -355,6 +372,7 @@ class TimeManageController extends Controller
                 'company_id' => $task['company_id'],
                 'project_id' => $task['project_id'],
                 'task_titly' => $task['task_titly'],
+                'assign_to' => $task['assign_to'],
                 'task_type' => $task['task_type'],
                 'task_description' => $task['task_description'],
                 'alloceted_hours' => $task['alloceted_hours'],
@@ -362,6 +380,17 @@ class TimeManageController extends Controller
             ]);
 
             return redirect('/task/all');
+        }
+
+        if( Auth::user()->employe == 'Developer' || Auth::user()->employe == 'QA Engineer') {
+            $lead_id = DB::table('teams')->where('id', '=', Auth::user()->users_team_id)
+                ->select('teams_lead_id')->first();
+
+            $projects = Project::where('lead_id', '=', $lead_id->teams_lead_id)
+                ->with('client')
+                ->get();
+
+            return view('time_manage.forms.taskForm', compact('projects'));
         }
 
         $task = Task::where( 'id', '=', $id )->get();
@@ -388,10 +417,15 @@ class TimeManageController extends Controller
     public function all_tasks()
     {
 
+        if (Auth::user()['original']['employe'] == 'Developer' || Auth::user()['original']['employe'] == 'QA Engineer')
+        $tasks = Task::where('assign_to', '=', Auth::user()['original']['id'])
+        ->with(['project','client'])->get();
+
+        if(Auth::user()['original']['employe'] == 'Supervisor' || Auth::user()['original']['employe'] == 'Admin' || Auth::user()['original']['employe'] == 'Lead')
         $tasks = Task::with(['project','client'])->get();
+
+
         $i=0;
-
-
         foreach($tasks as $task){
 
             $user = User::where('id', '=', $task->assign_to)->first();
@@ -425,9 +459,48 @@ class TimeManageController extends Controller
     public function get_project_tasks($project_id)
     {
         $tasks = Task::where('project_id', '=', $project_id)
-            ->whith(['project', 'user'])->get();
+        ->with(['project','client'])
+        ->get();
+        $i=0;
 
-        return view('', compact('tasks'));
+        foreach($tasks as $task){
+
+            $user = User::where('id', '=', $task->assign_to)->first();
+            if (isset($user) ) {
+                $user_name = $user->name;
+            } else {
+                $user_name = '';
+            }
+
+            $tasksRes[$i]['user_name'] = $user_name;
+            $tasksRes[$i]['id'] = $task->id;
+            $tasksRes[$i]['title'] = $task->task_titly;
+            $tasksRes[$i]['type'] = $task->task_type;
+            $tasksRes[$i]['assign_to'] = $task->assign_to;
+            $tasksRes[$i]['alloceted_hours'] = $task->alloceted_hours;
+            $tasksRes[$i]['task_description'] = $task->task_description;
+            $tasksRes[$i]['billable'] = $task->billable;
+            $tasksRes[$i]['created_at'] = $task->created_at;
+            $tasksRes[$i]['company'] = $task->client['company_name'];
+            $tasksRes[$i]['project_name'] = $task->project['project_name'];
+            $i++;
+        }
+
+        $project = DB::table('Project')
+            ->where('Project.id', '=', $project_id)
+            ->leftJoin('users', 'Project.lead_id', '=', 'users.id')
+            ->join('Clients', 'Project.client_id', '=', 'Clients.id')
+            ->select('Project.project_name',
+                'Project.id',
+                'Project.hourly_rate',
+                'Project.notes',
+                'Project.created_at',
+                'users.name', 'Clients.company_name' )
+            ->first();
+
+        $tasksForProject = true;
+
+        return view('time_manage.tasks', compact('tasksRes', 'tasksForProject', 'project'));
     }
 
     /*

@@ -48,12 +48,12 @@
                         </thead>
                         <tfoot>
                         <tr>
-                            <th width="130px">Users</th>
-                            <th>Email</th>
-                            <th>Team</th>
-                            <th>Hourly rate</th>
-                            <th>User type</th>
-                            <th style="min-width: 160px"  class="center">Created at</th>
+                            <th width="130px" class="thFoot">Users</th>
+                            <th class="thFoot">Email</th>
+                            <th class="thFoot">Team</th>
+                            <th class="thFoot">Hourly rate</th>
+                            <th class="thFoot">User type</th>
+                            <th style="min-width: 160px"  class="center thFoot">Created at</th>
 
                         </tr>
                         </tfoot>

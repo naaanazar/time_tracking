@@ -7,11 +7,11 @@ $(document).ready(function(){
     //table x scroll
 
 
-    $(document).ready(function() {
+
         $('#usersTable').DataTable({
-         //   scrollX : true,
-        //    scrollCollapse : true,
-        //    "sScrollXInner": "100%",
+           // scrollX : true,
+         //   scrollCollapse : true,
+          //  "sScrollXInner": "100%",
 
 
             initComplete: function () {
@@ -35,13 +35,15 @@ $(document).ready(function(){
                 });
             }
         });
-    } );
+    $('#usersTable tfoot tr').insertAfter($('#usersTable thead tr'))
 
+
+    $('#usersTable').parent().addClass('table_container');
 
     //$('#usersTable').find('select').addClass('input-xlarge focused my_input');
     //console.log ($('#usersTable').find("th").text());
 
- //   getProjects =
+    //   getProjects =
 
         $(document).on("click", ".getProjects", function (e) {
           var  id = $(e.target).parent('tr').data('id');
@@ -55,8 +57,21 @@ $(document).ready(function(){
 
         });
 
+    $(document).on("click", ".getTasks", function (e) {
+        var  id = $(e.target).parent('tr').data('id');
+        var urlGet = '/project/tasks/' + id;
+        console.log(urlGet);
+        if (urlGet) {
+            window.location.href = urlGet;
+        } else {
+
+        }
+
+    });
+
     $(document).on( "click", ".deleteTeam", function(e) {
         e.preventDefault();
+        e.stopImmediatePropagation();
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
         var massage = 'Do you want to remove <strong> ' + element + '</strong>?'
@@ -65,6 +80,7 @@ $(document).ready(function(){
 
     $(document).on( "click", ".deleteUser", function(e) {
         e.preventDefault();
+        e.stopImmediatePropagation();
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
         var massage = 'Do you want to remove <strong> ' + element + '</strong>?'
@@ -74,6 +90,7 @@ $(document).ready(function(){
 
     $(document).on( "click", ".deleteClient", function(e) {
         e.preventDefault();
+        e.stopImmediatePropagation();
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
         var massage = 'Do you want to remove <strong> ' + element + '</strong>?'
@@ -83,6 +100,7 @@ $(document).ready(function(){
 
     $(document).on( "click", ".deleteProject", function(e) {
         e.preventDefault();
+        e.stopImmediatePropagation();
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
         var massage = 'Do you want to remove <strong> ' + element + '</strong>?'
@@ -125,10 +143,14 @@ $(document).ready(function(){
         Main.all_users();
     });
 
-    $(document).on("mouseenter", "#AssignToId", function () {
+    var list = $('#AssignToId').data('all');
+    console.log(list);
+    if(list) {
+        //  $(document).on("mouseenter", "#AssignToId", function () {
         console.log('asdsd');
         Main.all_users();
-    });
+    }
+   // });
 });
 
 var Main = {
@@ -152,6 +174,7 @@ var Main = {
 
     all_users: function() {
         var clientId = $("#taskProjectId option:selected").val();
+        var employe = ($('#conteiner').data('status'));
         if (clientId) {
 
             var urlSend = '/get/team/' + clientId;
@@ -175,13 +198,18 @@ var Main = {
                 };
                 qa += '</optgroup>';
 
-                var other = '<optgroup label="Other">';
-                for ( var i  in response.data.other) {
-                    other += '<option value="' + response.data.other[i].id + '">' + response.data.other[i].name + ' - ' + response.data.other[i].employe + '</option>';
-                };
-                other += '</optgroup>';
+                console.log(employe);
 
-                $("#AssignToId").html(lead + team + qa + other);
+                if (employe == 'Admin' || employe == 'Lead' || employe == 'Supervisor') {
+                    var other = '<optgroup label="Other">';
+                    for (var i  in response.data.other) {
+                        other += '<option value="' + response.data.other[i].id + '">' + response.data.other[i].name + ' - ' + response.data.other[i].employe + '</option>';
+                    }
+                    ;
+                    other += '</optgroup>';
+                }
+
+                $("#AssignToId").append(lead + team + qa + other);
             });
         } else {
             $("#AssignToId").html('');

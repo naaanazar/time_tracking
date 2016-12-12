@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="col-md-9 cta-contents">
                             <div class="span12 add-border-bottom">
-                                <h1 class="h3-my">Projects: <strong>{{ $client->company_name }}</strong></h1>
+                                <h1 class="h3-my">Client: <strong>{{ $client->company_name }}</strong></h1>
                             </div>
                             <div class="cta-desc" style="margin-top: 20px">
                                 <div class="row ">
@@ -151,32 +151,32 @@
                                 <th>Hourly Rate</th>
                                 <th>Created at</th>
                                 @if ($status == 'Admin')
-                                    <th style="min-width: 140px">Action</th>
+                                    <th style="min-width: 140px; width: 140px;" class="center">Action</th>
                                 @endif
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
-                                <th>Project</th>
-                                <th>Company</th>
-                                <th>Lead</th>
-                                <th>Hourly Rate</th>
-                                <th>Created at</th>
+                                <th class="thFoot">Project</ththFoot>
+                                <th class="thFoot">Company</th>
+                                <th class="thFoot">Lead</th>
+                                <th class="thFoot">Hourly Rate</th>
+                                <th class="thFoot">Created at</th>
 
                             </tr>
                             </tfoot>
                             <tbody>
 
                             @foreach( $projects as $project )
-                                <tr class="odd gradeX">
+                                <tr class="odd gradeX getTasks" data-id="{{ $project->id }}">
                                     <td>{{ $project->project_name }}</td>
                                     <td>{{ (isset($client->company_name)) ? $client->company_name : $project->company_name }}</td>
                                     <td>{{ $project->name }}</td>
                                     <td>{{ $project->hourly_rate }}</td>
-                                    <td style="text-align: center">{{ $project->created_at }}</td>
+                                    <td style="text-align: center" >{{ $project->created_at }}</td>
 
                                     @if ($status == 'Admin')
-                                        <td>
+                                        <td class="actionForms" style="text-align: center;">
                                             @if ($status == 'Admin' )
 
                                                 <a href="/project/update/{{ $project->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
