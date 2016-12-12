@@ -17,9 +17,12 @@
             <div class="row-fluid">
                 <div class="span12">
                         <h3 class="h3-my">Projects</h3>
+                    @if ($status == 'Admin'  || $status == 'Supervisor' || $status == 'Lead')
                         <a href="/project/create" style="display:inline-block; margin-left: 25px" class="btn btn-large button-orange">
+
                             <i class="glyphicon glyphicon-plus"></i> Add Project
                         </a>
+                    @endif
                 </div>
             </div>
         @else

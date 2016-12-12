@@ -75,7 +75,7 @@ class TimeManageController extends Controller
 
     public function getProjects($client_id)
     {
-        $result = DB::table('project')->where('client_id', '=', $client_id)->get();
+        $result = DB::table('Project')->where('client_id', '=', $client_id)->get();
         if ($result) {
             return response()->json(['data' => (object)$result]);
         } else {
@@ -143,7 +143,7 @@ class TimeManageController extends Controller
             ]);
             return redirect('/client/all');
         }
-        $client = DB::table('clients')->where('id', '=', $id)->first();
+        $client = DB::table('Clients')->where('id', '=', $id)->first();
         //$client = Client::where( 'id', '=', $id );
 
 
@@ -165,7 +165,7 @@ class TimeManageController extends Controller
      * */
     public function all_client()
     {
-        $clients = DB::table('clients')->get();
+        $clients = DB::table('Clients')->get();
 
         return view('time_manage.clients', compact('clients'));
     }
@@ -246,16 +246,43 @@ class TimeManageController extends Controller
      * */
     public function all_project()
     {
-        $projects = DB::table('Project')
-            ->leftJoin('users', 'Project.lead_id', '=', 'users.id')
-            ->join('Clients', 'Project.client_id', '=', 'Clients.id')
-            ->select('Project.project_name',
+
+        if (Auth::user()['original']['employe'] == 'Developer' || Auth::user()['original']['employe'] == 'QA Engineer') {
+
+
+            $lead = DB::table('teams')->where('id', '=', Auth::user()['original']['users_team_id'])->first();
+            if ($lead->teams_lead_id) {
+                $projects = DB::table('Project')
+                    ->where('lead_id', '=', $lead->teams_lead_id)
+                    ->leftJoin('users', 'Project.lead_id', '=', 'users.id')
+                    ->join('Clients', 'Project.client_id', '=', 'Clients.id')
+                    ->select('Project.project_name',
+                        'Project.id',
+                        'Project.hourly_rate',
+                        'Project.notes',
+                        'Project.created_at',
+                        'users.name', 'Clients.company_name')
+                    ->get();
+            }
+        }
+
+        if(Auth::user()['original']['employe'] == 'Supervisor' || Auth::user()['original']['employe'] == 'Admin' || Auth::user()['original']['employe'] == 'Lead') {
+
+            $projects = DB::table('Project')
+                ->leftJoin('users', 'Project.lead_id', '=', 'users.id')
+                ->join('Clients', 'Project.client_id', '=', 'Clients.id')
+                ->select('Project.project_name',
                     'Project.id',
                     'Project.hourly_rate',
                     'Project.notes',
                     'Project.created_at',
                     'users.name', 'Clients.company_name' )
-            ->get();
+                ->get();
+        }
+
+
+
+
 
         return view('time_manage.projects', compact('projects'));
     }
@@ -389,12 +416,15 @@ class TimeManageController extends Controller
     public function all_tasks()
     {
 
-        if (Auth::user()['original']['employe'] == 'Developer' || Auth::user()['original']['employe'] == 'QA Engineer')
-        $tasks = Task::where('assign_to', '=', Auth::user()['original']['id'])
-        ->with(['project','client'])->get();
+        if (Auth::user()['original']['employe'] == 'Developer' || Auth::user()['original']['employe'] == 'QA Engineer') {
+            $tasks = Task::where('assign_to', '=', Auth::user()['original']['id'])
+                ->with(['Project', 'client'])->get();
+        }
 
-        if(Auth::user()['original']['employe'] == 'Supervisor' || Auth::user()['original']['employe'] == 'Admin' || Auth::user()['original']['employe'] == 'Lead')
-        $tasks = Task::with(['project','client'])->get();
+        if(Auth::user()['original']['employe'] == 'Supervisor' || Auth::user()['original']['employe'] == 'Admin' || Auth::user()['original']['employe'] == 'Lead') {
+
+            $tasks = Task::with(['Project', 'client'])->get();
+        }
 
 
         $i=0;
@@ -431,7 +461,7 @@ class TimeManageController extends Controller
     public function get_project_tasks($project_id)
     {
         $tasks = Task::where('project_id', '=', $project_id)
-        ->with(['project','client'])
+        ->with(['Project','client'])
         ->get();
         $i=0;
 

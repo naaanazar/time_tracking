@@ -75,10 +75,14 @@
                                 @if ($status == 'Admin' || $status == 'HR Manager')
                                     <li> <a tabindex="-1" href="/user/all">Users</a> </li>
                                 @endif
-                                @if ($status != 'HR Manager')
+                                @if ($status == 'Admin' || $status == 'Supervisor')
                                     <li> <a tabindex="-1" href="/client/all">Clients</a> </li>
+                                @endif
+                                @if ($status == 'Admin' || $status == 'Supervisor' || $status == 'Lead' || $status == 'Developer' || $status == 'QA Engineer')
                                     <li> <a tabindex="-1" href="/project/all">Projects</a> </li>
                                     <li> <a tabindex="-1" href="/task/all">Tasks</a> </li>
+                                @endif
+                                @if ($status == 'Admin' || $status == 'Supervisor' || $status == 'Lead')
                                     <li> <a tabindex="-1" href="/team/all">Teams</a> </li>
                                 @endif
                                 <li role="separator" class="divider"></li>
