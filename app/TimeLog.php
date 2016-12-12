@@ -22,4 +22,9 @@ class TimeLog extends Model
     {
         return $this->belongsTo('App\TimeTrack', 'track_id', 'id');
     }
+
+    public function task()
+    {
+        return $this->belongsTo('App\Task', 'task_id', 'id');
+    }
 }
