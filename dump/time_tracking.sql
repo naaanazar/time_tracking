@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Дек 12 2016 г., 13:11
+-- Время создания: Дек 12 2016 г., 14:00
 -- Версия сервера: 5.6.26
 -- Версия PHP: 5.6.12
 
@@ -169,11 +169,11 @@ INSERT INTO `teams` (`id`, `teams_lead_id`, `team_name`) VALUES
 
 CREATE TABLE IF NOT EXISTS `time_log` (
   `id` int(16) NOT NULL AUTO_INCREMENT,
-  `task_id` int(16) NOT NULL,
+  `track_id` int(16) NOT NULL,
   `start` date NOT NULL,
   `finish` date NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `task_id` (`task_id`)
+  KEY `task_id` (`track_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -247,7 +247,7 @@ ALTER TABLE `tasks`
 -- Ограничения внешнего ключа таблицы `time_log`
 --
 ALTER TABLE `time_log`
-  ADD CONSTRAINT `time_log_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `time_track` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `time_log_ibfk_1` FOREIGN KEY (`track_id`) REFERENCES `time_track` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `time_track`
