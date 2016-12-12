@@ -651,7 +651,6 @@ class TimeManageController extends Controller
         $this->validate($request, [
             'company_id' => 'integer',
             'project_id' => 'integer',
-
             'task_type' => 'required|min:2|max:30',
             'task_description' => 'required|regex:/[a-zA-Z0-9]+/|max:1000',
             'task_titly' => 'min:2|max:30',
