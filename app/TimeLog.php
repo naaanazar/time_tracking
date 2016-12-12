@@ -14,6 +14,7 @@ class TimeLog extends Model
      */
     protected $fillable = [
         'task_id',
+        'track_id',
         'start',
         'finish'
     ];

@@ -31,17 +31,17 @@ class TimeTrackController extends Controller
         if( Input::all() == true ) {
             TimeTrack::create( [ Input::all() ] );
 
-            return;
+            return true;
         }
 
         if( in_array(Auth::user()->employe, $this->users ) ) {
             $tasks = Task::where('assign_to', '=', Auth::user()->id )
                 ->with('project', 'track', 'track_log')->get();
-
+            
             return view('', compact('tasks'));
         }
 
-        $tasks = Taskt::with('project', 'track', 'track_log')->get();
+        $tasks = Task::with('project', 'track', 'track_log')->get();
 
         return view('', compact('tasks'));
     }

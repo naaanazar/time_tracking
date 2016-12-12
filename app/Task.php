@@ -45,6 +45,6 @@ class Task extends Model
 
     public function track_log()
     {
-        return $this->hasMany('App\TimeLog', 'id', 'task_id');
+        return $this->hasMany('App\TimeLog');
     }
 }
