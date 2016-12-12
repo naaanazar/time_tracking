@@ -4,7 +4,12 @@
 'use strict';
 $(document).ready(function(){
 
-    //table x scroll
+
+
+    //timetrack
+
+    $('#timeTrackShowDate').html(moment().format('dddd, MMMM Do YYYY'));
+
 
 
 

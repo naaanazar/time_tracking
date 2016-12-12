@@ -16,6 +16,12 @@ body {
     margin-bottom: 60px!important;
 }
 
+.showDate{
+    margin-top: 0px;
+    font-weight: normal;
+    color: #ccc;
+}
+
 .table_container{
     overflow-x: auto;
 
@@ -57,6 +63,23 @@ tfoot {
 
 thead {
     display: table-row-group;
+}
+
+.labelTrack{
+    text-align: left;!important;
+    padding-top: 10px;!important;
+    font-size: 16px;!important;
+}
+
+.inputTrackPadding{
+    color:#999!important;
+    padding: 4px!important;
+
+}
+
+.form-group-edit{
+    padding-left: 0px!important;
+    padding-right: 0px!important;
 }
 
 
