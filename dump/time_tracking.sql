@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Дек 10 2016 г., 12:01
+-- Время создания: Дек 12 2016 г., 16:14
 -- Версия сервера: 5.6.26
 -- Версия PHP: 5.6.12
 
@@ -37,16 +37,14 @@ CREATE TABLE IF NOT EXISTS `Clients` (
   `updated_at` date NOT NULL,
   `created_at` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Дамп данных таблицы `Clients`
 --
 
 INSERT INTO `Clients` (`id`, `company_name`, `company_address`, `website`, `contact_person`, `email`, `phone_number`, `updated_at`, `created_at`) VALUES
-(2, 'test', 'fdsfdsf', 'https://laravel.com', 'dasdasdds', 'asdasd@dfggfd.com', '34545435', '2016-12-08', '2016-12-08'),
-(3, 'tuzik', 'dee', 'https://laracasts.com', 'sadas', 'sad@gmail.com', '2344234', '2016-12-09', '2016-12-09'),
-(5, 'Pusir', 'fdfd dfdsfds', 'https://laracasts.com/skills/php', 'dsffdsg!', 'rtret@dfdfs.com', '324234', '2016-12-10', '2016-12-10');
+(6, 'Mss12', 'sads sadsad', 'https://laravel.com/docs/5.3/queries#selects', 'Petro', 'petro@gmail.com', '3434', '2016-12-10', '2016-12-10');
 
 -- --------------------------------------------------------
 
@@ -100,27 +98,15 @@ CREATE TABLE IF NOT EXISTS `Project` (
   `created_at` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `client_id` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Дамп данных таблицы `Project`
 --
 
 INSERT INTO `Project` (`id`, `client_id`, `lead_id`, `project_name`, `hourly_rate`, `notes`, `updated_at`, `created_at`) VALUES
-(3, 2, 0, 'qweqwe', '10.00', 'qwewqeqwe', '2016-12-08', '2016-12-08'),
-(4, 2, 42, 'tester', '10.00', 'dasddasdasdds', '2016-12-08', '2016-12-08'),
-(5, 2, 0, 'testin', '10.00', 'dasdasdsdasd', '2016-12-09', '2016-12-08'),
-(6, 2, 0, 'testing', '11.00', 'dasdasd', '2016-12-09', '2016-12-09'),
-(7, 3, 0, 'tttop', '0.00', 'dsdsada', '2016-12-09', '2016-12-09'),
-(8, 2, 0, 'asdasd', '0.00', 'sadasd', '2016-12-09', '2016-12-09'),
-(9, 2, 42, 'testing', '10.00', 'sdsdsdsd sdasdsa asdsdasd', '2016-12-09', '2016-12-09'),
-(10, 2, 42, 'testing', '10.00', 'sdsdsdsd sdasdsa asdsdasd', '2016-12-09', '2016-12-09'),
-(11, 2, 0, 'testing', '10.00', 'sdsdsdsd sdasdsa asdsdasd', '2016-12-09', '2016-12-09'),
-(12, 2, 0, 'testin', '10.00', 'sdsdsdsd sdasdsa asdsdasd', '2016-12-09', '2016-12-09'),
-(13, 2, 0, 'testing', '10.00', 'sdsdsdsd sdasdsa asdsdasd', '2016-12-09', '2016-12-09'),
-(14, 2, 0, 'testin', '10.00', 'sdsdsdsd ', '2016-12-09', '2016-12-09'),
-(15, 2, 0, 'testin', '10.00', '', '2016-12-09', '2016-12-09'),
-(16, 2, 42, 'asdas', '50.00', 'asdas', '2016-12-09', '2016-12-09');
+(19, 6, 0, 'project1', '50.00', 'sdsdsa', '2016-12-10', '2016-12-10'),
+(20, 6, 49, 'testing', '50.00', 'dsfd', '2016-12-10', '2016-12-10');
 
 -- --------------------------------------------------------
 
@@ -143,15 +129,17 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   PRIMARY KEY (`id`),
   KEY `company_id` (`company_id`,`project_id`),
   KEY `project_id` (`project_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Дамп данных таблицы `tasks`
 --
 
 INSERT INTO `tasks` (`id`, `company_id`, `project_id`, `task_type`, `task_titly`, `alloceted_hours`, `assign_to`, `task_description`, `billable`, `created_at`, `updated_at`) VALUES
-(3, 2, 4, 'Bug Fixing', 'dsfdsf', '50.00', '42', 'dsfdsdf', 1, '2016-12-09', '2016-12-09'),
-(4, 2, 4, 'Bug Fixing', 'sdsda', '50.00', '27', 'asasds', 1, '2016-12-09', '2016-12-09');
+(10, 6, 19, 'Bug Fixing', 'AAAA', '50.00', '27', 'fdsfd ', 1, '2016-12-10', '2016-12-10'),
+(11, 6, 20, 'Quality Assurance', 'sas', '100.00', '49', 'dsd', 1, '2016-12-10', '2016-12-10'),
+(12, 6, 20, 'Bug Fixing', 'asdasd', '50.00', '49', 'dsadas', 0, '2016-12-12', '2016-12-12'),
+(13, 6, 20, 'Bug Fixing', 'sadasdasd', '50.00', '49', 'asdasd', 0, '2016-12-12', '2016-12-12');
 
 -- --------------------------------------------------------
 
@@ -164,16 +152,65 @@ CREATE TABLE IF NOT EXISTS `teams` (
   `teams_lead_id` int(10) NOT NULL,
   `team_name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Дамп данных таблицы `teams`
 --
 
 INSERT INTO `teams` (`id`, `teams_lead_id`, `team_name`) VALUES
-(1, 26, 'php'),
-(2, 42, 'js'),
-(3, 0, 'ruby');
+(8, 49, 'php');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `time_log`
+--
+
+CREATE TABLE IF NOT EXISTS `time_log` (
+  `id` int(16) NOT NULL AUTO_INCREMENT,
+  `task_id` int(16) NOT NULL,
+  `track_id` int(16) NOT NULL,
+  `start` datetime NOT NULL,
+  `finish` datetime NOT NULL,
+  `updated_at` date NOT NULL,
+  `created_at` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `task_id` (`track_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Дамп данных таблицы `time_log`
+--
+
+INSERT INTO `time_log` (`id`, `task_id`, `track_id`, `start`, `finish`, `updated_at`, `created_at`) VALUES
+(1, 10, 1, '2016-12-12 15:20:30', '2016-12-12 16:20:30', '2016-12-12', '2016-12-12');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `time_track`
+--
+
+CREATE TABLE IF NOT EXISTS `time_track` (
+  `id` int(16) NOT NULL AUTO_INCREMENT,
+  `task_id` int(16) NOT NULL,
+  `date_start` datetime NOT NULL,
+  `date_finish` datetime NOT NULL,
+  `additional_cost` int(16) NOT NULL,
+  `total_time` int(16) NOT NULL,
+  `updated_at` date NOT NULL,
+  `created_at` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `task_id` (`task_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Дамп данных таблицы `time_track`
+--
+
+INSERT INTO `time_track` (`id`, `task_id`, `date_start`, `date_finish`, `additional_cost`, `total_time`, `updated_at`, `created_at`) VALUES
+(1, 10, '2016-12-12 14:19:20', '2016-12-12 15:19:20', 5, 3600, '2016-12-12', '2016-12-12');
 
 -- --------------------------------------------------------
 
@@ -192,31 +229,21 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `employe` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `users_team_id` int(10) NOT NULL DEFAULT '0',
-  `team_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'no team',
   `hourly_rate` float(5,2) DEFAULT '0.00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=45 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=53 ;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `google_id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `employe`, `users_team_id`, `team_name`, `hourly_rate`) VALUES
-(2, NULL, '  terr ', 'terr@gmail.coms', '$2y$10$oHZj9FU1lHC3hctB90asLuGaSmqRk2ZYWzNd0jqZjpZ7tlW48RAFK', 'UzpDLGbrN2d6sa6x3Z9UKhzKhbo2oszSoYP6wAjcf56BOMS8IGVSuTtO9bi0', '2016-12-02 07:13:16', '2016-12-06 13:38:55', 'Admin', 1, 'php', 9.11),
-(25, NULL, ' Nazal', 'nazar@gmail.com', '$2y$10$SBqmNY8Lfpyk7yJhoyQPE.2cW5wcwiAOdODV7jmGwa9dOFAWPA0gG', NULL, '2016-12-06 11:02:48', '2016-12-06 12:50:37', 'Developer', 2, 'js', 10.10),
-(26, NULL, ' Voldemort', 'vold@gmail.com', '$2y$10$KokVdfiMx7dSpXZZr/E7BezipXq4lBmNz0rNE4FxzRYj.XGux3rIG', NULL, '2016-12-06 11:03:15', '2016-12-06 13:05:18', 'Lead', 2, 'js', 8.00),
-(27, NULL, ' Anton', 'an@gmail.com', '$2y$10$mEzQ.b0mX8H9qTSR27vrN.uq64KQF9O0jW4mdVBFEPY4N8gXIpiu6', 'OcZMjjPCMn7fQrJPrQ7b3qdqKzblx7v0jGUZXDiogG0EOOiyWkr1jOtiyOTJ', '2016-12-06 13:40:59', '2016-12-09 10:17:56', 'Admin', 1, 'php', 10.00),
-(31, NULL, '  New Admins', 'new@gmail.com', '$2y$10$dhHa2OHYFDIUSjuEk73UhuMIDpjEeUnv7bw4/flzTAdJhA/0kLndi', NULL, '2016-12-07 05:42:39', '2016-12-07 08:51:43', 'QA Engineer', 1, 'php', 0.00),
-(32, NULL, ' Toxic', 'tex@gmail.com', '$2y$10$zwihoNnJcMOr0BDad.xAB.6woYxhQhnDL531OVT1QCaaL2XpQc2k.', NULL, '2016-12-07 05:43:46', '2016-12-07 05:44:13', 'Developer', 1, 'php', 10.10),
-(35, NULL, 'sadddas', 'ssdd@sdad.com', '$2y$10$Yusihul3N5glb2usRRbRMusGltwqscHjLrR914e43JKOUIla8ymX.', NULL, '2016-12-08 10:27:47', '2016-12-08 10:27:47', 'Admin', 0, '', 0.00),
-(36, NULL, 'xzcxzc', 'dsadsasd@sad.com', '$2y$10$svOm7vbbIAsVFI7WcFL8MeJgkRerTRrWD3HHa.4.ddZJbingkz9g6', NULL, '2016-12-08 10:28:05', '2016-12-08 10:28:05', 'Admin', 0, '', 0.00),
-(37, NULL, 'sdasff', 'dfdas@df.com', '$2y$10$yNuZhWV81ZEbhWwMhpZe3eEPLV9vxAnZj9NDD9ovj7g1c/E42sCf2', NULL, '2016-12-08 10:28:18', '2016-12-08 10:28:18', 'Admin', 0, '', 0.00),
-(39, NULL, 'Anton', 'tester@gmail.com', '$2y$10$SznzVfJCuXIlE6hW3qE2Suw0YZib0Xo1yVRF7AaRHna/EgJjUfdAq', 'cCi2ghSlQUb9AYUG7CkWo1J4MFuWRBHJAWiXt3jtcAmWTleITEP4PGgU24iF', '2016-12-08 10:31:45', '2016-12-08 12:00:36', 'Admin', 0, 'no team', 0.00),
-(40, NULL, 'Testing', 'testin@gmail.com', '$2y$10$oGSqALqndFdiLBqMleXXvOiX8aZ7Ck8kGjujJcDfk6C42eMAxhckq', NULL, '2016-12-09 05:23:42', '2016-12-09 05:23:42', 'Admin', 0, '', 0.00),
-(42, NULL, '  AAAa', 'asdasdd@erewr.com', '$2y$10$TrQSU.RpCZwCne.yoEYES.iyp8vRFcDVDQTvVrxNH6r88xvZJ47V.', NULL, '2016-12-09 05:25:02', '2016-12-09 06:28:54', 'Lead', 1, 'php', 10.00),
-(43, NULL, 'Tyzik', 'tyz@gmail.com', '$2y$10$57jm6RTHxfSUKG7otDggruIqXHUK7RWOp/YgjwaLh/aXCUqPHyI9i', NULL, '2016-12-09 06:33:11', '2016-12-09 06:33:11', 'Admin', 0, '', 0.00),
-(44, NULL, 'add', 'admin@admin.com', '$2y$10$098xVr3AdbpptAkhtYtUCOWYUEqiaVD/RBEL86W8W0qWDl6cd4DRC', 'GL1JQJlh6PiluMr1rrzhX6u42t7ydvcXT8lfuFih66cMNW9EA2p8OFf27ooE', '2016-12-09 06:43:22', '2016-12-09 06:44:11', 'Admin', 0, 'no team', 0.00);
+INSERT INTO `users` (`id`, `google_id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `employe`, `users_team_id`, `hourly_rate`) VALUES
+(27, NULL, ' Anton', 'an@gmail.com', '$2y$10$mEzQ.b0mX8H9qTSR27vrN.uq64KQF9O0jW4mdVBFEPY4N8gXIpiu6', 'OcZMjjPCMn7fQrJPrQ7b3qdqKzblx7v0jGUZXDiogG0EOOiyWkr1jOtiyOTJ', '2016-12-06 13:40:59', '2016-12-09 10:17:56', 'Admin', 8, 10.00),
+(44, NULL, 'add', 'admin@admin.com', '$2y$10$098xVr3AdbpptAkhtYtUCOWYUEqiaVD/RBEL86W8W0qWDl6cd4DRC', 'GL1JQJlh6PiluMr1rrzhX6u42t7ydvcXT8lfuFih66cMNW9EA2p8OFf27ooE', '2016-12-09 06:43:22', '2016-12-09 06:44:11', 'Admin', 0, 0.00),
+(49, NULL, ' Masik', 'sdasd@wddew.com', '$2y$10$f5uWksp/edR9G5Yuatwuk.MZuZtBFUDplTbZW9dJa/dcqm3b0ICT6', NULL, '2016-12-10 14:07:09', '2016-12-10 14:07:49', 'Lead', 8, 50.00),
+(51, NULL, 'Asas', 'asdasd@dfggfd.comss', '$2y$10$3NCNznkJeQpCXOqc18bHR.pB8cLDW2EXzSvuh6XX/L98rE1y5DbiK', NULL, '2016-12-10 14:43:18', '2016-12-10 14:43:18', 'Developer', 8, 50.00),
+(52, NULL, ' Dev', 'sad@gmail.com1', '$2y$10$Wy8rO31Xp1iI8a.ZmVz9ceh.xBO9THdptcKD897hB2w7vk05xMaGK', NULL, '2016-12-12 05:32:05', '2016-12-12 05:32:17', 'Admin', 0, 0.00);
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -234,6 +261,18 @@ ALTER TABLE `Project`
 ALTER TABLE `tasks`
   ADD CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `Clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tasks_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `Project` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `time_log`
+--
+ALTER TABLE `time_log`
+  ADD CONSTRAINT `time_log_ibfk_1` FOREIGN KEY (`track_id`) REFERENCES `time_track` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `time_track`
+--
+ALTER TABLE `time_track`
+  ADD CONSTRAINT `time_track_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

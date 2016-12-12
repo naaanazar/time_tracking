@@ -37,4 +37,14 @@ class Task extends Model
     {
         return $this->belongsTo('App\User', 'assign_to', 'id');
     }
+
+    public function track()
+    {
+        return $this->hasMany('App\TimeTrack');
+    }
+
+    public function track_log()
+    {
+        return $this->hasMany('App\TimeLog');
+    }
 }
