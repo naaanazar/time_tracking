@@ -103,7 +103,7 @@
                             <input type="number" steep="0.01" style="padding: 10px; max-width: 65%;" class="inputTrackPadding focused my_input " name="usr_time">
                              <span class="" style="display: inline-block">
                                 <label  class="labelTrack" >
-                                   Billable Time<input type="checkbox">
+                                   Billable Time <input type="checkbox">
                                 </label>
                              </span>
                         </div>
