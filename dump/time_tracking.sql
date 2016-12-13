@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Дек 12 2016 г., 16:14
+-- Время создания: Дек 13 2016 г., 18:39
 -- Версия сервера: 5.6.26
 -- Версия PHP: 5.6.12
 
@@ -169,6 +169,7 @@ INSERT INTO `teams` (`id`, `teams_lead_id`, `team_name`) VALUES
 
 CREATE TABLE IF NOT EXISTS `time_log` (
   `id` int(16) NOT NULL AUTO_INCREMENT,
+  `project_id` int(16) NOT NULL,
   `task_id` int(16) NOT NULL,
   `track_id` int(16) NOT NULL,
   `start` datetime NOT NULL,
@@ -183,8 +184,8 @@ CREATE TABLE IF NOT EXISTS `time_log` (
 -- Дамп данных таблицы `time_log`
 --
 
-INSERT INTO `time_log` (`id`, `task_id`, `track_id`, `start`, `finish`, `updated_at`, `created_at`) VALUES
-(1, 10, 1, '2016-12-12 15:20:30', '2016-12-12 16:20:30', '2016-12-12', '2016-12-12');
+INSERT INTO `time_log` (`id`, `project_id`, `task_id`, `track_id`, `start`, `finish`, `updated_at`, `created_at`) VALUES
+(1, 19, 10, 1, '2016-12-12 14:30:29', '2016-12-12 16:20:30', '2016-12-12', '2016-12-12');
 
 -- --------------------------------------------------------
 
@@ -194,9 +195,13 @@ INSERT INTO `time_log` (`id`, `task_id`, `track_id`, `start`, `finish`, `updated
 
 CREATE TABLE IF NOT EXISTS `time_track` (
   `id` int(16) NOT NULL AUTO_INCREMENT,
+  `project_id` int(16) NOT NULL,
   `task_id` int(16) NOT NULL,
   `date_start` datetime NOT NULL,
   `date_finish` datetime NOT NULL,
+  `duration` int(16) NOT NULL,
+  `Billable_time` tinyint(1) NOT NULL,
+  `description` text NOT NULL,
   `additional_cost` int(16) NOT NULL,
   `total_time` int(16) NOT NULL,
   `updated_at` date NOT NULL,
@@ -209,8 +214,8 @@ CREATE TABLE IF NOT EXISTS `time_track` (
 -- Дамп данных таблицы `time_track`
 --
 
-INSERT INTO `time_track` (`id`, `task_id`, `date_start`, `date_finish`, `additional_cost`, `total_time`, `updated_at`, `created_at`) VALUES
-(1, 10, '2016-12-12 14:19:20', '2016-12-12 15:19:20', 5, 3600, '2016-12-12', '2016-12-12');
+INSERT INTO `time_track` (`id`, `project_id`, `task_id`, `date_start`, `date_finish`, `duration`, `Billable_time`, `description`, `additional_cost`, `total_time`, `updated_at`, `created_at`) VALUES
+(1, 19, 10, '2016-12-12 14:19:20', '2016-12-12 15:19:20', 0, 0, '', 5, 3600, '2016-12-12', '2016-12-12');
 
 -- --------------------------------------------------------
 

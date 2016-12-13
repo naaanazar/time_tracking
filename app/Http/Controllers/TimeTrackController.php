@@ -89,7 +89,8 @@ class TimeTrackController extends Controller
             'date_start' => '',
             'date_finish' => '',
             'duration' => 'required|1000',
-            'additional_cost' => 'required|integer'
+            'additional_cost' => 'required|integer',
+            'Billable_time' => ''
         ]);
     }
 }

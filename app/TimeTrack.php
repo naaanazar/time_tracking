@@ -18,6 +18,7 @@ class TimeTrack extends Model
         'date_start',
         'date_finish',
         'duration',
+        'Billable_time',
         'additional_cost',
         'total_time'
     ];
