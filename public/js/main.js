@@ -180,7 +180,8 @@ $(document).ready(function(){
     }
     function timer() {
         t = setTimeout(add, 1000);
-        console.log(t);    }
+    }
+
     timer();
 
    clearTimeout(t);
@@ -411,7 +412,7 @@ $(document).ready(function(){
     });
 
     var list = $('#AssignToId').data('all');
-    console.log(list);
+
     if(list) {
         //  $(document).on("mouseenter", "#AssignToId", function () {
         console.log('asdsd');

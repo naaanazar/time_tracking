@@ -14,8 +14,11 @@ class TimeTrack extends Model
      */
     protected $fillable = [
         'task_id',
+        'project_id',
         'date_start',
         'date_finish',
+        'duration',
+        'Billable_time',
         'additional_cost',
         'total_time'
     ];

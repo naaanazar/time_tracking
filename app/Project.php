@@ -29,4 +29,14 @@ class Project extends Model
     {
         return $this->hasMany('App\task');
     }
+
+    public function track()
+    {
+        return $this->hasMany('App\TimeTrack');
+    }
+
+    public function track_log()
+    {
+        return $this->hasMany('App\TimeLog');
+    }
 }
