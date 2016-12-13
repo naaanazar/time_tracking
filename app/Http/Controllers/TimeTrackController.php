@@ -54,13 +54,24 @@ class TimeTrackController extends Controller
      * create time log
      * action works with ajax
      * */
-    public function create_time_log()
+    public function create_time_log( $id = false )
     {
+        if( $id == true ) {
+            TimeLog::where('id', '=', $id)->update([ Input::all() ]);
+            return true;
+        }
+
         if( Input::all() == true ) {
             TimeLog::create( [ Input::all() ] );
 
             return true;
         }
         return false;
+    }
+
+    public function test()
+    {
+        $time = new Task();
+        return $time->time_parser();
     }
 }
