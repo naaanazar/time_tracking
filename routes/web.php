@@ -70,12 +70,13 @@ Route::group(['middleware' => ['permision']], function () {
     Route::get('/trecking', 'TimeTrackController@trecking');
     Route::post('/trecking', 'TimeTrackController@trecking');
     Route::post('/create/timelog/{id?}', 'TimeTrackController@create_time_log')->where(['id' => '[0-9]+']);
+    Route::get('/tasks/get/{project_id}', 'TimeTrackController@getTasks')->where(['id' => '[0-9]+']);
 
     // forbidden
     Route::get('/register', 'TimeManageController@index');
 
     //testing
-    Route::get('/test', 'TimeTrackController@test');
+    //Route::get('/test', 'TimeTrackController@test');
 });
 
 // Auth

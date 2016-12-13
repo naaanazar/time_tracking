@@ -43,16 +43,24 @@
 
             <div class="col-sm-6 col-md-6 col-lg-6" style="border-right: 1px solid #ccc; padding-top: 20px">
 
-                <form  method="POST" action="" id="addTrackForm">
-
+                <form  method="POST" action="/trecking" id="addTrackForm">
+                    {{ csrf_field() }}
                     <div class="form-group form-group-edit col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                         <div class="col-xs-2 col-sm-4 col-md-3 col-lg-3" style="text-align: right;">
                             <label class="control-label labelTrack" for="trackProjectId">Project</label>
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
-
-                                <select name="projects" class="inputTrackPadding focused my_input"  id="trackProjectId" style="height: 35px;" required>
+                                <select name="project_id" class="inputTrackPadding focused my_input"  id="trackProjectId" style="height: 35px;" required>
+                                    <option selected disabled>select project</option>
+                                    @foreach( $tasks as $task )
+                                        <option value="{{ $task->id }}">{{ $task->project_name }}</option>
+                                    @endforeach
                                 </select>
+                                @if ($errors->has('project_id'))
+                                    <span class="help-block">
+                                                <strong style="color:#802420">{{ $errors->first('project_id') }}</strong>
+                                            </span>
+                                @endif
                         </div>
                     </div>
 
@@ -63,7 +71,13 @@
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
 
                             <select name="task_id" class="inputTrackPadding focused my_input"  id="trackTaskId"  style="height: 35px;" required>
+
                             </select>
+                            @if ($errors->has('task_id'))
+                                <span class="help-block">
+                                                <strong style="color:#802420">{{ $errors->first('task_id') }}</strong>
+                                            </span>
+                            @endif
                         </div>
                     </div>
 
@@ -143,6 +157,11 @@
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
                            <textarea class="inputTrackPadding focused my_input " rows="7" name="description" id="trackDescription"></textarea>
                         </div>
+                        @if ($errors->has('description'))
+                            <span class="help-block">
+                                                <strong style="color:#802420">{{ $errors->first('description') }}</strong>
+                                            </span>
+                        @endif
                     </div>
 
                     <div class="form-group form-group-edit col-xs-12 col-sm-12 col-md-12 col-lg-12" >
@@ -150,12 +169,12 @@
                             <label class="control-label labelTrack" for=""></label>
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9"  style="margin-top: 20px">
-                          <bytton id="" class="btn button-orange">Submit</button>
+                          <button type="submit" id="" class="btn button-orange">Submit</button>
                         </div>
                     </div>
 
 
-                </form
+                </form>
 
             </div>
             </div>
@@ -194,6 +213,7 @@
 
 
     </div>
-
+    <script src="/js/jquery/jquery-3.1.1.min.js"></script>
+    <script src="/js/tasks.js"></script>
 
 @endsection

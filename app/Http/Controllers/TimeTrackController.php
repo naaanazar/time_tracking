@@ -25,10 +25,12 @@ class TimeTrackController extends Controller
     /*
      * trecing time action
      * */
-    public function trecking()
+    public function trecking(Request $request)
     {
         if( Input::all() == true ) {
-            TimeTrack::create( [ Input::all() ] );
+            $this->validation_track($request);
+
+            TimeTrack::create( Input::all() );
 
             return true;
         }
@@ -37,14 +39,14 @@ class TimeTrackController extends Controller
 
         if( in_array(Auth::user()->employe, $this->users ) ) {
             $tasks = Task::where('assign_to', '=', Auth::user()->id )
-                ->with('project', 'track', 'track_log')->get();
+                ->with('track', 'track_log')->get();
 
             $tasks = $task->time_counter($tasks);
 
             return view('', compact('tasks'));
         }
 
-        $tasks = Task::with('project', 'track', 'track_log')->get();
+        $tasks = Project::with('task', 'track', 'track_log')->get();
         $tasks = $task->time_counter($tasks);
 
         return view('time_track.time_track', compact('tasks'));
@@ -69,9 +71,25 @@ class TimeTrackController extends Controller
         return false;
     }
 
-    public function test()
+    public function getTasks($project_id)
     {
-        $time = new Task();
-        return $time->time_parser();
+        $result = Task::where('project_id', '=', $project_id)->get();
+        if ($result) {
+            return response()->json(['data' => (object)$result]);
+        } else {
+            return response()->json(['data' => 'false']);
+        }
+
+        return response()->json(['data' => (object)$result]);
+    }
+
+    private function validation_track($request)
+    {
+        $this->validate($request, [
+            'date_start' => '',
+            'date_finish' => '',
+            'duration' => 'required|1000',
+            'additional_cost' => 'required|integer'
+        ]);
     }
 }
