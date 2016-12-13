@@ -1,4 +1,26 @@
 
+@media (min-width: 1500px) {
+    .container {
+        width: 1500px !important;
+    }
+}
+
+.trackLog{
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.trackLogTable>tbody>tr:hover
+   {
+     background-color: #EAEAEA;
+ }
+
+.trackLogWrite{
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
 td {
     vertical-align: inherit !important;
     border-left: none !important;

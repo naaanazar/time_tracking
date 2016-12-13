@@ -71,7 +71,40 @@
                             <label class="control-label labelTrack" for="" >Start</label>
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
-                            <input type="time" style="padding: 10px" class="inputTrackPadding" name="usr_time">
+                            <div class="col-md-4 col-lg-4" style="padding: 0px">
+                            <span class="input-group" >
+                                <input type="time" style="width: 70%" class="inputTrackPadding form-control" name="usr_time">
+                                <span class="input-group-btn" style=" float:left ">
+                                    <button type="button" class="btn btn-default" style="padding:6px 1px">now</button>
+                                    <button type="button" class="btn btn-default" style="padding:6px 3px">+</button>
+                                    <button type="button" class="btn btn-default" style="padding:6px 3px">-</button>
+                                </span>
+                            </span>
+                            </div>
+                            <div class="col-sm-12 col-md-2 col-lg-2" style="padding: 0px; text-align: center;">
+                            <label class="labelTrack">Finish</label>
+                                </div>
+                            <div class="col-md-4 col-lg-4" style="padding: 0px">
+                            <span class="input-group" >
+                                <input type="time"  style="width: 70%; " class="inputTrackPadding form-control" name="usr_time">
+                                <span class="input-group-btn" style=" float:left ">
+                                    <button type="button" class="btn btn-default" style="padding:6px 1px">now</button>
+                                    <button type="button" class="btn btn-default" style="padding:6px 3px">+</button>
+                                    <button type="button" class="btn btn-default" style="padding:6px 3px">-</button>
+                                </span>
+                            </span>
+                            </div>
+
+                            <div class="col-md-2 col-lg-2" style="padding: 0px">
+                               <span class="" style="display: inline-block">
+                                <label class = "labelTrack">
+                                    <input type="checkbox"> Next Day
+                                </label>
+                             </span>
+                            </div>
+
+                               <!-- </div>
+
                             <span>
                                 <label class="labelTrack" for="">Finish</label>
                                 <input type="time" style="padding: 10px" class="inputTrackPadding" name="usr_time">
@@ -80,8 +113,8 @@
                                 <label class = "labelTrack">
                                     <input type="checkbox"> Next Day
                                 </label>
-                             </span>
-                         </div>
+                             </span>-->
+                        </div>
                     </div>
 
                     <div class="form-group form-group-edit col-xs-12 col-sm-12 col-md-12 col-lg-12" >
@@ -131,10 +164,38 @@
                 </form
 
             </div>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-
             </div>
-        </div>
+            <div class="col-sm-6 col-md-6 col-lg-6"  style="border-right: 1px solid #ccc; padding-top: 20px">
+                <table class="col-md-12 trackLogTable" id="trackLogTableId">
+                    <tbody>
+
+                    <tr class="trackLog trackLogFirst" id="firstTrack" >
+                        <td class="">
+                            <span class="ng-binding"></span>
+                            <p class="projecttask"> - nazar - ertretret</p>
+                        </td>
+                        <td class="text-right">
+                            <h3 id="timeTrackFirstSegment" style="margin: 7px 0px ">0:00:00</h3>
+                            <p class="project" >11:32 - 11:32</p>
+                        </td>
+                        <td class="text-right table-cell-actions">
+                            <div class="btn-group">
+                                <button class="btn btn-default" id="startTrack">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </button>
+                                <button class="btn btn-default" id="editTrack">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </button>
+                                <button class="btn btn-default" id="deleteTrack">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                   </tbody>
+                </table>
+            </div>
+
 
 
 
