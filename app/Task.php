@@ -62,7 +62,7 @@ class Task extends Model
         foreach( $data as $value ) {
             foreach( $value->track_log as $val )
             {
-                $diff = strtotime(date('Y-m-d H:i:s')) - strtotime($val->start) - $this->time_parser($val->start);
+                $diff = strtotime(date('Y-m-d H:i:s')) - strtotime($val->start); // -  $this->time_parser($val->start);
                 $value->track_log->time_diff = $this->time_diff($diff);
             }
         }

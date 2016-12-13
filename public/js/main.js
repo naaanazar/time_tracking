@@ -5,10 +5,147 @@
 $(document).ready(function(){
 
 
-
-
-
     //timetrack
+
+    var dStart,
+        dFinish,
+        duration ;
+
+    $('#formTrackStart').on('mouseleave',function(){
+        trackStart();
+
+    });
+
+    $('#formTrackStart').on('click',function(){
+        trackStart();
+
+    });
+
+    $('#formTrackFinish').on('mouseleave',function(){
+        trackFinish();
+    });
+
+    $('#formTrackFinish').on('click',function(){
+        trackFinish();
+    });
+
+    function trackStart(){
+        console.log('11');
+        if (hasValue("#formTrackStart") || hasValue("#formTrackFinish")){
+            // console.log('2');
+            $("#timeDuration").attr('disabled', 'disabled');
+            var dateStringStart = $("#formTrackStart").val();
+            //      console.log(moment(dateString, "HH:mm").isValid() + moment(dateString, "HH:mm").format('HH:mm'));
+
+            if(moment(dateStringStart, "HH:mm").isValid()){
+                var dateString = moment(dateStringStart, "HH:mm").format('HH:mm');
+                $('#formTrackStart').val(dateString);
+                dStart = new Date();
+                dStart.setHours(dateString.slice(0,2));
+                dStart.setMinutes(dateString.slice(3));
+                dStart.setSeconds('0');
+                dStart.setMilliseconds('0');
+            } else {
+                $('#formTrackStart').val('incorect');
+            }
+
+
+        } else{
+            $("#timeDuration").removeAttr('disabled');
+        }
+
+        if(dFinish && dStart){
+
+            timeDuration(dFinish,  dStart)
+        }
+    }
+
+    function trackFinish(){
+
+        console.log('11');
+        if (hasValue("#formTrackStart") || hasValue("#formTrackFinish")){
+            // console.log('2');
+            $("#timeDuration").attr('disabled', 'disabled');
+            var dateStringFinish = $("#formTrackFinish").val();
+            //      console.log(moment(dateString, "HH:mm").isValid() + moment(dateString, "HH:mm").format('HH:mm'));
+
+            if(moment(dateStringFinish, "HH:mm").isValid()){
+                var dateString = moment(dateStringFinish, "HH:mm").format('HH:mm');
+                $('#formTrackFinish').val(dateString);
+                dFinish = new Date();
+                dFinish.setHours(dateString.slice(0,2));
+                dFinish.setMinutes(dateString.slice(3));
+                dFinish.setSeconds('0');
+                dFinish.setMilliseconds('0');
+            } else {
+                $('#formTrackFinish').val('incorect');
+            }
+
+
+        } else{
+            $("#timeDuration").removeAttr('disabled');
+        }
+
+
+
+        if(dFinish && dStart){
+
+            timeDuration(dFinish,  dStart)
+        }
+
+    }
+
+
+    function timeDuration(dFinish,  dStart) {
+
+        if (dFinish.getHours() == dStart.getHours && dFinish.getMinutes() == dStart.getMinutes() ){
+
+            $("#timeDuration").val('00:00');
+
+        } else {
+            var duration = dFinish - dStart;
+
+            var hours;
+
+            if (Math.floor(duration / 60000) < 60) {
+                hours = '00';
+            } else {
+                var hours = Math.floor(Math.floor(duration / 60000) / 60);
+                if (hours < 10) {
+                    hours = '0' + hours;
+                }
+
+            }
+
+            var minuts = Math.floor(duration / 60000) % 60;
+
+            if (minuts < 10) {
+                minuts = '0' + minuts;
+            }
+
+            $("#timeDuration").val(hours + ':' + minuts);
+
+            console.log(minuts + 'mm' + 'hh' + hours);
+        }
+    }
+
+
+
+
+    function hasValue(elem) {
+        var valElement = $(elem).val();
+        if (valElement) {
+            console.log(valElement);
+            console.log('tru');
+            return true;
+        } else {
+            console.log('false');
+            return false;
+        }
+    }
+
+
+    //timetrack log
 
     $('#timeTrackShowDate').html(moment().format('dddd, MMMM Do YYYY'));
 
@@ -39,18 +176,12 @@ $(document).ready(function(){
 
        var timeDuration = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
        $('#timeTrackSegmentDuration').html(timeDuration);
-
-
         timer();
-
-
     }
     function timer() {
         t = setTimeout(add, 1000);
-        console.log(t);
-    }
+        console.log(t);    }
     timer();
-
 
    clearTimeout(t);
 

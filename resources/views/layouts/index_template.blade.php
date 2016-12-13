@@ -32,6 +32,7 @@
 
     <script src="/js/moment.js"></script>
 
+
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(), ]); ?>
@@ -171,6 +172,7 @@
 
 
     <script src="/bootstrap3/js/bootstrap.min.js"></script>
+
 
     <script src="/js/main.js"></script>
 
