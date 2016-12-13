@@ -4,7 +4,143 @@
 'use strict';
 $(document).ready(function(){
 
-    //table x scroll
+
+
+
+
+    //timetrack
+
+    $('#timeTrackShowDate').html(moment().format('dddd, MMMM Do YYYY'));
+
+
+     //h1 = document.getElementsByTagName('h1')[0],
+    var   showTime = $('#timeTrackSegmentDuration').text();
+    if (!showTime){
+        showTime = '00:00:00';
+    }
+    //var timeDuration;
+
+        //start = document.getElementById('start'),
+    var   stop = document.getElementById('stop'),
+        clear = document.getElementById('clear'),
+        seconds = 0, minutes = 0, hours = 0,
+        t;
+
+    function add() {
+        seconds++;
+        if (seconds >= 60) {
+            seconds = 0;
+            minutes++;
+            if (minutes >= 60) {
+                minutes = 0;
+                hours++;
+            }
+        }
+
+       var timeDuration = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+       $('#timeTrackSegmentDuration').html(timeDuration);
+
+
+        timer();
+
+
+    }
+    function timer() {
+        t = setTimeout(add, 1000);
+        console.log(t);
+    }
+    timer();
+
+
+   clearTimeout(t);
+
+    $(document).on('click' , '#startTrack',  function(){
+        console.log(showTime);
+        console.log('1111');
+
+        var html = '' +
+            '<tr class="trackLog activeTrack trackLogWrite"  >' +
+            '<td class="">' +
+            '<span class="ng-binding"></span>' +
+            '<p class="projecttask"> - nazar - ertretret</p>' +
+            '</td>' +
+            '<td class="text-right">' +
+            '<h3 id="timeTrackSegmentDuration" style="margin: 7px 0px ">0:00:00</h3>' +
+            '<p class="project" >11:32 - 11:32</p>' +
+            '</td>' +
+            '<td class="text-right table-cell-actions">' +
+            '<div class="btn-group">' +
+            '<button class="btn btn-danger" id="stopTrack">' +
+            '<span class="glyphicon glyphicon-stop"></span>' +
+            '</button>' +
+            '</div>' +
+            '</td>' +
+            '</tr>';
+        $('#trackLogTableId').append(html);
+
+        timer();
+    });
+    //clearTimeout(t);
+
+    $(document).on('click' , '#stopTrack',  function(){
+        console.log('stop');
+
+        var timeSegment = $('#timeTrackSegmentDuration').text();
+
+        clearTimeout(t);
+
+        var html = '' +
+            '<td class="">' +
+            '<span class="ng-binding"></span>' +
+           '<p class="projecttask"> - nazar - ertretret</p>' +
+           '</td>' +
+            '<td class="text-right">' +
+            '<h3 id="timeTrackSegmentFinish" style="margin: 7px 0px ">' + timeSegment + '</h3>' +
+        '<p class="project" >11:32 - 11:32</p>' +
+        '</td>' +
+        '<td class="text-right table-cell-actions">' +
+            '<div class="btn-group">' +
+            '<button class="btn btn-default" id="startTrack">' +
+            '<span class="glyphicon glyphicon-play"></span>' +
+            '</button>' +
+            '<button class="btn btn-default" id="editTrack">' +
+            '<span class="glyphicon glyphicon-pencil"></span>' +
+            '</button>' +
+            '<button class="btn btn-default" id="deleteTrack">' +
+            '<span class="glyphicon glyphicon-trash"></span>' +
+            '</button>' +
+            '</div>' +
+            '</td>';
+
+        if ($('#firstTrack').hasClass('trackLogFirst')) {
+            $('#firstTrack').html(html);
+            $('.activeTrack').remove();
+            $('#firstTrack').removeClass('trackLogFirst');
+        }else {
+
+            $('.activeTrack').html(html);
+            $('.activeTrack').removeClass('trackLogWrite');
+            $('.activeTrack').removeClass('activeTrack');
+        }
+
+
+    })
+    /* Start button */
+   // start.onclick = timer;
+
+    /* Stop button */
+   // stop.onclick = function() {
+   //     clearTimeout(t);
+    //}
+
+    /* Clear button
+    clear.onclick = function() {
+        h1.textContent = "00:00:00";
+        seconds = 0; minutes = 0; hours = 0;
+    }*/
+
+
+    //datatables
 
 
 

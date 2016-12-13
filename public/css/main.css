@@ -1,4 +1,26 @@
 
+@media (min-width: 1500px) {
+    .container {
+        width: 1500px !important;
+    }
+}
+
+.trackLog{
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.trackLogTable>tbody>tr:hover
+   {
+     background-color: #EAEAEA;
+ }
+
+.trackLogWrite{
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
 td {
     vertical-align: inherit !important;
     border-left: none !important;
@@ -14,6 +36,12 @@ th {
 body {
 
     margin-bottom: 60px!important;
+}
+
+.showDate{
+    margin-top: 0px;
+    font-weight: normal;
+    color: #ccc;
 }
 
 .table_container{
@@ -57,6 +85,23 @@ tfoot {
 
 thead {
     display: table-row-group;
+}
+
+.labelTrack{
+    text-align: left;!important;
+    padding-top: 10px;!important;
+    font-size: 16px;!important;
+}
+
+.inputTrackPadding{
+    color:#999!important;
+    padding: 4px!important;
+
+}
+
+.form-group-edit{
+    padding-left: 0px!important;
+    padding-right: 0px!important;
 }
 
 
