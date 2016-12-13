@@ -47,4 +47,36 @@ class Task extends Model
     {
         return $this->hasMany('App\TimeLog');
     }
+
+    public function time_parser($time)
+    {
+        $time = explode(' ', $time);
+        $time[5] = (int)(preg_replace('/[+,0,:]/', '', $time[5]));
+        $diff = ((int)(date('O')) - $time[5])*3600;
+
+        return $diff;
+    }
+
+    public function time_counter($data)
+    {
+        foreach( $data as $value ) {
+            foreach( $value->track_log as $val )
+            {
+                $diff = strtotime(date('Y-m-d H:i:s')) - strtotime($val->start) - $this->time_parser($val->start);
+                $value->track_log->time_diff = $this->time_diff($diff);
+            }
+        }
+
+        return $data;
+    }
+
+    protected function time_diff($second)
+    {
+        $difference = bcmod($second, 3600);
+        $result['hour'] = (int)($second/3600);
+        $result['minutes'] = (int)($difference/60);
+        $result['second'] = bcmod($difference, 60);
+
+        return $result;
+    }
 }
