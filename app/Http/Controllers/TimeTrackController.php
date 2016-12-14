@@ -92,8 +92,10 @@ class TimeTrackController extends Controller
     private function validation_track($request)
     {
         $this->validate($request, [
-            'date_start' => '',
-            'date_finish' => '',
+            'task_id' => 'required',
+            'project_id' => 'required',
+            'date_start' => 'required',
+            'date_finish' => 'required',
             'description' => 'max:1000',
             'additional_cost' => 'integer',
             'billable_time' => ''
