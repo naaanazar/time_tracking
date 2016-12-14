@@ -8,7 +8,7 @@
             <div class="row-fluid">
                 <div class="heading-top-margin">
 
-                    <div class="heading-without-datepicker"><?= ( isset( $task ) ) ? 'Edit' : 'Create' ;?> task</div>
+                    <div class="heading-without-datepicker"><?= ( isset( $task ) ) ? 'Edit' : 'Add' ;?> task</div>
                 </div>
             </div>
         </div>

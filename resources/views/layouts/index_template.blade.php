@@ -66,7 +66,7 @@
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    Report<span class="caret"></span>
+                                    Report <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" >
                                     <li><a href="#">-----</a></li>
@@ -79,7 +79,7 @@
                         @endif
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                Manage<span class="caret"></span>
+                                Manage <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" >
                                 @if ($status == 'Admin' || $status == 'HR Manager')

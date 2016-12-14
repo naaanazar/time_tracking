@@ -5,14 +5,23 @@
 $(document).ready(function(){
 
 
+
+    $(document).on('click', '.webClick', function(e){
+        e.stopImmediatePropagation();
+        window.open($(e.target).html(),'_blank');
+    })
+
+        $(window).load(function(){
+            $(".removeSelect").html('');
+
+        });
+
+
+
     //timetrack
 
 
-    billableTime
 
-    additionalCost
-
-    insertCost
     $(document).on('change', '#billableTime', function() {
         if(this.checked) {
             console.log('1');
@@ -390,7 +399,7 @@ $(document).ready(function(){
             initComplete: function () {
                 this.api().columns().every(function () {
                     var column = this;
-                    var select = $('<select><option value=""></option></select>')
+                    var select = $('<select><option value="">all</option></select>')
                         .appendTo($(column.footer()).empty())
                         .on('change', function () {
                             var val = $.fn.dataTable.util.escapeRegex(
@@ -456,7 +465,7 @@ $(document).ready(function(){
         e.stopImmediatePropagation();
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
-        var massage = 'Do you want to remove <strong> ' + element + '</strong>?'
+        var massage = 'Do you want to remove <strong> ' + element + '</strong> user?'
 
         Main.displayModal('#delete-user', delUrl, massage, '#modalConfirmDeleteUser');
     });
@@ -538,7 +547,7 @@ var Main = {
         var htmlDelete = '' +
             '<div class="modal-header">' +
                 '<button type="button" class="close" data-dismiss="modal">&times;</button>' +
-                '<h4 class="modal-title">Delete</h4>' +
+                '<h4 class="modal-title">Delete Confirmation</h4>' +
             '</div>' +
             '<div class="modal-body">' +
                 '<p>' + massage + '</p>' +

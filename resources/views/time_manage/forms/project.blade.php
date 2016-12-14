@@ -9,7 +9,7 @@
             <div class="row-fluid">
                 <div class="heading-top-margin">
 
-                    <div class="heading-without-datepicker"><?= isset($project) ? 'Edit' : 'Create' ?> Project</div>
+                    <div class="heading-without-datepicker"><?= isset($project) ? 'Edit' : 'Add' ?> Project</div>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
                                     <select name="company_id" class="input-xlarge focused my_input"  id="CompanyNameProjectId" style="height: 42px;">
-                                        <option selected disabled>Please change Project</option>
+                                        <option selected disabled>Select</option>
                                         @if (isset($client->company_name))
                                         <option value="{{ $client->id }}" selected>{{ $client->company_name }}</option>
                                         @endif
@@ -96,7 +96,7 @@
                             </div>
                             <div class="control-group row">
                                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                    <label class="control-label" for="TeamLeadProjectId" style="text-align: left;">TeamLead</label>
+                                    <label class="control-label" for="TeamLeadProjectId" style="text-align: left;">Team Lead</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
@@ -106,7 +106,7 @@
                                             <option selected value="{{ $lead[0]->id }}">{{ $lead[0]->name }}</option>
                                         @endif
 
-                                        <option selected value="0">Please change lead</option>
+                                        <option selected value="0">Select</option>
 
                                         @if (isset($leads->company_name))
                                             <option value="{{ $leads->id }}" selected>{{ $leads->company_name }}</option>

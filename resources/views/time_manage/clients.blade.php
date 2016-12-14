@@ -50,23 +50,24 @@
                                 <th class="thFoot" >Company Name</th>
                                 <th class="thFoot">Address</th>
                                 <th class="thFoot" >Website</th>
-                                <th class="thFoot">Contact Persone</th>
+                                <th class="thFoot">Contact Person</th>
                                 <th class="thFoot">Email</th>
                                 <th class="thFoot">Phone Number</th>
                                 <!--  <th style="min-width: 160px"  class="center">Created at</th> -->
-                              <!--  @if ($status == 'HR Manager' || $status == 'Admin')
-                                    <th ">Action</th>
-                                @endif  -->
+                               @if ($status == 'HR Manager' || $status == 'Admin')
+                                    <th class="removeSelect" >Action</th>
+                                @endif
                             </tr>
                             </tfoot>
                             <tbody>
+
 
                             @foreach( $clients as $client )
                                 <tr class="odd gradeX getProjects" data-id="{{ $client->id }}">
                                     <td>{{ $client->company_name }}</td>
                                     <td>{{ $client->company_address }}</td>
-                                    <td>
-                                        <a href="{{ $client->website }}">{{ $client->website }}</a>
+                                    <td class="webClick" style="color: #497DDD; text-decoration: underline;" >
+                                       {{ $client->website }}
                                         </td>
                                     <td>{{ $client->contact_person }}</td>
                                     <td>{{ $client->email }}</td>

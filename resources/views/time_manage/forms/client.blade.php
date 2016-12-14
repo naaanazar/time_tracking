@@ -7,7 +7,7 @@
     <div class="row">
         <div class="row-fluid">
             <div class="heading-top-margin">
-                <div class="heading-without-datepicker"><?= isset($client) ? 'Edit' : 'Create' ?> Client</div>
+                <div class="heading-without-datepicker"><?= isset($client) ? 'Edit' : 'Add' ?> Client</div>
             </div>
         </div>
     </div>
