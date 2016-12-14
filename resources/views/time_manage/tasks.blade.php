@@ -38,7 +38,7 @@
                         <div class="row">
                             <div class="col-md-9 cta-contents">
                                 <div class="span12 add-border-bottom">
-                                    <h1 class="h3-my">Projects: <strong>{{  $project->project_name }}</strong></h1>
+                                    <h1 class="h3-my">Project: <strong>{{  $project->project_name }}</strong></h1>
                                 </div>
                                 <div class="cta-desc" style="margin-top: 20px">
                                     <div class="row ">

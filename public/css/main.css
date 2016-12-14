@@ -38,6 +38,8 @@ body {
     margin-bottom: 60px!important;
 }
 
+
+
 .showDate{
     margin-top: 0px;
     font-weight: normal;
@@ -222,10 +224,10 @@ thead {
     cursor:pointer!important;
 }
 
-table {
+/*table {
     border-right: none !important;
     border-left: none !important;
-}
+}*/
 
 .h3-my{
     color: #999;

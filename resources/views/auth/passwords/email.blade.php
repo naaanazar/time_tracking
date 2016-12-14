@@ -27,9 +27,14 @@
                         {{ session('status') }}
                     </div>
                 @endif
+                <div class="col-md-6">
+                <a href="/" class="btn btn-large btn-primary">back</a>
+                    </div>
+                <div class="col-md-6">
                 <button  type="submit" class="btn btn-large btn-primary">
                     Send Password Reset Link
                 </button>
+                    </div>
             </div>
 
         </form>

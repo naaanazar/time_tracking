@@ -29,8 +29,8 @@
             </div>
             <h2  class="col-md-10 showDate"  id="timeTrackShowDate"></h2>
         </div>
-        <div class="row" style="margin-top: 20px">
-            <div class="col-md-6">
+        <div class="row" style="margin-top: 20px;     color: #999; font-size: 18px">
+            <div class="col-md-6" >
                 Add track log
             </div>
             <div class="col-md-6">

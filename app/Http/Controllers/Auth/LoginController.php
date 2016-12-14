@@ -59,9 +59,9 @@ class LoginController extends Controller
     {
 
 
-        if (Input::get('denied') != '') {
+        if (Input::get('error') == 'access_denied') {
 
-            return redirect()->route('/login');
+            return redirect('/');
 
         }  else {
 
