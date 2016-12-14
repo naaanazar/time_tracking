@@ -71,6 +71,9 @@ Route::group(['middleware' => ['permision']], function () {
     Route::post('/trecking', 'TimeTrackController@trecking');
     Route::post('/create/timelog/{id?}', 'TimeTrackController@create_time_log')->where(['id' => '[0-9]+']);
     Route::get('/tasks/get/{project_id}', 'TimeTrackController@getTasks')->where(['id' => '[0-9]+']);
+    Route::get('/trecking/getTime', 'TimeTrackController@getTimeNow');
+
+
 
     // forbidden
     Route::get('/register', 'TimeManageController@index');

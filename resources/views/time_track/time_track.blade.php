@@ -131,7 +131,7 @@
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
                             <input type="text" style="padding: 10px; max-width: 65%;"   class="inputTrackPadding focused my_input" name="duration" id="timeDuration" placeholder="HH:MM">
-                            <label class="labelTrack" for="" style="padding-top: 10px">Value($)</label>
+                            <label class="labelTrack" for="" style="padding-top: 10px">Value($) <span id="insertCost"><span></label>
                         </div>
                     </div>
 
@@ -139,15 +139,22 @@
                         <div class="col-xs-2 col-sm-4 col-md-3 col-lg-3" style="text-align: right;">
                             <label class="control-label labelTrack" for="additionalCost">Additional Cost</label>
                         </div>
-                        <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
-                            <input type="number" steep="0.01" style="padding: 10px; max-width: 65%;" class="inputTrackPadding focused my_input " name="additional_cost" id="additionalCost">
-
-                            <span class="" style="display: inline-block">
-                                <label  class="labelTrack" for="billableTime">
-                                   Billable Time <input type="checkbox" name="Billable_time" id="billableTime">
-                                </label>
-                             </span>
+                        <div class="controls col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="input-group">
+                            <div class="input-group-btn" >
+                            <input type="number" steep="0.01" style="padding: 10px; max-width: 89%" class="inputTrackPadding focused my_input form-control " name="additional_cost" id="additionalCost">
+                            <span class="input-group-addon" style="padding: 9px 12px">$</span>
+                            </div>
+                            </div>
                         </div>
+                        <div class="controls col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                        <span class="" style="display: inline-block">
+                            <label  class="labelTrack" for="billableTime">
+                               Billable Time <input type="checkbox" name="Billable_time" id="billableTime">
+                            </label>
+                         </span>
+                        </div>
+
                     </div>
 
                     <div class="form-group form-group-edit col-xs-12 col-sm-12 col-md-12 col-lg-12" >
