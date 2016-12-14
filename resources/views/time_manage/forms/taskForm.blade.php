@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
-                                        <select name="company_id" class="input-xlarge focused my_input"  id="CompanyTaskId" style="height: 42px;" required>
+                                        <select name="company_id" class="input-xlarge focused my_input" id="CompanyTaskId" style="height: 42px;" required>
 
                                         @if( !isset( $task ) )
                                             <option  defaul>Please change Company</option>
@@ -62,11 +62,12 @@
                             @endif
                             <div class="control-group row">
                                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                    <label class="control-label" for="taskProjectId" style="text-align: left;">Project</label>
+                                    <label class="control-label" for="taskProjectId" style="text-align: left;">Project *</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                     @if( $status == 'Developer' || $status == 'QA Engineer' )
-                                        <select name="project_id" class="input-xlarge focused my_input"  id="taskProjectId" style="height: 42px;" required>
+                                        <select name="project_id" class="input-xlarge focused my_input" id="taskProjectId" style="height: 42px;" required
+                                                <?= ( $status == 'Developer') ? ' disabled' : '' ?>>
                                         @if( isset( $projects ) )
                                             @foreach( $projects as $project )
                                                     <option value="{{ $project->id }}" selected>{{ $project->project_name }}</option>
@@ -98,10 +99,11 @@
 
                             <div class="control-group row">
                                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                    <label class="control-label" for="taskTypeId" style="text-align: left;">Task Type</label>
+                                    <label class="control-label" for="taskTypeId" style="text-align: left;">Task Type *</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <select name="task_type" class="input-xlarge focused my_input"  id="taskTypeId" style="height: 42px;">
+                                    <select name="task_type" class="input-xlarge focused my_input"  id="taskTypeId" style="height: 42px;"
+                                    <?= ( $status == 'Developer') ? ' disabled' : '' ?>>
 
                                         @if( isset( $task ) )
                                             <?php $array = ['New Feature', 'Bug Fixing', 'Quality Assurance', 'Estimates Required']; ?>
@@ -128,11 +130,13 @@
 
                             <div class="control-group row">
                                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                    <label class="control-label" for="taskTittleId" style="text-align: left;">Task Title</label>
+                                    <label class="control-label" for="taskTittleId" style="text-align: left;">Task Title *</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
+
                                     <input name="task_titly" class="input-xlarge focused my_input" id="taskTittleId"   type="text" required
-                                         value="<?= ( isset( $task[0]->task_titly ) ) ? $task[0]->task_titly : ( old('task_titly') ) ? old('task_titly') : '' ;?>"/>
+                                         value="<?= ( isset( $task[0]->task_titly ) ) ? $task[0]->task_titly : (( old('task_titly') ) ? old('task_titly') : '') ;?>"
+                                        <?= ( $status == 'Developer') ? ' disabled' : '' ?>>
                                     @if ($errors->has('task_titly'))
                                         <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('task_titly') }}</strong>
@@ -147,7 +151,7 @@
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                     <textarea name="task_description" class="input-xlarge focused my_input" id="taskDescriptionId" rows="6"  type="text"
-                                            ><?= ( isset( $task[0]->task_titly ) ) ? $task[0]->task_titly : ( old('task_description') ? old('task_description') : '' ) ;?></textarea>
+                                            ><?= ( isset( $task[0]->task_description ) ) ? $task[0]->task_description : ( old('task_description') ? old('task_description') : '' ) ;?></textarea>
                                     @if ($errors->has('task_description'))
                                         <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('task_description') }}</strong>
@@ -162,7 +166,8 @@
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                     <input name="alloceted_hours" class="input-xlarge focused my_input" id="HourlyRateProhectId"  type="number"
-                                            value="<?= ( isset( $task[0]->alloceted_hours ) ) ? $task[0]->alloceted_hours : '' ;?>"/>
+                                            value="<?= ( isset( $task[0]->alloceted_hours ) ) ? $task[0]->alloceted_hours : '' ;?>"
+                                        <?= ( $status == 'Developer') ? ' disabled' : '' ?>/>
                                     @if ($errors->has('alloceted_hours'))
                                         <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('alloceted_hours') }}</strong>

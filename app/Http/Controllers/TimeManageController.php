@@ -246,9 +246,7 @@ class TimeManageController extends Controller
      * */
     public function all_project()
     {
-
         if (Auth::user()['original']['employe'] == 'Developer' || Auth::user()['original']['employe'] == 'QA Engineer') {
-
 
             $lead = DB::table('teams')->where('id', '=', Auth::user()['original']['users_team_id'])->first();
             if ($lead->teams_lead_id) {
@@ -279,10 +277,6 @@ class TimeManageController extends Controller
                     'users.name', 'Clients.company_name' )
                 ->get();
         }
-
-
-
-
 
         return view('time_manage.projects', compact('projects'));
     }
@@ -417,7 +411,10 @@ class TimeManageController extends Controller
                 ->with('client')
                 ->get();
 
-            return view('time_manage.forms.taskForm', compact('projects'));
+            $task = Task::where( [['assign_to', '=', Auth::user()->id], ['id', '=', $id]] )
+                ->with('project')->get();
+
+            return view('time_manage.forms.taskForm', compact('projects', 'task'));
         }
 
         $task = Task::where( 'id', '=', $id )->get();
