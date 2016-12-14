@@ -153,8 +153,10 @@ $(document).ready(function(){
                 dStart.setMinutes(dateString.slice(3));
                 dStart.setSeconds('0');
                 dStart.setMilliseconds('0');
+                $('#formTrackStartSend').val(dStart);
             } else {
                 $('#formTrackStart').val('incorect');
+                $('#formTrackStartSend').val('');
             }
 
 
@@ -187,8 +189,10 @@ $(document).ready(function(){
                 dFinish.setMinutes(dateString.slice(3));
                 dFinish.setSeconds('0');
                 dFinish.setMilliseconds('0');
+                $('#formTrackFinishSend').val(dFinish);
             } else {
                 $('#formTrackFinish').val('incorect');
+                $('#formTrackFinishSend').val('');
             }
 
 

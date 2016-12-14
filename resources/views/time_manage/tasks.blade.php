@@ -128,7 +128,7 @@
                                 <th>Billable</th>
                                 <th>Created at</th>
                                 @if ($status == 'Admin' || $status == 'Lead' || $status == 'Supervisor' || $status == 'Developer' ||  $status == 'QA Engineer')
-                                    <th style="min-width: 140px">Action</th>
+                                    <th style="min-width: 140px; width: 140px;" class="center">Action</th>
                                 @endif
                             </tr>
                             </thead>

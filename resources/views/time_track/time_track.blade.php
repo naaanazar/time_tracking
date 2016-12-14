@@ -89,7 +89,7 @@
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
                             <div class="col-md-4 col-lg-4" style="padding: 0px">
                             <span class="input-group" >
-                                <input type="text" value="" style="width: 60%" class="inputTrackPadding form-control" name="date_start" id="formTrackStart" placeholder="HH:MM" />
+                                <input type="text" value="" style="width: 60%" class="inputTrackPadding form-control" id="formTrackStart" placeholder="HH:MM" />
 
                                 <span class="input-group-btn" style=" float:left ">
                                     <button type="button" class="btn btn-default" id="formTrackStartNow" style="padding:6px 1px">now</button>
@@ -105,7 +105,7 @@
 
                             <div class="col-md-4 col-lg-4" style="padding: 0px">
                             <span class="input-group" >
-                                <input type="text"  style="width: 60%; " class="inputTrackPadding form-control" name="date_finish" id="formTrackFinish" placeholder="HH:MM">
+                                <input type="text"  style="width: 60%; " class="inputTrackPadding form-control"  id="formTrackFinish" placeholder="HH:MM">
                                 <span class="input-group-btn" style=" float:left ">
                                     <button type="button" class="btn btn-default" id="formTrackFinishNow" style="padding:6px 1px">now</button>
                                     <button type="button" class="btn btn-default" id="formTrackFinishInc" style="padding:6px 3px">+</button>
@@ -113,6 +113,9 @@
                                 </span>
                             </span>
                             </div>
+
+                            <input id="formTrackStartSend"  type="hidden" name="date_start">
+                            <input id="formTrackFinishSend" type="hidden" name="date_finish" >
 
                             <div class="col-md-2 col-lg-2" style="padding: 0px">
                                <span class="" style="display: inline-block">

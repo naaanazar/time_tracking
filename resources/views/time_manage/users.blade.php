@@ -42,7 +42,7 @@
                             <th style="min-width: 160px"  class="center">Created at</th>
 
                             @if ($status == 'HR Manager' || $status == 'Admin')
-                                 <th style= "min-width: 140px">Action</th>
+                                <th style="min-width: 140px; width: 140px;" class="center">Action</th>
                             @endif
                         </tr>
                         </thead>
