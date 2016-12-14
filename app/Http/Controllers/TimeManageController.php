@@ -665,7 +665,7 @@ class TimeManageController extends Controller
     private function validation_team($request)
     {
         $this->validate($request, [
-            'team_name' => 'required|min:2|max:30'
+            'team_name' => 'required|unique:teams|min:2|max:30'
         ]);
     }
 }
