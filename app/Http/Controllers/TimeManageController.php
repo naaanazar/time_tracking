@@ -624,7 +624,7 @@ class TimeManageController extends Controller
             'company_address' => 'min:4|max:100',
             'website' => 'string',
             'contact_person' => 'required|min:4|max:30',
-            'email' => 'required|email',
+            'email' => 'required|unique:users|email',
             'phone_number' => 'regex:/[0-9-]+/|max:30'
         ]);
     }
@@ -640,6 +640,8 @@ class TimeManageController extends Controller
             'project_name' => 'required|min:2|max:30',
             'hourly_rate' => 'numeric',
             'notes' => 'regex:/[a-zA-Z0-9]+/|max:1000'
+        ], [
+            'company_id.required' => 'The company field is required'
         ]);
     }
 

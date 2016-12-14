@@ -25,7 +25,7 @@
                             @if( $status != 'Developer' || $status != 'Developer' )
                             <div class="control-group row">
                                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                    <label class="control-label" for="CompanyTaskId" style="text-align: left;">Company</label>
+                                    <label class="control-label" for="CompanyTaskId" style="text-align: left;">Client</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
@@ -104,13 +104,19 @@
                                     <select name="task_type" class="input-xlarge focused my_input"  id="taskTypeId" style="height: 42px;">
 
                                         @if( isset( $task ) )
+                                            <?php $array = ['New Feature', 'Bug Fixing', 'Quality Assurance', 'Estimates Required']; ?>
                                             <option selected>{{ $task[0]->task_type }}</option>
+                                            <?php foreach( $array as $value ) : ?>
+                                                <?php if( $task[0]->task_type != $value ) : ?>
+                                                    <option><?= $value ?></option>
+                                                <?php endif ?>
+                                            <?php endforeach ?>
+                                        @else
+                                            <option>New Feature</option>
+                                            <option>Bug Fixing</option>
+                                            <option>Quality Assurance</option>
+                                            <option>Estimates Required</option>
                                         @endif
-
-                                        <option>New Feature</option>
-                                        <option>Bug Fixing</option>
-                                        <option>Quality Assurance</option>
-                                        <option>Estimates Required</option>
                                     </select>
                                     @if ($errors->has('task_type'))
                                         <span class="help-block">
@@ -122,11 +128,11 @@
 
                             <div class="control-group row">
                                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                    <label class="control-label" for="taskTittleId" style="text-align: left;">Title</label>
+                                    <label class="control-label" for="taskTittleId" style="text-align: left;">Task Title</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                     <input name="task_titly" class="input-xlarge focused my_input" id="taskTittleId"   type="text" required
-                                         value="<?= ( isset( $task[0]->task_titly ) ) ? $task[0]->task_titly : '' ;?>"/>
+                                         value="<?= ( isset( $task[0]->task_titly ) ) ? $task[0]->task_titly : ( old('task_titly') ) ? old('task_titly') : '' ;?>"/>
                                     @if ($errors->has('task_titly'))
                                         <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('task_titly') }}</strong>
@@ -141,7 +147,7 @@
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                     <textarea name="task_description" class="input-xlarge focused my_input" id="taskDescriptionId" rows="6"  type="text"
-                                            ><?= ( isset( $task[0]->task_titly ) ) ? $task[0]->task_titly : '' ;?></textarea>
+                                            ><?= ( isset( $task[0]->task_titly ) ) ? $task[0]->task_titly : ( old('task_description') ? old('task_description') : '' ) ;?></textarea>
                                     @if ($errors->has('task_description'))
                                         <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('task_description') }}</strong>

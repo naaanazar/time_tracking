@@ -26,6 +26,7 @@
 
                                         <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                             <select name="employe" class="input-xlarge focused my_input" id="selectTeam" style="height: 42px;" >
+                                                <option selected disabled>Select</option>
                                                 @if( old('employe') )
                                                     <option>{{ old('employe') }}</option>
 

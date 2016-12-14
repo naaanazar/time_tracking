@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Дек 13 2016 г., 18:39
+-- Время создания: Дек 14 2016 г., 11:51
 -- Версия сервера: 5.6.26
 -- Версия PHP: 5.6.12
 
@@ -94,19 +94,20 @@ CREATE TABLE IF NOT EXISTS `Project` (
   `project_name` varchar(255) NOT NULL,
   `hourly_rate` decimal(5,2) NOT NULL DEFAULT '0.00',
   `notes` text NOT NULL,
-  `updated_at` date NOT NULL,
-  `created_at` date NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `client_id` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
 
 --
 -- Дамп данных таблицы `Project`
 --
 
 INSERT INTO `Project` (`id`, `client_id`, `lead_id`, `project_name`, `hourly_rate`, `notes`, `updated_at`, `created_at`) VALUES
-(19, 6, 0, 'project1', '50.00', 'sdsdsa', '2016-12-10', '2016-12-10'),
-(20, 6, 49, 'testing', '50.00', 'dsfd', '2016-12-10', '2016-12-10');
+(19, 6, 0, 'project1', '50.00', 'sdsdsa', '2016-12-10 00:00:00', '2016-12-10 00:00:00'),
+(20, 6, 49, 'testing', '50.00', 'dsfd', '2016-12-10 00:00:00', '2016-12-10 00:00:00'),
+(21, 6, 49, 'test12', '50.00', 'sad sad sd sd ', '2016-12-14 07:24:14', '2016-12-14 07:24:14');
 
 -- --------------------------------------------------------
 
@@ -121,25 +122,26 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `task_type` varchar(255) NOT NULL,
   `task_titly` varchar(255) NOT NULL,
   `alloceted_hours` decimal(5,2) NOT NULL,
-  `assign_to` varchar(255) NOT NULL,
+  `assign_to` int(16) DEFAULT NULL,
   `task_description` text NOT NULL,
   `billable` tinyint(1) NOT NULL,
-  `created_at` date NOT NULL,
-  `updated_at` date NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `company_id` (`company_id`,`project_id`),
   KEY `project_id` (`project_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Дамп данных таблицы `tasks`
 --
 
 INSERT INTO `tasks` (`id`, `company_id`, `project_id`, `task_type`, `task_titly`, `alloceted_hours`, `assign_to`, `task_description`, `billable`, `created_at`, `updated_at`) VALUES
-(10, 6, 19, 'Bug Fixing', 'AAAA', '50.00', '27', 'fdsfd ', 1, '2016-12-10', '2016-12-10'),
-(11, 6, 20, 'Quality Assurance', 'sas', '100.00', '49', 'dsd', 1, '2016-12-10', '2016-12-10'),
-(12, 6, 20, 'Bug Fixing', 'asdasd', '50.00', '49', 'dsadas', 0, '2016-12-12', '2016-12-12'),
-(13, 6, 20, 'Bug Fixing', 'sadasdasd', '50.00', '49', 'asdasd', 0, '2016-12-12', '2016-12-12');
+(10, 6, 19, 'Bug Fixing', 'AAAA', '50.00', 27, 'fdsfd ', 1, '2016-12-10 00:00:00', '2016-12-10 00:00:00'),
+(11, 6, 20, 'Quality Assurance', 'sas', '100.00', 49, 'dsd', 1, '2016-12-10 00:00:00', '2016-12-10 00:00:00'),
+(12, 6, 20, 'Bug Fixing', 'asdasd', '50.00', 49, 'dsadas', 0, '2016-12-12 00:00:00', '2016-12-12 00:00:00'),
+(13, 6, 20, 'Bug Fixing', 'sadasdasd', '50.00', 49, 'asdasd', 0, '2016-12-12 00:00:00', '2016-12-12 00:00:00'),
+(14, 6, 20, 'New Feature', 'we', '0.00', 49, ' wwqe ', 0, '2016-12-14 00:00:00', '2016-12-14 00:00:00');
 
 -- --------------------------------------------------------
 
