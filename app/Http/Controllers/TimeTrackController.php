@@ -17,8 +17,6 @@ class TimeTrackController extends Controller
      * permission for trecking time
      * */
     protected $users = [
-        'Developer',
-        'QA Engineer',
         'Lead'
     ];
 
@@ -27,29 +25,37 @@ class TimeTrackController extends Controller
      * */
     public function trecking(Request $request)
     {
-        if( Input::all() == true ) {
-            $this->validation_track($request);
-
-            TimeTrack::create( Input::all() );
-
-            return true;
-        }
-
         $task = new Task();
 
-       /* if( in_array(Auth::user()->employe, $this->users ) ) {
-            $tasks = Task::where('assign_to', '=', Auth::user()->id )
-                ->with('track', 'track_log')->get();
+        if( Input::all() == true ) {
+            $this->validation_track($request);
+            $data = Input::all();
+
+            $data['date_start'] = $task->time_parser_from_js($data['date_start']);
+            $data['date_finish'] = $task->time_parser_from_js($data['date_finish']);
+            $data['duration'] = $task->duration($data);
+
+            TimeTrack::create( $data );
+
+            return redirect('/trecking');
+        }
+
+        if( in_array(Auth::user()->employe, $this->users ) ) {
+            $tasks = Project::where('lead_id', '=', Auth::user()->id )
+                ->with('task', 'track', 'track_log')->get();
 
             $tasks = $task->time_counter($tasks);
 
-            return view('', compact('tasks'));
-        }*/
+            return view('time_track.time_track', compact('tasks'));
 
-        $tasks = Project::with('task', 'track', 'track_log')->get();
-        $tasks = $task->time_counter($tasks);
+        } elseif ( Auth::user()->employe == 'Admin' || Auth::user()->employe == 'Supervisor' ) {
+            $tasks = Project::with('task', 'track', 'track_log')->get();
+            $tasks = $task->time_counter($tasks);
 
-        return view('time_track.time_track', compact('tasks'));
+            return view('time_track.time_track', compact('tasks'));
+        }
+
+        return redirect('/');
     }
 
     /*
@@ -88,9 +94,9 @@ class TimeTrackController extends Controller
         $this->validate($request, [
             'date_start' => '',
             'date_finish' => '',
-            'duration' => 'required|1000',
-            'additional_cost' => 'required|integer',
-            'Billable_time' => ''
+            'description' => 'max:1000',
+            'additional_cost' => 'integer',
+            'billable_time' => ''
         ]);
     }
 

@@ -153,7 +153,7 @@
                         <div class="controls col-xs-12 col-sm-3 col-md-3 col-lg-3">
                         <span class="" style="display: inline-block">
                             <label  class="labelTrack" for="billableTime">
-                               Billable Time <input type="checkbox" name="Billable_time" id="billableTime">
+                               Billable Time <input type="checkbox" name="billable_time" value="1" id="billableTime">
                             </label>
                          </span>
                         </div>
