@@ -6,9 +6,260 @@ $(document).ready(function(){
 
 
 
+    $(document).on('click', '.webClick', function(e){
+        e.stopImmediatePropagation();
+        window.open($(e.target).html(),'_blank');
+    })
+
+        $(window).load(function(){
+            $(".removeSelect").html('');
+
+        });
+
 
 
     //timetrack
+
+
+
+    $(document).on('change', '#billableTime', function() {
+        if(this.checked) {
+            console.log('1');
+           if($('#additionalCost').val().length >0 &&  $("#timeDuration").val().length > 0){
+             var cost =  $('#additionalCost').val() / 60 * moment.duration($("#timeDuration").val()).asMinutes();
+               console.log(cost);
+               $('#insertCost').html(Math.round(cost * 100) / 100);
+           }
+        } else {
+            $('#insertCost').html('');
+
+        }
+    });
+
+    $(document).on('mousemove', '#additionalCost', function(){
+
+        var attr = $('#billableTime').prop('checked');
+        console.log(attr)
+        if (typeof attr !== typeof undefined && attr !== false) {
+            console.log('1');
+            if($('#additionalCost').val().length >0 &&  $("#timeDuration").val().length > 0){
+                var cost =  $('#additionalCost').val() / 60 * moment.duration($("#timeDuration").val()).asMinutes();
+                console.log(cost);
+                $('#insertCost').html(Math.round(cost * 100) / 100);
+            }
+        } else {
+            $('#insertCost').html('');
+
+        }
+    });
+
+
+
+    // button now
+    var dStart,
+        dFinish,
+        duration ;
+
+    $(document).on('click', '#formTrackStartNow', function(){
+        $.get('/trecking/getTime', function (response) {
+            $('#formTrackStart').val(moment(response.data * 1000).format('HH:mm'));
+            trackStart();
+        });
+    });
+
+    $(document).on('click', '#formTrackFinishNow', function(){
+        $.get('/trecking/getTime', function (response) {
+            $('#formTrackFinish').val(moment(response.data * 1000).format('HH:mm'));
+            trackFinish();
+        });
+    });
+
+    //button + -
+    $(document).on('click', '#formTrackStartInc', function(){
+        addTime('#formTrackStart', 10);
+        trackStart();
+    });
+
+    $(document).on('click', '#formTrackFinishInc', function(){
+        addTime('#formTrackFinish' , 10);
+        trackFinish();
+    });
+
+    $(document).on('click', '#formTrackStartDec', function(){
+        addTime('#formTrackStart', -10);
+        trackStart();
+    });
+
+    $(document).on('click', '#formTrackFinishDec', function(){
+        addTime('#formTrackFinish' , -10);
+        trackFinish();
+    });
+
+    $(document).on('change', '#nextDay', function() {
+        if(this.checked) {
+            if(!dFinish){
+                dFinish = new Date();
+            }
+            dFinish.setDate(new Date().getDate()+ 1);
+            trackFinish();
+        } else {
+            if(dFinish){
+                dFinish.setDate(new Date().getDate());
+                trackFinish();
+            }
+        }
+    });
+
+
+    function addTime(element , addMinutes){
+        var timeSet = $(element).val();
+        if(moment(timeSet, "HH:mm").isValid()){
+            timeSet =  moment(timeSet, "HH:mm").add(addMinutes, 'minutes');
+        } else {
+            timeSet =  moment('00:00', 'HH:mm' ).add(addMinutes, 'minutes');
+        }
+        $(element).val(moment(timeSet, "HH:mm").format('HH:mm'));
+    }
+
+
+    //time + duratiot
+
+
+
+    $('#formTrackStart').on('mouseleave',function(){
+        trackStart();
+
+    });
+
+    $('#formTrackFinish').on('mouseleave',function(){
+        trackFinish();
+    });
+
+
+
+    function trackStart(){
+        console.log('11');
+        if (hasValue("#formTrackStart") || hasValue("#formTrackFinish")){
+            // console.log('2');
+            $("#timeDuration").attr('disabled', 'disabled');
+            var dateStringStart = $("#formTrackStart").val();
+            //      console.log(moment(dateString, "HH:mm").isValid() + moment(dateString, "HH:mm").format('HH:mm'));
+
+            if(moment(dateStringStart, "HH:mm").isValid()){
+                var dateString = moment(dateStringStart, "HH:mm").format('HH:mm');
+                $('#formTrackStart').val(dateString);
+                dStart = new Date();
+                dStart.setHours(dateString.slice(0,2));
+                dStart.setMinutes(dateString.slice(3));
+                dStart.setSeconds('0');
+                dStart.setMilliseconds('0');
+            } else {
+                $('#formTrackStart').val('incorect');
+            }
+
+
+        } else{
+            $("#timeDuration").removeAttr('disabled');
+        }
+
+        if(dFinish && dStart){
+
+            timeDuration(dFinish,  dStart)
+        }
+    }
+
+    function trackFinish(){
+
+        console.log('11');
+        if (hasValue("#formTrackStart") || hasValue("#formTrackFinish")){
+            // console.log('2');
+            $("#timeDuration").attr('disabled', 'disabled');
+            var dateStringFinish = $("#formTrackFinish").val();
+            //      console.log(moment(dateString, "HH:mm").isValid() + moment(dateString, "HH:mm").format('HH:mm'));
+
+            if(moment(dateStringFinish, "HH:mm").isValid()){
+                var dateString = moment(dateStringFinish, "HH:mm").format('HH:mm');
+                $('#formTrackFinish').val(dateString);
+                if (!dFinish) {
+                    dFinish = new Date();
+                };
+                dFinish.setHours(dateString.slice(0,2));
+                dFinish.setMinutes(dateString.slice(3));
+                dFinish.setSeconds('0');
+                dFinish.setMilliseconds('0');
+            } else {
+                $('#formTrackFinish').val('incorect');
+            }
+
+
+        } else{
+            $("#timeDuration").removeAttr('disabled');
+        }
+
+
+
+        if(dFinish && dStart){
+
+            timeDuration(dFinish,  dStart)
+        }
+
+    }
+
+
+    function timeDuration(dFinish,  dStart) {
+
+        if (dFinish > dStart) {
+            if (dFinish.getHours() == dStart.getHours && dFinish.getMinutes() == dStart.getMinutes()) {
+
+                $("#timeDuration").val('00:00');
+
+            } else {
+                var duration = dFinish - dStart;
+
+                var hours;
+
+                if (Math.floor(duration / 60000) < 60) {
+                    hours = '00';
+                } else {
+                    var hours = Math.floor(Math.floor(duration / 60000) / 60);
+                    if (hours < 10) {
+                        hours = '0' + hours;
+                    }
+
+                }
+
+                var minuts = Math.floor(duration / 60000) % 60;
+
+                if (minuts < 10) {
+                    minuts = '0' + minuts;
+                }
+
+                $("#timeDuration").val(hours + ':' + minuts);
+
+                console.log(minuts + 'mm' + 'hh' + hours);
+            }
+        } else {
+            $("#timeDuration").val('incorect');
+        }
+    }
+
+
+
+
+    function hasValue(elem) {
+        var valElement = $(elem).val();
+        if (valElement) {
+            console.log(valElement);
+            console.log('tru');
+            return true;
+        } else {
+            console.log('false');
+            return false;
+        }
+    }
+
+
+    //timetrack log
 
     $('#timeTrackShowDate').html(moment().format('dddd, MMMM Do YYYY'));
 
@@ -39,17 +290,13 @@ $(document).ready(function(){
 
        var timeDuration = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
        $('#timeTrackSegmentDuration').html(timeDuration);
-
-
         timer();
-
-
     }
     function timer() {
         t = setTimeout(add, 1000);
     }
-    timer();
 
+    timer();
 
    clearTimeout(t);
 
@@ -152,7 +399,7 @@ $(document).ready(function(){
             initComplete: function () {
                 this.api().columns().every(function () {
                     var column = this;
-                    var select = $('<select><option value=""></option></select>')
+                    var select = $('<select><option value="">all</option></select>')
                         .appendTo($(column.footer()).empty())
                         .on('change', function () {
                             var val = $.fn.dataTable.util.escapeRegex(
@@ -218,7 +465,7 @@ $(document).ready(function(){
         e.stopImmediatePropagation();
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
-        var massage = 'Do you want to remove <strong> ' + element + '</strong>?'
+        var massage = 'Do you want to remove <strong> ' + element + '</strong> user?'
 
         Main.displayModal('#delete-user', delUrl, massage, '#modalConfirmDeleteUser');
     });
@@ -288,12 +535,19 @@ $(document).ready(function(){
    // });
 });
 
+function getServerTime() {
+    $.get('/trecking/getTime', function (response) {
+        console.log(response.data + '2222222222');
+        return response.data;
+    });
+}
+
 var Main = {
     displayModal: function(idModal, delUrl, massage, appendContainer) {
         var htmlDelete = '' +
             '<div class="modal-header">' +
                 '<button type="button" class="close" data-dismiss="modal">&times;</button>' +
-                '<h4 class="modal-title">Delete</h4>' +
+                '<h4 class="modal-title">Delete Confirmation</h4>' +
             '</div>' +
             '<div class="modal-body">' +
                 '<p>' + massage + '</p>' +

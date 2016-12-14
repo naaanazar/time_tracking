@@ -142,6 +142,9 @@
                                 <th class="thFoot">Assign To</th>
                                 <th class="thFoot">Billable</th>
                                 <th class="thFoot">Created at</th>
+                                @if ($status == 'Admin' || $status == 'Lead' || $status == 'Supervisor' || $status == 'Developer' ||  $status == 'QA Engineer')
+                                    <th  class="removeSelect">Action</th>
+                                @endif
                             </tr>
                             </tfoot>
                             <tbody>

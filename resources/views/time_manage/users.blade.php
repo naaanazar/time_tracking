@@ -54,6 +54,9 @@
                             <th class="thFoot">Hourly rate</th>
                             <th class="thFoot">User type</th>
                             <th style="min-width: 160px"  class="center thFoot">Created at</th>
+                            @if ($status == 'HR Manager' || $status == 'Admin')
+                                <th  class="removeSelect">Action</th>
+                            @endif
 
                         </tr>
                         </tfoot>

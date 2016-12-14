@@ -165,6 +165,9 @@
                                 <th class="thFoot">Lead</th>
                                 <th class="thFoot">Hourly Rate</th>
                                 <th class="thFoot">Created at</th>
+                                @if ($status == 'Admin')
+                                <th class="removeSelect" >Action</th>
+                                @endif
 
                             </tr>
                             </tfoot>
@@ -175,7 +178,7 @@
                                     <td>{{ $project->project_name }}</td>
                                     <td>{{ (isset($client->company_name)) ? $client->company_name : $project->company_name }}</td>
                                     <td>{{ $project->name }}</td>
-                                    <td>{{ $project->hourly_rate }}</td>
+                                    <td style="text-align: center;">{{ $project->hourly_rate }}</td>
                                     <td style="text-align: center" >{{ $project->created_at }}</td>
 
                                     @if ($status == 'Admin')
