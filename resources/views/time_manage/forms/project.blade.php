@@ -104,9 +104,9 @@
 
                                         @if( isset( $lead[0] ) )
                                             <option selected value="{{ $lead[0]->id }}">{{ $lead[0]->name }}</option>
+                                        @else
+                                            <option selected value="0">Please change lead</option>
                                         @endif
-
-                                        <option selected value="0">Please change lead</option>
 
                                         @if (isset($leads->company_name))
                                             <option value="{{ $leads->id }}" selected>{{ $leads->company_name }}</option>
