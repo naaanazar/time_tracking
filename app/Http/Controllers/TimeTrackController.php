@@ -93,4 +93,10 @@ class TimeTrackController extends Controller
             'Billable_time' => ''
         ]);
     }
+
+    public function getTimeNow(){
+        $data = time();
+
+        return response()->json(['data' => $data]);
+    }
 }

@@ -7,16 +7,117 @@ $(document).ready(function(){
 
     //timetrack
 
+
+    billableTime
+
+    additionalCost
+
+    insertCost
+    $(document).on('change', '#billableTime', function() {
+        if(this.checked) {
+            console.log('1');
+           if($('#additionalCost').val().length >0 &&  $("#timeDuration").val().length > 0){
+             var cost =  $('#additionalCost').val() / 60 * moment.duration($("#timeDuration").val()).asMinutes();
+               console.log(cost);
+               $('#insertCost').html(Math.round(cost * 100) / 100);
+           }
+        } else {
+            $('#insertCost').html('');
+
+        }
+    });
+
+    $(document).on('mousemove', '#additionalCost', function(){
+
+        var attr = $('#billableTime').prop('checked');
+        console.log(attr)
+        if (typeof attr !== typeof undefined && attr !== false) {
+            console.log('1');
+            if($('#additionalCost').val().length >0 &&  $("#timeDuration").val().length > 0){
+                var cost =  $('#additionalCost').val() / 60 * moment.duration($("#timeDuration").val()).asMinutes();
+                console.log(cost);
+                $('#insertCost').html(Math.round(cost * 100) / 100);
+            }
+        } else {
+            $('#insertCost').html('');
+
+        }
+    });
+
+
+
+    // button now
     var dStart,
         dFinish,
         duration ;
 
-    $('#formTrackStart').on('mouseleave',function(){
-        trackStart();
-
+    $(document).on('click', '#formTrackStartNow', function(){
+        $.get('/trecking/getTime', function (response) {
+            $('#formTrackStart').val(moment(response.data * 1000).format('HH:mm'));
+            trackStart();
+        });
     });
 
-    $('#formTrackStart').on('click',function(){
+    $(document).on('click', '#formTrackFinishNow', function(){
+        $.get('/trecking/getTime', function (response) {
+            $('#formTrackFinish').val(moment(response.data * 1000).format('HH:mm'));
+            trackFinish();
+        });
+    });
+
+    //button + -
+    $(document).on('click', '#formTrackStartInc', function(){
+        addTime('#formTrackStart', 10);
+        trackStart();
+    });
+
+    $(document).on('click', '#formTrackFinishInc', function(){
+        addTime('#formTrackFinish' , 10);
+        trackFinish();
+    });
+
+    $(document).on('click', '#formTrackStartDec', function(){
+        addTime('#formTrackStart', -10);
+        trackStart();
+    });
+
+    $(document).on('click', '#formTrackFinishDec', function(){
+        addTime('#formTrackFinish' , -10);
+        trackFinish();
+    });
+
+    $(document).on('change', '#nextDay', function() {
+        if(this.checked) {
+            if(!dFinish){
+                dFinish = new Date();
+            }
+            dFinish.setDate(new Date().getDate()+ 1);
+            trackFinish();
+        } else {
+            if(dFinish){
+                dFinish.setDate(new Date().getDate());
+                trackFinish();
+            }
+        }
+    });
+
+
+    function addTime(element , addMinutes){
+        var timeSet = $(element).val();
+        if(moment(timeSet, "HH:mm").isValid()){
+            timeSet =  moment(timeSet, "HH:mm").add(addMinutes, 'minutes');
+        } else {
+            timeSet =  moment('00:00', 'HH:mm' ).add(addMinutes, 'minutes');
+        }
+        $(element).val(moment(timeSet, "HH:mm").format('HH:mm'));
+    }
+
+
+    //time + duratiot
+
+
+
+    $('#formTrackStart').on('mouseleave',function(){
         trackStart();
 
     });
@@ -25,9 +126,7 @@ $(document).ready(function(){
         trackFinish();
     });
 
-    $('#formTrackFinish').on('click',function(){
-        trackFinish();
-    });
+
 
     function trackStart(){
         console.log('11');
@@ -72,7 +171,9 @@ $(document).ready(function(){
             if(moment(dateStringFinish, "HH:mm").isValid()){
                 var dateString = moment(dateStringFinish, "HH:mm").format('HH:mm');
                 $('#formTrackFinish').val(dateString);
-                dFinish = new Date();
+                if (!dFinish) {
+                    dFinish = new Date();
+                };
                 dFinish.setHours(dateString.slice(0,2));
                 dFinish.setMinutes(dateString.slice(3));
                 dFinish.setSeconds('0');
@@ -98,34 +199,38 @@ $(document).ready(function(){
 
     function timeDuration(dFinish,  dStart) {
 
-        if (dFinish.getHours() == dStart.getHours && dFinish.getMinutes() == dStart.getMinutes() ){
+        if (dFinish > dStart) {
+            if (dFinish.getHours() == dStart.getHours && dFinish.getMinutes() == dStart.getMinutes()) {
 
-            $("#timeDuration").val('00:00');
+                $("#timeDuration").val('00:00');
 
-        } else {
-            var duration = dFinish - dStart;
-
-            var hours;
-
-            if (Math.floor(duration / 60000) < 60) {
-                hours = '00';
             } else {
-                var hours = Math.floor(Math.floor(duration / 60000) / 60);
-                if (hours < 10) {
-                    hours = '0' + hours;
+                var duration = dFinish - dStart;
+
+                var hours;
+
+                if (Math.floor(duration / 60000) < 60) {
+                    hours = '00';
+                } else {
+                    var hours = Math.floor(Math.floor(duration / 60000) / 60);
+                    if (hours < 10) {
+                        hours = '0' + hours;
+                    }
+
                 }
 
+                var minuts = Math.floor(duration / 60000) % 60;
+
+                if (minuts < 10) {
+                    minuts = '0' + minuts;
+                }
+
+                $("#timeDuration").val(hours + ':' + minuts);
+
+                console.log(minuts + 'mm' + 'hh' + hours);
             }
-
-            var minuts = Math.floor(duration / 60000) % 60;
-
-            if (minuts < 10) {
-                minuts = '0' + minuts;
-            }
-
-            $("#timeDuration").val(hours + ':' + minuts);
-
-            console.log(minuts + 'mm' + 'hh' + hours);
+        } else {
+            $("#timeDuration").val('incorect');
         }
     }
 
@@ -420,6 +525,13 @@ $(document).ready(function(){
     }
    // });
 });
+
+function getServerTime() {
+    $.get('/trecking/getTime', function (response) {
+        console.log(response.data + '2222222222');
+        return response.data;
+    });
+}
 
 var Main = {
     displayModal: function(idModal, delUrl, massage, appendContainer) {
