@@ -624,7 +624,7 @@ class TimeManageController extends Controller
             'company_address' => 'min:4|max:100',
             'website' => 'string',
             'contact_person' => 'required|min:4|max:30',
-            'email' => 'required|unique:users|email',
+            'email' => 'required|unique:Clients|email',
             'phone_number' => 'regex:/[0-9-]+/|max:30'
         ]);
     }
