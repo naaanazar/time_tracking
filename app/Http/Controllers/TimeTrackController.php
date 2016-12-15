@@ -31,9 +31,13 @@ class TimeTrackController extends Controller
             $this->validation_track($request);
             $data = Input::all();
 
-            $data['date_start'] = $task->time_parser_from_js($data['date_start']);
-            $data['date_finish'] = $task->time_parser_from_js($data['date_finish']);
-            $data['duration'] = $task->duration($data);
+            if( isset( $data['date_start'] ) && isset( $data['date_finish'] ) ) {
+                $data['date_start'] = $task->time_parser_from_js($data['date_start']);
+                $data['date_finish'] = $task->time_parser_from_js($data['date_finish']);
+            }
+            if( isset( $data['duration'] ) ){
+                $data['duration'] = $task->parse_duration($data['duration']);
+            }
 
             TimeTrack::create( $data );
 
@@ -56,6 +60,16 @@ class TimeTrackController extends Controller
         }
 
         return redirect('/');
+    }
+
+    /*
+     * return all track
+     * */
+    public function all_track()
+    {
+        $tracks = TimeTrack::with('task', 'project')->get();
+        
+        return view('', compact('tracks'));
     }
 
     /*
@@ -94,8 +108,8 @@ class TimeTrackController extends Controller
         $this->validate($request, [
             'task_id' => 'required',
             'project_id' => 'required',
-            'date_start' => 'required',
-            'date_finish' => 'required',
+            'date_start' => '',
+            'date_finish' => '',
             'description' => 'max:1000',
             'additional_cost' => 'integer',
             'billable_time' => ''

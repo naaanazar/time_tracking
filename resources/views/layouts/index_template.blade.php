@@ -12,8 +12,9 @@
     <title>Ignatiuz</title>
 
     <link href="/css/main.css" rel="stylesheet" media="screen">
-    <link href="/css/jquery.jgrowl.css" rel="stylesheet" media="screen">
 
+    <link rel="shortcut icon" href="http://faviconka.ru/ico/faviconka_ru_1127.png" type="image/png">
+    <link href="/css/jquery.jgrowl.css" rel="stylesheet" media="screen">
 
     <link rel="stylesheet" href="/assets/font-awesome.css">
     <link rel="" href="/assets/fonts/glyphicons-halflings-regular.eot">
