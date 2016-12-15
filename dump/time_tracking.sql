@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Дек 14 2016 г., 11:51
+-- Время создания: Дек 14 2016 г., 18:31
 -- Версия сервера: 5.6.26
 -- Версия PHP: 5.6.12
 
@@ -37,14 +37,15 @@ CREATE TABLE IF NOT EXISTS `Clients` (
   `updated_at` date NOT NULL,
   `created_at` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Дамп данных таблицы `Clients`
 --
 
 INSERT INTO `Clients` (`id`, `company_name`, `company_address`, `website`, `contact_person`, `email`, `phone_number`, `updated_at`, `created_at`) VALUES
-(6, 'Mss12', 'sads sadsad', 'https://laravel.com/docs/5.3/queries#selects', 'Petro', 'petro@gmail.com', '3434', '2016-12-10', '2016-12-10');
+(6, 'Mss12', 'sads sadsad', 'https://laravel.com/docs/5.3/queries#selects', 'Petro', 'petro@gmail.com', '3434', '2016-12-10', '2016-12-10'),
+(7, 'dsfds', 'dsdsf', 'https://github.com/', 'dsdsf', 'petro@gmail.com', '2343243', '2016-12-14', '2016-12-14');
 
 -- --------------------------------------------------------
 
@@ -105,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `Project` (
 --
 
 INSERT INTO `Project` (`id`, `client_id`, `lead_id`, `project_name`, `hourly_rate`, `notes`, `updated_at`, `created_at`) VALUES
-(19, 6, 0, 'project1', '50.00', 'sdsdsa', '2016-12-10 00:00:00', '2016-12-10 00:00:00'),
+(19, 6, 49, 'project1', '50.00', 'sdsdsa', '2016-12-14 09:04:41', '2016-12-10 00:00:00'),
 (20, 6, 49, 'testing', '50.00', 'dsfd', '2016-12-10 00:00:00', '2016-12-10 00:00:00'),
 (21, 6, 49, 'test12', '50.00', 'sad sad sd sd ', '2016-12-14 07:24:14', '2016-12-14 07:24:14');
 
@@ -137,9 +138,9 @@ CREATE TABLE IF NOT EXISTS `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `company_id`, `project_id`, `task_type`, `task_titly`, `alloceted_hours`, `assign_to`, `task_description`, `billable`, `created_at`, `updated_at`) VALUES
-(10, 6, 19, 'Bug Fixing', 'AAAA', '50.00', 27, 'fdsfd ', 1, '2016-12-10 00:00:00', '2016-12-10 00:00:00'),
+(10, 6, 19, 'Bug Fixing', 'ewrerw', '50.00', 44, 'AAAA', 1, '2016-12-10 00:00:00', '2016-12-14 09:10:44'),
 (11, 6, 20, 'Quality Assurance', 'sas', '100.00', 49, 'dsd', 1, '2016-12-10 00:00:00', '2016-12-10 00:00:00'),
-(12, 6, 20, 'Bug Fixing', 'asdasd', '50.00', 49, 'dsadas', 0, '2016-12-12 00:00:00', '2016-12-12 00:00:00'),
+(12, 6, 20, 'Bug Fixing', 'sdasd', '50.00', 49, 'asdasd', 0, '2016-12-12 00:00:00', '2016-12-14 09:16:01'),
 (13, 6, 20, 'Bug Fixing', 'sadasdasd', '50.00', 49, 'asdasd', 0, '2016-12-12 00:00:00', '2016-12-12 00:00:00'),
 (14, 6, 20, 'New Feature', 'we', '0.00', 49, ' wwqe ', 0, '2016-12-14 00:00:00', '2016-12-14 00:00:00');
 
@@ -202,22 +203,25 @@ CREATE TABLE IF NOT EXISTS `time_track` (
   `date_start` datetime NOT NULL,
   `date_finish` datetime NOT NULL,
   `duration` int(16) NOT NULL,
-  `Billable_time` tinyint(1) NOT NULL,
+  `billable_time` tinyint(1) NOT NULL DEFAULT '0',
   `description` text NOT NULL,
   `additional_cost` int(16) NOT NULL,
-  `total_time` int(16) NOT NULL,
-  `updated_at` date NOT NULL,
-  `created_at` date NOT NULL,
+  `total_time` int(16) DEFAULT NULL,
+  `updated_at` datetime NOT NULL,
+  `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `task_id` (`task_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Дамп данных таблицы `time_track`
 --
 
-INSERT INTO `time_track` (`id`, `project_id`, `task_id`, `date_start`, `date_finish`, `duration`, `Billable_time`, `description`, `additional_cost`, `total_time`, `updated_at`, `created_at`) VALUES
-(1, 19, 10, '2016-12-12 14:19:20', '2016-12-12 15:19:20', 0, 0, '', 5, 3600, '2016-12-12', '2016-12-12');
+INSERT INTO `time_track` (`id`, `project_id`, `task_id`, `date_start`, `date_finish`, `duration`, `billable_time`, `description`, `additional_cost`, `total_time`, `updated_at`, `created_at`) VALUES
+(1, 19, 10, '2016-12-12 14:19:20', '2016-12-12 15:19:20', 0, 0, '', 5, 3600, '2016-12-12 00:00:00', '2016-12-12 00:00:00'),
+(5, 19, 10, '2016-12-14 08:00:00', '2016-12-14 18:00:00', 36000, 0, 'tertr retr etret r', 50, NULL, '2016-12-14 15:11:28', '2016-12-14 15:11:28'),
+(6, 19, 10, '2016-12-14 18:00:00', '2016-12-14 20:00:00', 7200, 0, 'sasds sad asdas d', 50, NULL, '2016-12-14 15:12:37', '2016-12-14 15:12:37'),
+(7, 19, 10, '2016-12-14 08:00:00', '2016-12-14 10:00:00', 7200, 1, 'sdsad ', 50, NULL, '2016-12-14 15:17:07', '2016-12-14 15:17:07');
 
 -- --------------------------------------------------------
 
@@ -246,7 +250,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `google_id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `employe`, `users_team_id`, `hourly_rate`) VALUES
-(27, NULL, ' Anton', 'an@gmail.com', '$2y$10$mEzQ.b0mX8H9qTSR27vrN.uq64KQF9O0jW4mdVBFEPY4N8gXIpiu6', 'OcZMjjPCMn7fQrJPrQ7b3qdqKzblx7v0jGUZXDiogG0EOOiyWkr1jOtiyOTJ', '2016-12-06 13:40:59', '2016-12-09 10:17:56', 'Admin', 8, 10.00),
+(27, NULL, ' Anton', 'an@gmail.com', '$2y$10$mEzQ.b0mX8H9qTSR27vrN.uq64KQF9O0jW4mdVBFEPY4N8gXIpiu6', 'oHbQX2OlDGbirfO3cZUbQrGdyLmBCnWfwGvBoYxArYZX8lvzRQglo4me2NQJ', '2016-12-06 13:40:59', '2016-12-14 09:42:18', 'Admin', 8, 10.00),
 (44, NULL, 'add', 'admin@admin.com', '$2y$10$098xVr3AdbpptAkhtYtUCOWYUEqiaVD/RBEL86W8W0qWDl6cd4DRC', 'GL1JQJlh6PiluMr1rrzhX6u42t7ydvcXT8lfuFih66cMNW9EA2p8OFf27ooE', '2016-12-09 06:43:22', '2016-12-09 06:44:11', 'Admin', 0, 0.00),
 (49, NULL, ' Masik', 'sdasd@wddew.com', '$2y$10$f5uWksp/edR9G5Yuatwuk.MZuZtBFUDplTbZW9dJa/dcqm3b0ICT6', NULL, '2016-12-10 14:07:09', '2016-12-10 14:07:49', 'Lead', 8, 50.00),
 (51, NULL, 'Asas', 'asdasd@dfggfd.comss', '$2y$10$3NCNznkJeQpCXOqc18bHR.pB8cLDW2EXzSvuh6XX/L98rE1y5DbiK', NULL, '2016-12-10 14:43:18', '2016-12-10 14:43:18', 'Developer', 8, 50.00),

@@ -48,6 +48,21 @@ class Task extends Model
         return $this->hasMany('App\TimeLog');
     }
 
+    public function time_parser_from_js($time = false)
+    {
+        if( $time != false ) {
+            $date = explode( ' ', $time );
+            unset($date[6]);
+            unset($date[7]);
+            $date = implode(' ', $date);
+
+            $date = date( 'Y-m-d H:i:s', strtotime( $date ));
+            return $date;
+        }
+
+        return 0;
+    }
+
     public function time_parser($time = false)
     {
         if( $time != false ) {
@@ -74,6 +89,11 @@ class Task extends Model
         }
 
         return $data;
+    }
+
+    public function duration($date)
+    {
+        return $date = strtotime($date['date_finish']) - strtotime($date['date_start']);
     }
 
     protected function time_diff($second)
