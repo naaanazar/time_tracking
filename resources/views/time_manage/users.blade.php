@@ -66,7 +66,7 @@
                             <tr class="odd gradeX">
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->team_name }}</td>
+                                <td>{{ $user->team_name ? $user->team_name : '-' }}</td>
                                 <td  style="text-align: center" class="center">{{ $user->hourly_rate }}</td>
                                 <td>{{ $user->employe }}</td>
                                 <td style="text-align: center">{{ $user->created_at }}</td>
