@@ -28,4 +28,14 @@ class TimeTrack extends Model
     {
         return $this->hasMany('App\TimeLog');
     }
+
+    public function task()
+    {
+        return $this->belongsTo('App\Task', 'task_id', 'id');
+    }
+
+    public function project()
+    {
+        return $this->belongsTo('App\Project', 'project_id', 'id');
+    }
 }

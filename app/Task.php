@@ -105,4 +105,10 @@ class Task extends Model
 
         return $result;
     }
+
+    public function parse_duration($time)
+    {
+        $data = explode(':', $time);
+        return $data = ((int)($data[0]))*60 + (int)($data[1]);
+    }
 }
