@@ -14,7 +14,7 @@
 
                 @if ($errors->has('email'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('email') }}</strong>
+                        <strong>{{ $errors->first('email' ) == 'These credentials do not match our records.' ? 'These passwords don\'t match' : $errors->first('email' ) }}</strong>
                     </span>
                 @endif
 

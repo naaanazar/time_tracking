@@ -5,6 +5,19 @@
 $(document).ready(function(){
 
 
+    $(window).load(function(){
+        if (($('#bodyData').data('msg').length > 0) && ($('#bodyData').data('theme').length > 0)) {
+            $.jGrowl($('#bodyData').data('msg'), {
+                theme: $('#bodyData').data('theme'),
+                life: 200000000
+            });
+        }
+    });
+
+
+
+
+
 
     $(document).on('click', '.webClick', function(e){
         e.stopImmediatePropagation();

@@ -249,22 +249,25 @@ class TimeManageController extends Controller
         if (Auth::user()['original']['employe'] == 'Developer' || Auth::user()['original']['employe'] == 'QA Engineer') {
 
             $lead = DB::table('teams')->where('id', '=', Auth::user()['original']['users_team_id'])->first();
-            if ($lead->teams_lead_id) {
-                $projects = DB::table('Project')
-                    ->where('lead_id', '=', $lead->teams_lead_id)
-                    ->leftJoin('users', 'Project.lead_id', '=', 'users.id')
-                    ->join('Clients', 'Project.client_id', '=', 'Clients.id')
-                    ->select('Project.project_name',
-                        'Project.id',
-                        'Project.hourly_rate',
-                        'Project.notes',
-                        'Project.created_at',
-                        'users.name', 'Clients.company_name')
-                    ->get();
+            if ($lead) {
+                if ($lead->teams_lead_id) {
+                    $projects = DB::table('Project')
+                        ->where('lead_id', '=', $lead->teams_lead_id)
+                        ->leftJoin('users', 'Project.lead_id', '=', 'users.id')
+                        ->join('Clients', 'Project.client_id', '=', 'Clients.id')
+                        ->select('Project.project_name',
+                            'Project.id',
+                            'Project.hourly_rate',
+                            'Project.notes',
+                            'Project.created_at',
+                            'users.name', 'Clients.company_name')
+                        ->get();
+                }
+                return view('time_manage.projects', compact('projects'));
             }
         }
 
-        if(Auth::user()['original']['employe'] == 'Supervisor' || Auth::user()['original']['employe'] == 'Admin' || Auth::user()['original']['employe'] == 'Lead') {
+        if (Auth::user()['original']['employe'] == 'Supervisor' || Auth::user()['original']['employe'] == 'Admin' || Auth::user()['original']['employe'] == 'Lead') {
 
             $projects = DB::table('Project')
                 ->leftJoin('users', 'Project.lead_id', '=', 'users.id')
@@ -274,12 +277,14 @@ class TimeManageController extends Controller
                     'Project.hourly_rate',
                     'Project.notes',
                     'Project.created_at',
-                    'users.name', 'Clients.company_name' )
+                    'users.name', 'Clients.company_name')
                 ->get();
+            return view('time_manage.projects', compact('projects'));
         }
 
         return view('time_manage.projects', compact('projects'));
     }
+
 
     /*
      * return all projects

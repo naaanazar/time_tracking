@@ -113,6 +113,38 @@ thead {
 
 
 
+.jGrowl-notification {
+    font-size: 18px;
+    width: 300px !important;
+}
+
+.jGrowl-notification {
+    color: #31708f !important;
+    background-color: #d9edf7 !important;
+    border-color: #bce8f1 !important;
+}
+
+.jgrowl-danger {
+    color: #a94442 !important;
+    background-color: #f2dede !important;
+    border-color: #ebccd1 !important;
+}
+
+.jgrowl-warning {
+    color: #8a6d3b !important;
+    background-color: #fcf8e3 !important;
+    border-color: #faebcc !important;
+}
+
+.jgrowl-success {
+    color: #3c763d !important;
+    background-color: #dff0d8 !important;
+    border-color: #d6e9c6 !important;
+}
+
+
+
+
 
 
 

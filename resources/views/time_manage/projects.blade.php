@@ -122,15 +122,7 @@
 
         </div>
 
-            <!--    <td>{{ $client->company_name }}</td>
-            <td>{{ $client->company_address }}</td>
-            <td>
-                <a href="{{ $client->website }}">{{ $client->website }}</a>
-            </td>
-            <td>{{ $client->contact_person }}</td>
-            <td>{{ $client->email }}</td>
-            <td>{{ $client->phone_number }}</td>
-              <td style="text-align: center">{{ $client->created_at }}</td> -->
+
         @endif
         <div class="row-fluid">
             <!-- block -->
@@ -171,30 +163,32 @@
 
                             </tr>
                             </tfoot>
-                            <tbody>
+                            @if(isset($projects))
+                                <tbody>
 
-                            @foreach( $projects as $project )
-                                <tr class="odd gradeX getTasks" data-id="{{ $project->id }}">
-                                    <td>{{ $project->project_name }}</td>
-                                    <td>{{ (isset($client->company_name)) ? $client->company_name : $project->company_name }}</td>
-                                    <td>{{ $project->name }}</td>
-                                    <td style="text-align: center;">{{ $project->hourly_rate }}</td>
-                                    <td style="text-align: center" >{{ $project->created_at }}</td>
+                                @foreach( $projects as $project )
+                                    <tr class="odd gradeX getTasks" data-id="{{ $project->id }}">
+                                        <td>{{ $project->project_name }}</td>
+                                        <td>{{ (isset($client->company_name)) ? $client->company_name : $project->company_name }}</td>
+                                        <td>{{ $project->name }}</td>
+                                        <td style="text-align: center;">{{ $project->hourly_rate }}</td>
+                                        <td style="text-align: center" >{{ $project->created_at }}</td>
 
-                                    @if ($status == 'Admin')
-                                        <td class="actionForms" style="text-align: center;">
-                                            @if ($status == 'Admin' )
+                                        @if ($status == 'Admin')
+                                            <td class="actionForms" style="text-align: center;">
+                                                @if ($status == 'Admin' )
 
-                                                <a href="/project/update/{{ $project->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
-                                                <button type="button" class="btn btn-danger  deleteProject" data-url="/project/delete/{{ $project->id }}" data-element="{{  $project->project_name  }}">
-                                                    <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
-                                            @endif
-                                        </td>
-                                    @endif
-                                </tr>
-                            @endforeach
+                                                    <a href="/project/update/{{ $project->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
+                                                    <button type="button" class="btn btn-danger  deleteProject" data-url="/project/delete/{{ $project->id }}" data-element="{{  $project->project_name  }}">
+                                                        <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
+                                                @endif
+                                            </td>
+                                        @endif
+                                    </tr>
+                                @endforeach
 
-                            </tbody>
+                                </tbody>
+                            @endif
                         </table>
                     </div>
                 </div>
