@@ -67,7 +67,7 @@
                                     <label class="control-label" for="taskProjectId" style="text-align: left;">Project *</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    @if( $status == 'Developer' || $status == 'QA Engineer' )
+                                    @if( $status == 'Developer' )
                                         <select name="project_id" class="input-xlarge focused my_input" id="taskProjectId" style="height: 42px;" required
                                                 <?= ( $status == 'Developer') ? ' disabled' : '' ?>>
                                         @if( isset( $projects ) )
