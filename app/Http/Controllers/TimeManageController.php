@@ -347,7 +347,7 @@ class TimeManageController extends Controller
             return redirect('/task/all');
         }
 
-        if( Auth::user()->employe == 'Developer' || Auth::user()->employe == 'QA Engineer') {
+        if( Auth::user()->employe == 'Developer' ) {
             if( Auth::user()->users_team_id == 0 ) {
                 return redirect('/task/all/no team/warning');
             }
@@ -407,7 +407,7 @@ class TimeManageController extends Controller
             return redirect('/task/all');
         }
 
-        if( Auth::user()->employe == 'Developer' || Auth::user()->employe == 'QA Engineer') {
+        if( Auth::user()->employe == 'Developer' ) {
             if( Auth::user()->users_team_id == 0 ) {
                 return redirect('/task/all/no team/warning');
             }
