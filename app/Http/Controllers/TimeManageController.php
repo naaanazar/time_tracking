@@ -349,7 +349,7 @@ class TimeManageController extends Controller
 
         if( Auth::user()->employe == 'Developer' || Auth::user()->employe == 'QA Engineer') {
             if( Auth::user()->users_team_id == 0 ) {
-                return redirect('/task/all');
+                return redirect('/task/all/no team/warning');
             }
 
             $lead_id = DB::table('teams')->where('id', '=', Auth::user()->users_team_id)
@@ -409,9 +409,9 @@ class TimeManageController extends Controller
 
         if( Auth::user()->employe == 'Developer' || Auth::user()->employe == 'QA Engineer') {
             if( Auth::user()->users_team_id == 0 ) {
-                return redirect('/task/all');
+                return redirect('/task/all/no team/warning');
             }
-            
+
             $lead_id = DB::table('teams')->where('id', '=', Auth::user()->users_team_id)
                 ->select('teams_lead_id')->first();
 
@@ -446,7 +446,7 @@ class TimeManageController extends Controller
     /*
      * return all tasks
      * */
-    public function all_tasks()
+    public function all_tasks($msg = '', $theme = '')
     {
 
         if (Auth::user()['original']['employe'] == 'Developer' || Auth::user()['original']['employe'] == 'QA Engineer') {
@@ -485,7 +485,7 @@ class TimeManageController extends Controller
 
         }
 
-           return view('time_manage.tasks', compact('tasksRes'));
+           return view('time_manage.tasks', compact('tasksRes', 'msg', 'theme'));
     }
 
     /*
