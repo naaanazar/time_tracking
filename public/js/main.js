@@ -6,6 +6,9 @@ $(document).ready(function(){
 
 
     $(window).load(function(){
+
+        $(".removeSelect").html('');
+
         if (($('#bodyData').data('msg').length > 0) && ($('#bodyData').data('theme').length > 0)) {
             $.jGrowl($('#bodyData').data('msg'), {
                 theme: $('#bodyData').data('theme'),
@@ -26,17 +29,11 @@ $(document).ready(function(){
 
 
 
-
-
     $(document).on('click', '.webClick', function(e){
         e.stopImmediatePropagation();
         window.open($(e.target).html(),'_blank');
     })
 
-        $(window).load(function(){
-            $(".removeSelect").html('');
-
-        });
 
 
 
