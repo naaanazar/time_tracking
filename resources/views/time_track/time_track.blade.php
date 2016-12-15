@@ -124,6 +124,16 @@
                                 </label>
                              </span>
                             </div>
+                            @if ($errors->has('date_start'))
+                                <span class="help-block">
+                                                <strong style="color:#802420">{{ $errors->first('date_start') }}</strong>
+                                            </span>
+                            @endif
+                            @if ($errors->has('date_finish'))
+                                <span class="help-block">
+                                                <strong style="color:#802420">{{ $errors->first('date_finish') }}</strong>
+                                            </span>
+                            @endif
 
                         </div>
                     </div>
@@ -134,7 +144,12 @@
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
                             <input type="text" style="padding: 10px; max-width: 65%;"   class="inputTrackPadding focused my_input" name="duration" id="timeDuration" placeholder="HH:MM">
-                            <label class="labelTrack" for="" style="padding-top: 10px">Value($) <span id="insertCost"><span></label>
+                            <label class="labelTrack" for="" style="padding-top: 10px">Value($) <span id="insertCost"></span></label>
+                            @if ($errors->has('duration'))
+                                <span class="help-block">
+                                                <strong style="color:#802420">{{ $errors->first('duration') }}</strong>
+                                            </span>
+                            @endif
                         </div>
                     </div>
 
@@ -144,11 +159,16 @@
                         </div>
                         <div class="controls col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <div class="input-group">
-                            <div class="input-group-btn" >
-                            <input type="number" steep="0.01" style="padding: 10px; max-width: 89%" class="inputTrackPadding focused my_input form-control " name="additional_cost" id="additionalCost">
-                            <span class="input-group-addon" style="padding: 9px 12px">$</span>
+                                <div class="input-group-btn" >
+                                    <input type="number" steep="0.01" style="padding: 10px; max-width: 89%" class="inputTrackPadding focused my_input form-control " name="additional_cost" id="additionalCost">
+                                    <span class="input-group-addon" style="padding: 9px 12px">$</span>
+                                </div>
                             </div>
-                            </div>
+                            @if ($errors->has('additional_cost'))
+                                <span class="help-block">
+                                                <strong style="color:#802420">{{ $errors->first('additional_cost') }}</strong>
+                                            </span>
+                            @endif
                         </div>
                         <div class="controls col-xs-12 col-sm-3 col-md-3 col-lg-3">
                         <span class="" style="display: inline-block">
