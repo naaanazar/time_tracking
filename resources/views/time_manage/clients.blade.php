@@ -36,7 +36,7 @@
                                 <th style="min-width: 130px">Company Name</th>
                                 <th>Address</th>
                                 <th  class="thHead" style=" max-width: 120px!important;">Website</th>
-                                <th>Contact Persone</th>
+                                <th>Contact Person</th>
                                 <th>Email</th>
                                 <th>Phone Number</th>
                               <!--  <th style="min-width: 160px"  class="center">Created at</th> -->

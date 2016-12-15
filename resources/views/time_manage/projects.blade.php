@@ -13,7 +13,7 @@
     </div>
 
     <div id="conteiner" class="container" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}"
-            data-msg="<?= isset($notyfi['msg']) ? $notyfi['msg'] : '1111' ?>" data-theme="<?=isset($notyfi['theme']) ? $notyfi['theme'] : '222' ?>">
+            data-msg="<?= isset($notyfi['msg']) ? $notyfi['msg'] : '' ?>" data-theme="<?=isset($notyfi['theme']) ? $notyfi['theme'] : '' ?>">
         @if (!isset($projectsForClient))
             <div class="row-fluid">
                 <div class="span12">
@@ -96,7 +96,7 @@
                                 </div>
                             </div>
 
-                        </div>
+
                         <div class="col-md-3 cta-button">
 
                             <a href="/client/update/{{ $client->id }}" style="display:inline-block; margin-left: 25px" class="btn btn-info">

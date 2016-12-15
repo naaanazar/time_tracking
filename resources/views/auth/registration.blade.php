@@ -21,11 +21,11 @@
                                 {{ csrf_field() }}
                                     <div class="control-group row" >
                                         <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                        <label class="control-label " for="focusedInput">User type</label>
+                                        <label class="control-label " for="focusedInput">User type *</label>
                                         </div>
 
                                         <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                            <select name="employe" class="input-xlarge focused my_input" id="selectTeam" style="height: 42px;" >
+                                            <select name="employe" class="input-xlarge focused my_input" id="selectTeam" style="height: 42px;" required />
                                                 <option selected disabled>Select</option>
                                                 @if( old('employe') )
                                                     <option>{{ old('employe') }}</option>
@@ -40,13 +40,18 @@
                                                 <option>Developer</option>
                                                 <option>QA Engineer</option>
                                             </select>
+                                            @if ($errors->has('employe'))
+                                                <span class="help-block">
+                                                <strong style="color:#802420">{{ $errors->first('employe') }}</strong>
+                                            </span>
+                                            @endif
 
                                         </div>
                                     </div>
 
                                     <div class="control-group row">
                                         <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                        <label class="control-label" for="focusedInput">Name</label>
+                                        <label class="control-label" for="focusedInput">Name  *</label>
                                         </div>
                                         <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                             <input name="name" class="input-xlarge focused my_input" id="focusedInput"  autofocus type="text" value="{{ old('name') }}">
@@ -59,7 +64,7 @@
                                     </div>
                                     <div class="control-group  row">
                                         <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                        <label class="control-label" for="focusedInput">Email</label>
+                                        <label class="control-label" for="focusedInput">Email *</label>
                                         </div>
                                         <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 

@@ -105,17 +105,21 @@
                                         @if( isset( $lead[0] ) )
                                             <option selected value="{{ $lead[0]->id }}">{{ $lead[0]->name }}</option>
                                         @else
-                                            <option selected value="0">Please change lead</option>
+                                            <option selected value="0">Select</option>
                                         @endif
-
+                                        @if( !isset( $lead[0]))
                                         <option selected value="0">Select</option>
+                                            @endif
 
                                         @if (isset($leads->company_name))
                                             <option value="{{ $leads->id }}" selected>{{ $leads->company_name }}</option>
                                         @endif
 
                                         @foreach( $leads as $key )
-                                            <option  value="{{ $key->id}}">{{ $key->name }}</option>
+                                                @if( isset( $lead[0]) && $lead[0]->id == $key->id)
+                                                @else
+                                                    <option  value="{{ $key->id}}">{{ $key->name }}</option>
+                                                @endif
                                         @endforeach
                                     </select>
                                 </div>
