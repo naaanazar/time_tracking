@@ -72,7 +72,7 @@
                                         <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7">
                                             {{ $project->name }}
                                         </div>
-                                    </div
+                                    </div>
 
                                 </div>
                                 <div class="row my_row">
@@ -86,17 +86,19 @@
 
                             </div>
 
-                        </div>
-                        <div class="col-md-3 cta-button">
 
-                            <a href="/project/update/{{ $project->id }}" style="display:inline-block; margin-left: 25px" class="btn btn-info">
-                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Project
-                            </a>
+                        <div class="col-md-3 cta-button">
+                            @if ($status == 'Admin' || $status == 'Lead' || $status == 'Supervisor')
+                                <a href="/project/update/{{ $project->id }}" style="display:inline-block; margin-left: 25px" class="btn btn-info">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Project
+                                </a>
+                            @endif
+                        </div>
                         </div>
                     </div>
                 </div>
             </div>
-    </div>
+
 
 
 

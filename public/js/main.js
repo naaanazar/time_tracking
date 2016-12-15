@@ -5,16 +5,35 @@
 $(document).ready(function(){
 
 
+    $(window).load(function(){
+
+        $(".removeSelect").html('');
+
+        if (($('#bodyData').data('msg').length > 0) && ($('#bodyData').data('theme').length > 0)) {
+            $.jGrowl($('#bodyData').data('msg'), {
+                theme: $('#bodyData').data('theme'),
+                life: 4000,
+                position:'center',
+            });
+        };
+
+        if (($('#conteiner').data('msg').length > 0) && ($('#conteiner').data('theme').length > 0)) {
+            $.jGrowl($('#conteiner').data('msg'), {
+                theme: $('#conteiner').data('theme'),
+                life: 4000,
+                position:'center',
+            });
+        }
+    });
+
+
+
 
     $(document).on('click', '.webClick', function(e){
         e.stopImmediatePropagation();
         window.open($(e.target).html(),'_blank');
     })
 
-        $(window).load(function(){
-            $(".removeSelect").html('');
-
-        });
 
 
 

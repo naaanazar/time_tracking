@@ -33,7 +33,7 @@ class mailCreateUser extends Mailable
      */
     public function build()
     {
-        return $this->from('example@example.com')->
+        return $this->from([ 'name' => 'Ignatiuz'])->subject("New User")->
         view('mail.createUser');
     }
 }

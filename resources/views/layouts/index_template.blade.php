@@ -14,6 +14,7 @@
     <link href="/css/main.css" rel="stylesheet" media="screen">
 
     <link rel="shortcut icon" href="http://faviconka.ru/ico/faviconka_ru_1127.png" type="image/png">
+    <link href="/css/jquery.jgrowl.css" rel="stylesheet" media="screen">
 
     <link rel="stylesheet" href="/assets/font-awesome.css">
     <link rel="" href="/assets/fonts/glyphicons-halflings-regular.eot">
@@ -38,7 +39,7 @@
         window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(), ]); ?>
     </script>
 </head>
-<body id="">
+<body id="bodyData" data-msg="<?=isset($msg) ? $msg : '' ?>" data-theme="<?=isset($theme) ? $theme : '' ?>">
 <div class="navbar-inner navbar-style">
     <nav class="navbar navbar-top nav-my" style="float:right; display:inline-block; z-index: 3">
         <div class="container-fluid" style="min-height: 61px;">
@@ -172,6 +173,7 @@
 
 
     <script src="/bootstrap3/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.jgrowl.js"></script>
 
 
     <script src="/js/main.js"></script>

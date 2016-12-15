@@ -12,7 +12,8 @@
         </div>
     </div>
 
-    <div id="conteiner" class="container" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
+    <div id="conteiner" class="container" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}"
+            data-msg="<?= isset($notyfi['msg']) ? $notyfi['msg'] : '' ?>" data-theme="<?=isset($notyfi['theme']) ? $notyfi['theme'] : '' ?>">
         @if (!isset($projectsForClient))
             <div class="row-fluid">
                 <div class="span12">
@@ -74,7 +75,7 @@
                                     <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7">
                                         {{ $client->contact_person }}
                                     </div>
-                                </div
+                                </div>
 
                                 </div>
                                 <div class="row my_row">
@@ -95,7 +96,7 @@
                                 </div>
                             </div>
 
-                        </div>
+
                         <div class="col-md-3 cta-button">
 
                             <a href="/client/update/{{ $client->id }}" style="display:inline-block; margin-left: 25px" class="btn btn-info">
@@ -104,17 +105,11 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
             </div>
         </div>
 
 
-
             <div class="row my_row">
-
 
             </div>
 
@@ -122,15 +117,7 @@
 
         </div>
 
-            <!--    <td>{{ $client->company_name }}</td>
-            <td>{{ $client->company_address }}</td>
-            <td>
-                <a href="{{ $client->website }}">{{ $client->website }}</a>
-            </td>
-            <td>{{ $client->contact_person }}</td>
-            <td>{{ $client->email }}</td>
-            <td>{{ $client->phone_number }}</td>
-              <td style="text-align: center">{{ $client->created_at }}</td> -->
+
         @endif
         <div class="row-fluid">
             <!-- block -->
@@ -141,8 +128,6 @@
                         <script>
 
                         </script>
-
-
 
                         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="usersTable">
                             <thead>
@@ -160,7 +145,7 @@
                             </thead>
                             <tfoot>
                             <tr>
-                                <th class="thFoot">Project</ththFoot>
+                                <th class="thFoot">Project</th>
                                 <th class="thFoot">Company</th>
                                 <th class="thFoot">Lead</th>
                                 <th class="thFoot">Hourly Rate</th>
@@ -171,30 +156,32 @@
 
                             </tr>
                             </tfoot>
-                            <tbody>
+                            @if(isset($projects))
+                                <tbody>
 
-                            @foreach( $projects as $project )
-                                <tr class="odd gradeX getTasks" data-id="{{ $project->id }}">
-                                    <td>{{ $project->project_name }}</td>
-                                    <td>{{ (isset($client->company_name)) ? $client->company_name : $project->company_name }}</td>
-                                    <td>{{ $project->name }}</td>
-                                    <td style="text-align: center;">{{ $project->hourly_rate }}</td>
-                                    <td style="text-align: center" >{{ $project->created_at }}</td>
+                                @foreach( $projects as $project )
+                                    <tr class="odd gradeX getTasks" data-id="{{ $project->id }}">
+                                        <td>{{ $project->project_name }}</td>
+                                        <td>{{ (isset($client->company_name)) ? $client->company_name : $project->company_name }}</td>
+                                        <td>{{ $project->name }}</td>
+                                        <td style="text-align: center;">{{ $project->hourly_rate }}</td>
+                                        <td style="text-align: center" >{{ $project->created_at }}</td>
 
-                                    @if ($status == 'Admin')
-                                        <td class="actionForms" style="text-align: center;">
-                                            @if ($status == 'Admin' )
+                                        @if ($status == 'Admin')
+                                            <td class="actionForms" style="text-align: center;">
+                                                @if ($status == 'Admin' )
 
-                                                <a href="/project/update/{{ $project->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
-                                                <button type="button" class="btn btn-danger  deleteProject" data-url="/project/delete/{{ $project->id }}" data-element="{{  $project->project_name  }}">
-                                                    <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
-                                            @endif
-                                        </td>
-                                    @endif
-                                </tr>
-                            @endforeach
+                                                    <a href="/project/update/{{ $project->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
+                                                    <button type="button" class="btn btn-danger  deleteProject" data-url="/project/delete/{{ $project->id }}" data-element="{{  $project->project_name  }}">
+                                                        <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
+                                                @endif
+                                            </td>
+                                        @endif
+                                    </tr>
+                                @endforeach
 
-                            </tbody>
+                                </tbody>
+                            @endif
                         </table>
                     </div>
                 </div>

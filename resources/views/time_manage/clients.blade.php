@@ -35,8 +35,8 @@
                             <tr>
                                 <th style="min-width: 130px">Company Name</th>
                                 <th>Address</th>
-                                <th  class="thHead">Website</th>
-                                <th>Contact Persone</th>
+                                <th  class="thHead" style=" max-width: 120px!important;">Website</th>
+                                <th>Contact Person</th>
                                 <th>Email</th>
                                 <th>Phone Number</th>
                               <!--  <th style="min-width: 160px"  class="center">Created at</th> -->
@@ -49,7 +49,7 @@
                             <tr>
                                 <th class="thFoot" >Company Name</th>
                                 <th class="thFoot">Address</th>
-                                <th class="thFoot" >Website</th>
+                                <th class="thFoot thFootSite" style=" max-width: 120px!important;" >Website</th>
                                 <th class="thFoot">Contact Person</th>
                                 <th class="thFoot">Email</th>
                                 <th class="thFoot">Phone Number</th>
