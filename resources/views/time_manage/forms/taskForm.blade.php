@@ -24,11 +24,11 @@
                             @endif
                             @if( $status != 'Developer' || $status != 'Developer' )
                             <div class="control-group row">
+                                @if( isset( $client ) )
                                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                    <label class="control-label" for="CompanyTaskId" style="text-align: left;">Client</label>
+                                    <label class="control-label" for="CompanyTaskId" style="text-align: left;">Client *</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-
                                         <select name="company_id" class="input-xlarge focused my_input" id="CompanyTaskId" style="height: 42px;" required>
 
                                         @if( !isset( $task ) )
@@ -36,6 +36,7 @@
 
                                             @if (isset($client->company_name))
                                                 <option value="{{ $client->id }}" selected>{{ $client->company_name }}</option>
+
                                             @endif
 
                                             @foreach( $client as $key )
@@ -58,6 +59,7 @@
                                                     </span>
                                             @endif
                                 </div>
+                                @endif
                             </div>
                             @endif
                             <div class="control-group row">

@@ -348,6 +348,10 @@ class TimeManageController extends Controller
         }
 
         if( Auth::user()->employe == 'Developer' || Auth::user()->employe == 'QA Engineer') {
+            if( Auth::user()->users_team_id == 0 ) {
+                return redirect('/task/all');
+            }
+
             $lead_id = DB::table('teams')->where('id', '=', Auth::user()->users_team_id)
                     ->select('teams_lead_id')->first();
 
@@ -404,6 +408,10 @@ class TimeManageController extends Controller
         }
 
         if( Auth::user()->employe == 'Developer' || Auth::user()->employe == 'QA Engineer') {
+            if( Auth::user()->users_team_id == 0 ) {
+                return redirect('/task/all');
+            }
+            
             $lead_id = DB::table('teams')->where('id', '=', Auth::user()->users_team_id)
                 ->select('teams_lead_id')->first();
 
