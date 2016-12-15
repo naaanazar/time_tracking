@@ -110,7 +110,9 @@ thead {
 
 
 
-
+#jGrowl {
+    top: 170px!important;
+}
 
 
 .jGrowl-notification {

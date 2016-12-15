@@ -9,7 +9,16 @@ $(document).ready(function(){
         if (($('#bodyData').data('msg').length > 0) && ($('#bodyData').data('theme').length > 0)) {
             $.jGrowl($('#bodyData').data('msg'), {
                 theme: $('#bodyData').data('theme'),
-                life: 200000000
+                life: 4000,
+                position:'center',
+            });
+        };
+
+        if (($('#conteiner').data('msg').length > 0) && ($('#conteiner').data('theme').length > 0)) {
+            $.jGrowl($('#conteiner').data('msg'), {
+                theme: $('#conteiner').data('theme'),
+                life: 4000,
+                position:'center',
             });
         }
     });

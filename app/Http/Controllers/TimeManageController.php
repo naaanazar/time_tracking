@@ -264,6 +264,10 @@ class TimeManageController extends Controller
                         ->get();
                 }
                 return view('time_manage.projects', compact('projects'));
+            } else {
+                $notyfi['msg'] = "You aren't invited to the team";
+                $notyfi['theme'] = 'jgrowl-warning';
+                return view('time_manage.projects', compact('notyfi'));
             }
         }
 
@@ -354,7 +358,7 @@ class TimeManageController extends Controller
 
         if( Auth::user()->employe == 'Developer' || Auth::user()->employe == 'QA Engineer') {
             if( Auth::user()->users_team_id == 0 ) {
-                return redirect('/task/all/no team/warning');
+                return redirect('/task/all/You aren\'t invited to the team/jgrowl-warning');
             }
 
             $lead_id = DB::table('teams')->where('id', '=', Auth::user()->users_team_id)
@@ -414,7 +418,7 @@ class TimeManageController extends Controller
 
         if( Auth::user()->employe == 'Developer' || Auth::user()->employe == 'QA Engineer') {
             if( Auth::user()->users_team_id == 0 ) {
-                return redirect('/task/all/no team/warning');
+                return redirect('/task/all/You aren\'t invited to the team/jgrowl-warning');
             }
 
             $lead_id = DB::table('teams')->where('id', '=', Auth::user()->users_team_id)

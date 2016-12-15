@@ -12,7 +12,8 @@
         </div>
     </div>
 
-    <div id="conteiner" class="container" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
+    <div id="conteiner" class="container" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}"
+            data-msg="<?= isset($notyfi['msg']) ? $notyfi['msg'] : '1111' ?>" data-theme="<?=isset($notyfi['theme']) ? $notyfi['theme'] : '222' ?>">
         @if (!isset($projectsForClient))
             <div class="row-fluid">
                 <div class="span12">
@@ -74,7 +75,7 @@
                                     <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7">
                                         {{ $client->contact_person }}
                                     </div>
-                                </div
+                                </div>
 
                                 </div>
                                 <div class="row my_row">
@@ -104,17 +105,11 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
             </div>
         </div>
 
 
-
             <div class="row my_row">
-
 
             </div>
 
@@ -134,8 +129,6 @@
 
                         </script>
 
-
-
                         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="usersTable">
                             <thead>
                             <tr>
@@ -152,7 +145,7 @@
                             </thead>
                             <tfoot>
                             <tr>
-                                <th class="thFoot">Project</ththFoot>
+                                <th class="thFoot">Project</th>
                                 <th class="thFoot">Company</th>
                                 <th class="thFoot">Lead</th>
                                 <th class="thFoot">Hourly Rate</th>
