@@ -448,7 +448,6 @@ class TimeManageController extends Controller
      * */
     public function all_tasks($msg = '', $theme = '')
     {
-
         if (Auth::user()['original']['employe'] == 'Developer' || Auth::user()['original']['employe'] == 'QA Engineer') {
             $tasks = Task::where('assign_to', '=', Auth::user()['original']['id'])
                 ->with(['Project', 'client'])->get();
