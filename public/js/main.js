@@ -154,6 +154,35 @@ $(document).ready(function(){
         trackFinish();
     });
 
+    $("#timeDuration").on('mouseleave',function(){
+
+        fixTime("#timeDuration");
+    });
+
+    $("#timeDuration").on('click',function(){
+
+        fixTime("#timeDuration");
+    });
+
+    $(".button-orange").on('mousemove',function(){
+
+        fixTime("#timeDuration");
+    });
+
+
+    button-orange
+
+    function fixTime(element) {
+        if($(element).val().length >0) {
+            $(element).val();
+            var fixTime = moment($(element).val(), "HH:mm").format('HH:mm')
+            $(element).val(fixTime);
+        }
+    }
+
+
+
+
 
 
     function trackStart(){
