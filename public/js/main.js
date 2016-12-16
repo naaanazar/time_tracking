@@ -4,8 +4,59 @@
 'use strict';
 $(document).ready(function(){
 
+  //  $('#datetimepicker').datetimepicker('setInitialDate', '2016-12-31');
+
+  /*  $('.day').on('click', function(){
+        var date = setTimeout(" console.log($('#dtp_input2').val());"  , 500);
+
+
+//console.log(date + '-----');
+    //    window.location ='/trecking/' + date;
+        window.onload=function() {
+            console.log($('#dtp_input2').val());
+        }
+
+
+    });
+
+
+    $('.form_date').datetimepicker({
+
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0,
+
+    });
+
+    $(document).on('dp.change', '.form_date', function() {
+        alert('changed');
+    });*/
+
+
+    $(".d4").datepicker({
+            autoclose: true
+        }
+    ).on('changeDate', function (e) {
+        console.log(e.format());
+    });
+
+    $('#sandbox-container .input-group.date').datepicker({
+        autoclose: true
+    });
+
+    $('.d4').datepicker('update', new Date(2011, 2, 5));
+
+
+
+
 
     $(window).load(function(){
+
+
 
         $(".removeSelect").html('');
 

@@ -27,33 +27,29 @@
                     </button>
 
 
-                        <span class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd" style="display: inline-block; width: 0px;">
-                            <input class="form-control" type="hidden" value="" readonly>
-
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                        </span>
-                        <input type="hidden" id="dtp_input2" value="" /><br/>
 
 
-                    <script type="text/javascript">
-
-                        $('.form_date').datetimepicker({
-
-                            weekStart: 1,
-                            todayBtn:  1,
-                            autoclose: 1,
-                            todayHighlight: 1,
-                            startView: 2,
-                            minView: 2,
-                            forceParse: 0
-                        });
-
-                        $(document).on('click', '.datetimepicker-days').
-
-                    </script>
+                      <div class="input-group date">
+                           <label> <input type="text" class="form-control d4"  style="display:hidden">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-th"></i>
+                            </span> </label>
+                          </div>
 
 
-                </div>
+
+
+                     <!--   <span class="input-group " style="display: inline-block; width: 0px;">
+                            <input class="d4" type="hidden" value="<? ($date) ? $date : '' ?>" readonly>
+
+                            <span class="d4" class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </span>-->
+
+
+
+
+
+
             </div>
             <h2  class="col-md-10 showDate"  id="timeTrackShowDate"></h2>
         </div>

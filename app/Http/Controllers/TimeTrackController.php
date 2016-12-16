@@ -23,9 +23,11 @@ class TimeTrackController extends Controller
     /*
      * trecing time action
      * */
-    public function trecking(Request $request)
+    public function trecking(Request $request, $date=false)
     {
         $task = new Task();
+
+       // var_dump($date);
 
         if( Input::all() == true ) {
             $this->validation_track($request);
@@ -50,13 +52,13 @@ class TimeTrackController extends Controller
 
             $tasks = $task->time_counter($tasks);
 
-            return view('time_track.time_track', compact('tasks'));
+            return view('time_track.time_track', compact('tasks', 'date'));
 
         } elseif ( Auth::user()->employe == 'Admin' || Auth::user()->employe == 'Supervisor' ) {
             $tasks = Project::with('task', 'track', 'track_log')->get();
             $tasks = $task->time_counter($tasks);
 
-            return view('time_track.time_track', compact('tasks'));
+            return view('time_track.time_track', compact('tasks', 'date'));
         }
 
         return redirect('/');
