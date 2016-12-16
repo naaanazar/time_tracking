@@ -48,7 +48,7 @@
                             forceParse: 0
                         });
 
-                        $(document).on('click', '.datetimepicker-days').
+               //         $(document).on('click', '.datetimepicker-days').
 
                     </script>
 
@@ -188,7 +188,7 @@
                         <div class="controls col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <div class="input-group">
                                 <div class="input-group-btn" >
-                                    <input type="number" steep="0.01" style="padding: 10px; max-width: 89%" class="inputTrackPadding focused my_input form-control " name="additional_cost" id="additionalCost">
+                                    <input value="" type="number" steep="0.01" style="padding: 10px; max-width: 89%" class="inputTrackPadding focused my_input form-control " name="additional_cost" id="additionalCost">
                                     <span class="input-group-addon" style="padding: 9px 12px">$</span>
                                 </div>
                             </div>

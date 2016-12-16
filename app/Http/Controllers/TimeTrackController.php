@@ -31,9 +31,15 @@ class TimeTrackController extends Controller
             $this->validation_track($request);
             $data = Input::all();
 
-            if( isset( $data['date_start'] ) && isset( $data['date_finish'] ) ) {
+            if( $data['date_start'] != 0 && $data['date_finish'] != 0 ) {
                 $data['date_start'] = $task->time_parser_from_js($data['date_start']);
                 $data['date_finish'] = $task->time_parser_from_js($data['date_finish']);
+            } elseif( $data['date_start'] == 0 && $data['date_finish'] == 0 ) {
+                unset($data['date_start']);
+                unset($data['date_finish']);
+            }
+            if( $data['additional_cost'] == '') {
+                $data['additional_cost'] = 0;
             }
             if( isset( $data['duration'] ) ){
                 $data['duration'] = $task->parse_duration($data['duration']);
