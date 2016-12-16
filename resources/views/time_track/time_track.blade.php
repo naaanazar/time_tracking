@@ -3,6 +3,9 @@
 @section('content')
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
 
+    <script type="text/javascript" src="/data/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="/data/daterangepicker.css" />
+
     <div class="modal fade" id="delete-user" role="dialog">
         <div class="modal-dialog"  >
             <!-- Modal content-->
@@ -22,9 +25,34 @@
                     <button class="btn btn-sm">
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </button>
-                    <button class="btn btn-sm ">
-                        <i class="glyphicon glyphicon-calendar"></i>
-                    </button>
+
+
+                        <span class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd" style="display: inline-block; width: 0px;">
+                            <input class="form-control" type="hidden" value="" readonly>
+
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </span>
+                        <input type="hidden" id="dtp_input2" value="" /><br/>
+
+
+                    <script type="text/javascript">
+
+                        $('.form_date').datetimepicker({
+
+                            weekStart: 1,
+                            todayBtn:  1,
+                            autoclose: 1,
+                            todayHighlight: 1,
+                            startView: 2,
+                            minView: 2,
+                            forceParse: 0
+                        });
+
+                        $(document).on('click', '.datetimepicker-days').
+
+                    </script>
+
+
                 </div>
             </div>
             <h2  class="col-md-10 showDate"  id="timeTrackShowDate"></h2>

@@ -170,7 +170,7 @@ $(document).ready(function(){
     });
 
 
-    button-orange
+
 
     function fixTime(element) {
         if($(element).val().length >0) {

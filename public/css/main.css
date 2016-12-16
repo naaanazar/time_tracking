@@ -38,7 +38,11 @@ body {
     margin-bottom: 60px!important;
 }
 
-/* hover */
+.datetimepicker {
+    background-color: white!important;
+}
+
+    /* hover */
 
 .dropdown-menu li:hover .sub-menu {
     visibility: visible;
@@ -342,7 +346,7 @@ thead {
 
 .dropdown-menu {
     margin-top: 3px!important;
-    background-color: #ff6d00!important;
+   /* background-color: #ff6d00!important;*/
     border-radius: 5px!important;
     padding-bottom: 22px!important;
 }

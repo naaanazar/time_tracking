@@ -17,10 +17,18 @@
     <link href="/css/jquery.jgrowl.css" rel="stylesheet" media="screen">
 
     <link rel="stylesheet" href="/assets/font-awesome.css">
+
+
+
+
     <link rel="" href="/assets/fonts/glyphicons-halflings-regular.eot">
 
     <link href="/bootstrap3/css/bootstrap.css" rel="stylesheet" media="screen">
     <link href="/bootstrap3/css/bootstrap-theme.css.map" rel="stylesheet" media="screen">
+
+   <link href="/css/bootstrap-datetimepicker.css" rel="stylesheet" media="screen">
+
+
 
     <link rel="stylesheet" type="text/css" href="/datatables/DataTables-1.10.12/css/dataTables.bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/datatables/Buttons-1.2.2/css/buttons.bootstrap.min.css"/>
@@ -30,6 +38,8 @@
     <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/dataTables.buttons.min.js"></script>
     <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/buttons.bootstrap.min.js"></script>
     <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/buttons.colVis.min.js"></script>
+
+    <script type="text/javascript" src="/js/bootstrap-datetimepicker.js"></script>
 
     <script src="/js/moment.js"></script>
 
@@ -69,7 +79,7 @@
                                 <a href="#" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     Report <span class="caret"></span>
                                 </a>
-                                <ul class="dropdown-menu" >
+                                <ul class="dropdown-menu dropdown-menu-my" style="background-color: #ff6d00" >
                                     <li><a href="#">-----</a></li>
                                     <li><a href="#">------</a></li>
                                     <li><a href="#">------</a></li>
@@ -82,7 +92,7 @@
                             <a href="#" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Manage <span class="caret"></span>
                             </a>
-                            <ul class="dropdown-menu" >
+                            <ul class="dropdown-menu"  style="background-color: #ff6d00">
                                 @if ($status == 'Admin' || $status == 'HR Manager')
                                     <li> <a tabindex="-1" href="/user/all">Users</a> </li>
                                 @endif
