@@ -15,42 +15,22 @@
         </div>
     </div>
 
-    <div id="conteiner" class="container" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
+    <div id="conteiner" class="container" data-date="<?= isset($date)? $date : '' ?>" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
         <div class="row" style="margin-top: 20px">
             <div class="col-md-2 btn-toolbar" style="vertical-align: inherit">
                 <div id="timeStep5" class="btn-group">
-                    <button class="btn btn-sm">
+                    <button class="btn btn-sm calendarPrevDay">
                         <span class="glyphicon glyphicon-chevron-left"></span>
                     </button>
-                    <button class="btn btn-sm">
+                    <button class="btn btn-sm calendarNextDay">
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </button>
-
-
-
-
-                      <div class="input-group date">
-                           <label> <input type="text" class="form-control d4"  style="display:hidden">
-                            <span class="input-group-addon">
-                                <i class="glyphicon glyphicon-th"></i>
-                            </span> </label>
-                          </div>
-
-
-
-
-                     <!--   <span class="input-group " style="display: inline-block; width: 0px;">
-                            <input class="d4" type="hidden" value="<? ($date) ? $date : '' ?>" readonly>
-
-                            <span class="d4" class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                        </span>-->
-
-
-
-
-
-
+                    <button class="btn btn-sm d4">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </button>
+                </div>
             </div>
+
             <h2  class="col-md-10 showDate"  id="timeTrackShowDate"></h2>
         </div>
         <div class="row" style="margin-top: 20px;     color: #999; font-size: 18px">

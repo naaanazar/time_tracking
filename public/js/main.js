@@ -38,17 +38,33 @@ $(document).ready(function(){
 
 
     $(".d4").datepicker({
-            autoclose: true
+            autoclose: true,
+            todayBtn: "linked",
+            todayHighlight: true
         }
     ).on('changeDate', function (e) {
-        console.log(e.format());
+            var dateCalendar = e.format();
+            dateCalendar = moment(dateCalendar, 'MM/DD/YYYY').format('DD-MM-YYYY');
+            window.location.href = "/trecking/" + dateCalendar;
     });
 
     $('#sandbox-container .input-group.date').datepicker({
         autoclose: true
     });
 
-    $('.d4').datepicker('update', new Date(2011, 2, 5));
+    $('.d4').datepicker('update', new Date(moment($('#conteiner').data('date'), 'DD-MM-YYYY')));
+
+    $(document).on("click", ".calendarNextDay", function(){
+        var dateCalendar = moment($('#conteiner').data('date'), 'DD-MM-YYYY').add('days', 1).format('DD-MM-YYYY');
+        window.location.href = "/trecking/" + dateCalendar;
+    });
+
+    $(document).on("click", ".calendarPrevDay", function(){
+        var dateCalendar = moment($('#conteiner').data('date'), 'DD-MM-YYYY').add('days', -1).format('DD-MM-YYYY');
+        window.location.href = "/trecking/" + dateCalendar;
+    });
+
+
 
 
 
@@ -364,7 +380,7 @@ $(document).ready(function(){
 
     //timetrack log
 
-    $('#timeTrackShowDate').html(moment().format('dddd, MMMM Do YYYY'));
+    $('#timeTrackShowDate').html(moment($('#conteiner').data('date'), 'DD-MM-YYYY').format('dddd, MMMM Do YYYY'));
 
 
      //h1 = document.getElementsByTagName('h1')[0],
