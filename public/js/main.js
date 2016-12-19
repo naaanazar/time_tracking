@@ -354,6 +354,7 @@ $(document).ready(function(){
                 }
 
                 $("#timeDuration").val(hours + ':' + minuts);
+                $("#formTrackDuration").val(hours + ':' + minuts);
 
                 console.log(minuts + 'mm' + 'hh' + hours);
             }

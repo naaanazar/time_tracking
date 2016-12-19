@@ -120,6 +120,8 @@
 
                             <input id="formTrackStartSend"  type="hidden" name="date_start">
                             <input id="formTrackFinishSend" type="hidden" name="date_finish" >
+                            <input id="formTrackDate"  type="hidden" name="track_date" value="<?= isset($date) ?  $date : ''?>" >
+                            <input id="formTrackDuration" type="hidden" name="date_duration" >
 
                             <div class="col-md-2 col-lg-2" style="padding: 0px">
                                <span class="" style="display: inline-block">
