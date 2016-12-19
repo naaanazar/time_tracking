@@ -28,6 +28,7 @@
                     <button class="btn btn-sm d4">
                         <span class="glyphicon glyphicon-th"></span>
                     </button>
+
                 </div>
             </div>
 
@@ -55,7 +56,7 @@
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
                                 <select name="project_id" class="inputTrackPadding focused my_input"  id="trackProjectId" style="height: 35px;" required>
-                                    <option selected disabled>select project</option>
+                                    <option selected disabled>Select project</option>
                                     @foreach( $tasks as $task )
                                         <option value="{{ $task->id }}">{{ $task->project_name }}</option>
                                     @endforeach
@@ -166,7 +167,7 @@
                         <div class="controls col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <div class="input-group">
                                 <div class="input-group-btn" >
-                                    <input type="number" steep="0.01" style="padding: 10px; max-width: 89%" class="inputTrackPadding focused my_input form-control " name="additional_cost" id="additionalCost">
+                                    <input value="" type="number" steep="0.01" style="padding: 10px; max-width: 89%" class="inputTrackPadding focused my_input form-control " name="additional_cost" id="additionalCost">
                                     <span class="input-group-addon" style="padding: 9px 12px">$</span>
                                 </div>
                             </div>

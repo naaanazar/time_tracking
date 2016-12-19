@@ -9,6 +9,7 @@ use App\Project;
 use App\Task;
 use App\TimeTrack;
 use App\TimeLog;
+use App\User;
 use Validator;
 
 class TimeTrackController extends Controller
@@ -31,20 +32,28 @@ class TimeTrackController extends Controller
             $date =  date('d-m-Y');
         }
 
-
-
         if( Input::all() == true ) {
             $this->validation_track($request);
             $data = Input::all();
 
-            if( isset( $data['date_start'] ) && isset( $data['date_finish'] ) ) {
+            if( $data['date_start'] != '' && $data['date_finish'] != '' ) {
                 $data['date_start'] = $task->time_parser_from_js($data['date_start']);
                 $data['date_finish'] = $task->time_parser_from_js($data['date_finish']);
+            } elseif( $data['date_start'] == '' && $data['date_finish'] == '' ) {
+                unset($data['date_start']);
+                unset($data['date_finish']);
+            }
+            if( $data['additional_cost'] == '') {
+                $data['additional_cost'] = 0;
             }
             if( isset( $data['duration'] ) ){
                 $data['duration'] = $task->parse_duration($data['duration']);
             }
-
+            if( $data['date_duration'] != '' ){
+                $data['duration'] = $task->parse_duration($data['date_duration']);
+            }
+            $data['track_date'] = date('Y-m-d', strtotime($data['track_date']));
+            
             TimeTrack::create( $data );
 
             return redirect('/trecking');
@@ -130,5 +139,17 @@ class TimeTrackController extends Controller
         $data = time();
 
         return response()->json(['data' => $data]);
+    }
+
+    public function test()
+    {
+        $users = User::where('id', '>', '1')
+            ->orderby('name', 'asc')
+            ->get();
+        foreach( $users as $user )
+        {
+            echo '<pre>'; var_dump($user->name); echo '</pre>';
+        }
+
     }
 }

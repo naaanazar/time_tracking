@@ -16,6 +16,7 @@ class TimeTrack extends Model
         'task_id',
         'project_id',
         'date_start',
+        'track_date',
         'description',
         'date_finish',
         'duration',
