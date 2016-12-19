@@ -49,9 +49,11 @@ class TimeTrackController extends Controller
             if( isset( $data['duration'] ) ){
                 $data['duration'] = $task->parse_duration($data['duration']);
             }
-            if ($date) {
-                $data['track_date'] = $date;
+            if( $data['date_duration'] != '' ){
+                $data['duration'] = $task->parse_duration($data['date_duration']);
             }
+            $data['track_date'] = date('Y-m-d', strtotime($data['track_date']));
+            
             TimeTrack::create( $data );
 
             return redirect('/trecking');
