@@ -28,6 +28,12 @@ class TimeManageController extends Controller
         }
     }
 
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
+
     /*
      * return all users
      * */
