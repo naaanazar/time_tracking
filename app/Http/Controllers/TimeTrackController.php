@@ -32,16 +32,14 @@ class TimeTrackController extends Controller
             $date =  date('d-m-Y');
         }
 
-
-
         if( Input::all() == true ) {
             $this->validation_track($request);
             $data = Input::all();
 
-            if( $data['date_start'] != 0 && $data['date_finish'] != 0 ) {
+            if( $data['date_start'] != '' && $data['date_finish'] != '' ) {
                 $data['date_start'] = $task->time_parser_from_js($data['date_start']);
                 $data['date_finish'] = $task->time_parser_from_js($data['date_finish']);
-            } elseif( $data['date_start'] == 0 && $data['date_finish'] == 0 ) {
+            } elseif( $data['date_start'] == '' && $data['date_finish'] == '' ) {
                 unset($data['date_start']);
                 unset($data['date_finish']);
             }
@@ -51,7 +49,9 @@ class TimeTrackController extends Controller
             if( isset( $data['duration'] ) ){
                 $data['duration'] = $task->parse_duration($data['duration']);
             }
-
+            if ($date) {
+                $data['track_date'] = $date;
+            }
             TimeTrack::create( $data );
 
             return redirect('/trecking');
