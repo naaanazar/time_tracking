@@ -360,6 +360,7 @@ $(document).ready(function(){
             }
         } else {
             $("#timeDuration").val('incorect');
+            $("#formTrackFinish").val($('#formTrackStart').val());
         }
     }
 

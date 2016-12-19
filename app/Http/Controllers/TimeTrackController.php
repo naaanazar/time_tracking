@@ -75,6 +75,8 @@ class TimeTrackController extends Controller
      * */
     public function all_track()
     {
+
+
         $tracks = TimeTrack::with('task', 'project')->get();
 
         return view('', compact('tracks'));
