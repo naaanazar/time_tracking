@@ -39,7 +39,7 @@
     <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/buttons.bootstrap.min.js"></script>
     <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/buttons.colVis.min.js"></script>
 
-    <script type="text/javascript" src="/js/bootstrap-datetimepicker.js"></script>
+
 
     <script src="/js/moment.js"></script>
 
@@ -187,6 +187,8 @@
 
 
     <script src="/js/main.js"></script>
+
+<script type="text/javascript" src="/js/bootstrap-datetimepicker.js"></script>
 
 
   <!--  <script src="/assets/datatables/js/jquery.dataTables.min.js"></script>

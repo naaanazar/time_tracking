@@ -15,46 +15,23 @@
         </div>
     </div>
 
-    <div id="conteiner" class="container" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
+    <div id="conteiner" class="container" data-date="<?= isset($date)? $date : '' ?>" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
         <div class="row" style="margin-top: 20px">
             <div class="col-md-2 btn-toolbar" style="vertical-align: inherit">
                 <div id="timeStep5" class="btn-group">
-                    <button class="btn btn-sm">
+                    <button class="btn btn-sm calendarPrevDay">
                         <span class="glyphicon glyphicon-chevron-left"></span>
                     </button>
-                    <button class="btn btn-sm">
+                    <button class="btn btn-sm calendarNextDay">
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </button>
-
-
-                        <span class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd" style="display: inline-block; width: 0px;">
-                            <input class="form-control" type="hidden" value="" readonly>
-
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                        </span>
-                        <input type="hidden" id="dtp_input2" value="" /><br/>
-
-
-                    <script type="text/javascript">
-
-                        $('.form_date').datetimepicker({
-
-                            weekStart: 1,
-                            todayBtn:  1,
-                            autoclose: 1,
-                            todayHighlight: 1,
-                            startView: 2,
-                            minView: 2,
-                            forceParse: 0
-                        });
-
-               //         $(document).on('click', '.datetimepicker-days').
-
-                    </script>
-
+                    <button class="btn btn-sm d4">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </button>
 
                 </div>
             </div>
+
             <h2  class="col-md-10 showDate"  id="timeTrackShowDate"></h2>
         </div>
         <div class="row" style="margin-top: 20px;     color: #999; font-size: 18px">
@@ -79,7 +56,7 @@
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
                                 <select name="project_id" class="inputTrackPadding focused my_input"  id="trackProjectId" style="height: 35px;" required>
-                                    <option selected disabled>select project</option>
+                                    <option selected disabled>Select project</option>
                                     @foreach( $tasks as $task )
                                         <option value="{{ $task->id }}">{{ $task->project_name }}</option>
                                     @endforeach

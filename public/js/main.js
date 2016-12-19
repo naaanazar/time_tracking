@@ -4,8 +4,75 @@
 'use strict';
 $(document).ready(function(){
 
+  //  $('#datetimepicker').datetimepicker('setInitialDate', '2016-12-31');
+
+  /*  $('.day').on('click', function(){
+        var date = setTimeout(" console.log($('#dtp_input2').val());"  , 500);
+
+
+//console.log(date + '-----');
+    //    window.location ='/trecking/' + date;
+        window.onload=function() {
+            console.log($('#dtp_input2').val());
+        }
+
+
+    });
+
+
+    $('.form_date').datetimepicker({
+
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0,
+
+    });
+
+    $(document).on('dp.change', '.form_date', function() {
+        alert('changed');
+    });*/
+
+
+    $(".d4").datepicker({
+            autoclose: true,
+            todayBtn: "linked",
+            todayHighlight: true
+        }
+    ).on('changeDate', function (e) {
+            var dateCalendar = e.format();
+            dateCalendar = moment(dateCalendar, 'MM/DD/YYYY').format('DD-MM-YYYY');
+            window.location.href = "/trecking/" + dateCalendar;
+    });
+
+    $('#sandbox-container .input-group.date').datepicker({
+        autoclose: true
+    });
+
+    $('.d4').datepicker('update', new Date(moment($('#conteiner').data('date'), 'DD-MM-YYYY')));
+
+    $(document).on("click", ".calendarNextDay", function(){
+        var dateCalendar = moment($('#conteiner').data('date'), 'DD-MM-YYYY').add('days', 1).format('DD-MM-YYYY');
+        window.location.href = "/trecking/" + dateCalendar;
+    });
+
+    $(document).on("click", ".calendarPrevDay", function(){
+        var dateCalendar = moment($('#conteiner').data('date'), 'DD-MM-YYYY').add('days', -1).format('DD-MM-YYYY');
+        window.location.href = "/trecking/" + dateCalendar;
+    });
+
+
+
+
+
+
 
     $(window).load(function(){
+
+
 
         $(".removeSelect").html('');
 
@@ -313,7 +380,7 @@ $(document).ready(function(){
 
     //timetrack log
 
-    $('#timeTrackShowDate').html(moment().format('dddd, MMMM Do YYYY'));
+    $('#timeTrackShowDate').html(moment($('#conteiner').data('date'), 'DD-MM-YYYY').format('dddd, MMMM Do YYYY'));
 
 
      //h1 = document.getElementsByTagName('h1')[0],

@@ -39,7 +39,7 @@
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
                                 <select name="teams_lead_id" class="input-xlarge focused my_input"  id="CompanyNameProjectId" style="height: 42px;">
-                                    <option selected disabled>Please change Lead</option>
+                                    <option selected disabled>Please select Lead</option>
 
                                     @foreach( $leads as $key )
                                         <option  value="{{ $key->id}}">{{ $key->name }}</option>
