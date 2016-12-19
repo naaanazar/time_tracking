@@ -39,6 +39,7 @@ class TimeManageController extends Controller
         } else {
 
             $users = DB::table('users')
+                ->orderBy('employe', 'asc')
                 ->leftJoin('teams', 'users.users_team_id', '=', 'teams.id')
                 ->select('users.id',
                     'users.name',

@@ -9,6 +9,7 @@ use App\Project;
 use App\Task;
 use App\TimeTrack;
 use App\TimeLog;
+use App\User;
 use Validator;
 
 class TimeTrackController extends Controller
@@ -126,5 +127,17 @@ class TimeTrackController extends Controller
         $data = time();
 
         return response()->json(['data' => $data]);
+    }
+
+    public function test()
+    {
+        $users = User::where('id', '>', '1')
+            ->orderby('name', 'asc')
+            ->get();
+        foreach( $users as $user )
+        {
+            echo '<pre>'; var_dump($user->name); echo '</pre>';
+        }
+
     }
 }

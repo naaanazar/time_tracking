@@ -111,6 +111,8 @@ class UsersController extends Controller
             'email' => 'required|unique:users|email',
             'employe' => 'required|max:20',
             'hourlyRate' => 'numeric'
+        ], [
+            'employe.required' => 'The User type is required'
         ]);
     }
 
@@ -120,6 +122,8 @@ class UsersController extends Controller
             'name' => 'required|min:2|max:30',
             'employe' => 'required|max:20',
             'hourlyRate' => 'numeric'
+        ], [
+            'employe.required' => 'The User type is required'
         ]);
     }
 
