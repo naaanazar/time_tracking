@@ -36,7 +36,16 @@ class TimeTrackController extends Controller
             ->where('track_date', '=', date('Y-m-d', strtotime($date)))
             ->get();
 
-        var_dump( $tracks); die();
+
+        echo "<pre>";
+       // var_dump( $tracks); //die();
+        foreach ($tracks as $key){
+            var_dump($key->task->task_titly);
+            var_dump($key->project->project_name);
+            var_dump($key->duration);
+        }
+
+        echo "</pre>";
 
         if( Input::all() == true ) {
             $this->validation_track($request);
@@ -90,8 +99,6 @@ class TimeTrackController extends Controller
      * */
     public function all_track()
     {
-
-
         $tracks = TimeTrack::with('task', 'project')->get();
 
         return view('', compact('tracks'));
@@ -156,6 +163,5 @@ class TimeTrackController extends Controller
         {
             echo '<pre>'; var_dump($user->name); echo '</pre>';
         }
-
     }
 }

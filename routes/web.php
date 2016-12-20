@@ -11,8 +11,6 @@
 |
 */
 
-
-
 Route::group(['middleware' => ['permision']], function () {
 
     // User Controller
@@ -89,7 +87,6 @@ Route::group(['middleware' => ['permision']], function () {
 });
 
 // Auth
-
 Auth::routes();
 
 // google login
