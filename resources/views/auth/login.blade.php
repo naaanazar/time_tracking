@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <div class="container" id="login">
     <div class="row">
         <form class="form-signin" role="form" method="POST" action="{{ url('/login') }}">

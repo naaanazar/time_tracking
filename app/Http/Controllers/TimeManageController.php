@@ -17,7 +17,6 @@ class TimeManageController extends Controller
     /**
      * home page
      */
-
     public function index()
     {
         if (Auth::guest()) {
@@ -26,12 +25,6 @@ class TimeManageController extends Controller
         else {
             return view('layouts.index_template');
         }
-    }
-
-    public function logout()
-    {
-        Auth::logout();
-        return redirect('/');
     }
 
     /*

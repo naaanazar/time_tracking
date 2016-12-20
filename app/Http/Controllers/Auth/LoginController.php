@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 //use Socialite;
 use App\Users;
 
@@ -57,8 +59,6 @@ class LoginController extends Controller
      */
     public function handleProviderCallback()
     {
-
-
         if (Input::get('error') == 'access_denied') {
 
             return redirect('/');
@@ -86,9 +86,6 @@ class LoginController extends Controller
                 return redirect('?loginStatus=You account do not register');
 
             }
-
         }
     }
-
-
 }

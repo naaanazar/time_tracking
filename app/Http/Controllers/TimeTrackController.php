@@ -148,6 +148,5 @@ class TimeTrackController extends Controller
         {
             echo '<pre>'; var_dump($user->name); echo '</pre>';
         }
-
     }
 }

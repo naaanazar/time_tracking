@@ -10,7 +10,6 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-
 Route::group(['middleware' => ['permision']], function () {
 
     // User Controller
@@ -77,14 +76,12 @@ Route::group(['middleware' => ['permision']], function () {
 
     // forbidden
     Route::get('/register', 'TimeManageController@index');
-    Route::get('/user/logout', 'TimeManageController@logout');
 
     //testing
     //Route::get('/test', 'TimeTrackController@test');
 });
 
 // Auth
-
 Auth::routes();
 
 // google login
