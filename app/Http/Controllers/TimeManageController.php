@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+
+use Illuminate\Auth\Middleware\Authenticate;
+
 use App\Client;
 use App\Project;
 use App\Task;
@@ -17,6 +20,11 @@ class TimeManageController extends Controller
     /**
      * home page
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {

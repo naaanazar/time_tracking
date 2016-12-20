@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
 //use Socialite;
 use App\Users;
@@ -40,10 +42,10 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
+   /* public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
-    }
+    }*/
 
     public function redirectToProvider()
     {
@@ -88,6 +90,16 @@ class LoginController extends Controller
             }
 
         }
+    }
+
+    public function log()
+    {
+
+        Cache::flush();
+        Auth::logout();
+        Session::flush();
+
+        return redirect('/');
     }
 
 

@@ -1,7 +1,9 @@
 @extends('layouts.template')
 
 @section('content')
-
+ <!--   <script>
+        location.reload(true);
+    </script>-->
 
 <div class="container" id="login">
     <div class="row">

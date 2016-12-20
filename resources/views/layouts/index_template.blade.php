@@ -2,9 +2,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="cache-control" content="private, max-age=0, no-cache">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -79,7 +84,7 @@
                                 <a href="#" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     Report <span class="caret"></span>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-my" style="background-color: #ff6d00" >
+                                <ul class="dropdown-menu dropdown-menu-my" style="background-color: #ff6d00; top: 58px;" >
                                     <li><a href="#">-----</a></li>
                                     <li><a href="#">------</a></li>
                                     <li><a href="#">------</a></li>
@@ -92,7 +97,7 @@
                             <a href="#" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Manage <span class="caret"></span>
                             </a>
-                            <ul class="dropdown-menu"  style="background-color: #ff6d00">
+                            <ul class="dropdown-menu"  style="background-color: #ff6d00; top: 58px;">
                                 @if ($status == 'Admin' || $status == 'HR Manager')
                                     <li> <a tabindex="-1" href="/user/all">Users</a> </li>
                                 @endif
@@ -111,13 +116,10 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="{{ url('/logout') }}" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();
-                               document.getElementById('logout-form').submit();">
+                            <a href="#" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();
+                               location.replace('/user/logout')">
                                 Sign Out
                             </a>
-                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
                         </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->

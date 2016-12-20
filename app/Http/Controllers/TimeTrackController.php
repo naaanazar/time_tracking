@@ -32,6 +32,12 @@ class TimeTrackController extends Controller
             $date =  date('d-m-Y');
         }
 
+        $tracks = TimeTrack::with('task', 'project')
+            ->where('track_date', '=', date('Y-m-d', strtotime($date)))
+            ->get();
+
+        var_dump( $tracks); die();
+
         if( Input::all() == true ) {
             $this->validation_track($request);
             $data = Input::all();
@@ -66,14 +72,14 @@ class TimeTrackController extends Controller
             $tasks = $task->time_counter($tasks);
 
 
-            return view('time_track.time_track', compact('tasks', 'date'));
+            return view('time_track.time_track', compact('tasks', 'date', 'tracks'));
 
         } elseif ( Auth::user()->employe == 'Admin' || Auth::user()->employe == 'Supervisor' ) {
             $tasks = Project::with('task', 'track', 'track_log')->get();
             $tasks = $task->time_counter($tasks);
 
 
-            return view('time_track.time_track', compact('tasks', 'date'));
+            return view('time_track.time_track', compact('tasks', 'date', 'tracks'));
         }
 
         return redirect('/');

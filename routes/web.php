@@ -11,6 +11,8 @@
 |
 */
 
+
+
 Route::group(['middleware' => ['permision']], function () {
 
     // User Controller
@@ -77,6 +79,10 @@ Route::group(['middleware' => ['permision']], function () {
 
     // forbidden
     Route::get('/register', 'TimeManageController@index');
+
+
+
+    Route::get('/user/logout', 'Auth\LoginController@log');
 
     //testing
     //Route::get('/test', 'TimeTrackController@test');
