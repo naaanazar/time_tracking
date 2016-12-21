@@ -38,11 +38,7 @@
     <link rel="stylesheet" type="text/css" href="/datatables/DataTables-1.10.12/css/dataTables.bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/datatables/Buttons-1.2.2/css/buttons.bootstrap.min.css"/>
     <script type="text/javascript" src="/datatables/jQuery-2.2.3/jquery-2.2.3.min.js"></script>
-    <script type="text/javascript" src="/datatables/DataTables-1.10.12/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="/datatables/DataTables-1.10.12/js/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/buttons.bootstrap.min.js"></script>
-    <script type="text/javascript" src="/datatables/Buttons-1.2.2/js/buttons.colVis.min.js"></script>
+
 
 
 

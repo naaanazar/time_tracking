@@ -217,7 +217,8 @@
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6"  style="border-right: 1px solid #ccc; padding-top: 20px">
 
-                <table class="col-md-12 trackLogTable" id="trackLogTableId">
+                <table class="col-md-12 trackLogTable" class="display" id="trackLogTableId">
+
                     <tbody>
                     @foreach( $tracks as $key)
                         <tr class="trackLog trackLogFirst" id="firstTrack" >
@@ -247,16 +248,28 @@
                                 </div>
                             </td>
                         </tr>
+
+                        <tr style="display:none">
+                            <td>
+                            <table >
+                                <tr>sdfsdf
+                                </tr>
+                            </table>
+                            </td>
+                        </tr>
                     @endforeach
                    </tbody>
                 </table>
+
+
+
             </div>
 
 
 
 </div>
     </div>
-    <script src="/js/jquery/jquery-3.1.1.min.js"></script>
+<!--    <script src="/js/jquery/jquery-3.1.1.min.js"></script>-->
     <script src="/js/tasks.js"></script>
 
 @endsection

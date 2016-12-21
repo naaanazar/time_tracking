@@ -510,7 +510,6 @@ $(document).ready(function(){
     //datatables
 
 
-
         $('#usersTable').DataTable({
            // scrollX : true,
          //   scrollCollapse : true,
