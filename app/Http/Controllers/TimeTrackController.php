@@ -35,7 +35,7 @@ class TimeTrackController extends Controller
         $tracks = TimeTrack::with('task', 'project')
             ->where('track_date', '=', date('Y-m-d', strtotime($date)))
             ->get();
-        
+
         /*echo "<pre>";
        // var_dump( $tracks); //die();
         foreach ($tracks as $key){
@@ -159,6 +159,16 @@ class TimeTrackController extends Controller
         }
 
         return redirect('/');
+    }
+
+    /*
+     * delete time track
+     * */
+    public function delete_track($id)
+    {
+        TimeTrack::where('id', '=', $id)->delete();
+
+        return redirect('/trecking');
     }
 
     /*

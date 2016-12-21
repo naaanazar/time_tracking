@@ -75,6 +75,7 @@ Route::group(['middleware' => ['permision']], function () {
     Route::get('/track/all', 'TimeTrackController@all_track');
     Route::get('/track/update/{id}', 'TimeTrackController@update_track')->where(['id' => '[0-9]+']);
     Route::post('/track/update/{id}', 'TimeTrackController@update_track')->where(['id' => '[0-9]+']);
+    Route::get('/track/delete/{id}', 'TimeTrackController@delete_track')->where(['id' => '[0-9]+']);
 
     // forbidden
     Route::get('/register', 'TimeManageController@index');
