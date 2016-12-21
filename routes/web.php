@@ -69,19 +69,17 @@ Route::group(['middleware' => ['permision']], function () {
     //trecking time & trecking log
     Route::get('/trecking/{date?}', 'TimeTrackController@trecking');
     Route::post('/trecking', 'TimeTrackController@trecking');
-    Route::post('/create/timelog/{id?}', 'TimeTrackController@create_time_log')->where(['id' => '[0-9]+']);
+    Route::post('/create/timelog', 'TimeTrackController@create_time_log');
     Route::get('/tasks/get/{project_id}', 'TimeTrackController@getTasks')->where(['id' => '[0-9]+']);
     Route::get('/trecking/getTime', 'TimeTrackController@getTimeNow');
     Route::get('/trecking-getTime', 'TimeTrackController@getTimeNow');
     Route::get('/track/all', 'TimeTrackController@all_track');
-
+    Route::get('/track/update/{id}', 'TimeTrackController@update_track')->where(['id' => '[0-9]+']);
+    Route::post('/track/update/{id}', 'TimeTrackController@update_track')->where(['id' => '[0-9]+']);
+    Route::get('/track/delete/{id}', 'TimeTrackController@delete_track')->where(['id' => '[0-9]+']);
 
     // forbidden
     Route::get('/register', 'TimeManageController@index');
-
-
-
-    Route::get('/user/logout', 'Auth\LoginController@log');
 
     //testing
     //Route::get('/test', 'TimeTrackController@test');

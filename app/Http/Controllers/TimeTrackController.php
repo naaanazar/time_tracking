@@ -36,8 +36,7 @@ class TimeTrackController extends Controller
             ->where('track_date', '=', date('Y-m-d', strtotime($date)))
             ->get();
 
-
-      /*  echo "<pre>";
+        /*echo "<pre>";
        // var_dump( $tracks); //die();
         foreach ($tracks as $key){
             var_dump($key);
@@ -77,9 +76,7 @@ class TimeTrackController extends Controller
         if( in_array(Auth::user()->employe, $this->users ) ) {
             $tasks = Project::where('lead_id', '=', Auth::user()->id )
                 ->with('task', 'track', 'track_log')->get();
-
             $tasks = $task->time_counter($tasks);
-
 
             return view('time_track.time_track', compact('tasks', 'date', 'tracks'));
 
@@ -87,11 +84,91 @@ class TimeTrackController extends Controller
             $tasks = Project::with('task', 'track', 'track_log')->get();
             $tasks = $task->time_counter($tasks);
 
-
             return view('time_track.time_track', compact('tasks', 'date', 'tracks'));
         }
 
         return redirect('/');
+    }
+
+    /*
+     * update track log
+     * */
+    public function update_track( Request $request, $track_id, $date = false )
+    {
+        $task = new Task();
+
+        if (!$date) {
+            $date =  date('d-m-Y');
+        }
+
+        $tracks = TimeTrack::with('task', 'project')
+            ->where('track_date', '=', date('Y-m-d', strtotime($date)))
+            ->get();
+
+        if( Input::all() == true ) {
+            $this->validation_track($request);
+            $data = Input::all();
+
+            if( $data['date_start'] != '' && $data['date_finish'] != '' ) {
+                $data['date_start'] = $task->time_parser_from_js($data['date_start']);
+                $data['date_finish'] = $task->time_parser_from_js($data['date_finish']);
+            } elseif( $data['date_start'] == '' && $data['date_finish'] == '' ) {
+                unset($data['date_start']);
+                unset($data['date_finish']);
+            }
+            if( $data['additional_cost'] == '') {
+                $data['additional_cost'] = 0;
+            }
+            if( isset( $data['duration'] ) ){
+                $data['duration'] = $task->parse_duration($data['duration']);
+            }
+            if( $data['date_duration'] != '' ){
+                $data['duration'] = $task->parse_duration($data['date_duration']);
+            }
+            $data['track_date'] = date('Y-m-d', strtotime($data['track_date']));
+            unset($data['_token']);
+            unset($data['date_duration']);
+
+            TimeTrack::where('id', '=', $track_id)->update( $data );
+
+            return redirect('/trecking');
+        }
+
+        if( in_array(Auth::user()->employe, $this->users ) ) {
+            $tasks = Project::where('lead_id', '=', Auth::user()->id )
+                ->with('task', 'track', 'track_log')->get();
+            $tasks = $task->time_counter($tasks);
+            $track = TimeTrack::where('id', '=', $track_id)
+                ->with('project', 'task')
+                ->get();
+
+            $track[0]['duration'] = $task->time_minute($track[0]['attributes']['duration']);
+
+            return view('time_track.time_track', compact('tasks', 'track', 'date', 'tracks'));
+
+        } elseif ( Auth::user()->employe == 'Admin' || Auth::user()->employe == 'Supervisor' ) {
+            $tasks = Project::with('task', 'track', 'track_log')->get();
+            $tasks = $task->time_counter($tasks);
+            $track = TimeTrack::where('id', '=', $track_id)
+                ->with('project', 'task')
+                ->get();
+
+            $track[0]['duration'] = $task->time_minute($track[0]['attributes']['duration']);
+
+            return view('time_track.time_track', compact('tasks', 'track', 'date', 'tracks'));
+        }
+
+        return redirect('/');
+    }
+
+    /*
+     * delete time track
+     * */
+    public function delete_track($id)
+    {
+        TimeTrack::where('id', '=', $id)->delete();
+
+        return redirect('/trecking');
     }
 
     /*
@@ -108,13 +185,8 @@ class TimeTrackController extends Controller
      * create time log
      * action works with ajax
      * */
-    public function create_time_log( $id = false )
+    public function create_time_log()
     {
-        if( $id == true ) {
-            TimeLog::where('id', '=', $id)->update([ Input::all() ]);
-            return true;
-        }
-
         if( Input::all() == true ) {
             TimeLog::create( [ Input::all() ] );
 
