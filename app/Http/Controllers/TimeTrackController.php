@@ -127,9 +127,10 @@ class TimeTrackController extends Controller
                 $data['duration'] = $task->parse_duration($data['date_duration']);
             }
             $data['track_date'] = date('Y-m-d', strtotime($data['track_date']));
+            unset($data['_token']);
+            unset($data['date_duration']);
 
-            TimeTrack::update( $data )
-                ->where('id', '=', $track_id);
+            TimeTrack::where('id', '=', $track_id)->update( $data );
 
             return redirect('/trecking');
         }
@@ -142,6 +143,8 @@ class TimeTrackController extends Controller
                 ->with('project', 'task')
                 ->get();
 
+            $track[0]['duration'] = $task->time_minute($track[0]['attributes']['duration']);
+
             return view('time_track.time_track', compact('tasks', 'track', 'date', 'tracks'));
 
         } elseif ( Auth::user()->employe == 'Admin' || Auth::user()->employe == 'Supervisor' ) {
@@ -150,6 +153,8 @@ class TimeTrackController extends Controller
             $track = TimeTrack::where('id', '=', $track_id)
                 ->with('project', 'task')
                 ->get();
+
+            $track[0]['duration'] = $task->time_minute($track[0]['attributes']['duration']);
 
             return view('time_track.time_track', compact('tasks', 'track', 'date', 'tracks'));
         }

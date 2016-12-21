@@ -111,4 +111,12 @@ class Task extends Model
         $data = explode(':', $time);
         return $data = ((int)($data[0]))*60 + (int)($data[1]);
     }
+
+    public function time_minute($minute)
+    {
+        $minutes = bcmod($minute, 60);
+        $houers = (int)($minute/60);
+
+        return $result = $houers . ':' . $minutes;
+    }
 }

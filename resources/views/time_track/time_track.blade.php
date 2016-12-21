@@ -58,7 +58,7 @@
                                 <select name="project_id" class="inputTrackPadding focused my_input"  id="trackProjectId" style="height: 35px;" required>
                                     <option selected disabled>Select project</option>
                                     @if( isset( $track ) )
-                                        <option value="{{ $track[0]->project->project_id }}" selected>{{ $track[0]->project->project_name }}</option>
+                                        <option value="{{ $track[0]->project->id }}" selected>{{ $track[0]->project->project_name }}</option>
                                     @endif
                                     @foreach( $tasks as $task )
                                         <option value="{{ $task->id }}">{{ $task->project_name }}</option>
@@ -80,7 +80,7 @@
 
                             <select name="task_id" class="inputTrackPadding focused my_input"  id="trackTaskId"  style="height: 35px;" required>
                                 @if( isset( $track ) )
-                                    <option value="{{ $track[0]->task->task_id }}" selected>{{ $track[0]->task->task_name }}</option>
+                                    <option value="{{ $track[0]->task->id }}" selected>{{ $track[0]->task->task_titly }}</option>
                                 @endif
                             </select>
                             @if ($errors->has('task_id'))
@@ -155,7 +155,8 @@
                             <label class="control-label labelTrack" for="timeDuration" style="text-align: left; padding-top: 10px">Duration</label>
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
-                            <input type="text" style="padding: 10px; max-width: 65%;"   class="inputTrackPadding focused my_input" name="duration" id="timeDuration" placeholder="HH:MM">
+                            <input type="text" style="padding: 10px; max-width: 65%;"   class="inputTrackPadding focused my_input" name="duration" id="timeDuration" placeholder="HH:MM"
+                                    value="<?= ( isset( $track ) ) ? $track[0]->duration : '' ; ?>">
                             <label class="labelTrack" for="" style="padding-top: 10px">Value($) <span id="insertCost"></span></label>
                             @if ($errors->has('duration'))
                                 <span class="help-block">
@@ -172,7 +173,8 @@
                         <div class="controls col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <div class="input-group">
                                 <div class="input-group-btn" >
-                                    <input value="" type="number" steep="0.01" style="padding: 10px; max-width: 89%" class="inputTrackPadding focused my_input form-control " name="additional_cost" id="additionalCost">
+                                    <input value="<?= ( isset($track) ) ? $track[0]->additional_cost : '' ; ?>"
+                                           type="number" steep="0.01" style="padding: 10px; max-width: 89%" class="inputTrackPadding focused my_input form-control " name="additional_cost" id="additionalCost">
                                     <span class="input-group-addon" style="padding: 9px 12px">$</span>
                                 </div>
                             </div>
@@ -185,7 +187,8 @@
                         <div class="controls col-xs-12 col-sm-3 col-md-3 col-lg-3">
                         <span class="" style="display: inline-block">
                             <label  class="labelTrack" for="billableTime">
-                               Billable Time <input type="checkbox" name="billable_time" value="1" id="billableTime">
+                               Billable Time <input type="checkbox" name="billable_time" value="1" id="billableTime"
+                                <?= ( isset( $track ) && $track[0]->task->billable == 1 ) ? ' checked' : '' ;?>>
                             </label>
                          </span>
                         </div>
@@ -197,7 +200,8 @@
                             <label class="control-label labelTrack" for="trackDescription">Description</label>
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
-                           <textarea class="inputTrackPadding focused my_input " rows="7" name="description" id="trackDescription"></textarea>
+                           <textarea class="inputTrackPadding focused my_input " rows="7" name="description" id="trackDescription"><?= ( isset($track) ) ? $track[0]->description : '' ; ?>
+                           </textarea>
                         </div>
                         @if ($errors->has('description'))
                             <span class="help-block">
