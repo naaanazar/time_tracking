@@ -130,7 +130,8 @@
 
         <div style="display: inline-block; float: right; position: relative; margin-top: 61px;     position: absolute;
     right: 10px;">
-            <img src="http://webdevelop.it-dev-lab.com/images/log.png" width="65" height="65" style="position: absolute;
+            <img src="<?= ( file_exists('../public/images/Voldemar.png') ) ? '../public/images/Voldemar.png' : 'http://webdevelop.it-dev-lab.com/images/log.png' ;?>"
+                 width="65" height="65" style="position: absolute;
                     left: -27px;
                     bottom: -2px;">
             <span style="    display: inline-block;
