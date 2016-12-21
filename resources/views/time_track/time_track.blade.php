@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <div id="conteiner" class="container" data-date="<?= isset($date)? $date : '' ?>" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
+    <div id="conteiner" class="container" data-date="<?= isset($date)? $date : '' ?>" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}" data-token="{{ Session::token() }}">
         <div class="row" style="margin-top: 20px">
             <div class="col-md-2 btn-toolbar" style="vertical-align: inherit">
                 <div id="timeStep5" class="btn-group">

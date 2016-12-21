@@ -461,7 +461,7 @@ $(document).ready(function(){
                      '</a>' +
 
                  '<form id="stop-form" action="{{ url(\'/\') }}" method="POST" style="display: none;">' +
-                     '{{ csrf_field() }}' +
+                 '<input type="hidden" name="_token" id="csrf-token" value="' + $('#conteiner').data('token') + '" />' +
                      '<input type="hidden" name="project_id" value="' + $(e.target).parents("tr").data('project_id') + '">' +
                      '<input type="hidden" name="task_id" value="' + $(e.target).parents("tr").data('task_id') + '">' +
                      '<input type="hidden" name="track_id" value="' + $(e.target).parents("tr").data('id') + '">' +
