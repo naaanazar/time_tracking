@@ -36,15 +36,6 @@ class TimeTrackController extends Controller
             ->where('track_date', '=', date('Y-m-d', strtotime($date)))
             ->get();
 
-        /*echo "<pre>";
-       // var_dump( $tracks); //die();
-        foreach ($tracks as $key){
-            var_dump($key);
-          //  var_dump($key->project->project_name);
-           // var_dump($key->duration);
-        }
-
-        echo "</pre>";*/
 
         if( Input::all() == true ) {
             $this->validation_track($request);
@@ -78,13 +69,13 @@ class TimeTrackController extends Controller
                 ->with('task', 'track', 'track_log')->get();
             $tasks = $task->time_counter($tasks);
 
-            return view('time_track.time_track', compact('tasks', 'date', 'tracks'));
+            return view('time_track.time_track', compact('tasks', 'date', 'tracks', 'timeLog'));
 
         } elseif ( Auth::user()->employe == 'Admin' || Auth::user()->employe == 'Supervisor' ) {
             $tasks = Project::with('task', 'track', 'track_log')->get();
             $tasks = $task->time_counter($tasks);
 
-            return view('time_track.time_track', compact('tasks', 'date', 'tracks'));
+            return view('time_track.time_track', compact('tasks', 'date', 'tracks', 'timeLog'));
         }
 
         return redirect('/');
@@ -181,10 +172,24 @@ class TimeTrackController extends Controller
         return view('', compact('tracks'));
     }
 
+
     /*
      * create time log
      * action works with ajax
      * */
+
+    public function getTimeLogById($id){
+
+
+        $timeLog = TimeLog::where('track_id', '=', $id)->
+        with('task', 'project')->get();
+
+        //var_dump($timeLog);
+
+        return response()->json(['data' => (object)$timeLog]);
+
+    }
+
     public function create_time_log()
     {
         if( Input::all() == true ) {

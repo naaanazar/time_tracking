@@ -445,7 +445,7 @@ $(document).ready(function(){
            //  console.log('1111');
 
              var html = '' +
-             '<tr class="trackLog activeTrack trackLogWrite"  >' +
+             '<tr class="trackLog activeTrack trackLogWrite" data-stop-id ="' + $(e.target).parents("tr").data('id') + '"  >' +
              '<td class="">' +
              '<span class="ng-binding"></span>' +
              '<p class="projecttask"> - nazar - ertretret</p>' +
@@ -456,17 +456,12 @@ $(document).ready(function(){
              '</td>' +
              '<td class="text-right table-cell-actions">' +
                  '<div class="btn-group">' +
-                     '<a href="#" class="btn btn-danger" id="stopTrack" onclick="event.preventDefault();  document.getElementById(\'stop-form\').submit();">' +
+                     '<a href="#" class="btn btn-danger" id="stopTrack" >' +
                      '<span class="glyphicon glyphicon-stop"></span>' +
                      '</a>' +
 
-<<<<<<< HEAD
-                 '<form id="stop-form" action="{{ url(\'/\') }}" method="POST" style="display: none;">' +
-                 '<input type="hidden" name="_token" id="csrf-token" value="' + $('#conteiner').data('token') + '" />' +
-=======
                  '<form id="stop-form" action="/create/timelog/" method="POST" style="display: none;">' +
-                     '{{ csrf_field() }}' +
->>>>>>> a1f6cc0587fc3eda9bff4bd67d9df50e6f5b619e
+                 '<input type="hidden" name="_token" id="csrf-token" value="' + $('#conteiner').data('token') + '" />' +
                      '<input type="hidden" name="project_id" value="' + $(e.target).parents("tr").data('project_id') + '">' +
                      '<input type="hidden" name="task_id" value="' + $(e.target).parents("tr").data('task_id') + '">' +
                      '<input type="hidden" name="track_id" value="' + $(e.target).parents("tr").data('id') + '">' +
@@ -484,49 +479,56 @@ $(document).ready(function(){
      //clearTimeout(t);
 
      $(document).on('click' , '#stopTrack',  function(){
-     console.log('stop');
+         console.log('stop');
+         event.preventDefault();
 
-     var timeSegment = $('#timeTrackSegmentDuration').text();
+         var timeSegment = $('#timeTrackSegmentDuration').text();
+         clearTimeout(t);
+         document.getElementById('stop-form').submit();
 
-     clearTimeout(t);
-
-     var html = '' +
-     '<td class="">' +
-     '<span class="ng-binding"></span>' +
-     '<p class="projecttask"> - nazar - ertretret</p>' +
-     '</td>' +
-     '<td class="text-right">' +
-     '<h3 id="timeTrackSegmentFinish" style="margin: 7px 0px ">' + timeSegment + '</h3>' +
-     '<p class="project" >11:32 - 11:32</p>' +
-     '</td>' +
-     '<td class="text-right table-cell-actions">' +
-     '<div class="btn-group">' +
-     '<button class="btn btn-default" id="startTrack">' +
-     '<span class="glyphicon glyphicon-play"></span>' +
-     '</button>' +
-     '<button class="btn btn-default" id="editTrack">' +
-     '<span class="glyphicon glyphicon-pencil"></span>' +
-     '</button>' +
-     '<button class="btn btn-default" id="deleteTrack">' +
-     '<span class="glyphicon glyphicon-trash"></span>' +
-     '</button>' +
-     '</div>' +
-     '</td>';
-
-     if ($('#firstTrack').hasClass('trackLogFirst')) {
-     $('#firstTrack').html(html);
-     $('.activeTrack').remove();
-     $('#firstTrack').removeClass('trackLogFirst');
-     }else {
-
-     $('.activeTrack').html(html);
-     $('.activeTrack').removeClass('trackLogWrite');
-     $('.activeTrack').removeClass('activeTrack');
-     }
+     });
 
 
-     })
+    $(document).on('click' , '.showTimelog',  function(e){
+        var id =$(e.target).parents("tr").data('id');
+        $('#add-'+  id).show();
 
+    $.get('/track-getTimeLogById/' +  id , function (response) {
+        console.log(response.data);
+
+        var html;
+
+        for (var key in response.data) {
+
+
+        html += '' +
+            '<tr class="trackLog"  >' +
+            '<td class="">' +
+            '<span class="ng-binding"></span>' +
+            '<p class="projecttask"> - nazar - ertretret</p>' +
+            '</td>' +
+            '<td class="text-right">' +
+            '<h3 id="timeTrackSegmentDuration" style="margin: 7px 0px ">0:00:00</h3>' +
+            '<p class="project" >11:32 - 11:32</p>' +
+            '</td>' +
+            '<td class="text-right table-cell-actions">' +
+            '<div class="btn-group">' +
+            '<button class="btn btn-danger" id="stopTrack">' +
+            '<span class="glyphicon glyphicon-trash"></span>' +
+            '</button>' +
+            '</div>' +
+            '</td>' +
+            '</tr>';
+        };
+
+        console.log($(e.target));
+
+        $('#add-'+  id).find('table').append(html);
+        $(e.target).hide();
+        $(e.target).parentsUntil('td').find('.hideTimelog').show();
+    });
+
+    });
 
 
 
@@ -679,7 +681,7 @@ $(document).ready(function(){
             initComplete: function () {
                 this.api().columns().every(function () {
                     var column = this;
-                    var select = $('<select><option value="">all</option></select>')
+                    var select = $('<select><option value="">All</option></select>')
                         .appendTo($(column.footer()).empty())
                         .on('change', function () {
                             var val = $.fn.dataTable.util.escapeRegex(
