@@ -230,7 +230,20 @@
 
                     <tbody>
                     @foreach( $tracks as $key)
-                        <tr class="trackLog trackLogFirst" id="firstTrack" >
+                        <tr class="trackLog trackLogFirst" id="firstTrack"
+                            data-id ="<?= $key->id ?>"
+                            data-project_name ="<?= $key->project->project_name  ?>"
+                            data-project_id ="<?= $key->project->id  ?>"
+                            data-task_titly ="<?= $key->task->task_titly ?>"
+                            data-task_id ="<?= $key->task->id ?>"
+                            data-total_time ="<?= ($key->total_time == null) ? '00:00:00' : date('h:i:s', strtotime($key->total_time))  ?>"
+                            data-duration ="<?= ($key->duration == null) ? '00:00' : date('h:i',  mktime(0,$key->duration)) ?>"
+                            data-date_start ="<?= date('h:i', strtotime($key->date_start))?>"
+                            data-date_start = "<?= date('h:i', strtotime($key->date_finish)) ?>">
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-plus"></span>
+                                </a>
+                            </td>
                             <td class="">
                                 <span class="ng-binding"></span>
                                 <p class="projecttask"> - {{ $key->project->project_name }} - {{ $key->task->task_titly }}</p>
@@ -258,11 +271,12 @@
                             </td>
                         </tr>
 
-                        <tr style="display:none">
-                            <td>
-                            <table >
-                                <tr>sdfsdf
-                                </tr>
+                        <tr style="display:none" id ="add-<?= $key->id ?>">
+
+
+                            <td colspan="4" style="    padding-left: 30px;">
+                            <table width="100%">
+
                             </table>
                             </td>
                         </tr>
