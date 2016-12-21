@@ -48,7 +48,7 @@
 
             <div class="col-sm-6 col-md-6 col-lg-6" style="border-right: 1px solid #ccc; padding-top: 20px">
 
-                <form  method="POST" action="/trecking" id="addTrackForm">
+                <form  method="POST" action="<?php (isset( $track )) ? '/track/update/' . $track[0]->id : '/trecking' ;?>" id="addTrackForm">
                     {{ csrf_field() }}
                     <div class="form-group form-group-edit col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                         <div class="col-xs-2 col-sm-4 col-md-3 col-lg-3" style="text-align: right;">
@@ -57,6 +57,9 @@
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
                                 <select name="project_id" class="inputTrackPadding focused my_input"  id="trackProjectId" style="height: 35px;" required>
                                     <option selected disabled>Select project</option>
+                                    @if( isset( $track ) )
+                                        <option value="{{ $track[0]->project->project_id }}" selected>{{ $track[0]->project->project_name }}</option>
+                                    @endif
                                     @foreach( $tasks as $task )
                                         <option value="{{ $task->id }}">{{ $task->project_name }}</option>
                                     @endforeach
@@ -76,7 +79,9 @@
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
 
                             <select name="task_id" class="inputTrackPadding focused my_input"  id="trackTaskId"  style="height: 35px;" required>
-
+                                @if( isset( $track ) )
+                                    <option value="{{ $track[0]->task->task_id }}" selected>{{ $track[0]->task->task_name }}</option>
+                                @endif
                             </select>
                             @if ($errors->has('task_id'))
                                 <span class="help-block">

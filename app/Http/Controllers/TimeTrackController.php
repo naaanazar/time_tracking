@@ -37,7 +37,7 @@ class TimeTrackController extends Controller
             ->get();
 
 
-        echo "<pre>";
+        /*echo "<pre>";
        // var_dump( $tracks); //die();
         foreach ($tracks as $key){
             var_dump($key->task->task_titly);
@@ -45,7 +45,7 @@ class TimeTrackController extends Controller
             var_dump($key->duration);
         }
 
-        echo "</pre>";
+        echo "</pre>";*/
 
         if( Input::all() == true ) {
             $this->validation_track($request);
@@ -77,9 +77,7 @@ class TimeTrackController extends Controller
         if( in_array(Auth::user()->employe, $this->users ) ) {
             $tasks = Project::where('lead_id', '=', Auth::user()->id )
                 ->with('task', 'track', 'track_log')->get();
-
             $tasks = $task->time_counter($tasks);
-
 
             return view('time_track.time_track', compact('tasks', 'date', 'tracks'));
 
@@ -87,8 +85,73 @@ class TimeTrackController extends Controller
             $tasks = Project::with('task', 'track', 'track_log')->get();
             $tasks = $task->time_counter($tasks);
 
-
             return view('time_track.time_track', compact('tasks', 'date', 'tracks'));
+        }
+
+        return redirect('/');
+    }
+
+    /*
+     * update track log
+     * */
+    public function update_track( Request $request, $track_id, $date = false )
+    {
+        $task = new Task();
+
+        if (!$date) {
+            $date =  date('d-m-Y');
+        }
+
+        $tracks = TimeTrack::with('task', 'project')
+            ->where('track_date', '=', date('Y-m-d', strtotime($date)))
+            ->get();
+
+        if( Input::all() == true ) {
+            $this->validation_track($request);
+            $data = Input::all();
+
+            if( $data['date_start'] != '' && $data['date_finish'] != '' ) {
+                $data['date_start'] = $task->time_parser_from_js($data['date_start']);
+                $data['date_finish'] = $task->time_parser_from_js($data['date_finish']);
+            } elseif( $data['date_start'] == '' && $data['date_finish'] == '' ) {
+                unset($data['date_start']);
+                unset($data['date_finish']);
+            }
+            if( $data['additional_cost'] == '') {
+                $data['additional_cost'] = 0;
+            }
+            if( isset( $data['duration'] ) ){
+                $data['duration'] = $task->parse_duration($data['duration']);
+            }
+            if( $data['date_duration'] != '' ){
+                $data['duration'] = $task->parse_duration($data['date_duration']);
+            }
+            $data['track_date'] = date('Y-m-d', strtotime($data['track_date']));
+
+            TimeTrack::update( $data )
+                ->where('id', '=', $track_id);
+
+            return redirect('/trecking');
+        }
+
+        if( in_array(Auth::user()->employe, $this->users ) ) {
+            $tasks = Project::where('lead_id', '=', Auth::user()->id )
+                ->with('task', 'track', 'track_log')->get();
+            $tasks = $task->time_counter($tasks);
+            $track = TimeTrack::where('id', '=', $track_id)
+                ->with('project', 'task')
+                ->get();
+
+            return view('time_track.time_track', compact('tasks', 'track', 'date', 'tracks'));
+
+        } elseif ( Auth::user()->employe == 'Admin' || Auth::user()->employe == 'Supervisor' ) {
+            $tasks = Project::with('task', 'track', 'track_log')->get();
+            $tasks = $task->time_counter($tasks);
+            $track = TimeTrack::where('id', '=', $track_id)
+                ->with('project', 'task')
+                ->get();
+
+            return view('time_track.time_track', compact('tasks', 'track', 'date', 'tracks'));
         }
 
         return redirect('/');

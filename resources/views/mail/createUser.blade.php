@@ -17,7 +17,7 @@
 
 <body style="color:grey">
 
-<img src="http://<?= $_SERVER['SERVER_NAME'] ?>/images/ignatiuz-logo.png" width="247" height="102">
+<img src="http://<?= $_SERVER['SERVER_NAME'] ?>/images/ignatiuz-logo.png" width="250" height="102">
 <div>
     <h3>Hello, {{ $name }} </h3>
     <p>Your account is registered!</p>
