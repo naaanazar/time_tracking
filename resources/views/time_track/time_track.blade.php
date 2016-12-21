@@ -225,41 +225,60 @@
 
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6"  style="border-right: 1px solid #ccc; padding-top: 20px">
-                <table class="col-md-12 trackLogTable" id="trackLogTableId">
-                    <tbody>
 
-                    <tr class="trackLog trackLogFirst" id="firstTrack" >
-                        <td class="">
-                            <span class="ng-binding"></span>
-                            <p class="projecttask"> - nazar - ertretret</p>
-                        </td>
-                        <td class="text-right">
-                            <h3 id="timeTrackFirstSegment" style="margin: 7px 0px ">0:00:00</h3>
-                            <p class="project" >11:32 - 11:32</p>
-                        </td>
-                        <td class="text-right table-cell-actions">
-                            <div class="btn-group">
-                                <button class="btn btn-default" id="startTrack">
-                                    <span class="glyphicon glyphicon-play"></span>
-                                </button>
-                                <button class="btn btn-default" id="editTrack">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                                <button class="btn btn-default" id="deleteTrack">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                <table class="col-md-12 trackLogTable" class="display" id="trackLogTableId">
+
+                    <tbody>
+                    @foreach( $tracks as $key)
+                        <tr class="trackLog trackLogFirst" id="firstTrack" >
+                            <td class="">
+                                <span class="ng-binding"></span>
+                                <p class="projecttask"> - {{ $key->project->project_name }} - {{ $key->task->task_titly }}</p>
+                            </td>
+                            <td class="text-right">
+                                <h3 id="timeTrackFirstSegment" style="margin: 7px 0px ">{{ ($key->total_time == null) ? '00:00:00' : date('h:i:s', strtotime($key->total_time)) }}</h3>
+                                @if ($key->date_start == null || $key->date_start == null)
+                                    <p class="project" >  {{ ($key->duration == null) ? '00:00' : date('h:i',  mktime(0,$key->duration)) }}</p>
+                                @else
+                                     <p class="project" > {{ date('h:i', strtotime($key->date_start)) }} - {{  date('h:i', strtotime($key->date_finish)) }}</p>
+                                @endif
+                            </td>
+                            <td class="text-right table-cell-actions">
+                                <div class="btn-group">
+                                    <button class="btn btn-default" id="startTrack">
+                                        <span class="glyphicon glyphicon-play"></span>
+                                    </button>
+                                    <button class="btn btn-default" id="editTrack">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                    <button class="btn btn-default" id="deleteTrack">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr style="display:none">
+                            <td>
+                            <table >
+                                <tr>sdfsdf
+                                </tr>
+                            </table>
+                            </td>
+                        </tr>
+                    @endforeach
                    </tbody>
                 </table>
+
+
+
             </div>
 
 
 
 </div>
     </div>
-    <script src="/js/jquery/jquery-3.1.1.min.js"></script>
+<!--    <script src="/js/jquery/jquery-3.1.1.min.js"></script>-->
     <script src="/js/tasks.js"></script>
 
 @endsection

@@ -35,14 +35,13 @@ class TimeTrackController extends Controller
         $tracks = TimeTrack::with('task', 'project')
             ->where('track_date', '=', date('Y-m-d', strtotime($date)))
             ->get();
-
-
+        
         /*echo "<pre>";
        // var_dump( $tracks); //die();
         foreach ($tracks as $key){
-            var_dump($key->task->task_titly);
-            var_dump($key->project->project_name);
-            var_dump($key->duration);
+            var_dump($key);
+          //  var_dump($key->project->project_name);
+           // var_dump($key->duration);
         }
 
         echo "</pre>";*/
@@ -52,7 +51,7 @@ class TimeTrackController extends Controller
             $data = Input::all();
 
             if( $data['date_start'] != '' && $data['date_finish'] != '' ) {
-                $data['date_start'] = $task->time_parser_from_js($data['date_start']);
+                $data['date_start'] =  $task->time_parser_from_js($data['date_start']);
                 $data['date_finish'] = $task->time_parser_from_js($data['date_finish']);
             } elseif( $data['date_start'] == '' && $data['date_finish'] == '' ) {
                 unset($data['date_start']);
