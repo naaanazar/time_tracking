@@ -273,7 +273,10 @@ class TimeTrackController extends Controller
         return response()->json(['data' => $data]);
     }
 
-    public function test()
+    /*
+     * test action
+     * */
+    private function test()
     {
         $trask = TimeTrack::where('id', '=', '22')
             ->with('timeLog')
