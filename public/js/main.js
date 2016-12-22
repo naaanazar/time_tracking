@@ -527,8 +527,7 @@ $(document).ready(function(){
                     '</div>' +
                     '</td>' +
                     '</tr>';
-            }
-            ;
+            };
 
 
             $('#add-' + id).find('table').html(html);
