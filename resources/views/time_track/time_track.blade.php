@@ -2,7 +2,6 @@
 
 @section('content')
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
-
     <script type="text/javascript" src="/data/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="/data/daterangepicker.css" />
 
@@ -200,7 +199,7 @@
                             <label class="control-label labelTrack" for="trackDescription">Description</label>
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
-                           <textarea class="inputTrackPadding focused my_input " rows="7" name="description" id="trackDescription"><?= ( isset($track) ) ? $track[0]->description : '' ; ?>
+                           <textarea class="inputTrackPadding focused my_input " rows="7" name="description" id="trackDescription"><?= ( old('description') ) ? old('description') : (( isset($track) ) ? $track[0]->description : '') ; ?>
                            </textarea>
                         </div>
                         @if ($errors->has('description'))
