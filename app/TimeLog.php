@@ -45,9 +45,14 @@ class TimeLog extends Model
             ->select(['track_id', 'start'])
             ->first();
 
+        $data['total_time'] = strtotime($data['finish']) - strtotime($start['start']);
+
+        $this->where('id', '=', $data['id'])
+            ->update( $data );
+
         $this->totalTimeTrack($start['track_id']);
 
-        return strtotime($data['finish']) - strtotime($start['start']);
+        return ;
     }
 
     /*

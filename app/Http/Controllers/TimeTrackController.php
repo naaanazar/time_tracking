@@ -197,11 +197,9 @@ class TimeTrackController extends Controller
         if( isset($data['id'])) {
 
             $data['finish'] = date('Y-m-d h:i:s');
-                unset($data['_token']);
-            $data['total_time'] = ( new TimeLog() )->totalTime($data);
+            unset($data['_token']);
 
-            TimeLog::where('id', '=', $data['id'])
-                ->update( $data );
+           ( new TimeLog() )->totalTime($data);
 
             return back();
         }

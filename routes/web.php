@@ -84,7 +84,7 @@ Route::group(['middleware' => ['permision']], function () {
     Route::get('/register', 'TimeManageController@index');
 
     //testing
-    Route::get('/test', 'TimeTrackController@test');
+    //Route::get('/test', 'TimeTrackController@test');
 });
 
 // Auth
