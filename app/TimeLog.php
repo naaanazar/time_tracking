@@ -55,6 +55,7 @@ class TimeLog extends Model
      * */
     public function totalTimeTrack($id)
     {
+
         $logs = TimeLog::where('track_id', '=', $id)
             ->get();
 

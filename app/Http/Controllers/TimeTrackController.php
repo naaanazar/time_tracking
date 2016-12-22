@@ -172,7 +172,6 @@ class TimeTrackController extends Controller
         return view('', compact('tracks'));
     }
 
-
     /*
      * create time log
      * action works with ajax
@@ -231,13 +230,13 @@ class TimeTrackController extends Controller
     {
         $traskId = 0;
         $traskId = TimeLog::where('id', '=', $id)
-            ->select(['track_id'])
+            ->select('track_id')
             ->first();
 
         TimeLog::where('id', '=', $id)
             ->delete();
 
-        (new TimeLog())->totalTimeTrack( $traskId );
+        (new TimeLog())->totalTimeTrack( $traskId['attributes']['track_id'] );
 
         return redirect('/trecking');
     }
@@ -276,11 +275,8 @@ class TimeTrackController extends Controller
     /*
      * test action
      * */
-    private function test()
+    public function test()
     {
-        $trask = TimeTrack::where('id', '=', '22')
-            ->with('timeLog')
-            ->get();
-        var_dump($trask);
+        $this->deleteTraskLog('35');
     }
 }
