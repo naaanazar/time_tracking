@@ -445,7 +445,7 @@ $(document).ready(function(){
            //  console.log('1111');
 
              var html = '' +
-             '<tr class="trackLog activeTrack trackLogWrite"  >' +
+             '<tr class="trackLog activeTrack trackLogWrite" data-stop-id ="' + $(e.target).parents("tr").data('id') + '"  >' +
              '<td class="">' +
              '<span class="ng-binding"></span>' +
              '<p class="projecttask"> - nazar - ertretret</p>' +
@@ -456,12 +456,12 @@ $(document).ready(function(){
              '</td>' +
              '<td class="text-right table-cell-actions">' +
                  '<div class="btn-group">' +
-                     '<a href="#" class="btn btn-danger" id="stopTrack" onclick="event.preventDefault();  document.getElementById(\'stop-form\').submit();">' +
+                     '<a href="#" class="btn btn-danger" id="stopTrack" >' +
                      '<span class="glyphicon glyphicon-stop"></span>' +
                      '</a>' +
 
                  '<form id="stop-form" action="/create/timelog/" method="POST" style="display: none;">' +
-                     '{{ csrf_field() }}' +
+                 '<input type="hidden" name="_token" id="csrf-token" value="' + $('#conteiner').data('token') + '" />' +
                      '<input type="hidden" name="project_id" value="' + $(e.target).parents("tr").data('project_id') + '">' +
                      '<input type="hidden" name="task_id" value="' + $(e.target).parents("tr").data('task_id') + '">' +
                      '<input type="hidden" name="track_id" value="' + $(e.target).parents("tr").data('id') + '">' +
@@ -479,49 +479,87 @@ $(document).ready(function(){
      //clearTimeout(t);
 
      $(document).on('click' , '#stopTrack',  function(){
-     console.log('stop');
+         console.log('stop');
+         event.preventDefault();
 
-     var timeSegment = $('#timeTrackSegmentDuration').text();
+         var timeSegment = $('#timeTrackSegmentDuration').text();
+         clearTimeout(t);
+         document.getElementById('stop-form').submit();
 
-     clearTimeout(t);
-
-     var html = '' +
-     '<td class="">' +
-     '<span class="ng-binding"></span>' +
-     '<p class="projecttask"> - nazar - ertretret</p>' +
-     '</td>' +
-     '<td class="text-right">' +
-     '<h3 id="timeTrackSegmentFinish" style="margin: 7px 0px ">' + timeSegment + '</h3>' +
-     '<p class="project" >11:32 - 11:32</p>' +
-     '</td>' +
-     '<td class="text-right table-cell-actions">' +
-     '<div class="btn-group">' +
-     '<button class="btn btn-default" id="startTrack">' +
-     '<span class="glyphicon glyphicon-play"></span>' +
-     '</button>' +
-     '<button class="btn btn-default" id="editTrack">' +
-     '<span class="glyphicon glyphicon-pencil"></span>' +
-     '</button>' +
-     '<button class="btn btn-default" id="deleteTrack">' +
-     '<span class="glyphicon glyphicon-trash"></span>' +
-     '</button>' +
-     '</div>' +
-     '</td>';
-
-     if ($('#firstTrack').hasClass('trackLogFirst')) {
-     $('#firstTrack').html(html);
-     $('.activeTrack').remove();
-     $('#firstTrack').removeClass('trackLogFirst');
-     }else {
-
-     $('.activeTrack').html(html);
-     $('.activeTrack').removeClass('trackLogWrite');
-     $('.activeTrack').removeClass('activeTrack');
-     }
+     });
 
 
-     })
 
+
+    //time log show
+
+    $(document).on('click' , '.showTimelog',  function(e){
+        var id =$(e.target).parents("tr").data('id');
+        $('#add-'+  id).show();
+
+        $.get('/track-getTimeLogById/' +  id , function (response) {
+            console.log(response.data);
+
+            var html;
+
+            for (var key in response.data) {
+
+
+
+
+            html += '' +
+                '<tr class="trackLog"  data-idTrack="' + response.data[key].track_id + '">' +
+                '<td class="">' +
+                '<span class="ng-binding"></span>' +
+                '<p class="projecttask"> - ' + response.data[key].project.project_name + ' - ' + response.data[key].task.task_titly + '</p>' +
+                '</td>' +
+                '<td class="text-right">' +
+                '<h3 id="timeTrackSegmentDuration" style="margin: 7px 0px ">' + SecondsTohhmmss((moment(response.data[key].finish, "YYYY-MM-DD hh:mm:ss") - moment(response.data[key].start, "YYYY-MM-DD hh:mm:ss"))/1000) + '</h3>' +
+                '<p class="project" >' + moment(response.data[key].start, "YYYY-MM-DD hh:mm:ss").format('HH:mm') + ' - ' + moment(response.data[key].finish, "YYYY-MM-DD hh:mm:ss").format('HH:mm') + '</p>' +
+                '</td>' +
+                '<td class="text-right table-cell-actions">' +
+                '<div class="btn-group">' +
+                '<button class="btn btn-danger" id="stopTrack">' +
+                '<span class="glyphicon glyphicon-trash"></span>' +
+                '</button>' +
+                '</div>' +
+                '</td>' +
+                '</tr>';
+            };
+
+            console.log($(e.target));
+
+            $('#add-'+  id).find('table').html(html);
+            $(e.target).parents('a').hide();
+            $(e.target).parents('tr').find('.hideTimelog').show();
+
+        });
+
+    });
+
+    $(document).on('click' , '.hideTimelog',  function(e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $(e.target).parents('a').hide();
+        $(e.target).parents('tr').find('.showTimelog').show();
+        var id =$(e.target).parents("tr").data('id');
+        $('#add-'+  id).hide();
+    });
+
+
+    var SecondsTohhmmss = function(totalSeconds) {
+        var hours   = Math.floor(totalSeconds / 3600);
+        var minutes = Math.floor((totalSeconds - (hours * 3600)) / 60);
+        var seconds = totalSeconds - (hours * 3600) - (minutes * 60);
+
+        // round seconds
+        seconds = Math.round(seconds * 100) / 100
+
+        var result = (hours < 10 ? "0" + hours : hours);
+        result += ":" + (minutes < 10 ? "0" + minutes : minutes);
+        result += ":" + (seconds  < 10 ? "0" + seconds : seconds);
+        return result;
+    }
 
 
 
@@ -674,7 +712,7 @@ $(document).ready(function(){
             initComplete: function () {
                 this.api().columns().every(function () {
                     var column = this;
-                    var select = $('<select><option value="">all</option></select>')
+                    var select = $('<select><option value="">All</option></select>')
                         .appendTo($(column.footer()).empty())
                         .on('change', function () {
                             var val = $.fn.dataTable.util.escapeRegex(

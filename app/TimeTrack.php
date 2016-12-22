@@ -39,4 +39,6 @@ class TimeTrack extends Model
     {
         return $this->belongsTo('App\Project', 'project_id', 'id');
     }
+
+
 }

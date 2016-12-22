@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <div id="conteiner" class="container" data-date="<?= isset($date)? $date : '' ?>" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
+    <div id="conteiner" class="container" data-date="<?= isset($date)? $date : '' ?>" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}" data-token="{{ Session::token() }}">
         <div class="row" style="margin-top: 20px">
             <div class="col-md-2 btn-toolbar" style="vertical-align: inherit">
                 <div id="timeStep5" class="btn-group">
@@ -241,7 +241,10 @@
                             data-date_start ="<?= date('h:i', strtotime($key->date_start))?>"
                             data-date_start = "<?= date('h:i', strtotime($key->date_finish)) ?>">
                             <td>
-                                <a href="#"><span class="glyphicon glyphicon-plus"></span>
+                                <a href="#"  class="showTimelog"> <span class="glyphicon glyphicon-plus"></span>
+                                </a>
+
+                                <a href="#"  class="hideTimelog" style="display: none;"> <span class="glyphicon glyphicon-minus" ></span>
                                 </a>
                             </td>
                             <td class="">
@@ -271,11 +274,12 @@
                             </td>
                         </tr>
 
-                        <tr style="display:none" id ="add-<?= $key->id ?>">
+                        <tr  style="display:none"  id ="add-<?= $key->id ?>">
 
 
                             <td colspan="4" style="    padding-left: 30px;">
                             <table width="100%">
+
 
                             </table>
                             </td>
