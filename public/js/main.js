@@ -515,7 +515,9 @@ $(document).ready(function(){
 
 
                 for (var key in response.data) {
-             //       if (add != 'undefined' && response.data[key].finish == null) {
+
+                    console.log(response.data[key].finish);
+                    if (response.data[key].finish != null) {
 
                     html += '' +
                         '<tr class="trackLog"  data-idTrack="' + response.data[key].track_id + '">' +
@@ -535,7 +537,7 @@ $(document).ready(function(){
                         '</div>' +
                         '</td>' +
                         '</tr>';
-                   // }
+                    }
                 };
 
 
