@@ -34,4 +34,13 @@ class TimeLog extends Model
     {
         return $this->belongsTo('App\Project', 'project_id', 'id');
     }
+
+    public function totalTime($data)
+    {
+        $start = $this::where('id', '=', $data['id'])
+            ->select('start')
+            ->first();
+
+        return strtotime($data['finish']) - strtotime($start);
+    }
 }
