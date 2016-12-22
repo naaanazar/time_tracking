@@ -396,40 +396,46 @@ $(document).ready(function(){
      $('#timeTrackShowDate').html(moment($('#conteiner').data('date'), 'DD-MM-YYYY').format('dddd, MMMM Do YYYY'));
 
 
-     //h1 = document.getElementsByTagName('h1')[0],
+    /* //h1 = document.getElementsByTagName('h1')[0],
      var   showTime = $('#timeTrackSegmentDuration').text();
      if (!showTime){
      showTime = '00:00:00';
      }
-     //var timeDuration;
+     //var timeDuration;*/
 
      //start = document.getElementById('start'),
-     var   stop = document.getElementById('stop'),
-     clear = document.getElementById('clear'),
+     var
+      /*stop = document.getElementById('stop'),
+     clear = document.getElementById('clear'),*/
      seconds = 0, minutes = 0, hours = 0,
      t;
 
-     function add() {
-     seconds++;
-     if (seconds >= 60) {
-     seconds = 0;
-     minutes++;
-     if (minutes >= 60) {
-     minutes = 0;
-     hours++;
-     }
+     function add(timeSet) {
+
+     /*    if (timeSet){
+          //   hours = timeSet.slice(0,2);
+       //      minutes =
+             console.log (timeSet.slice(3,5));
+         }*/
+
+         seconds++;
+         if (seconds >= 60) {
+             seconds = 0;
+             minutes++;
+             if (minutes >= 60) {
+                 minutes = 0;
+                 hours++;
+             }
+         }
+         timeDuration = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+         $('#timeTrackSegmentDuration').html(timeDuration);
+         timer();
      }
 
-     var timeDuration = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
-     $('#timeTrackSegmentDuration').html(timeDuration);
-     timer();
-     }
      function timer() {
      t = setTimeout(add, 1000);
      }
-
-     timer();
-
+    // timer();
      clearTimeout(t);
 
      $(document).on('click' , '#startTrack',  function(e){
@@ -449,41 +455,23 @@ $(document).ready(function(){
 
             // console.log(showTime);
            //  console.log('1111');
+                var track_id =  $(e.target).parents("tr").data('id');
+                var project_name =    $(e.target).parents("tr").data('project_name')
+                var task_title =   $(e.target).parents("tr").data('task_titly')
 
-             var html = '' +
-             '<tr class="trackLog activeTrack trackLogWrite" data-stop-id ="' + $(e.target).parents("tr").data('id') + '"  >' +
-             '<td class="">' +
-             '<span class="ng-binding"></span>' +
-             '<p class="projecttask"> - ' + $(e.target).parents("tr").data('project_name') + ' - ' + $(e.target).parents("tr").data('task_titly') + '</p>' +
-             '</td>' +
-             '<td class="text-right">' +
-             '<h3 id="timeTrackSegmentDuration" style="margin: 7px 0px ">0:00:00</h3>' +
-             '<p class="project" >'+ moment(response.data[0].start, "YYYY-MM-DD hh:mm:ss").format('HH:mm') + ' - --:--</p>' +
-             '</td>' +
-             '<td class="text-right table-cell-actions">' +
-                 '<div class="btn-group">' +
-                     '<a href="#" class="btn btn-danger" id="stopTrack" >' +
-                     '<span class="glyphicon glyphicon-stop"></span>' +
-                     '</a>' +
+                 showStartLogBlock(moment(response.data[0].start, "YYYY-MM-DD hh:mm:ss").format('HH:mm'), response.data[0].id, track_id, project_name,  task_title, e);
 
-                 '<form id="stop-form" action="/create/timelog/" method="POST" style="display: none;">' +
-                 '<input type="hidden" name="_token" id="csrf-token" value="' + $('#conteiner').data('token') + '" />' +
-                     '<input type="hidden" name="id" value="' + response.data[0].id + '">' +
-                '</form>' +
-                 '</div>' +
-             '</td>' +
-             '</tr>';
 
-                 showTimeLog(e, html );
 
 
 
              $('#add-' + id).show();
 
-             timer();
+            // timer();
          });
      });
      //clearTimeout(t);
+    var actibeTimetrackId = false;
 
      $(document).on('click' , '#stopTrack',  function(){
          console.log('stop');
@@ -512,8 +500,6 @@ $(document).ready(function(){
 
             var html;
 
-
-
                 for (var key in response.data) {
 
                     console.log(response.data[key].finish);
@@ -538,12 +524,56 @@ $(document).ready(function(){
                         '</td>' +
                         '</tr>';
                     }
+
+                    if(response.data[key].finish == null) {
+                        actibeTimetrackId = response.data[key].id;
+
+                        console.log('dddddddddddddddddddddd');
+
+                        $.get('/trecking-getTime', function (date) {
+                        console.log('blablablablabla');
+                          var duration = SecondsTohhmmss((moment(date.data, "YYYY-MM-DD hh:mm:ss") - moment(response.data[key].start, "YYYY-MM-DD hh:mm:ss")) / 1000)
+
+                       var  html2 = '' +
+                            '<tr class="trackLog activeTrack trackLogWrite" data-stop-id ="' + response.data[key].id + '"  >' +
+                            '<td class="">' +
+                            '<span class="ng-binding"></span>' +
+                            '<p class="projecttask"> - ' + response.data[key].project.project_name + ' - ' + response.data[key].task.task_titly + '</p>' +
+                            '</td>' +
+                            '<td class="text-right">' +
+                            '<h3 id="timeTrackSegmentDuration" style="margin: 7px 0px ">' + duration + '</h3>' +
+                            '<p class="project" >' + moment(response.data[key].start, "YYYY-MM-DD hh:mm:ss").format('HH:mm') + ' - --:--</p>' +
+                            '</td>' +
+                            '<td class="text-right table-cell-actions">' +
+                            '<div class="btn-group">' +
+                            '<a href="#" class="btn btn-danger" id="stopTrack" >' +
+                            '<span class="glyphicon glyphicon-stop"></span>' +
+                            '</a>' +
+
+                            '<form id="stop-form" action="/create/timelog/" method="POST" style="display: none;">' +
+                            '<input type="hidden" name="_token" id="csrf-token" value="' + $('#conteiner').data('token') + '" />' +
+                            '<input type="hidden" name="id" value="' + response.data[key].id + '">' +
+                            '</form>' +
+                            '</div>' +
+                            '</td>' +
+                            '</tr>';
+
+                            $('#add-' + id).find('table').append(html2);
+
+                            seconds = duration.slice(6,7) == 0 ? duration.slice(7) : duration.slice(6);
+                                minutes = duration.slice(3,4) == 0 ? duration.slice(4,5) : duration.slice(3,5);
+                                hours = duration.slice(1,2) == 0 ? duration.slice(1,2) : duration.slice(0,2);
+                            console.log(seconds + '***' + minutes +'*****'+ hours + '*****' +  duration );
+                            timer();
+                        });
+
+                    }
                 };
 
 
-            if (add) {
+           /* if (add) {
                 html += add;
-            }
+            }*/
 
 
             $('#add-' + id).find('table').html(html);
@@ -552,6 +582,36 @@ $(document).ready(function(){
 
         });
     };
+
+    function showStartLogBlock(time, id, track_id, project_name,  task_title, e)
+    {
+        var html = '' +
+            '<tr class="trackLog activeTrack trackLogWrite" data-stop-id ="' + track_id + '"  >' +
+            '<td class="">' +
+            '<span class="ng-binding"></span>' +
+            '<p class="projecttask"> - ' + project_name + ' - ' + task_title + '</p>' +
+            '</td>' +
+            '<td class="text-right">' +
+            '<h3 id="timeTrackSegmentDuration" style="margin: 7px 0px ">0:00:00</h3>' +
+            '<p class="project" >' + time + ' - --:--</p>' +
+            '</td>' +
+            '<td class="text-right table-cell-actions">' +
+            '<div class="btn-group">' +
+            '<a href="#" class="btn btn-danger" id="stopTrack" >' +
+            '<span class="glyphicon glyphicon-stop"></span>' +
+            '</a>' +
+
+            '<form id="stop-form" action="/create/timelog/" method="POST" style="display: none;">' +
+            '<input type="hidden" name="_token" id="csrf-token" value="' + $('#conteiner').data('token') + '" />' +
+            '<input type="hidden" name="id" value="' + id + '">' +
+            '</form>' +
+            '</div>' +
+            '</td>' +
+            '</tr>';
+
+
+        showTimeLog(e, html);
+    }
 
 
     $(document).on('click' , '.hideTimelog',  function(e){
@@ -867,7 +927,7 @@ $(document).ready(function(){
 
 function getServerTime() {
     $.get('/trecking-getTime', function (response) {
-        console.log(response.data + '2222222222');
+        console.log(response.data);
         return response.data;
     });
 }

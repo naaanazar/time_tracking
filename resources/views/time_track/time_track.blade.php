@@ -260,15 +260,19 @@
                             </td>
                             <td class="text-right table-cell-actions">
                                 <div class="btn-group">
-                                    <button class="btn btn-default" id="startTrack">
-                                        <span class="glyphicon glyphicon-play"></span>
-                                    </button>
+                                    <span class="stop-start-button">
+                                        <button class="btn btn-default" id="startTrack">
+                                            <span class="glyphicon glyphicon-play"></span>
+                                        </button>
+                                    </span>
+                                    <span>
                                     <a href class="btn btn-default" id="editTrack">
                                         <span class="glyphicon glyphicon-pencil"></span>
                                     </a>
                                     <button class="btn btn-default" id="deleteTrack">
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </button>
+                                        </span>
                                 </div>
                             </td>
                         </tr>

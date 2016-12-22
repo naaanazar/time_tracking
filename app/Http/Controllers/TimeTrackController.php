@@ -198,7 +198,7 @@ class TimeTrackController extends Controller
         $data =  Input::all();
         if( isset($data['id'])) {
 
-            $data['finish'] = date('Y-m-d h:i:s');
+            $data['finish'] = date('Y-m-d H:i:s');
                 unset($data['_token']);
 
 
@@ -207,11 +207,12 @@ class TimeTrackController extends Controller
 
             return back();
 
+
         }
 
         if( Input::all() == true ) {
             $start =  Input::all();
-            $start['start'] = date('Y-m-d h:i:s');
+            $start['start'] = date('Y-m-d H:i:s');
 
             TimeLog::create($start);
 
@@ -252,7 +253,7 @@ class TimeTrackController extends Controller
     }
 
     public function getTimeNow(){
-        $data = time();
+        $data = date('Y-m-d H:i:s');
 
         return response()->json(['data' => $data]);
     }
