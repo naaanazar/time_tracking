@@ -172,7 +172,6 @@ class TimeTrackController extends Controller
         return view('', compact('tracks'));
     }
 
-
     /*
      * create time log
      * action works with ajax
@@ -194,19 +193,15 @@ class TimeTrackController extends Controller
      * */
     public function create_time_log( $id = false )
     {
-
         $data =  Input::all();
         if( isset($data['id'])) {
 
             $data['finish'] = date('Y-m-d H:i:s');
                 unset($data['_token']);
-
-
-            TimeLog::where('id', '=', $data['id'])
-                ->update( $data );
+            
+           ( new TimeLog() )->totalTime($data);
 
             return back();
-
 
         }
 
@@ -225,6 +220,24 @@ class TimeTrackController extends Controller
         }
 
         return false;
+    }
+
+    /*
+     * delete time log
+     * */
+    public function deleteTraskLog( $id )
+    {
+        $traskId = 0;
+        $traskId = TimeLog::where('id', '=', $id)
+            ->select('track_id')
+            ->first();
+
+        TimeLog::where('id', '=', $id)
+            ->delete();
+
+        (new TimeLog())->totalTimeTrack( $traskId['attributes']['track_id'] );
+
+        return redirect('/trecking');
     }
 
     public function getTasks($project_id)
@@ -258,14 +271,11 @@ class TimeTrackController extends Controller
         return response()->json(['data' => $data]);
     }
 
+    /*
+     * test action
+     * */
     public function test()
     {
-        $users = User::where('id', '>', '1')
-            ->orderby('name', 'asc')
-            ->get();
-        foreach( $users as $user )
-        {
-            echo '<pre>'; var_dump($user->name); echo '</pre>';
-        }
+        $this->deleteTraskLog('35');
     }
 }

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\TimeTrack;
 
 class TimeLog extends Model
 {
@@ -33,5 +34,46 @@ class TimeLog extends Model
     public function project()
     {
         return $this->belongsTo('App\Project', 'project_id', 'id');
+    }
+
+    /*
+     * count total time in trask log
+     * */
+    public function totalTime($data)
+    {
+        $start = $this::where('id', '=', $data['id'])
+            ->select(['track_id', 'start'])
+            ->first();
+
+        $data['total_time'] = strtotime($data['finish']) - strtotime($start['start']);
+
+        $this->where('id', '=', $data['id'])
+            ->update( $data );
+
+        $this->totalTimeTrack($start['track_id']);
+
+        return ;
+    }
+
+    /*
+     * count total tim in trask
+     * */
+    public function totalTimeTrack($id)
+    {
+
+        $logs = TimeLog::where('track_id', '=', $id)
+            ->get();
+
+        $count = 0;
+        foreach( $logs as $log ) {
+            $count += $log['attributes']['total_time'];
+        }
+
+        TimeTrack::where('id', '=', $id)
+            ->update([
+                'total_time' => (int)$count
+            ]);
+
+        return;
     }
 }

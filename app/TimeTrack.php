@@ -25,9 +25,9 @@ class TimeTrack extends Model
         'total_time'
     ];
 
-    public function time_log()
+    public function timeLog()
     {
-        return $this->hasMany('App\TimeLog');
+        return $this->hasMany('App\TimeLog', 'id', 'track_id');
     }
 
     public function task()
