@@ -147,14 +147,14 @@ $(document).ready(function(){
         duration ;
 
     $(document).on('click', '#formTrackStartNow', function(){
-        $.get('/trecking/getTime', function (response) {
+        $.get('/trecking-getTime', function (response) {
             $('#formTrackStart').val(moment(response.data * 1000).format('HH:mm'));
             trackStart();
         });
     });
 
     $(document).on('click', '#formTrackFinishNow', function(){
-        $.get('/trecking/getTime', function (response) {
+        $.get('/trecking-getTime', function (response) {
             $('#formTrackFinish').val(moment(response.data * 1000).format('HH:mm'));
             trackFinish();
         });
@@ -434,15 +434,17 @@ $(document).ready(function(){
 
      $(document).on('click' , '#startTrack',  function(e){
 
-         $.post('/trecking-getTime',
+         $.post('/create/timelog',
              { project_id: $(e.target).parents("tr").data('project_id'),
                 task_id: $(e.target).parents("tr").data('task_id'),
-                track_id: $(e.target).parents("tr").data('id') },
+                track_id: $(e.target).parents("tr").data('id'),
+                 _token: $('#conteiner').data('token') },
              function (response){
          console.log(response);
              var responseDate = response.data;
              var dateStartTrack = moment(responseDate * 1000).format('HH:mm')
 
+                 console.log( response.data[0].id);
              var id = $(e.target).parents("tr").data('id');
 
             // console.log(showTime);
@@ -456,7 +458,7 @@ $(document).ready(function(){
              '</td>' +
              '<td class="text-right">' +
              '<h3 id="timeTrackSegmentDuration" style="margin: 7px 0px ">0:00:00</h3>' +
-             '<p class="project" >'+ dateStartTrack + ' - --:--</p>' +
+             '<p class="project" >'+ moment(response.data[0].start, "YYYY-MM-DD hh:mm:ss").format('HH:mm') + ' - --:--</p>' +
              '</td>' +
              '<td class="text-right table-cell-actions">' +
                  '<div class="btn-group">' +
@@ -466,13 +468,16 @@ $(document).ready(function(){
 
                  '<form id="stop-form" action="/create/timelog/" method="POST" style="display: none;">' +
                  '<input type="hidden" name="_token" id="csrf-token" value="' + $('#conteiner').data('token') + '" />' +
-                     '<input type="hidden" name="id" value="' + 10 + '">' +
+                     '<input type="hidden" name="id" value="' + response.data[0].id + '">' +
                 '</form>' +
                  '</div>' +
              '</td>' +
              '</tr>';
-                 showTimeLog(e);
-             $('#add-' + id).find('table').append(html);
+
+                 showTimeLog(e, html );
+
+
+
              $('#add-' + id).show();
 
              timer();
@@ -498,7 +503,7 @@ $(document).ready(function(){
         showTimeLog(e);
     });
 
-    function showTimeLog(e) {
+    function showTimeLog(e, add) {
         var id = $(e.target).parents("tr").data('id');
         $('#add-' + id).show();
 
@@ -507,27 +512,36 @@ $(document).ready(function(){
 
             var html;
 
-            for (var key in response.data) {
 
-                html += '' +
-                    '<tr class="trackLog"  data-idTrack="' + response.data[key].track_id + '">' +
-                    '<td class="">' +
-                    '<span class="ng-binding"></span>' +
-                    '<p class="projecttask"> - ' + response.data[key].project.project_name + ' - ' + response.data[key].task.task_titly + '</p>' +
-                    '</td>' +
-                    '<td class="text-right">' +
-                    '<h3 id="timeTrackSegmentDuration" style="margin: 7px 0px ">' + SecondsTohhmmss((moment(response.data[key].finish, "YYYY-MM-DD hh:mm:ss") - moment(response.data[key].start, "YYYY-MM-DD hh:mm:ss")) / 1000) + '</h3>' +
-                    '<p class="project" >' + moment(response.data[key].start, "YYYY-MM-DD hh:mm:ss").format('HH:mm') + ' - ' + moment(response.data[key].finish, "YYYY-MM-DD hh:mm:ss").format('HH:mm') + '</p>' +
-                    '</td>' +
-                    '<td class="text-right table-cell-actions">' +
-                    '<div class="btn-group">' +
-                    '<button class="btn btn-danger" id="stopTrack">' +
-                    '<span class="glyphicon glyphicon-trash"></span>' +
-                    '</button>' +
-                    '</div>' +
-                    '</td>' +
-                    '</tr>';
-            };
+
+                for (var key in response.data) {
+             //       if (add != 'undefined' && response.data[key].finish == null) {
+
+                    html += '' +
+                        '<tr class="trackLog"  data-idTrack="' + response.data[key].track_id + '">' +
+                        '<td class="">' +
+                        '<span class="ng-binding"></span>' +
+                        '<p class="projecttask"> - ' + response.data[key].project.project_name + ' - ' + response.data[key].task.task_titly + '</p>' +
+                        '</td>' +
+                        '<td class="text-right">' +
+                        '<h3 id="" style="margin: 7px 0px ">' + SecondsTohhmmss((moment(response.data[key].finish, "YYYY-MM-DD hh:mm:ss") - moment(response.data[key].start, "YYYY-MM-DD hh:mm:ss")) / 1000) + '</h3>' +
+                        '<p class="project" >' + moment(response.data[key].start, "YYYY-MM-DD hh:mm:ss").format('HH:mm') + ' - ' + moment(response.data[key].finish, "YYYY-MM-DD hh:mm:ss").format('HH:mm') + '</p>' +
+                        '</td>' +
+                        '<td class="text-right table-cell-actions">' +
+                        '<div class="btn-group">' +
+                        '<button class="btn btn-danger" id="stopTrack">' +
+                        '<span class="glyphicon glyphicon-trash"></span>' +
+                        '</button>' +
+                        '</div>' +
+                        '</td>' +
+                        '</tr>';
+                   // }
+                };
+
+
+            if (add) {
+                html += add;
+            }
 
 
             $('#add-' + id).find('table').html(html);
@@ -850,7 +864,7 @@ $(document).ready(function(){
 });
 
 function getServerTime() {
-    $.get('/trecking/getTime', function (response) {
+    $.get('/trecking-getTime', function (response) {
         console.log(response.data + '2222222222');
         return response.data;
     });

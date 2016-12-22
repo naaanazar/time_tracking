@@ -194,15 +194,26 @@ class TimeTrackController extends Controller
      * */
     public function create_time_log( $id = false )
     {
-        if( $id == true ) {
-            TimeLog::where('id', '=', $id)
-                ->update( Input::all() );
 
-            return true;
+        $data =  Input::all();
+        if( isset($data['id'])) {
+
+            $data['finish'] = date('Y-m-d h:i:s');
+                unset($data['_token']);
+
+
+            TimeLog::where('id', '=', $data['id'])
+                ->update( $data );
+
+            return back();
+
         }
 
         if( Input::all() == true ) {
-            TimeLog::create( Input::all() );
+            $start =  Input::all();
+            $start['start'] = date('Y-m-d h:i:s');
+
+            TimeLog::create($start);
 
             $timeLog = Timelog::orderBy('id', 'desc')
                 ->select(['id', 'start'])

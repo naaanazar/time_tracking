@@ -252,7 +252,7 @@
                                 <p class="projecttask"> - {{ $key->project->project_name }} - {{ $key->task->task_titly }}</p>
                             </td>
                             <td class="text-right">
-                                <h3 id="timeTrackFirstSegment" style="margin: 7px 0px ">{{ ($key->total_time == null) ? '00:00:00' : date('h:i:s', strtotime($key->total_time)) }}</h3>
+                                <h3 id="timeTrackSegmentTotal" style="margin: 7px 0px ">{{ ($key->total_time == null) ? '00:00:00' : date('h:i:s', strtotime($key->total_time)) }}</h3>
                                 @if ($key->date_start == null || $key->date_start == null)
                                     <p class="project" >  {{ ($key->duration == null) ? '00:00' : date('h:i',  mktime(0,$key->duration)) }}</p>
                                 @else
@@ -264,9 +264,9 @@
                                     <button class="btn btn-default" id="startTrack">
                                         <span class="glyphicon glyphicon-play"></span>
                                     </button>
-                                    <button class="btn btn-default" id="editTrack">
+                                    <a href class="btn btn-default" id="editTrack">
                                         <span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
+                                    </a>
                                     <button class="btn btn-default" id="deleteTrack">
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </button>
