@@ -205,8 +205,9 @@ class TimeTrackController extends Controller
             TimeLog::create( Input::all() );
 
             $timeLog = Timelog::orderBy('id', 'desc')
+                ->select(['id', 'start'])
                 ->limit(1)
-                ->select(['id', 'start']);
+                ->get();
 
             return response()->json(['data' => (object)$timeLog]);
         }
