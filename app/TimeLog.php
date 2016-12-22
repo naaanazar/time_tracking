@@ -62,7 +62,7 @@ class TimeLog extends Model
         foreach( $logs as $log ) {
             $count += $log['attributes']['total_time'];
         }
-        
+
         TimeTrack::where('id', '=', $id)
             ->update([
                 'total_time' => (int)$count

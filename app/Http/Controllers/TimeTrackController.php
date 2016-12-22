@@ -224,6 +224,24 @@ class TimeTrackController extends Controller
         return false;
     }
 
+    /*
+     * delete time log
+     * */
+    public function deleteTraskLog( $id )
+    {
+        $traskId = 0;
+        $traskId = TimeLog::where('id', '=', $id)
+            ->select(['track_id'])
+            ->first();
+
+        TimeLog::where('id', '=', $id)
+            ->delete();
+
+        (new TimeLog())->totalTimeTrack( $traskId );
+
+        return redirect('/trecking');
+    }
+
     public function getTasks($project_id)
     {
         $result = Task::where('project_id', '=', $project_id)->get();
