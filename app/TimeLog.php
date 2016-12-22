@@ -13,6 +13,7 @@ class TimeLog extends Model
      * @var array
      */
     protected $fillable = [
+        'project_id',
         'task_id',
         'track_id',
         'start',

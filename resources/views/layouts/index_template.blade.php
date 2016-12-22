@@ -126,11 +126,11 @@
 </div>
 <div style=" border-bottom: solid 3px #808080">
     <div class="container" style="position: relative">
-          <a href="http://webdevelop.it-dev-lab.com"><img src="http://webdevelop.it-dev-lab.com/images/ignatiuz-logo.png" width="247" height="102" style="margin-top:7px"></a>
+          <a href="/"><img src="/images/ignatiuz-logo.png" width="247" height="102" style="margin-top:7px"></a>
 
         <div style="display: inline-block; float: right; position: relative; margin-top: 61px;     position: absolute;
     right: 10px;">
-            <img src="<?= ( file_exists('../public/images/Voldemar.png') ) ? 'http://idus:90/images/Voldemar.png' : 'http://webdevelop.it-dev-lab.com/images/log.png' ;?>"
+            <img src="/images/log.png"
                  width="65" height="65" style="position: absolute;
                     left: -27px;
                     bottom: -2px;">

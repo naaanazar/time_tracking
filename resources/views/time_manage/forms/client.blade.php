@@ -21,7 +21,7 @@
 
                         <div class="control-group row">
                             <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                <label class="control-label" for="companeMameId" style="text-align: left;">Company Name</label>
+                                <label class="control-label" for="companeMameId" style="text-align: left;">Company Name *</label>
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
@@ -37,14 +37,15 @@
 
                         <div class="control-group row">
                             <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                <label class="control-label" for="AddressId" style="text-align: left;">Address</label>
+                                <label class="control-label" for="AddressId" style="text-align: left;">Address *</label>
                             </div>
+
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                 <input name="company_address" class="input-xlarge focused my_input" id="AddressId"   type="text"
                                        value="<?= isset($client->company_address) ? $client->company_address : ((old('company_address')) ? old('company_address') :'') ?>"/>
-                                @if ($errors->has('compane_address'))
+                                @if ($errors->has('company_address'))
                                     <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('compane_address') }}</strong>
+                                                <strong style="color:#802420">{{ $errors->first('company_address') }}</strong>
                                             </span>
                                 @endif
                             </div>
@@ -52,7 +53,7 @@
 
                         <div class="control-group row">
                             <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                <label class="control-label" for="WebsiteId" style="text-align: left;">Website</label>
+                                <label class="control-label" for="WebsiteId" style="text-align: left;">Website *</label>
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                 <input name="website" class="input-xlarge focused my_input" id="WebsiteId"  type="text"
@@ -67,7 +68,7 @@
 
                         <div class="control-group row">
                             <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                <label class="control-label" for="ContactPersonId" style="text-align: left;">Contact Person</label>
+                                <label class="control-label" for="ContactPersonId" style="text-align: left;">Contact Person *</label>
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                 <input name="contact_person" class="input-xlarge focused my_input" id="ContactPersonId"   type="text"

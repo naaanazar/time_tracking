@@ -643,8 +643,8 @@ class TimeManageController extends Controller
     {
         $this->validate($request, [
             'company_name' => 'required|min:4|max:30',
-            'company_address' => 'min:4|max:100',
-            'website' => 'string',
+            'company_address' => 'required|min:4|max:100',
+            'website' => 'required|string',
             'contact_person' => 'required|min:4|max:30',
             'email' => 'required|unique:Clients|email',
             'phone_number' => 'regex:/[0-9-]+/|max:30'
@@ -673,11 +673,11 @@ class TimeManageController extends Controller
     private function validation_task($request)
     {
         $this->validate($request, [
-            'company_id' => 'integer',
-            'project_id' => 'integer',
+            'company_id' => 'required|integer',
+            'project_id' => 'required|integer',
             'task_type' => 'required|min:2|max:30',
-            'task_description' => 'required|regex:/[a-zA-Z0-9]+/|max:1000',
-            'task_titly' => 'min:2|max:30',
+            'task_description' => 'regex:/[a-zA-Z0-9]+/|max:1000',
+            'task_titly' => 'required|min:2|max:30',
             'alloceted_hours' => 'numeric',
             'assign_to' => 'min:2|max:30',
             'billable' => 'boolean'

@@ -187,16 +187,30 @@ class TimeTrackController extends Controller
         //var_dump($timeLog);
 
         return response()->json(['data' => (object)$timeLog]);
-
     }
 
-    public function create_time_log()
+    /*
+     * create time log
+     * */
+    public function create_time_log( $id = false )
     {
-        if( Input::all() == true ) {
-            TimeLog::create( [ Input::all() ] );
+        if( $id == true ) {
+            TimeLog::where('id', '=', $id)
+                ->update( Input::all() );
 
             return true;
         }
+
+        if( Input::all() == true ) {
+            TimeLog::create( Input::all() );
+
+            $timeLog = Timelog::orderBy('id', 'desc')
+                ->limit(1)
+                ->select(['id', 'start']);
+
+            return response()->json(['data' => (object)$timeLog]);
+        }
+
         return false;
     }
 
