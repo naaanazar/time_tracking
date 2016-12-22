@@ -275,6 +275,9 @@ class TimeTrackController extends Controller
 
     public function test()
     {
-        ((new TimeLog())->totalTimeTrack('22'));
+        $trask = TimeTrack::where('id', '=', '22')
+            ->with('timeLog')
+            ->get();
+        var_dump($trask);
     }
 }
