@@ -194,7 +194,6 @@ class TimeTrackController extends Controller
      * */
     public function create_time_log( $id = false )
     {
-
         $data =  Input::all();
         if( isset($data['id'])) {
 
@@ -206,7 +205,6 @@ class TimeTrackController extends Controller
                 ->update( $data );
 
             return back();
-
         }
 
         if( Input::all() == true ) {
@@ -259,12 +257,6 @@ class TimeTrackController extends Controller
 
     public function test()
     {
-        $users = User::where('id', '>', '1')
-            ->orderby('name', 'asc')
-            ->get();
-        foreach( $users as $user )
-        {
-            echo '<pre>'; var_dump($user->name); echo '</pre>';
-        }
+        ((new TimeLog())->totalTimeTrack('22'));
     }
 }
