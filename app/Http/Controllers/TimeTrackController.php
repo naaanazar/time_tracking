@@ -303,7 +303,7 @@ class TimeTrackController extends Controller
             'project_id' => 'required',
             'date_start' => '',
             'date_finish' => '',
-            'description' => 'required|max:1000',
+            'description' => 'max:1000',
             'additional_cost' => 'integer',
             'billable_time' => ''
         ], [
