@@ -79,6 +79,8 @@ Route::group(['middleware' => ['permision']], function () {
     Route::get('/track/delete/{id}', 'TimeTrackController@delete_track')->where(['id' => '[0-9]+']);
     Route::get('/track-getTimeLogById/{id}', 'TimeTrackController@getTimeLogById')->where(['id' => '[0-9]+']);
     Route::get('/log/delete/{id}', 'TimeTrackController@deleteTraskLog')->where(['id' => '[0-9]+']);
+    Route::get('/trask/approve/{id}', 'TimeTrackController@approveTrask')->where(['id' => '[0-9]+']);
+    Route::get('/trask/reject/{id}', 'TimeTrackController@approveTrask')->where(['id' => '[0-9]+']);
 
     // forbidden
     Route::get('/register', 'TimeManageController@index');

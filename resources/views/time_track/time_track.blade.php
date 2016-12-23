@@ -295,12 +295,12 @@
 
                                     </span>
                                     <span>
-                                    <a href class="btn btn-default" id="editTrack">
+                                    <a href="/track/update/<?= $key->id ?>" class="btn btn-default" id="editTrack">
                                         <span class="glyphicon glyphicon-pencil"></span>
                                     </a>
-                                    <button class="btn btn-default" id="deleteTrack">
+                                    <a href="/track/delete/<?= $key->id ?>" class="btn btn-default" id="deleteTrack">
                                         <span class="glyphicon glyphicon-trash"></span>
-                                    </button>
+                                    </a>
                                         </span>
                                 </div>
                             </td>

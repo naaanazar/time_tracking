@@ -14,6 +14,7 @@ class TimeTrack extends Model
      */
     protected $fillable = [
         'task_id',
+        'approve',
         'project_id',
         'date_start',
         'track_date',

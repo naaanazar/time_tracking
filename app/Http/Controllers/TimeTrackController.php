@@ -167,9 +167,31 @@ class TimeTrackController extends Controller
      * */
     public function all_track()
     {
-        $tracks = TimeTrack::with('task', 'project')->get();
+        $tasks = Task::with('project', 'track', 'user')->get();
 
         return view('time_track.time_tracks_all', compact('tracks'));
+    }
+
+    /*
+     * approve trask
+     * */
+    public function approveTrask( $id )
+    {
+        TimeTrack::where('id', '=', $id)
+            ->update([ 'approve' => 1 ]);
+
+        return back();
+    }
+
+    /*
+     *
+     * */
+    public function rejectTrask( $id )
+    {
+        TimeTrack::where('id', '=', $id)
+            ->update([ 'approve' => 0 ]);
+
+        return back();
     }
 
     /*
@@ -281,9 +303,11 @@ class TimeTrackController extends Controller
             'project_id' => 'required',
             'date_start' => '',
             'date_finish' => '',
-            'description' => 'max:1000',
+            'description' => 'required|max:1000',
             'additional_cost' => 'integer',
             'billable_time' => ''
+        ], [
+            'description.required' => 'field can not be blank'
         ]);
     }
 
