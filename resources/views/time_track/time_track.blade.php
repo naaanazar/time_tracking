@@ -230,6 +230,7 @@
                     <tbody>
                     @foreach( $tracks as $key)
                         <?php
+                        $totalTime = '';
                         if($key->total_time != null){
 
                             $hours = floor($key->total_time / 3600);
