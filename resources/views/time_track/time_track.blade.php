@@ -272,7 +272,7 @@
                                 @if ($key->date_start == null || $key->date_start == null)
                                     <p class="project" >  {{ ($key->duration == null) ? '00:00' : date('H:i',  mktime(0,$key->duration)) }}</p>
                                 @else
-                                     <p class="project" > {{ date('h:i', strtotime($key->date_start)) }} - {{  date('h:i', strtotime($key->date_finish)) }}</p>
+                                     <p class="project" > {{ date('H:i', strtotime($key->date_start)) }} - {{  date('H:i', strtotime($key->date_finish)) }}</p>
                                 @endif
                             </td>
                             <td class="text-right table-cell-actions">

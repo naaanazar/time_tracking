@@ -159,7 +159,7 @@ class TimeTrackController extends Controller
     {
         TimeTrack::where('id', '=', $id)->delete();
 
-        return redirect('/trecking');
+        return back();
     }
 
     /*
