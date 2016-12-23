@@ -11,14 +11,6 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="approv-track" role="dialog">
-        <div class="modal-dialog"  >
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div id="#modalConfirmApprove"></div>
-            </div>
-        </div>
-    </div>
 
     <div id="conteiner" class="container" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
         <div class="row-fluid">
@@ -45,7 +37,7 @@
                                 <th width="130px">Project</th>
                                 <th>Task</th>
                                 <!--  <th>User</th> -->
-                                <th>Approw</th>
+                                <th>Approve</th>
                                <!--  <th>Date Start</th>
                                 <th>Date Finish</th>-->
                                 <th>Duration</th>
@@ -82,7 +74,7 @@
                                     <tr class="odd gradeX">
                                         <td>{{ $key->project->project_name }}</td>
                                         <td>{{ $key->task->task_titly }}</td>
-                                        <td>{{ $key->task->approve == 1 ? 'yes' : '-' }}</td>
+                                        <td>{{ $key->approve == 1 ? 'Yes' : '-' }}</td>
                                         <td>{{ $key->duration ==null ? '-' : date('H:i',  mktime(0,$key->duration)) }}</td>
                                         <td>{{ $key->total_time ==null ? '-' : date('H:i',  mktime(0,$key->total_time)) }}</td>
                                         <td>{{ $key->billable_time == 1 ? 'Yes' : '-' }}</td>
@@ -90,19 +82,19 @@
 
                                         @if ($status == 'Lead' || $status == 'Admin' || $status == 'Supervisor')
                                             <td>
-                                                @if($key->task->approve == 0)
-                                                <button <?=$key->total_time >= $key->duration ? 'disabled' : '' ?> type="button" class="btn btn-success <?=$key->total_time >= $key->duration ? 'disabled' : '' ?> deleteTrack" data-url="/track/delete/{{ $key->id }}" data-element="{{ $key->project->project_name . '-' . $key->task->task_titly}}">
+                                                @if($key->approve == 0)
+                                                <button  type="button" class="btn btn-success approvTrack" data-url="/trask/approve/{{ $key->id }}" data-element="{{ $key->project->project_name . '-' . $key->task->task_titly}}">
                                                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Approve
                                                 </button>
                                                 @endif
-                                                @if($key->task->approve == 0)
-                                                    <button <?=$key->total_time >= $key->duration ? 'disabled' : '' ?> type="button" class="btn btn-warning <?=$key->total_time >= $key->duration ? 'disabled' : '' ?> deleteTrack" data-url="/track/delete/{{ $key->id }}" data-element="{{ $key->project->project_name . '-' . $key->task->task_titly}}">
-                                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Reject
+                                                @if($key->approve == 1)
+                                                    <button  type="button" class="btn btn-warning  rejectTrack" data-url="/trask/reject/{{ $key->id }}" data-element="{{ $key->project->project_name . '-' . $key->task->task_titly}}">
+                                                        &nbsp&nbsp<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Reject &nbsp
                                                     </button>
                                                 @endif
 
                                                 <a href="/track/update/{{ $key->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
-                                                    <button type="button" class="btn btn-danger approvTrack" data-url="/track/delete/{{ $key->id }}" data-element="{{ $key->project->project_name . '-' . $key->task->task_titly}}">
+                                                    <button type="button" class="btn btn-danger deleteTrack" data-url="/track/delete/{{ $key->id }}" data-element="{{ $key->project->project_name . '-' . $key->task->task_titly}}">
                                                         <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
                                             </td>
                                         @endif
