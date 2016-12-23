@@ -108,7 +108,7 @@
                                     <li> <a tabindex="-1" href="/team/all">Teams</a> </li>
                                 @endif
                                 <li role="separator" class="divider"></li>
-                                <li> <a tabindex="-1" href="#">--</a> </li>
+                                <li> <a tabindex="-1" href="/track/all">time tracks</a> </li>
                             </ul>
                         </li>
                         <li class="dropdown">

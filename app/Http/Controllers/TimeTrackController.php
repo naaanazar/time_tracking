@@ -169,7 +169,7 @@ class TimeTrackController extends Controller
     {
         $tasks = Task::with('project', 'track', 'user')->get();
 
-        return view('', compact('tasks'));
+        return view('time_track.time_tracks_all', compact('tracks'));
     }
 
     /*

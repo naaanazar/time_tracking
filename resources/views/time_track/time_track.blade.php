@@ -230,6 +230,7 @@
                     <tbody>
                     @foreach( $tracks as $key)
                         <?php
+                        $totalTime = '';
                         if($key->total_time != null){
 
                             $hours = floor($key->total_time / 3600);
@@ -294,12 +295,12 @@
 
                                     </span>
                                     <span>
-                                    <a href class="btn btn-default" id="editTrack">
-                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    <a href="<?= $key->id ?>" class="btn btn-default" id="editTrack">
+                                        <span class="glyphicon glyphicon-pencil">Edit trask</span>
                                     </a>
-                                    <button class="btn btn-default" id="deleteTrack">
+                                    <a href="" class="btn btn-default" id="deleteTrack">
                                         <span class="glyphicon glyphicon-trash"></span>
-                                    </button>
+                                    </a>
                                         </span>
                                 </div>
                             </td>
