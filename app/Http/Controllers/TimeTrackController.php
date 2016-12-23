@@ -184,6 +184,17 @@ class TimeTrackController extends Controller
     }
 
     /*
+     *
+     * */
+    public function rejectTrask( $id )
+    {
+        TimeTrack::where('id', '=', $id)
+            ->update([ 'approve' => 0 ]);
+
+        return back();
+    }
+
+    /*
      * create time log
      * action works with ajax
      * */
