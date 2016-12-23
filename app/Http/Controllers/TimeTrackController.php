@@ -210,6 +210,28 @@ class TimeTrackController extends Controller
     }
 
     /*
+     * finish track
+     * */
+    public function trackDone( $id )
+    {
+        TimeTrack::where('id', '=', $id)
+            ->update(['done' => 1 ]);
+
+        return back();
+    }
+
+    /*
+     * again return track to work
+     * */
+    public function trackReturnToWork( $id )
+    {
+        TimeTrack::where('id', '=', $id)
+            ->update(['done' => 0 ]);
+
+        return back();
+    }
+
+    /*
      * create time log
      * action works with ajax
      * */
@@ -281,6 +303,7 @@ class TimeTrackController extends Controller
         setcookie("logTrackActiveTrackId", "", time()-10, "/");
         setcookie("logTrackActiveLogId", "", time()-10, "/");
     }
+
     /*
      * delete time log
      * */

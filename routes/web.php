@@ -57,6 +57,8 @@ Route::group(['middleware' => ['permision']], function () {
     Route::get('/task/all/{msg?}/{theme?}', 'TimeManageController@all_tasks');
     Route::get('/project/tasks/{id}', 'TimeManageController@get_project_tasks')->where(['id' => '[0-9]+']);
     Route::get('/client/tasks/{id}', 'TimeManageController@get_client_tasks')->where(['id' => '[0-9]+']);
+    Route::get('/task/done/{id}', 'TimeManageController@taskDone')->where(['id' => '[0-9]+']);
+    Route::get('/task/start/{id}', 'TimeManageController@taskReturnToWork')->where(['id' => '[0-9]+']);
 
     // team
     Route::get('/team/create/', 'TimeManageController@create_team');
@@ -81,10 +83,12 @@ Route::group(['middleware' => ['permision']], function () {
     Route::get('/log/delete/{id}', 'TimeTrackController@deleteTraskLog')->where(['id' => '[0-9]+']);
     Route::get('/trask/approve/{id}', 'TimeTrackController@approveTrask')->where(['id' => '[0-9]+']);
     Route::get('/trask/reject/{id}', 'TimeTrackController@rejectTrask')->where(['id' => '[0-9]+']);
+    Route::get('/trask/done/{id}', 'TimeTrackController@trackDone')->where(['id' => '[0-9]+']);
+    Route::get('/trask/start/{id}', 'TimeTrackController@trackReturnToWork')->where(['id' => '[0-9]+']);
 
     // forbidden
     Route::get('/register', 'TimeManageController@index');
-
+    Route::get('/user/logout', 'TimeManageController@logout');
     //testing
     //Route::get('/test', 'TimeTrackController@test');
 });
