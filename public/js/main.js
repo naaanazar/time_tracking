@@ -148,14 +148,14 @@ $(document).ready(function(){
 
     $(document).on('click', '#formTrackStartNow', function(){
         $.get('/trecking-getTime', function (response) {
-            $('#formTrackStart').val(moment(response.data * 1000).format('HH:mm'));
+            $('#formTrackStart').val(moment(response.data, "YYYY-MM-DD hh:mm:ss").format('HH:mm'));
             trackStart();
         });
     });
 
     $(document).on('click', '#formTrackFinishNow', function(){
         $.get('/trecking-getTime', function (response) {
-            $('#formTrackFinish').val(moment(response.data * 1000).format('HH:mm'));
+            $('#formTrackFinish').val(moment(response.data, "YYYY-MM-DD hh:mm:ss").format('HH:mm'));
             trackFinish();
         });
     });
@@ -429,6 +429,9 @@ $(document).ready(function(){
          }
          timeDuration = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
          $('#timeTrackSegmentDuration').html(timeDuration);
+
+         $('.timeTrackSegmentTotalActive').html(SecondsTohhmmss((moment.duration(timeDuration) + (moment.duration($('.timeTrackSegmentTotalActive').data('total'))))/1000));
+
          timer();
      }
 
@@ -438,16 +441,20 @@ $(document).ready(function(){
     // timer();
      clearTimeout(t);
 
+
+
      $(document).on('click' , '#startTrack',  function(e){
 
          $.post('/create/timelog',
              { project_id: $(e.target).parents("tr").data('project_id'),
                 task_id: $(e.target).parents("tr").data('task_id'),
                 track_id: $(e.target).parents("tr").data('id'),
-                 _token: $('#conteiner').data('token') },
+                 _token: $('#conteiner').data('token'),
+                 create: true },
              function (response){
          console.log(response);
-             var responseDate = response.data;
+                 window.location ='/trecking/' + $('#conteiner').data('date');
+            /* var responseDate = response.data;
              var dateStartTrack = moment(responseDate * 1000).format('HH:mm')
 
                  console.log( response.data[0].id);
@@ -456,16 +463,14 @@ $(document).ready(function(){
             // console.log(showTime);
            //  console.log('1111');
                 var track_id =  $(e.target).parents("tr").data('id');
-                var project_name =    $(e.target).parents("tr").data('project_name')
-                var task_title =   $(e.target).parents("tr").data('task_titly')
-
-                 showStartLogBlock(moment(response.data[0].start, "YYYY-MM-DD hh:mm:ss").format('HH:mm'), response.data[0].id, track_id, project_name,  task_title, e);
+                var project_name =    $(e.target).parents("tr").data('project_name');
+                var task_title =   $(e.target).parents("tr").data('task_titly');*/
 
 
 
+               //  showStartLogBlock(moment(response.data[0].start, "YYYY-MM-DD hh:mm:ss").format('HH:mm'), response.data[0].id, track_id, project_name,  task_title, e);
 
-
-             $('#add-' + id).show();
+           //  $('#add-' + id).show();
 
             // timer();
          });
@@ -477,11 +482,19 @@ $(document).ready(function(){
          console.log('stop');
          event.preventDefault();
 
-         var timeSegment = $('#timeTrackSegmentDuration').text();
+      //   var timeSegment = $('#timeTrackSegmentDuration').text();
          clearTimeout(t);
          document.getElementById('stop-form').submit();
 
      });
+
+    $(document).on('click' , '#stopTrack2',  function(){
+        console.log('stop');
+        event.preventDefault();
+        clearTimeout(t);
+        document.getElementById('stop-form-track').submit();
+
+    });
 
 
 
@@ -494,6 +507,7 @@ $(document).ready(function(){
     function showTimeLog(e, add) {
         var id = $(e.target).parents("tr").data('id');
         $('#add-' + id).show();
+        $('#track-' + id).find('.showTimelog').hide();
 
         $.get('/track-getTimeLogById/' + id, function (response) {
             console.log(response.data);
@@ -507,21 +521,23 @@ $(document).ready(function(){
 
                     html += '' +
                         '<tr class="trackLog"  data-idTrack="' + response.data[key].track_id + '">' +
-                        '<td class="">' +
-                        '<span class="ng-binding"></span>' +
-                        '<p class="projecttask"> - ' + response.data[key].project.project_name + ' - ' + response.data[key].task.task_titly + '</p>' +
-                        '</td>' +
-                        '<td class="text-right">' +
-                        '<h3 id="" style="margin: 7px 0px ">' + SecondsTohhmmss((moment(response.data[key].finish, "YYYY-MM-DD hh:mm:ss") - moment(response.data[key].start, "YYYY-MM-DD hh:mm:ss")) / 1000) + '</h3>' +
-                        '<p class="project" >' + moment(response.data[key].start, "YYYY-MM-DD hh:mm:ss").format('HH:mm') + ' - ' + moment(response.data[key].finish, "YYYY-MM-DD hh:mm:ss").format('HH:mm') + '</p>' +
-                        '</td>' +
-                        '<td class="text-right table-cell-actions">' +
-                        '<div class="btn-group">' +
-                        '<button class="btn btn-danger" id="stopTrack">' +
-                        '<span class="glyphicon glyphicon-trash"></span>' +
-                        '</button>' +
-                        '</div>' +
-                        '</td>' +
+                            '<td class="">' +
+                                '<span class="ng-binding"></span>' +
+                                '<p class="projecttask"> - ' + response.data[key].project.project_name + ' - ' + response.data[key].task.task_titly + '</p>' +
+                            '</td>' +
+                            '<td class="text-right">' +
+                                '<h3 id="" style="margin: 7px 0px ">' +
+                                SecondsTohhmmss((moment(response.data[key].finish, "YYYY-MM-DD hh:mm:ss") - moment(response.data[key].start, "YYYY-MM-DD hh:mm:ss")) / 1000) + '</h3>' +
+                                '<p class="project" >' +
+                                moment(response.data[key].start, "YYYY-MM-DD hh:mm:ss").format('HH:mm') + ' - ' + moment(response.data[key].finish, "YYYY-MM-DD hh:mm:ss").format('HH:mm') + '</p>' +
+                            '</td>' +
+                            '<td class="text-right table-cell-actions">' +
+                                '<div class="btn-group">' +
+                                    '<button class="btn btn-danger" id="stopTrack">' +
+                                        '<span class="glyphicon glyphicon-trash"></span>' +
+                                    '</button>' +
+                                '</div>' +
+                            '</td>' +
                         '</tr>';
                     }
 
@@ -536,37 +552,52 @@ $(document).ready(function(){
 
                        var  html2 = '' +
                             '<tr class="trackLog activeTrack trackLogWrite" data-stop-id ="' + response.data[key].id + '"  >' +
-                            '<td class="">' +
-                            '<span class="ng-binding"></span>' +
-                            '<p class="projecttask"> - ' + response.data[key].project.project_name + ' - ' + response.data[key].task.task_titly + '</p>' +
-                            '</td>' +
-                            '<td class="text-right">' +
-                            '<h3 id="timeTrackSegmentDuration" style="margin: 7px 0px ">' + duration + '</h3>' +
-                            '<p class="project" >' + moment(response.data[key].start, "YYYY-MM-DD hh:mm:ss").format('HH:mm') + ' - --:--</p>' +
-                            '</td>' +
-                            '<td class="text-right table-cell-actions">' +
-                            '<div class="btn-group">' +
-                            '<a href="#" class="btn btn-danger" id="stopTrack" >' +
-                            '<span class="glyphicon glyphicon-stop"></span>' +
-                            '</a>' +
+                                '<td class="">' +
+                                    '<span class="ng-binding"></span>' +
+                                    '<p class="projecttask"> - ' + response.data[key].project.project_name + ' - ' + response.data[key].task.task_titly + '</p>' +
+                                '</td>' +
+                                '<td class="text-right">' +
+                                    '<h3 id="timeTrackSegmentDuration" style="margin: 7px 0px ">' + duration + '</h3>' +
+                                    '<p class="project" >' + moment(response.data[key].start, "YYYY-MM-DD hh:mm:ss").format('HH:mm') + ' - --:--</p>' +
+                                '</td>' +
+                                '<td class="text-right table-cell-actions">' +
+                                    '<div class="btn-group">' +
+                                        '<a href="#" class="btn btn-danger" id="stopTrack" >' +
+                                        '<span class="glyphicon glyphicon-stop"></span>' +
+                                        '</a>' +
 
-                            '<form id="stop-form" action="/create/timelog/" method="POST" style="display: none;">' +
-                            '<input type="hidden" name="_token" id="csrf-token" value="' + $('#conteiner').data('token') + '" />' +
-                            '<input type="hidden" name="id" value="' + response.data[key].id + '">' +
-                            '</form>' +
-                            '</div>' +
-                            '</td>' +
+                                        '<form id="stop-form" action="/create/timelog/" method="POST" style="display: none;">' +
+                                            '<input type="hidden" name="_token" id="csrf-token" value="' + $('#conteiner').data('token') + '" />' +
+                                            '<input type="hidden" name="id" value="' + response.data[key].id + '">' +
+                                        '</form>' +
+                                    '</div>' +
+                                '</td>' +
                             '</tr>';
 
                             $('#add-' + id).find('table').append(html2);
 
+                            var formFinish = '' +
+                                '<form id="stop-form-track" action="/create/timelog/" method="POST" style="display: none;">' +
+                                    '<input type="hidden" name="_token" id="csrf-token" value="' + $('#conteiner').data('token') + '" />' +
+                                    '<input type="hidden" name="id" value="' + response.data[key].id + '">' +
+                                '</form>';
+
+                            $('#track-' + response.data[key].track_id).find('.addTrackFinishForm').html(formFinish);
+
+                            $('#track-' + response.data[key].track_id).find('#startTrack').hide();
+                            $('#track-' + response.data[key].track_id).find('#stopTrack2').show();
+
+
+
+
                             seconds = duration.slice(6,7) == 0 ? duration.slice(7) : duration.slice(6);
                                 minutes = duration.slice(3,4) == 0 ? duration.slice(4,5) : duration.slice(3,5);
                                 hours = duration.slice(1,2) == 0 ? duration.slice(1,2) : duration.slice(0,2);
-                            console.log(seconds + '***' + minutes +'*****'+ hours + '*****' +  duration );
-                            timer();
-                        });
 
+                            if (!t) {
+                                timer();
+                            }
+                        });
                     }
                 };
 
@@ -583,7 +614,7 @@ $(document).ready(function(){
         });
     };
 
-    function showStartLogBlock(time, id, track_id, project_name,  task_title, e)
+   /* function showStartLogBlock(time, id, track_id, project_name,  task_title, e)
     {
         var html = '' +
             '<tr class="trackLog activeTrack trackLogWrite" data-stop-id ="' + track_id + '"  >' +
@@ -611,7 +642,7 @@ $(document).ready(function(){
 
 
         showTimeLog(e, html);
-    }
+    }*/
 
 
     $(document).on('click' , '.hideTimelog',  function(e){
@@ -637,6 +668,15 @@ $(document).ready(function(){
         result += ":" + (seconds  < 10 ? "0" + seconds : seconds);
         return result;
     }
+
+
+
+    //cockies
+
+    if(getCookie('logTrackActiveLogId')){
+        timer();
+    }
+    // ( document.cookie );
 
 
 
@@ -930,6 +970,21 @@ function getServerTime() {
         console.log(response.data);
         return response.data;
     });
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return false;
 }
 
 var Main = {
