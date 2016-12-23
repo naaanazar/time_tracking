@@ -3,11 +3,11 @@
 @section('content')
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
 
-    <div class="modal fade" id="delete-user" role="dialog">
+    <div class="modal fade" id="delete-track" role="dialog">
         <div class="modal-dialog"  >
             <!-- Modal content-->
             <div class="modal-content">
-                <div id="modalConfirmDeleteUser"></div>
+                <div id="modalConfirmDeleteTrack"></div>
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
                                 <th width="130px">Project</th>
                                 <th>Task</th>
                                 <!--  <th>User</th> -->
-                                <th>Approw</th>
+                                <th>Approve</th>
                                <!--  <th>Date Start</th>
                                 <th>Date Finish</th>-->
                                 <th>Duration</th>
@@ -45,7 +45,7 @@
                                 <th>Billable</th>
                                 <th>Cost</th>
                                 @if ($status == 'HR Manager' || $status == 'Admin')
-                                    <th style="min-width: 140px; width: 140px;" class="center">Action</th>
+                                    <th style="min-width:250px; width: 250px;" class="center">Action</th>
                                 @endif
                             </tr>
                             </thead>
@@ -54,14 +54,14 @@
                                 <th class="thFoot" width="130px">Project</th>
                                 <th class="thFoot" >Task</th>
                                <!-- <th class="thFoot" >User</th>-->
-                                <th class="thFoot" >Approw</th>
+                                <th class="thFoot" >Approv</th>
                               <!--  <th class="thFoot" >Date Start</th>
                                 <th class="thFoot" >Date Finish</th>-->
                                 <th class="thFoot" >Duration</th>
                                 <th class="thFoot" >total_time</th>
                                 <th class="thFoot" >Billable</th>
                                 <th class="thFoot" >Cost</th>
-                            @if ($status == 'HR Manager' || $status == 'Admin')
+                                @if ($status == 'Lead' || $status == 'Admin' || $status == 'Supervisor')
                                     <th  class="removeSelect">Action</th>
                                 @endif
 
@@ -69,25 +69,33 @@
                             </tfoot>
                             <tbody>
 
-                            @if (isset($track))
-                                @foreach( $users as $user )
+                            @if (isset($tracks))
+                                @foreach( $tracks as $key )
                                     <tr class="odd gradeX">
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->team_name ? $user->team_name : '' }}</td>
-                                        <td  style="text-align: center" class="center">{{ $user->hourly_rate }}</td>
-                                        <td>{{ $user->employe }}</td>
-                                        <td style="text-align: center">{{ $user->created_at }}</td>
+                                        <td>{{ $key->project->project_name }}</td>
+                                        <td>{{ $key->task->task_titly }}</td>
+                                        <td>{{ $key->approve == 1 ? 'Yes' : '-' }}</td>
+                                        <td>{{ $key->duration ==null ? '-' : date('H:i',  mktime(0,$key->duration)) }}</td>
+                                        <td>{{ $key->total_time ==null ? '-' : date('H:i',  mktime(0,$key->total_time)) }}</td>
+                                        <td>{{ $key->billable_time == 1 ? 'Yes' : '-' }}</td>
+                                        <td>{{ $key->additional_cost }}</td>
 
-                                        @if ($status == 'HR Manager' || $status == 'Admin')
+                                        @if ($status == 'Lead' || $status == 'Admin' || $status == 'Supervisor')
                                             <td>
-                                                @if ($status == 'Admin' ||
-                                                 ($status == 'HR Manager' &&
-                                                 ($user->employe == "Developer" || $user->employe == "QA Engineer" || $user->employe == "Lead")))
-                                                    <a href="/user/update/{{ $user->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
-                                                    <button type="button" class="btn btn-danger  deleteUser" data-url="/user/delete/{{ $user->id }}" data-element="{{ $user->name }}">
-                                                        <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
+                                                @if($key->approve == 0)
+                                                <button  type="button" class="btn btn-success approvTrack" data-url="/trask/approve/{{ $key->id }}" data-element="{{ $key->project->project_name . '-' . $key->task->task_titly}}">
+                                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Approve
+                                                </button>
                                                 @endif
+                                                @if($key->approve == 1)
+                                                    <button  type="button" class="btn btn-warning  rejectTrack" data-url="/trask/reject/{{ $key->id }}" data-element="{{ $key->project->project_name . '-' . $key->task->task_titly}}">
+                                                        &nbsp&nbsp<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Reject &nbsp
+                                                    </button>
+                                                @endif
+
+                                                <a href="/track/update/{{ $key->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
+                                                    <button type="button" class="btn btn-danger deleteTrack" data-url="/track/delete/{{ $key->id }}" data-element="{{ $key->project->project_name . '-' . $key->task->task_titly}}">
+                                                        <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
                                             </td>
                                         @endif
                                     </tr>

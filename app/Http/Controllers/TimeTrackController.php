@@ -29,8 +29,13 @@ class TimeTrackController extends Controller
         $task = new Task();
 
         if (!$date) {
-            $date =  date('d-m-Y');
+            if (isset($_COOKIE['SetDateTracking'])){
+                $date = $_COOKIE['SetDateTracking'];
+            } else {
+                $date = date('d-m-Y');
+            }
         }
+        setcookie('SetDateTracking', $date, time() + (86400 * 30), "/");
 
         $tracks = TimeTrack::with('task', 'project')
             ->where('track_date', '=', date('Y-m-d', strtotime($date)))
@@ -89,8 +94,13 @@ class TimeTrackController extends Controller
         $task = new Task();
 
         if (!$date) {
-            $date =  date('d-m-Y');
+            if (isset($_COOKIE['SetDateTracking'])){
+                $date = $_COOKIE['SetDateTracking'];
+            } else {
+                $date = date('d-m-Y');
+            }
         }
+        setcookie('SetDateTracking', $date, time() + (86400 * 30), "/");
 
         $tracks = TimeTrack::with('task', 'project')
             ->where('track_date', '=', date('Y-m-d', strtotime($date)))
@@ -122,7 +132,11 @@ class TimeTrackController extends Controller
 
             TimeTrack::where('id', '=', $track_id)->update( $data );
 
-            return redirect('/trecking');
+            if (isset($_COOKIE['SetDateTracking'])){
+                return redirect('/trecking/' . $_COOKIE['SetDateTracking']);
+            }
+
+            return redirect('/trecking/');
         }
 
         if( in_array(Auth::user()->employe, $this->users ) ) {
@@ -159,7 +173,7 @@ class TimeTrackController extends Controller
     {
         TimeTrack::where('id', '=', $id)->delete();
 
-        return redirect('/trecking');
+        return back();
     }
 
     /*
@@ -167,7 +181,8 @@ class TimeTrackController extends Controller
      * */
     public function all_track()
     {
-        $tasks = Task::with('project', 'track', 'user')->get();
+        //$tracks = Task::with('project', 'track', 'user')->get();
+        $tracks = TimeTrack::with('task', 'project')->get();
 
         return view('time_track.time_tracks_all', compact('tracks'));
     }

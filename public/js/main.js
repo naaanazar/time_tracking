@@ -929,6 +929,38 @@ $(document).ready(function(){
         Main.displayModal('#delete-task', delUrl,  massage, '#modalConfirmDeleteTask');
     });
 
+    $(document).on( "click", ".deleteTrack", function(e) {
+        e.preventDefault();
+        console.log('11')
+    //    e.stopImmediatePropagation();
+        var delUrl = $(e.target).data('url');
+        var element = $(e.target).data('element');
+        var massage = 'Do you want to approve track <strong> ' + element + '</strong>?'
+
+        Main.displayModal('#delete-track', delUrl,  massage, '#modalConfirmDeleteTrack');
+    });
+
+
+    $(document).on( "click", ".approvTrack", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        var delUrl = $(e.target).data('url');
+        var element = $(e.target).data('element');
+        var massage = 'Do you want to approve track <strong> ' + element + '</strong>?'
+
+        Main.displayModalApprove('#delete-track', delUrl,  massage, '#modalConfirmDeleteTrack');
+    });
+
+    $(document).on( "click", ".rejectTrack", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        var delUrl = $(e.target).data('url');
+        var element = $(e.target).data('element');
+        var massage = 'Do you want to reject track <strong> ' + element + '</strong>?'
+
+        Main.displayModalReject('#delete-track', delUrl,  massage, '#modalConfirmDeleteTrack');
+    });
+
 
 
     $(document).on("change", "#CompanyTaskId", function () {
@@ -1001,6 +1033,40 @@ var Main = {
                 '<a href="' + delUrl + '" type="button" class="btn btn-danger" >Delete</a>' +
                 '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
                 '</div>';
+
+        $(appendContainer).html(htmlDelete)
+        $(idModal).modal('toggle');
+    },
+    displayModalApprove: function(idModal, delUrl, massage, appendContainer) {
+        var htmlDelete = '' +
+            '<div class="modal-header">' +
+            '<button type="button" class="close" data-dismiss="modal">&times;</button>' +
+            '<h4 class="modal-title">Approve Confirmation</h4>' +
+            '</div>' +
+            '<div class="modal-body">' +
+            '<p>' + massage + '</p>' +
+            '</div>' +
+            '<div class="modal-footer">' +
+            '<a href="' + delUrl + '" type="button" class="btn btn-success" >Approve</a>' +
+            '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
+            '</div>';
+
+        $(appendContainer).html(htmlDelete)
+        $(idModal).modal('toggle');
+    },
+    displayModalReject: function(idModal, delUrl, massage, appendContainer) {
+        var htmlDelete = '' +
+            '<div class="modal-header">' +
+            '<button type="button" class="close" data-dismiss="modal">&times;</button>' +
+            '<h4 class="modal-title">Reject Confirmation</h4>' +
+            '</div>' +
+            '<div class="modal-body">' +
+            '<p>' + massage + '</p>' +
+            '</div>' +
+            '<div class="modal-footer">' +
+            '<a href="' + delUrl + '" type="button" class="btn btn-warning" >Reject</a>' +
+            '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
+            '</div>';
 
         $(appendContainer).html(htmlDelete)
         $(idModal).modal('toggle');
