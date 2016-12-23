@@ -184,7 +184,7 @@ class TimeTrackController extends Controller
     }
 
     /*
-     *
+     * reject task
      * */
     public function rejectTrask( $id )
     {
