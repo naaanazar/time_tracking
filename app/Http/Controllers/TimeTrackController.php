@@ -193,19 +193,23 @@ class TimeTrackController extends Controller
      * */
     public function create_time_log( $id = false )
     {
+
+
         $data =  Input::all();
         if( isset($data['id'])) {
-
-            $data['finish'] = date('Y-m-d H:i:s');
-                unset($data['_token']);
-            
-           ( new TimeLog() )->totalTime($data);
+            $this->trackFinish($data['id']);
 
             return back();
-
         }
 
+
+
         if( Input::all() == true ) {
+
+            if(isset($_COOKIE['logTrackActiveLogId'])){
+                $this->trackFinish($_COOKIE['logTrackActiveLogId']);
+            }
+
             $start =  Input::all();
             $start['start'] = date('Y-m-d H:i:s');
 
@@ -216,12 +220,30 @@ class TimeTrackController extends Controller
                 ->limit(1)
                 ->get();
 
+
+
+            setcookie('logTrackActiveStart', $start["start"], time() + (86400 * 30), "/");
+            setcookie('logTrackActiveLogId', $timeLog[0]->id, time() + (86400 * 30), "/");
+            setcookie('logTrackActiveTrackId', $start["track_id"], time() + (86400 * 30), "/");
+
             return response()->json(['data' => (object)$timeLog]);
         }
 
         return false;
     }
 
+    private function trackFinish($id)
+    {
+        $data['finish'] = date('Y-m-d H:i:s');
+        $data['id'] = $id;
+
+
+        ( new TimeLog() )->totalTime($data);
+
+        setcookie("logTrackActiveStart", "", time()-10, "/");
+        setcookie("logTrackActiveTrackId", "", time()-10, "/");
+        setcookie("logTrackActiveLogId", "", time()-10, "/");
+    }
     /*
      * delete time log
      * */
