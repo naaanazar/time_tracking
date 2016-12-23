@@ -568,6 +568,28 @@ class TimeManageController extends Controller
     }
 
     /*
+     * finish task
+     * */
+    public function taskDone( $id )
+    {
+        Task::where('id', '=', $id)
+            ->update(['done' => 1 ]);
+
+        return back();
+    }
+
+    /*
+     * again return task to work
+     * */
+    public function taskReturnToWork( $id )
+    {
+        Task::where('id', '=', $id)
+            ->update(['done' => 0 ]);
+
+        return back();
+    }
+
+    /*
      * get team on project id
      *
      * */
@@ -693,5 +715,14 @@ class TimeManageController extends Controller
         $this->validate($request, [
             'team_name' => 'required|unique:teams|min:2|max:30'
         ]);
+    }
+
+    /*
+     * logout
+     * */
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
     }
 }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Дек 23 2016 г., 10:52
+-- Время создания: Дек 23 2016 г., 13:26
 -- Версия сервера: 5.6.26
 -- Версия PHP: 5.6.12
 
@@ -234,14 +234,14 @@ CREATE TABLE IF NOT EXISTS `time_track` (
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `task_id` (`task_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 
 --
 -- Дамп данных таблицы `time_track`
 --
 
 INSERT INTO `time_track` (`id`, `approve`, `project_id`, `task_id`, `track_date`, `date_start`, `date_finish`, `duration`, `billable_time`, `description`, `additional_cost`, `total_time`, `updated_at`, `created_at`) VALUES
-(5, 0, 19, 10, NULL, '2016-12-14 08:00:00', '2016-12-14 18:00:00', 36000, 0, 'tertr retr etret r', 50, NULL, '2016-12-14 15:11:28', '2016-12-14 15:11:28'),
+(5, 1, 19, 10, NULL, '2016-12-14 08:00:00', '2016-12-14 18:00:00', 36000, 0, 'tertr retr etret r', 50, NULL, '2016-12-23 09:32:21', '2016-12-14 15:11:28'),
 (6, 0, 19, 10, NULL, '2016-12-14 18:00:00', '2016-12-14 20:00:00', 7200, 0, 'sasds sad asdas d', 50, NULL, '2016-12-14 15:12:37', '2016-12-14 15:12:37'),
 (7, 0, 19, 10, NULL, '2016-12-14 08:00:00', '2016-12-14 10:00:00', 7200, 1, 'sdsad ', 50, NULL, '2016-12-14 15:17:07', '2016-12-14 15:17:07'),
 (16, 0, 19, 10, '2016-12-19', '2016-12-18 23:00:00', '2016-12-19 00:00:00', NULL, 1, 'asdasd', 12, NULL, '2016-12-19 10:52:05', '2016-12-19 10:52:05'),

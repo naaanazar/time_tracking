@@ -199,12 +199,34 @@ class TimeTrackController extends Controller
     }
 
     /*
-     *
+     * reject task
      * */
     public function rejectTrask( $id )
     {
         TimeTrack::where('id', '=', $id)
             ->update([ 'approve' => 0 ]);
+
+        return back();
+    }
+
+    /*
+     * finish track
+     * */
+    public function trackDone( $id )
+    {
+        TimeTrack::where('id', '=', $id)
+            ->update(['done' => 1 ]);
+
+        return back();
+    }
+
+    /*
+     * again return track to work
+     * */
+    public function trackReturnToWork( $id )
+    {
+        TimeTrack::where('id', '=', $id)
+            ->update(['done' => 0 ]);
 
         return back();
     }
@@ -281,6 +303,7 @@ class TimeTrackController extends Controller
         setcookie("logTrackActiveTrackId", "", time()-10, "/");
         setcookie("logTrackActiveLogId", "", time()-10, "/");
     }
+
     /*
      * delete time log
      * */
