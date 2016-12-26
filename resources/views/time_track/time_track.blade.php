@@ -278,6 +278,9 @@
                             <td class="text-right table-cell-actions">
                                 <div class="btn-group">
                                     <span class="stop-start-button">
+                                         <button class="btn btn-success" id="startTrack" style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'display:none' : '' ?>" >
+                                             <span class="glyphicon glyphicon-ok"></span> Done
+                                         </button>
                                         <button class="btn btn-default" id="startTrack" style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'display:none' : '' ?>" >
                                             <span class="glyphicon glyphicon-play"></span>
                                         </button>
