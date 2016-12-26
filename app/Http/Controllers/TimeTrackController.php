@@ -319,7 +319,7 @@ class TimeTrackController extends Controller
 
         (new TimeLog())->totalTimeTrack( $traskId['attributes']['track_id'] );
 
-        return redirect('/trecking');
+        return back();
     }
 
     public function getTasks($project_id)

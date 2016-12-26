@@ -16,7 +16,8 @@
 
     <div id="conteiner" class="container" data-date="<?= isset($date)? $date : '' ?>"
          data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}"
-         data-token="{{ Session::token() }}">
+         data-token="{{ Session::token() }}"
+            data-log-active = "<?= isset($_COOKIE['logTrackActiveLogId']) ? $_COOKIE['logTrackActiveLogId'] : ''?>">
 
         <div class="row" style="margin-top: 20px">
             <div class="col-md-2 btn-toolbar" style="vertical-align: inherit">

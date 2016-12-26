@@ -73,17 +73,17 @@ $(document).ready(function(){
     $(window).load(function(){
 
         if (t) {
-            var idActiveLog = $conta
-            $.get('/trecking-getTimeTrack', function (date) {
+            var idActiveLog = $('#conteiner').data('log-active');
+            $.get('/get/timestart/' + idActiveLog, function (date) {
                 console.log('blablablablabla');
-                var duration = SecondsTohhmmss((moment(date.data, "YYYY-MM-DD hh:mm:ss") - moment(response.data[key].start, "YYYY-MM-DD hh:mm:ss")) / 1000)
+                console.log(date.data.now);
+                var duration = SecondsTohhmmss((moment(date.data.now, "YYYY-MM-DD hh:mm:ss") - moment(date.data.start, "YYYY-MM-DD hh:mm:ss")) / 1000);
+                console.log(duration);
+
+                seconds = duration.slice(6,7) == 0 ? duration.slice(7) : duration.slice(6);
+                minutes = duration.slice(3,4) == 0 ? duration.slice(4,5) : duration.slice(3,5);
+                hours = duration.slice(1,2) == 0 ? duration.slice(1,2) : duration.slice(0,2);
             });
-
-            console.log('0000000000000');
-
-            seconds = duration.slice(6,7) == 0 ? duration.slice(7) : duration.slice(6);
-            minutes = duration.slice(3,4) == 0 ? duration.slice(4,5) : duration.slice(3,5);
-            hours = duration.slice(1,2) == 0 ? duration.slice(1,2) : duration.slice(0,2);
         }
 
 
@@ -549,8 +549,9 @@ $(document).ready(function(){
                             '</td>' +
                             '<td class="text-right table-cell-actions">' +
                                 '<div class="btn-group">' +
-                                    '<button class="btn btn-danger" id="stopTrack">' +
-                                        '<span class="glyphicon glyphicon-trash"></span>' +
+                                    '<button type="button" class="btn btn-default deleteLog"' +
+                                        'data-url="/log/delete/' + response.data[key].id + '" data-element="' + SecondsTohhmmss((moment(response.data[key].finish, "YYYY-MM-DD hh:mm:ss") - moment(response.data[key].start, "YYYY-MM-DD hh:mm:ss")) / 1000) + '">' +
+                                        '<span class="glyphicon glyphicon-trash span_no_event" aria-hidden="true"></span>' +
                                     '</button>' +
                                 '</div>' +
                             '</td>' +
@@ -951,7 +952,18 @@ $(document).ready(function(){
     //    e.stopImmediatePropagation();
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
-        var massage = 'Do you want to approve track <strong> ' + element + '</strong>?'
+        var massage = 'Do you want to remove track <strong> ' + element + '</strong>?'
+
+        Main.displayModal('#delete-track', delUrl,  massage, '#modalConfirmDeleteTrack');
+    });
+
+    $(document).on( "click", ".deleteLog", function(e) {
+        e.preventDefault();
+        console.log('11')
+        //    e.stopImmediatePropagation();
+        var delUrl = $(e.target).data('url');
+        var element = $(e.target).data('element');
+        var massage = 'Do you want to remove log <strong> ' + element + '</strong>?'
 
         Main.displayModal('#delete-track', delUrl,  massage, '#modalConfirmDeleteTrack');
     });
