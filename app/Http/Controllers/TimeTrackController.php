@@ -350,6 +350,20 @@ class TimeTrackController extends Controller
         ]);
     }
 
+    /*
+     * get start time from log & now date by ajax
+     * */
+    public function getTimeStartLogById( $id )
+    {
+        $date['start'] = TimeLog::where('id', '=', $id)
+            ->select('start')
+            ->first()['attributes']['start'];
+
+        $date['now'] = date('Y-m-d H:i:s');
+
+        return response()->json(['data' => $date]);
+    }
+
     public function getTimeNow(){
         $data = date('Y-m-d H:i:s');
 
@@ -359,11 +373,17 @@ class TimeTrackController extends Controller
     /*
      * test action
      * */
-    public function test()
+    public function test($id = 49)
     {
-        $trask = TimeTrack::where('date_start', '=', '2016-12-14')
+        $trasks = Task::where('assign_to', '=', $id)
+            ->with('client', 'project', 'user', 'track')
             ->get();
 
-        echo '<pre>'; var_dump($trask); echo '</pre>';
+        $objectTask = new Task();
+
+        foreach( $trasks as $key => $trask ) {
+            
+        }
+        //echo '<pre>'; var_dump($trasks[0]['user']); echo '</pre>';
     }
 }

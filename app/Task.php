@@ -96,7 +96,7 @@ class Task extends Model
         return $date = strtotime($date['date_finish']) - strtotime($date['date_start']);
     }
 
-    protected function time_diff($second)
+    public function time_diff($second)
     {
         $difference = bcmod($second, 3600);
         $result['hour'] = (int)($second/3600);
