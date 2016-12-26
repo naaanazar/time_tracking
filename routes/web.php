@@ -92,8 +92,9 @@ Route::group(['middleware' => ['permision']], function () {
     // forbidden
     Route::get('/register', 'TimeManageController@index');
     Route::get('/user/logout', 'TimeManageController@logout');
+
     //testing
-    Route::get('/test', 'TimeTrackController@getTimeStartLogById');
+    Route::get('/test', 'TimeTrackController@test');
 });
 
 // Auth

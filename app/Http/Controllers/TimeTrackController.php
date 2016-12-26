@@ -380,11 +380,8 @@ class TimeTrackController extends Controller
 
         $objectTask = new Task();
 
-        foreach( $trasks[0]['track'] as $key => $trask) {
-            $trasks[0]['track'][$key]['total'] = $objectTask->time_diff($trask['total_time']);
-        }
-        foreach( $trasks[0]['user']['original'] as $key => $user ) {
-            echo '<pre>'; var_dump($key); echo '</pre>';
+        foreach( $trasks as $key => $trask ) {
+            
         }
         //echo '<pre>'; var_dump($trasks[0]['user']); echo '</pre>';
     }
