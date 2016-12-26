@@ -374,15 +374,19 @@ class TimeTrackController extends Controller
      * */
     public function test($id = 49)
     {
-        $trasks = Task::where('assign_to', '=', $id)
+        $tasks = Task::where('assign_to', '=', $id)
             ->with('client', 'project', 'user', 'track')
             ->get();
 
         $objectTask = new Task();
 
-        foreach( $trasks as $key => $trask ) {
-            
+        foreach( $tasks as $key => $task ) {
+            $total_time = 0;
+            foreach( $task['relations']['track'] as $log) {
+                $total_time += $log['attributes']['total_time'];
+            }
+            $tasks[$key]['total'] = $total_time; // in second
+            $tasks[$key]['value'] = $total_time*$tasks[$key]['relations']['user']['attributes']['hourly_rate'];
         }
-        //echo '<pre>'; var_dump($trasks[0]['user']); echo '</pre>';
     }
 }
