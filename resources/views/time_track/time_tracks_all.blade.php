@@ -44,7 +44,8 @@
                                 <th>total_time</th>
                                 <th>Billable</th>
                                 <th>Cost</th>
-                                @if ($status == 'HR Manager' || $status == 'Admin')
+                                <th>Status</th>
+                                @if ($status == 'Lead' || $status == 'Admin' || $status == 'Supervisor')
                                     <th style="min-width:250px; width: 250px;" class="center">Action</th>
                                 @endif
                             </tr>
@@ -61,6 +62,7 @@
                                 <th class="thFoot" >total_time</th>
                                 <th class="thFoot" >Billable</th>
                                 <th class="thFoot" >Cost</th>
+                                <th>Status</th>
                                 @if ($status == 'Lead' || $status == 'Admin' || $status == 'Supervisor')
                                     <th  class="removeSelect">Action</th>
                                 @endif
@@ -79,6 +81,7 @@
                                         <td>{{ $key->total_time ==null ? '-' : date('H:i',  mktime(0,$key->total_time)) }}</td>
                                         <td>{{ $key->billable_time == 1 ? 'Yes' : '-' }}</td>
                                         <td>{{ $key->additional_cost }}</td>
+                                        <td>{{ $key->done == 1 ? 'Done' : 'In proccess' }}</td>
 
                                         @if ($status == 'Lead' || $status == 'Admin' || $status == 'Supervisor')
                                             <td>
