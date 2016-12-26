@@ -360,6 +360,9 @@ class TimeTrackController extends Controller
      * */
     public function test()
     {
-        $this->deleteTraskLog('35');
+        $trask = TimeTrack::where('date_start', '=', '2016-12-14')
+            ->get();
+
+        echo '<pre>'; var_dump($trask); echo '</pre>';
     }
 }
