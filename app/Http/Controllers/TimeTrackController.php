@@ -352,14 +352,14 @@ class TimeTrackController extends Controller
     /*
      * get start time from log & now date by ajax
      * */
-    public function getTimeStartLogById( $id = 5 )
+    public function getTimeStartLogById( $id )
     {
         $date['start'] = TimeLog::where('id', '=', $id)
             ->select('start')
             ->first()['attributes']['start'];
 
         $date['now'] = date('Y-m-d H:i:s');
-        
+
         return response()->json(['data' => $date]);
     }
 
