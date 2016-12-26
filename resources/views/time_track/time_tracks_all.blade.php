@@ -71,7 +71,7 @@
 
                             @if (isset($tracks))
                                 @foreach( $tracks as $key )
-                                    <tr class="odd gradeX">
+                                    <tr class="odd gradeX <?= $key->approve == 1 ? 'done_tr' : ($key->done == 1 ? 'done_tr2' : '')?>">
                                         <td>{{ $key->project->project_name }}</td>
                                         <td>{{ $key->task->task_titly }}</td>
                                         <td>{{ $key->approve == 1 ? 'Yes' : '-' }}</td>
@@ -82,8 +82,10 @@
 
                                         @if ($status == 'Lead' || $status == 'Admin' || $status == 'Supervisor')
                                             <td>
-                                                @if($key->approve == 0)
-                                                <button  type="button" class="btn btn-success approvTrack" data-url="/trask/approve/{{ $key->id }}" data-element="{{ $key->project->project_name . '-' . $key->task->task_titly}}">
+                                                @if($key->approve == 0 )
+                                                <button  type="button" class="btn btn-success approvTrack"
+                                                         <?= $key->done == 0 ? 'disabled' : '' ?>
+                                                         data-url="/trask/approve/{{ $key->id }}" data-element="{{ $key->project->project_name . '-' . $key->task->task_titly}}">
                                                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Approve
                                                 </button>
                                                 @endif

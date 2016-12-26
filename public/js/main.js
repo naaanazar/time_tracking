@@ -72,6 +72,20 @@ $(document).ready(function(){
 
     $(window).load(function(){
 
+        if (t) {
+            var idActiveLog = $conta
+            $.get('/trecking-getTimeTrack', function (date) {
+                console.log('blablablablabla');
+                var duration = SecondsTohhmmss((moment(date.data, "YYYY-MM-DD hh:mm:ss") - moment(response.data[key].start, "YYYY-MM-DD hh:mm:ss")) / 1000)
+            });
+
+            console.log('0000000000000');
+
+            seconds = duration.slice(6,7) == 0 ? duration.slice(7) : duration.slice(6);
+            minutes = duration.slice(3,4) == 0 ? duration.slice(4,5) : duration.slice(3,5);
+            hours = duration.slice(1,2) == 0 ? duration.slice(1,2) : duration.slice(0,2);
+        }
+
 
 
         $(".removeSelect").html('');
@@ -256,7 +270,7 @@ $(document).ready(function(){
         console.log('11');
         if (hasValue("#formTrackStart") || hasValue("#formTrackFinish")){
             // console.log('2');
-            $("#timeDuration").attr('disabled', 'disabled');
+            $("#timeDuration").attr('readonly', 'readonly');
             var dateStringStart = $("#formTrackStart").val();
             //      console.log(moment(dateString, "HH:mm").isValid() + moment(dateString, "HH:mm").format('HH:mm'));
 
@@ -276,7 +290,7 @@ $(document).ready(function(){
 
 
         } else{
-            $("#timeDuration").removeAttr('disabled');
+            $("#timeDuration").removeAttr('readonly');
         }
 
         if(dFinish && dStart){
@@ -290,7 +304,7 @@ $(document).ready(function(){
         console.log('11');
         if (hasValue("#formTrackStart") || hasValue("#formTrackFinish")){
             // console.log('2');
-            $("#timeDuration").attr('disabled', 'disabled');
+            $("#timeDuration").attr('readonly', 'readonly');
             var dateStringFinish = $("#formTrackFinish").val();
             //      console.log(moment(dateString, "HH:mm").isValid() + moment(dateString, "HH:mm").format('HH:mm'));
 
@@ -312,7 +326,7 @@ $(document).ready(function(){
 
 
         } else{
-            $("#timeDuration").removeAttr('disabled');
+            $("#timeDuration").removeAttr('readonly');
         }
 
 
@@ -409,6 +423,8 @@ $(document).ready(function(){
      clear = document.getElementById('clear'),*/
      seconds = 0, minutes = 0, hours = 0,
      t;
+
+
 
      function add(timeSet) {
 
@@ -943,7 +959,7 @@ $(document).ready(function(){
 
     $(document).on( "click", ".approvTrack", function(e) {
         e.preventDefault();
-        e.stopImmediatePropagation();
+
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
         var massage = 'Do you want to approve track <strong> ' + element + '</strong>?'
@@ -953,7 +969,7 @@ $(document).ready(function(){
 
     $(document).on( "click", ".rejectTrack", function(e) {
         e.preventDefault();
-        e.stopImmediatePropagation();
+
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
         var massage = 'Do you want to reject track <strong> ' + element + '</strong>?'
@@ -1021,6 +1037,8 @@ function getCookie(cname) {
 
 var Main = {
     displayModal: function(idModal, delUrl, massage, appendContainer) {
+
+        console.log('2222');
         var htmlDelete = '' +
             '<div class="modal-header">' +
                 '<button type="button" class="close" data-dismiss="modal">&times;</button>' +

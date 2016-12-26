@@ -38,6 +38,10 @@ body {
     margin-bottom: 60px!important;
 }
 
+.span_no_event {
+    pointer-events: none;
+}
+
 .datetimepicker {
     background-color: white!important;
 }
@@ -164,7 +168,12 @@ thead {
 
 
 .done_tr{
-    background-color: #c7ff6a !important;
+    background-color: #dcffd1 !important;
+}
+
+.done_tr2{
+    background-color: #dff8ff !important;
+
 }
 
 
@@ -279,7 +288,7 @@ tr.shown td.details-control {
 
 .table-striped > tbody > tr:nth-of-type(odd):hover,
 .table-striped > tbody > tr:nth-of-type(even):hover {
-    background-color: #EAEAEA;
+    background-color: #EAEAEA!important;
 }
 .table-striped > tbody > tr:nth-of-type(odd),
 .table-striped > tbody > tr:nth-of-type(even){
