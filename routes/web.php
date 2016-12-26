@@ -87,7 +87,7 @@ Route::group(['middleware' => ['permision']], function () {
     Route::get('/trask/start/{id}', 'TimeTrackController@trackReturnToWork')->where(['id' => '[0-9]+']);
 
     // for ajax
-    Route::get('/get/timestart', 'TimeTrackController@getTimeStartLogById')
+    Route::get('/get/timestart', 'TimeTrackController@getTimeStartLogById');
 
     // forbidden
     Route::get('/register', 'TimeManageController@index');
