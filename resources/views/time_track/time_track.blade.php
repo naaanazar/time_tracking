@@ -241,7 +241,7 @@
                         }
                         ?>
 
-                        <tr class="trackLog trackLogFirst" id="track-<?= $key->id ?>"
+                        <tr class="trackLog trackLogFirst <?=? 'done_tr' : ''?>" id="track-<?= $key->id ?>"
                             data-id ="<?= $key->id ?>"
                             data-project_name ="<?= $key->project->project_name  ?>"
                             data-project_id ="<?= $key->project->id  ?>"
@@ -278,9 +278,12 @@
                             <td class="text-right table-cell-actions">
                                 <div class="btn-group">
                                     <span class="stop-start-button">
-                                         <button class="btn btn-success" id="startTrack" style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'display:none' : '' ?>" >
+                                         <a  href='/trask/done/<?= $key->id ?>'  class="btn btn-success" id="doneTrack" style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'display:none' : '' ?>" >
                                              <span class="glyphicon glyphicon-ok"></span> Done
-                                         </button>
+                                         </a>
+                                        <a  href='/trask/start/<?= $key->id ?>'  class="btn btn-success" id="doneReject" style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'display:none' : '' ?>" >
+                                            <span class="glyphicon glyphicon-ok"></span> Done
+                                        </a>
                                         <button class="btn btn-default" id="startTrack" style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'display:none' : '' ?>" >
                                             <span class="glyphicon glyphicon-play"></span>
                                         </button>
