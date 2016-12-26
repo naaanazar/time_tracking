@@ -1,4 +1,4 @@
-﻿@extends('layouts.index_template')
+@extends('layouts.index_template')
 
 @section('content')
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
@@ -16,8 +16,8 @@
 
     <div id="conteiner" class="container" data-date="<?= isset($date)? $date : '' ?>"
          data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}"
-         data-token="{{ Session::token() }}"
-            data-active-track-id="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ?">
+         data-token="{{ Session::token() }}">
+
         <div class="row" style="margin-top: 20px">
             <div class="col-md-2 btn-toolbar" style="vertical-align: inherit">
                 <div id="timeStep5" class="btn-group">
@@ -61,7 +61,7 @@
                                     <option selected disabled>Select project</option>
                                     @if( isset( $track ) )
                                         <option value="{{ $track[0]->project->id }}" selected>{{ $track[0]->project->project_name }}</option>
-                                    @endiftime_track.blade
+                                    @endif
                                     @foreach( $tasks as $task )
                                         <option value="{{ $task->id }}">{{ $task->project_name }}</option>
                                     @endforeach
@@ -244,7 +244,7 @@
                         }
                         ?>
 
-                        <tr class="trackLog trackLogFirst <?= $key->done == 1 ? 'done_tr' : '' ?>" id="track-<?= $key->id ?>"
+                        <tr class="trackLog trackLogFirst <?= $key->approve == 1 ? 'done_tr' : ($key->done == 1 ? 'done_tr2' : '')?>" id="track-<?= $key->id ?>"
                             data-id ="<?= $key->id ?>"
                             data-project_name ="<?= $key->project->project_name  ?>"
                             data-project_id ="<?= $key->project->id  ?>"
