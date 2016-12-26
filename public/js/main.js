@@ -262,9 +262,83 @@ $(document).ready(function(){
     }
 
 
+    function timeDuration(dFinish,  dStart) {
 
+        if (dFinish > dStart) {
+            if (dFinish.getHours() == dStart.getHours && dFinish.getMinutes() == dStart.getMinutes()) {
 
+                $("#timeDuration").val('00:00');
 
+            } else {
+                var duration = dFinish - dStart;
+
+                var hours;
+
+                if (Math.floor(duration / 60000) < 60) {
+                    hours = '00';
+                } else {
+                    var hours = Math.floor(Math.floor(duration / 60000) / 60);
+                    if (hours < 10) {
+                        hours = '0' + hours;
+                    }
+
+                }
+
+                var minuts = Math.floor(duration / 60000) % 60;
+
+                if (minuts < 10) {
+                    minuts = '0' + minuts;
+                }
+
+                $("#timeDuration").val(hours + ':' + minuts);
+                $("#formTrackDuration").val(hours + ':' + minuts);
+
+                console.log(minuts + 'mm' + 'hh' + hours);
+            }
+        } else {
+            $("#timeDuration").val('incorect');
+            $("#formTrackFinish").val($('#formTrackStart').val());
+        }
+    }
+
+    function timeDuration(dFinish,  dStart) {
+
+        if (dFinish > dStart) {
+            if (dFinish.getHours() == dStart.getHours && dFinish.getMinutes() == dStart.getMinutes()) {
+
+                $("#timeDuration").val('00:00');
+
+            } else {
+                var duration = dFinish - dStart;
+
+                var hours;
+
+                if (Math.floor(duration / 60000) < 60) {
+                    hours = '00';
+                } else {
+                    var hours = Math.floor(Math.floor(duration / 60000) / 60);
+                    if (hours < 10) {
+                        hours = '0' + hours;
+                    }
+
+                }
+
+                var minuts = Math.floor(duration / 60000) % 60;
+
+                if (minuts < 10) {
+                    minuts = '0' + minuts;
+                }
+
+                $("#timeDuration").val(hours + ':' + minuts);
+                $("#formTrackDuration").val(hours + ':' + minuts);
+
+                console.log(minuts + 'mm' + 'hh' + hours);
+            }
+        } else {
+            $("#timeDuration").val('incorect');
+            $("#formTrackFinish").val($('#formTrackStart').val());
+        }
+    }
 
     function trackStart(){
         console.log('11');
@@ -333,10 +407,12 @@ $(document).ready(function(){
 
         if(dFinish && dStart){
 
-            timeDuration(dFinish,  dStart)
+            timeDuration(dFinish,  dStart);
         }
 
     }
+
+
 
 
     function timeDuration(dFinish,  dStart) {
@@ -443,10 +519,10 @@ $(document).ready(function(){
                  hours++;
              }
          }
-         timeDuration = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
-         $('#timeTrackSegmentDuration').html(timeDuration);
+         var timeDurationSet = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+         $('#timeTrackSegmentDuration').html(timeDurationSet);
 
-         $('.timeTrackSegmentTotalActive').html(SecondsTohhmmss((moment.duration(timeDuration) + (moment.duration($('.timeTrackSegmentTotalActive').data('total'))))/1000));
+         $('.timeTrackSegmentTotalActive').html(SecondsTohhmmss((moment.duration(timeDurationSet) + (moment.duration($('.timeTrackSegmentTotalActive').data('total'))))/1000));
 
          timer();
      }
