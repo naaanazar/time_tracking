@@ -389,6 +389,9 @@ class TimeTrackController extends Controller
      * */
     public function test()
     {
-
+        $projects = Project::where('id', '=', 19)
+            ->with('user', 'task', 'track')
+            ->get();
+        echo '<pre>'; var_dump($projects[0]['original']['hourly_rate']); echo '</pre>';
     }
 }

@@ -33,11 +33,13 @@ class ReportsController extends Controller
 
         foreach( $tasks as $key => $task ) {
             $total_time = 0;
+            $value = 0;
             foreach( $task['relations']['track'] as $log) {
                 $total_time += $log['attributes']['total_time'];
+                $value += $log['attributes']['value'];
             }
             $tasks[$key]['total'] = $objectTask->time_hour($total_time);
-            $tasks[$key]['value'] = $total_time*$tasks[$key]['relations']['user']['attributes']['hourly_rate'];
+            $tasks[$key]['value'] = $value;
         }
 
         return $tasks;
@@ -55,11 +57,16 @@ class ReportsController extends Controller
 
         foreach( $projects as $key => $project ) {
             $totalTime = 0;
+            $value = 0;
             foreach( $project['relations']['track'] as $track ) {
                 $totalTime += $track['attributes']['total_time'];
+                $value += $track['attributes']['value'];
             }
 
-            $projects[ $key ]['value'] = $totalTime * $project['attributes']['hourly_rate'];
+            $projects[ $key ]['value'] = $value;
+            $projects[ $key ]['total_time'] = (new Task())->time_hour($totalTime);
+            $projects[ $key ]['cost'] = (new Task())->time_hour($totalTime) * $projects[ $key ]['original']['hourly_rate'];
+            $projects[ $key ]['economy'] = $projects[ $key ]['value'] - $projects[ $key ]['cost'];
         }
 
         return $projects;

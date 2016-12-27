@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\TimeTrack;
+use App\Task;
 
 class TimeLog extends Model
 {
@@ -69,9 +70,19 @@ class TimeLog extends Model
             $count += $log['attributes']['total_time'];
         }
 
+        $taskId = TimeTrack::where('id', '=', 22)
+            ->with('task')
+            ->first();
+
+        $userHourleRate = Task::where('id', '=', $taskId['original']['task_id'])
+            ->with('user')
+            ->first()['relations']['user']['attributes']['hourly_rate'];
+
+
         TimeTrack::where('id', '=', $id)
             ->update([
-                'total_time' => (int)$count
+                'total_time' => (int)$count,
+                'value' => (new Task())->time_hour((int)$count) * $userHourleRate
             ]);
 
         return;
