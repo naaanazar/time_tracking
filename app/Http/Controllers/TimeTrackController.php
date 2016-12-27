@@ -217,6 +217,13 @@ class TimeTrackController extends Controller
         TimeTrack::where('id', '=', $id)
             ->update(['done' => 1 ]);
 
+        $trackId = TimeTrack::where('id', '=', 5)
+            ->select('task_id')
+            ->first()['attributes']['task_id'];
+
+        Task::where('id', '=', $trackId)
+            ->update(['date_finish' => date('Y-m-d H:i:s')]);
+
         return back();
     }
 
@@ -373,9 +380,10 @@ class TimeTrackController extends Controller
      * daily report
      * $id - task id
      * */
-    public function dailyReport( $id )
+    public function dailyReport( $id, $date )
     {
         $tasks = Task::where('assign_to', '=', $id)
+            ->andWhere('date_finish', '=', $date)
             ->with('client', 'project', 'user', 'track')
             ->get();
 
@@ -396,23 +404,8 @@ class TimeTrackController extends Controller
     /*
      * test action
      * */
-    public function test($id = 49)
+    public function test()
     {
-        $tasks = Task::where('assign_to', '=', $id)
-            ->with('client', 'project', 'user', 'track')
-            ->get();
 
-        $objectTask = new Task();
-
-        foreach( $tasks as $key => $task ) {
-            $total_time = 0;
-            foreach( $task['relations']['track'] as $log) {
-                $total_time += $log['attributes']['total_time'];
-            }
-            $tasks[$key]['total'] = $objectTask->time_hour($total_time); // in second
-            $tasks[$key]['value'] = $total_time*$tasks[$key]['relations']['user']['attributes']['hourly_rate'];
-        }
-
-        return $tasks;
     }
 }
