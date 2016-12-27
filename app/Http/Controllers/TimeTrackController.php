@@ -217,7 +217,7 @@ class TimeTrackController extends Controller
         TimeTrack::where('id', '=', $id)
             ->update(['done' => 1 ]);
 
-        $trackId = TimeTrack::where('id', '=', 5)
+        $trackId = TimeTrack::where('id', '=', $id)
             ->select('task_id')
             ->first()['attributes']['task_id'];
 
@@ -234,6 +234,13 @@ class TimeTrackController extends Controller
     {
         TimeTrack::where('id', '=', $id)
             ->update(['done' => 0 ]);
+
+        $trackId = TimeTrack::where('id', '=', $id)
+            ->select('task_id')
+            ->first()['attributes']['task_id'];
+
+        Task::where('id', '=', $trackId)
+            ->update(['date_finish' => null ]);
 
         return back();
     }
