@@ -19,10 +19,10 @@
                             {{ csrf_field() }}
                                 <div class="control-group row">
                                     <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                        <label class="control-label" for="focusedInput">Team name</label>
+                                        <label class="control-label" for="focusedInput">Team name *</label>
                                     </div>
                                     <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                        <input name="team_name" class="input-xlarge focused my_input" id="focusedInput" autofocus required type="text">
+                                        <input name="team_name" class="input-xlarge focused my_input" id="focusedInput" autofocus required type="text" required />
                                         @if ($errors->has('team_name'))
                                             <span class="help-block">
                                             <strong style="color:#802420">{{ $errors->first('team_name') }}</strong>

@@ -37,7 +37,7 @@
 
                         <div class="control-group row">
                             <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                <label class="control-label" for="AddressId" style="text-align: left;">Address *</label>
+                                <label class="control-label" for="AddressId" style="text-align: left;">Address</label>
                             </div>
 
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
@@ -53,7 +53,7 @@
 
                         <div class="control-group row">
                             <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                <label class="control-label" for="WebsiteId" style="text-align: left;">Website *</label>
+                                <label class="control-label" for="WebsiteId" style="text-align: left;">Website</label>
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                 <input name="website" class="input-xlarge focused my_input" id="WebsiteId"  type="text"
@@ -83,7 +83,7 @@
 
                         <div class="control-group row">
                             <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                <label class="control-label" for="emailClientId" style="text-align: left;">Email</label>
+                                <label class="control-label" for="emailClientId" style="text-align: left;">Email *</label>
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                 <input type="email" name="email" class="input-xlarge focused my_input" id="emailClientId"  required

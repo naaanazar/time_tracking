@@ -675,8 +675,8 @@ class TimeManageController extends Controller
     {
         $this->validate($request, [
             'company_name' => 'required|min:4|max:30',
-            'company_address' => 'required|min:4|max:100',
-            'website' => 'required|string',
+            'company_address' => 'min:4|max:100',
+            'website' => 'string',
             'contact_person' => 'required|min:4|max:30',
             'email' => 'required|unique:Clients|email',
             'phone_number' => 'regex:/[0-9-]+/|max:30'
