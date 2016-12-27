@@ -19,13 +19,12 @@ class ReportsController extends Controller
      * $id - task id
      * $day - day of reports
      * */
-    public function dailyReport( $id, $day )
+    public function dailyReport( $day ) // testing
     {
         $data = date_create($day);
         $data1 = date_modify($data, '+1 day');
 
-        $tasks = Task::where('assign_to', '=', $id)
-            ->where('date_finish', '>', $data)
+        $tasks = Task::where('date_finish', '>', $data)
             ->where('date_finish', '<', $data1)
             ->with('client', 'project', 'user', 'track')
             ->get();
@@ -45,9 +44,31 @@ class ReportsController extends Controller
     }
 
     /*
-     *
+     * project report
      * */
-    public function projectReport()
+    public function projectReport( $dateStart, $dateFinish ) // testing
+    {
+        $projects = Project::where('created_at', '>=', $dateStart)
+            ->where('created_at', '<=', $dateFinish)
+            ->with('user', 'task', 'track')
+            ->get();
+
+        foreach( $projects as $key => $project ) {
+            $totalTime = 0;
+            foreach( $project['relations']['track'] as $track ) {
+                $totalTime += $track['attributes']['total_time'];
+            }
+
+            $projects[ $key ]['value'] = $totalTime * $project['attributes']['hourly_rate'];
+        }
+
+        return $projects;
+    }
+
+    /*
+     * people report
+     * */
+    public function peopleReport( $dateStart, $dateFinish )
     {
 
     }

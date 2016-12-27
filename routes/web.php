@@ -90,8 +90,9 @@ Route::group(['middleware' => ['permision']], function () {
     // ReportsController
 
     // reports
-    Route::get('/reports/daily/{id}/{day}', 'ReportsController@dailyReport')->where(['id' => '[0-9]+']);
-    Route::get('/reports/project', 'ReportsController@projectReport')->where(['id' => '[0-9]+']);
+    Route::get('/reports/daily/{day}', 'ReportsController@dailyReport');
+    Route::get('/reports/project/{dateStart}/{dateFinish}', 'ReportsController@projectReport');
+    Route::get('/reports/people/{dateStart}/{dateFinish}', 'ReportsController@peopleReport');
 
     // for ajax
     Route::get('/get/timestart/{id}', 'TimeTrackController@getTimeStartLogById');
