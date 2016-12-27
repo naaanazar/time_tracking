@@ -74,9 +74,31 @@ class ReportsController extends Controller
 
     /*
      * people report
+     * $userId - id user
      * */
-    public function peopleReport( $dateStart, $dateFinish )
+    public function peopleReport( $dateStart, $dateFinish, $userId )
     {
+        $tasks = Task::where('assign_to', '=', $userId)
+            ->where('date_finish', '>=', $dateStart)
+            ->where('date_finish', '<=', $dateFinish)
+            ->with('project', 'user', 'track')
+            ->get();
 
+        $objectTask = new Task();
+
+        foreach( $tasks as $key => $task ) {
+            $totalTime = 0;
+
+            foreach( $task['relations']['track'] as $track ) {
+                $totalTime += $track['attributes']['total_time'];
+            }
+
+            $totalTime = $objectTask->time_hour($totalTime);
+            $tasks[ $key ]['value'] = $task['relations']['project']['attributes']['hourly_rate'] * $totalTime;
+            $tasks[ $key ]['cost'] = $totalTime * $task['relations']['user']['attributes']['hourly_rate'];
+            $tasks[ $key ]['economy'] = $tasks[ $key ]['value'] - $tasks[ $key ]['cost'];
+        }
+
+        return $tasks;
     }
 }

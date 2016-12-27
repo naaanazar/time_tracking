@@ -389,7 +389,6 @@ class TimeTrackController extends Controller
      * */
     public function test()
     {
-
         echo '<pre>'; var_dump('test'); echo '</pre>';
     }
 }
