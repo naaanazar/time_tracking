@@ -27,8 +27,8 @@
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
-                                    <select name="company_id" class="input-xlarge focused my_input"  id="CompanyNameProjectId" style="height: 42px;" >
-                                        <option selected disabled>Select</option>
+                                    <select name="company_id" class="input-xlarge focused my_input"  id="CompanyNameProjectId" style="height: 42px;" required>
+                                        <option selected disabled value="">Select</option>
                                         @if (isset($client->company_name))
                                         <option value="{{ $client->id }}" selected>{{ $client->company_name }}</option>
                                         @endif

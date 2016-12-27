@@ -26,7 +26,7 @@
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
                                 <input name="company_name" class="input-xlarge focused my_input" id="companeMameId"  autofocus type="text"
-                                        value="<?= isset($client->company_name) ? $client->company_name : ((old('company_name')) ? old('company_name') : '') ?>"/>
+                                        value="<?= isset($client->company_name) ? $client->company_name : ((old('company_name')) ? old('company_name') : '') ?>" required/>
                                 @if ($errors->has('company_name'))
                                     <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('company_name') }}</strong>
@@ -72,7 +72,7 @@
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                 <input name="contact_person" class="input-xlarge focused my_input" id="ContactPersonId"   type="text"
-                                       value="<?= isset($client->contact_person) ? $client->contact_person : ((old('contact_person')) ? old('contact_person') :'') ?>"/>
+                                       value="<?= isset($client->contact_person) ? $client->contact_person : ((old('contact_person')) ? old('contact_person') :'') ?>" required/>
                                 @if ($errors->has('contact_person'))
                                     <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('contact_person') }}</strong>
