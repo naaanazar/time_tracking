@@ -4,8 +4,11 @@
 
     <?php
             if (isset($track)){
-                var_dump($track[0]->date_finish);
-    var_dump(date('Y-m-d', strtotime( $track[0]->date_finish)) - date('Y-m-d',  strtotime($track[0]->date_start))); }
+                $duration = $track[0]->duration;
+                $duration = explode(":", $track[0]->duration);
+                var_dump($duration[0]) ; var_dump((24));
+
+            }
     ?>
 
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
@@ -144,7 +147,10 @@
                             <div class="col-md-2 col-lg-2" style="padding: 0px">
                                <span class="" style="display: inline-block">
                                 <label class = "labelTrack">
-                                    <input type="checkbox" id="nextDay" name="nextDate" <?= isset($track)  ? ($track[0]->date_finish - $track[0]->date_start) : '' ?>> Next Day
+                                    <input type="checkbox" id="nextDay" name="nextDate"
+                                           <?php  (isset( $track)) ? $duration = explode(":", $track[0]->duration) : ''; ?>
+                                    <?= isset($track)  ? (floor((strtotime( $track[0]->date_finish) - strtotime( $track[0]->date_start)) / (60 * 60 * 24)) == 1 ||  $duration[0] >  24 ? 'checked' : '' ) : '' ?>
+                                            > Next Day
                                 </label>
                              </span>
                             </div>
@@ -284,7 +290,16 @@
                                         {{ ($key->total_time == null) ? '00:00:00' : date('H:i:s', strtotime($totalTime)) }}
                                 </h3>
                                 @if ($key->date_start == null || $key->date_start == null)
-                                    <p class="project" >  {{ ($key->duration == null) ? '00:00' : date('H:i',  mktime(0,$key->duration)) }}</p>
+                                    <?php  $hours = (int)($key->duration/60);
+                                   $minutes = bcmod($key->duration, 60);
+                                            if (strlen($hours) < 2){
+                                                $hours = '0' . $hours;
+                                            }
+                                            if (strlen($minutes) < 2){
+                                                $minutes = '0' . $minutes;
+                                            }
+                                    ?>
+                                    <p class="project" >  {{ ($key->duration == null) ? '00:00' : $hours . ':' . $minutes }}</p>
                                 @else
                                      <p class="project" > {{ date('H:i', strtotime($key->date_start)) }} - {{  date('H:i', strtotime($key->date_finish)) }}</p>
                                 @endif

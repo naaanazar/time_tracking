@@ -39,4 +39,9 @@ class Project extends Model
     {
         return $this->hasMany('App\TimeLog');
     }
+
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id', 'lead_id');
+    }
 }

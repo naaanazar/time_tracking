@@ -27,7 +27,7 @@
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
-                                    <select name="company_id" class="input-xlarge focused my_input"  id="CompanyNameProjectId" style="height: 42px;">
+                                    <select name="company_id" class="input-xlarge focused my_input"  id="CompanyNameProjectId" style="height: 42px;" >
                                         <option selected disabled>Select</option>
                                         @if (isset($client->company_name))
                                         <option value="{{ $client->id }}" selected>{{ $client->company_name }}</option>
@@ -55,8 +55,8 @@
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                     <input name="project_name" class="input-xlarge focused my_input" id="ProjectNameId"  type="text"
-                                        value="<?= ( isset( $project[0]->project_name ) ) ? $project[0]->project_name : '' ?>"
-                                    >
+                                        value="<?= ( isset( $project[0]->project_name ) ) ? $project[0]->project_name : '' ?>" required
+                                    />
                                     @if ($errors->has('project_name'))
                                         <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('project_name') }}</strong>

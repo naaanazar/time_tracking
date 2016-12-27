@@ -20,6 +20,7 @@ class ReportsController extends Controller
      * $day - day of reports
      * */
     public function dailyReport($day=false)
+
     {
 
         if($day == false) {
@@ -32,8 +33,10 @@ class ReportsController extends Controller
         $data = date_create($day);
         $data1 = date_modify($data, '+1 day');
 
-        $tasks = Task::where('date_finish', '>', $data)
-            ->where('date_finish', '<', $data1)
+
+        $tasks = Task::where('done', '=', 1)
+            ->where('date_finish', '>=', $data)
+            ->where('date_finish', '<=', $data1)
             ->with('client', 'project', 'user', 'track')
             ->get();
 
@@ -41,21 +44,75 @@ class ReportsController extends Controller
 
         foreach( $tasks as $key => $task ) {
             $total_time = 0;
+            $value = 0;
             foreach( $task['relations']['track'] as $log) {
                 $total_time += $log['attributes']['total_time'];
+                $value += $log['attributes']['value'];
             }
             $tasks[$key]['total'] = $objectTask->time_hour($total_time);
-            $tasks[$key]['value'] = $total_time*$tasks[$key]['relations']['user']['attributes']['hourly_rate'];
+            $tasks[$key]['value'] = $value;
         }
 
         return view('reports.dayliReport', compact('trasks'));
     }
 
     /*
-     *
+     * project report
      * */
-    public function projectReport()
+    public function projectReport( $dateStart, $dateFinish ) // testing
     {
+        $projects = Project::where('created_at', '>=', $dateStart)
+            ->where('created_at', '<=', $dateFinish)
+            ->with('user', 'task', 'track')
+            ->get();
 
+        $objectTask = new Task();
+
+        foreach( $projects as $key => $project ) {
+            $totalTime = 0;
+            $value = 0;
+            foreach( $project['relations']['track'] as $track ) {
+                $totalTime += $track['attributes']['total_time'];
+                $value += $track['attributes']['value'];
+            }
+
+            $projects[ $key ]['value'] = $value;
+            $projects[ $key ]['total_time'] = $objectTask->time_hour($totalTime);
+            $projects[ $key ]['cost'] = $objectTask->time_hour($totalTime) * $projects[ $key ]['original']['hourly_rate'];
+            $projects[ $key ]['economy'] = $projects[ $key ]['value'] - $projects[ $key ]['cost'];
+        }
+
+        return $projects;
+    }
+
+    /*
+     * people report
+     * $userId - id user
+     * */
+    public function peopleReport( $dateStart, $dateFinish )
+    {
+        $tasks = Task::where('done', '=', 1)
+            ->where('date_finish', '>=', $dateStart)
+            ->where('date_finish', '<=', $dateFinish)
+            ->with('project', 'user', 'track')
+            ->get();
+
+        $objectTask = new Task();
+
+        foreach( $tasks as $key => $task ) {
+            $totalTime = 0;
+
+            foreach( $task['relations']['track'] as $track ) {
+                $totalTime += $track['attributes']['total_time'];
+            }
+
+            $totalTime = $objectTask->time_hour($totalTime);
+
+            $tasks[ $key ]['value'] = $task['relations']['project']['attributes']['hourly_rate'] * $totalTime;
+            $tasks[ $key ]['cost'] = $totalTime * $task['relations']['user']['attributes']['hourly_rate'];
+            $tasks[ $key ]['economy'] = $tasks[ $key ]['value'] - $tasks[ $key ]['cost'];
+        }
+
+        return $tasks;
     }
 }

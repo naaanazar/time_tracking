@@ -43,10 +43,13 @@ class TimeManageController extends Controller
     {
         if( $team != false ) {
 
-            $users = User::where('team_name', '=', $team)->get();
+            $users = User::where('team_name', '=', $team)
+                ->orderBy('id', 'desc')
+                ->get();
         } else {
 
             $users = DB::table('users')
+                ->orderBy('id', 'desc')
                 ->orderBy('employe', 'asc')
                 ->leftJoin('teams', 'users.users_team_id', '=', 'teams.id')
                 ->select('users.id',
@@ -62,7 +65,6 @@ class TimeManageController extends Controller
 
         }
 
-
        return view('time_manage.users', compact('users'));
     }
 
@@ -72,6 +74,7 @@ class TimeManageController extends Controller
     public function team_all()
     {
         $teams = DB::table('teams')
+                ->orderBy('id', 'desc')
                 ->leftjoin('users', 'teams.teams_lead_id', '=', 'users.id')
                 ->select('teams.id',
                 'users.name',
@@ -174,7 +177,9 @@ class TimeManageController extends Controller
      * */
     public function all_client()
     {
-        $clients = DB::table('Clients')->get();
+        $clients = DB::table('Clients')
+            ->orderBy('id', 'desc')
+            ->get();
 
         return view('time_manage.clients', compact('clients'));
     }
@@ -262,6 +267,7 @@ class TimeManageController extends Controller
             if ($lead) {
                 if ($lead->teams_lead_id) {
                     $projects = DB::table('Project')
+                        ->orderBy('id', 'desc')
                         ->where('lead_id', '=', $lead->teams_lead_id)
                         ->leftJoin('users', 'Project.lead_id', '=', 'users.id')
                         ->join('Clients', 'Project.client_id', '=', 'Clients.id')
@@ -284,6 +290,7 @@ class TimeManageController extends Controller
         if (Auth::user()['original']['employe'] == 'Supervisor' || Auth::user()['original']['employe'] == 'Admin' || Auth::user()['original']['employe'] == 'Lead') {
 
             $projects = DB::table('Project')
+                ->orderBy('id', 'desc')
                 ->leftJoin('users', 'Project.lead_id', '=', 'users.id')
                 ->join('Clients', 'Project.client_id', '=', 'Clients.id')
                 ->select('Project.project_name',
@@ -469,12 +476,14 @@ class TimeManageController extends Controller
     {
         if (Auth::user()['original']['employe'] == 'Developer' || Auth::user()['original']['employe'] == 'QA Engineer') {
             $tasks = Task::where('assign_to', '=', Auth::user()['original']['id'])
+                ->orderBy('id', 'desc')
                 ->with(['Project', 'client'])->get();
         }
 
         if(Auth::user()['original']['employe'] == 'Supervisor' || Auth::user()['original']['employe'] == 'Admin' || Auth::user()['original']['employe'] == 'Lead') {
 
-            $tasks = Task::with(['Project', 'client'])->get();
+            $tasks = Task::orderBy('id', 'desc')
+                ->with(['Project', 'client'])->get();
         }
 
 
@@ -666,8 +675,8 @@ class TimeManageController extends Controller
     {
         $this->validate($request, [
             'company_name' => 'required|min:4|max:30',
-            'company_address' => 'required|min:4|max:100',
-            'website' => 'required|string',
+            'company_address' => 'min:4|max:100',
+            'website' => 'string',
             'contact_person' => 'required|min:4|max:30',
             'email' => 'required|unique:Clients|email',
             'phone_number' => 'regex:/[0-9-]+/|max:30'

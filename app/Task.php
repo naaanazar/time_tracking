@@ -120,7 +120,7 @@ class Task extends Model
         return $result = $houers . ':' . $minutes;
     }
 
-    public function time_hour($time)
+    public function time_hour($minute)
     {
         $minutes = bcmod($minute, 60);
         $houers = (int)($minute/60);
