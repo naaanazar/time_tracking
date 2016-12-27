@@ -25,7 +25,7 @@
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
-                                <input name="company_name" class="input-xlarge focused my_input" id="companeMameId"  autofocus type="text"
+                                <input name="company_name" required class="input-xlarge focused my_input" id="companeMameId"  autofocus type="text"
                                         value="<?= isset($client->company_name) ? $client->company_name : ((old('company_name')) ? old('company_name') : '') ?>"/>
                                 @if ($errors->has('company_name'))
                                     <span class="help-block">
@@ -41,7 +41,7 @@
                             </div>
 
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                <input name="company_address" class="input-xlarge focused my_input" id="AddressId"   type="text"
+                                <input name="company_address" required class="input-xlarge focused my_input" id="AddressId"   type="text"
                                        value="<?= isset($client->company_address) ? $client->company_address : ((old('company_address')) ? old('company_address') :'') ?>"/>
                                 @if ($errors->has('company_address'))
                                     <span class="help-block">
@@ -53,7 +53,7 @@
 
                         <div class="control-group row">
                             <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                <label class="control-label" for="WebsiteId" style="text-align: left;">Website *</label>
+                                <label class="control-label" for="WebsiteId" style="text-align: left;">Website</label>
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                 <input name="website" class="input-xlarge focused my_input" id="WebsiteId"  type="text"
@@ -71,7 +71,7 @@
                                 <label class="control-label" for="ContactPersonId" style="text-align: left;">Contact Person *</label>
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                <input name="contact_person" class="input-xlarge focused my_input" id="ContactPersonId"   type="text"
+                                <input name="contact_person"  required class="input-xlarge focused my_input" id="ContactPersonId"   type="text"
                                        value="<?= isset($client->contact_person) ? $client->contact_person : ((old('contact_person')) ? old('contact_person') :'') ?>"/>
                                 @if ($errors->has('contact_person'))
                                     <span class="help-block">
@@ -83,7 +83,7 @@
 
                         <div class="control-group row">
                             <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                <label class="control-label" for="emailClientId" style="text-align: left;">Email</label>
+                                <label class="control-label" for="emailClientId" style="text-align: left;">Email *</label>
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                 <input type="email" name="email" class="input-xlarge focused my_input" id="emailClientId"  required

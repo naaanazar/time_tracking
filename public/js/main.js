@@ -914,10 +914,8 @@ $(document).ready(function(){
 
 
         $('#usersTable').DataTable({
-           // scrollX : true,
-         //   scrollCollapse : true,
-          //  "sScrollXInner": "100%",
-
+           // "order": [[ 5, "desc" ]],
+            "aaSorting": [],
 
             initComplete: function () {
                 this.api().columns().every(function () {

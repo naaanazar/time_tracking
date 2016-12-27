@@ -65,7 +65,7 @@
                                         <label class="control-label" for="ProjectNameId" style="text-align: left;">Website</label>
                                     </div>
                                     <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7" >
-                                        <a href="{{ $client->website }}">{{ $client->website }}</a>
+                                        <a href="{{ $client->website }}" target="_blank">{{ $client->website }}</a>
                                     </div>
                                 </div>
                                 <div class="row my_row">
