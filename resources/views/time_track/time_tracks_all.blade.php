@@ -44,7 +44,8 @@
                                 <th>total_time</th>
                                 <th>Billable</th>
                                 <th>Cost</th>
-                                @if ($status == 'HR Manager' || $status == 'Admin')
+                                <th>Status</th>
+                                @if ($status == 'Lead' || $status == 'Admin' || $status == 'Supervisor')
                                     <th style="min-width:250px; width: 250px;" class="center">Action</th>
                                 @endif
                             </tr>
@@ -61,6 +62,7 @@
                                 <th class="thFoot" >total_time</th>
                                 <th class="thFoot" >Billable</th>
                                 <th class="thFoot" >Cost</th>
+                                <th>Status</th>
                                 @if ($status == 'Lead' || $status == 'Admin' || $status == 'Supervisor')
                                     <th  class="removeSelect">Action</th>
                                 @endif
@@ -71,7 +73,7 @@
 
                             @if (isset($tracks))
                                 @foreach( $tracks as $key )
-                                    <tr class="odd gradeX">
+                                    <tr class="odd gradeX <?= $key->approve == 1 ? 'done_tr' : ($key->done == 1 ? 'done_tr2' : '')?>">
                                         <td>{{ $key->project->project_name }}</td>
                                         <td>{{ $key->task->task_titly }}</td>
                                         <td>{{ $key->approve == 1 ? 'Yes' : '-' }}</td>
@@ -79,11 +81,14 @@
                                         <td>{{ $key->total_time ==null ? '-' : date('H:i',  mktime(0,$key->total_time)) }}</td>
                                         <td>{{ $key->billable_time == 1 ? 'Yes' : '-' }}</td>
                                         <td>{{ $key->additional_cost }}</td>
+                                        <td>{{ $key->done == 1 ? 'Done' : 'In proccess' }}</td>
 
                                         @if ($status == 'Lead' || $status == 'Admin' || $status == 'Supervisor')
                                             <td>
-                                                @if($key->approve == 0)
-                                                <button  type="button" class="btn btn-success approvTrack" data-url="/trask/approve/{{ $key->id }}" data-element="{{ $key->project->project_name . '-' . $key->task->task_titly}}">
+                                                @if($key->approve == 0 )
+                                                <button  type="button" class="btn btn-success approvTrack"
+                                                         <?= $key->done == 0 ? 'disabled' : '' ?>
+                                                         data-url="/trask/approve/{{ $key->id }}" data-element="{{ $key->project->project_name . '-' . $key->task->task_titly}}">
                                                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Approve
                                                 </button>
                                                 @endif

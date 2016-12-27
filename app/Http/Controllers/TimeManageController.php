@@ -204,6 +204,7 @@ class TimeManageController extends Controller
             return redirect('/project/all');
         }
 
+
         $client = Client::all();
         $leads = User::where('employe', '=', 'Lead')->get();
 

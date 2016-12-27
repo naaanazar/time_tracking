@@ -1,20 +1,23 @@
-@extends('layouts.index_template')
+﻿@extends('layouts.index_template')
 
 @section('content')
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
     <script type="text/javascript" src="/data/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="/data/daterangepicker.css" />
 
-    <div class="modal fade" id="delete-user" role="dialog">
+    <div class="modal fade" id="delete-track" role="dialog">
         <div class="modal-dialog"  >
             <!-- Modal content-->
             <div class="modal-content">
-                <div id="modalConfirmDeleteUser"></div>
+                <div id="modalConfirmDeleteTrack"></div>
             </div>
         </div>
     </div>
 
-    <div id="conteiner" class="container" data-date="<?= isset($date)? $date : '' ?>" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}" data-token="{{ Session::token() }}">
+    <div id="conteiner" class="container" data-date="<?= isset($date)? $date : '' ?>"
+         data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}"
+         data-token="{{ Session::token() }}"
+            data-active-track-id="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ?">
         <div class="row" style="margin-top: 20px">
             <div class="col-md-2 btn-toolbar" style="vertical-align: inherit">
                 <div id="timeStep5" class="btn-group">
@@ -58,7 +61,7 @@
                                     <option selected disabled>Select project</option>
                                     @if( isset( $track ) )
                                         <option value="{{ $track[0]->project->id }}" selected>{{ $track[0]->project->project_name }}</option>
-                                    @endif
+                                    @endiftime_track.blade
                                     @foreach( $tasks as $task )
                                         <option value="{{ $task->id }}">{{ $task->project_name }}</option>
                                     @endforeach
@@ -159,8 +162,8 @@
                             <label class="labelTrack" for="" style="padding-top: 10px">Value($) <span id="insertCost"></span></label>
                             @if ($errors->has('duration'))
                                 <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('duration') }}</strong>
-                                            </span>
+                                    <strong style="color:#802420">{{ $errors->first('duration') }}</strong>
+                                    </span>
                             @endif
                         </div>
                     </div>
@@ -241,7 +244,7 @@
                         }
                         ?>
 
-                        <tr class="trackLog trackLogFirst" id="track-<?= $key->id ?>"
+                        <tr class="trackLog trackLogFirst <?= $key->done == 1 ? 'done_tr' : '' ?>" id="track-<?= $key->id ?>"
                             data-id ="<?= $key->id ?>"
                             data-project_name ="<?= $key->project->project_name  ?>"
                             data-project_id ="<?= $key->project->id  ?>"
@@ -278,9 +281,20 @@
                             <td class="text-right table-cell-actions">
                                 <div class="btn-group">
                                     <span class="stop-start-button">
-                                        <button class="btn btn-default" id="startTrack" style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'display:none' : '' ?>" >
-                                            <span class="glyphicon glyphicon-play"></span>
-                                        </button>
+                                        @if ($key->done == 0)
+                                             <a  href='/trask/done/<?= $key->id ?>'  class="btn btn-success" id="doneTrack" style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'display:none' : '' ?>" >
+                                                 <span class="glyphicon glyphicon-ok"></span> Done
+                                             </a>
+                                        @else
+                                            <a  href='/trask/start/<?= $key->id ?>'  class="btn btn-warning" id="doneReject" style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'display:none' : '' ?>" >
+                                                <span class="glyphicon glyphicon-ok"></span> In process
+                                            </a>
+                                        @endif
+                                        @if ($key->done == 0)
+                                            <button class="btn btn-default" id="startTrack" style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'display:none' : '' ?>" >
+                                                <span class="glyphicon glyphicon-play"></span>
+                                            </button>
+                                        @endif
                                         <button href="#" class="btn btn-danger" id="stopTrack2"  style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? '' : 'display:none' ?>">
                                             <span class="glyphicon glyphicon-stop"></span>
                                         </button>
@@ -295,12 +309,15 @@
 
                                     </span>
                                     <span>
-                                    <a href="/track/update/<?= $key->id ?>" class="btn btn-default" id="editTrack">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </a>
-                                    <a href="/track/delete/<?= $key->id ?>" class="btn btn-default" id="deleteTrack">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                    </a>
+                                    @if ($key->done == 0)
+                                        <a href="/track/update/<?= $key->id ?>" class="btn btn-default" id="editTrack">
+                                            <span class="glyphicon glyphicon-pencil span_no_event"></span>
+                                        </a>
+                                    @endif
+
+                                         <button type="button" class="btn btn-default deleteTrack" data-url="/track/delete/{{ $key->id }}" data-element="{{ $key->project->project_name }} - {{ $key->task->task_titly }}">
+                                             <span class="glyphicon glyphicon-trash span_no_event" aria-hidden="true"></span></button>
+
                                         </span>
                                 </div>
                             </td>

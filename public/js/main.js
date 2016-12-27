@@ -72,6 +72,20 @@ $(document).ready(function(){
 
     $(window).load(function(){
 
+        if (t) {
+            var idActiveLog = $('#conteiner').data('log-active');
+            $.get('/get/timestart/' + idActiveLog, function (date) {
+                console.log('blablablablabla');
+                console.log(date.data.now);
+                var duration = SecondsTohhmmss((moment(date.data.now, "YYYY-MM-DD hh:mm:ss") - moment(date.data.start, "YYYY-MM-DD hh:mm:ss")) / 1000);
+                console.log(duration);
+
+                seconds = duration.slice(6,7) == 0 ? duration.slice(7) : duration.slice(6);
+                minutes = duration.slice(3,4) == 0 ? duration.slice(4,5) : duration.slice(3,5);
+                hours = duration.slice(1,2) == 0 ? duration.slice(1,2) : duration.slice(0,2);
+            });
+        }
+
 
 
         $(".removeSelect").html('');
@@ -248,15 +262,89 @@ $(document).ready(function(){
     }
 
 
+    function timeDuration(dFinish,  dStart) {
 
+        if (dFinish > dStart) {
+            if (dFinish.getHours() == dStart.getHours && dFinish.getMinutes() == dStart.getMinutes()) {
 
+                $("#timeDuration").val('00:00');
 
+            } else {
+                var duration = dFinish - dStart;
+
+                var hours;
+
+                if (Math.floor(duration / 60000) < 60) {
+                    hours = '00';
+                } else {
+                    var hours = Math.floor(Math.floor(duration / 60000) / 60);
+                    if (hours < 10) {
+                        hours = '0' + hours;
+                    }
+
+                }
+
+                var minuts = Math.floor(duration / 60000) % 60;
+
+                if (minuts < 10) {
+                    minuts = '0' + minuts;
+                }
+
+                $("#timeDuration").val(hours + ':' + minuts);
+                $("#formTrackDuration").val(hours + ':' + minuts);
+
+                console.log(minuts + 'mm' + 'hh' + hours);
+            }
+        } else {
+            $("#timeDuration").val('incorect');
+            $("#formTrackFinish").val($('#formTrackStart').val());
+        }
+    }
+
+    function timeDuration(dFinish,  dStart) {
+
+        if (dFinish > dStart) {
+            if (dFinish.getHours() == dStart.getHours && dFinish.getMinutes() == dStart.getMinutes()) {
+
+                $("#timeDuration").val('00:00');
+
+            } else {
+                var duration = dFinish - dStart;
+
+                var hours;
+
+                if (Math.floor(duration / 60000) < 60) {
+                    hours = '00';
+                } else {
+                    var hours = Math.floor(Math.floor(duration / 60000) / 60);
+                    if (hours < 10) {
+                        hours = '0' + hours;
+                    }
+
+                }
+
+                var minuts = Math.floor(duration / 60000) % 60;
+
+                if (minuts < 10) {
+                    minuts = '0' + minuts;
+                }
+
+                $("#timeDuration").val(hours + ':' + minuts);
+                $("#formTrackDuration").val(hours + ':' + minuts);
+
+                console.log(minuts + 'mm' + 'hh' + hours);
+            }
+        } else {
+            $("#timeDuration").val('incorect');
+            $("#formTrackFinish").val($('#formTrackStart').val());
+        }
+    }
 
     function trackStart(){
         console.log('11');
         if (hasValue("#formTrackStart") || hasValue("#formTrackFinish")){
             // console.log('2');
-            $("#timeDuration").attr('disabled', 'disabled');
+            $("#timeDuration").attr('readonly', 'readonly');
             var dateStringStart = $("#formTrackStart").val();
             //      console.log(moment(dateString, "HH:mm").isValid() + moment(dateString, "HH:mm").format('HH:mm'));
 
@@ -276,7 +364,7 @@ $(document).ready(function(){
 
 
         } else{
-            $("#timeDuration").removeAttr('disabled');
+            $("#timeDuration").removeAttr('readonly');
         }
 
         if(dFinish && dStart){
@@ -290,7 +378,7 @@ $(document).ready(function(){
         console.log('11');
         if (hasValue("#formTrackStart") || hasValue("#formTrackFinish")){
             // console.log('2');
-            $("#timeDuration").attr('disabled', 'disabled');
+            $("#timeDuration").attr('readonly', 'readonly');
             var dateStringFinish = $("#formTrackFinish").val();
             //      console.log(moment(dateString, "HH:mm").isValid() + moment(dateString, "HH:mm").format('HH:mm'));
 
@@ -312,17 +400,19 @@ $(document).ready(function(){
 
 
         } else{
-            $("#timeDuration").removeAttr('disabled');
+            $("#timeDuration").removeAttr('readonly');
         }
 
 
 
         if(dFinish && dStart){
 
-            timeDuration(dFinish,  dStart)
+            timeDuration(dFinish,  dStart);
         }
 
     }
+
+
 
 
     function timeDuration(dFinish,  dStart) {
@@ -410,6 +500,8 @@ $(document).ready(function(){
      seconds = 0, minutes = 0, hours = 0,
      t;
 
+
+
      function add(timeSet) {
 
      /*    if (timeSet){
@@ -427,10 +519,10 @@ $(document).ready(function(){
                  hours++;
              }
          }
-         timeDuration = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
-         $('#timeTrackSegmentDuration').html(timeDuration);
+         var timeDurationSet = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+         $('#timeTrackSegmentDuration').html(timeDurationSet);
 
-         $('.timeTrackSegmentTotalActive').html(SecondsTohhmmss((moment.duration(timeDuration) + (moment.duration($('.timeTrackSegmentTotalActive').data('total'))))/1000));
+         $('.timeTrackSegmentTotalActive').html(SecondsTohhmmss((moment.duration(timeDurationSet) + (moment.duration($('.timeTrackSegmentTotalActive').data('total'))))/1000));
 
          timer();
      }
@@ -533,8 +625,9 @@ $(document).ready(function(){
                             '</td>' +
                             '<td class="text-right table-cell-actions">' +
                                 '<div class="btn-group">' +
-                                    '<button class="btn btn-danger" id="stopTrack">' +
-                                        '<span class="glyphicon glyphicon-trash"></span>' +
+                                    '<button type="button" class="btn btn-default deleteLog"' +
+                                        'data-url="/log/delete/' + response.data[key].id + '" data-element="' + SecondsTohhmmss((moment(response.data[key].finish, "YYYY-MM-DD hh:mm:ss") - moment(response.data[key].start, "YYYY-MM-DD hh:mm:ss")) / 1000) + '">' +
+                                        '<span class="glyphicon glyphicon-trash span_no_event" aria-hidden="true"></span>' +
                                     '</button>' +
                                 '</div>' +
                             '</td>' +
@@ -935,7 +1028,18 @@ $(document).ready(function(){
     //    e.stopImmediatePropagation();
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
-        var massage = 'Do you want to approve track <strong> ' + element + '</strong>?'
+        var massage = 'Do you want to remove track <strong> ' + element + '</strong>?'
+
+        Main.displayModal('#delete-track', delUrl,  massage, '#modalConfirmDeleteTrack');
+    });
+
+    $(document).on( "click", ".deleteLog", function(e) {
+        e.preventDefault();
+        console.log('11')
+        //    e.stopImmediatePropagation();
+        var delUrl = $(e.target).data('url');
+        var element = $(e.target).data('element');
+        var massage = 'Do you want to remove log <strong> ' + element + '</strong>?'
 
         Main.displayModal('#delete-track', delUrl,  massage, '#modalConfirmDeleteTrack');
     });
@@ -943,7 +1047,7 @@ $(document).ready(function(){
 
     $(document).on( "click", ".approvTrack", function(e) {
         e.preventDefault();
-        e.stopImmediatePropagation();
+
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
         var massage = 'Do you want to approve track <strong> ' + element + '</strong>?'
@@ -953,7 +1057,7 @@ $(document).ready(function(){
 
     $(document).on( "click", ".rejectTrack", function(e) {
         e.preventDefault();
-        e.stopImmediatePropagation();
+
         var delUrl = $(e.target).data('url');
         var element = $(e.target).data('element');
         var massage = 'Do you want to reject track <strong> ' + element + '</strong>?'
@@ -1021,6 +1125,8 @@ function getCookie(cname) {
 
 var Main = {
     displayModal: function(idModal, delUrl, massage, appendContainer) {
+
+        console.log('2222');
         var htmlDelete = '' +
             '<div class="modal-header">' +
                 '<button type="button" class="close" data-dismiss="modal">&times;</button>' +
