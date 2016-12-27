@@ -81,9 +81,9 @@
                                     Report <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-my" style="background-color: #ff6d00; top: 58px;" >
-                                    <li><a href="#">-----</a></li>
-                                    <li><a href="#">------</a></li>
-                                    <li><a href="#">------</a></li>
+                                    <li><a href="#">Daily Report</a></li>
+                                    <li><a href="#">Project Report</a></li>
+                                    <li><a href="#">People Report</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#">------</a></li>
                                 </ul>
