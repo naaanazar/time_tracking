@@ -24,8 +24,8 @@ class ReportsController extends Controller
         $data = date_create($day);
         $data1 = date_modify($data, '+1 day');
 
-        $tasks = Task::where('date_finish', '>', $data)
-            ->where('date_finish', '<', $data1)
+        $tasks = Task::where('date_finish', '>=', $data)
+            ->where('date_finish', '<=', $data1)
             ->with('client', 'project', 'user', 'track')
             ->get();
 
