@@ -24,7 +24,8 @@ class ReportsController extends Controller
         $data = date_create($day);
         $data1 = date_modify($data, '+1 day');
 
-        $tasks = Task::where('date_finish', '>=', $data)
+        $tasks = Task::where('done', '=', 1)
+            ->where('date_finish', '>=', $data)
             ->where('date_finish', '<=', $data1)
             ->with('client', 'project', 'user', 'track')
             ->get();
@@ -55,6 +56,8 @@ class ReportsController extends Controller
             ->with('user', 'task', 'track')
             ->get();
 
+        $objectTask = new Task();
+
         foreach( $projects as $key => $project ) {
             $totalTime = 0;
             $value = 0;
@@ -64,8 +67,8 @@ class ReportsController extends Controller
             }
 
             $projects[ $key ]['value'] = $value;
-            $projects[ $key ]['total_time'] = (new Task())->time_hour($totalTime);
-            $projects[ $key ]['cost'] = (new Task())->time_hour($totalTime) * $projects[ $key ]['original']['hourly_rate'];
+            $projects[ $key ]['total_time'] = $objectTask->time_hour($totalTime);
+            $projects[ $key ]['cost'] = $objectTask->time_hour($totalTime) * $projects[ $key ]['original']['hourly_rate'];
             $projects[ $key ]['economy'] = $projects[ $key ]['value'] - $projects[ $key ]['cost'];
         }
 
@@ -78,7 +81,8 @@ class ReportsController extends Controller
      * */
     public function peopleReport( $dateStart, $dateFinish )
     {
-        $tasks = Task::where('date_finish', '>=', $dateStart)
+        $tasks = Task::where('done', '=', 1)
+            ->where('date_finish', '>=', $dateStart)
             ->where('date_finish', '<=', $dateFinish)
             ->with('project', 'user', 'track')
             ->get();
