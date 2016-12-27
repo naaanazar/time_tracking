@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Дек 26 2016 г., 11:01
+-- Время создания: Дек 27 2016 г., 12:01
 -- Версия сервера: 5.6.26
 -- Версия PHP: 5.6.12
 
@@ -127,6 +127,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `done` tinyint(1) NOT NULL DEFAULT '0',
   `task_description` text NOT NULL,
   `billable` tinyint(1) NOT NULL,
+  `date_finish` datetime DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
@@ -138,14 +139,14 @@ CREATE TABLE IF NOT EXISTS `tasks` (
 -- Дамп данных таблицы `tasks`
 --
 
-INSERT INTO `tasks` (`id`, `company_id`, `project_id`, `task_type`, `task_titly`, `alloceted_hours`, `assign_to`, `done`, `task_description`, `billable`, `created_at`, `updated_at`) VALUES
-(10, 6, 19, 'Bug Fixing', 'ewrerw', '50.00', 27, 0, 'AAAA', 1, '2016-12-10 00:00:00', '2016-12-14 09:10:44'),
-(11, 6, 20, 'Quality Assurance', 'sas', '100.00', 49, 0, 'dsd', 1, '2016-12-10 00:00:00', '2016-12-10 00:00:00'),
-(12, 6, 20, 'Bug Fixing', 'sdasd', '50.00', 49, 0, 'asdasd', 0, '2016-12-12 00:00:00', '2016-12-14 09:16:01'),
-(13, 6, 20, 'Bug Fixing', 'sadasdasd', '50.00', 49, 0, 'asdasd', 0, '2016-12-12 00:00:00', '2016-12-12 00:00:00'),
-(14, 6, 20, 'New Feature', 'we', '0.00', 49, 0, ' wwqe ', 0, '2016-12-14 00:00:00', '2016-12-14 00:00:00'),
-(15, 6, 19, 'Bug Fixing', 'asdasd', '10.00', 49, 0, 'sdsa', 0, '2016-12-15 12:48:59', '2016-12-15 12:48:59'),
-(16, 6, 20, 'Bug Fixing', 'aaaaAAAAAA', '10.00', 49, 0, 'asd', 0, '2016-12-15 12:49:17', '2016-12-15 12:49:17');
+INSERT INTO `tasks` (`id`, `company_id`, `project_id`, `task_type`, `task_titly`, `alloceted_hours`, `assign_to`, `done`, `task_description`, `billable`, `date_finish`, `created_at`, `updated_at`) VALUES
+(10, 6, 19, 'Bug Fixing', 'ewrerw', '50.00', 27, 0, 'AAAA', 1, '2016-12-06 09:00:00', '2016-12-10 00:00:00', '2016-12-14 09:10:44'),
+(11, 6, 20, 'Quality Assurance', 'sas', '100.00', 49, 0, 'dsd', 1, NULL, '2016-12-10 00:00:00', '2016-12-10 00:00:00'),
+(12, 6, 20, 'Bug Fixing', 'sdasd', '50.00', 49, 0, 'asdasd', 0, NULL, '2016-12-12 00:00:00', '2016-12-14 09:16:01'),
+(13, 6, 20, 'Bug Fixing', 'sadasdasd', '50.00', 49, 0, 'asdasd', 0, NULL, '2016-12-12 00:00:00', '2016-12-12 00:00:00'),
+(14, 6, 20, 'New Feature', 'we', '0.00', 49, 0, ' wwqe ', 0, NULL, '2016-12-14 00:00:00', '2016-12-14 00:00:00'),
+(15, 6, 19, 'Bug Fixing', 'asdasd', '10.00', 49, 0, 'sdsa', 0, NULL, '2016-12-15 12:48:59', '2016-12-15 12:48:59'),
+(16, 6, 20, 'Bug Fixing', 'aaaaAAAAAA', '10.00', 49, 0, 'asd', 0, NULL, '2016-12-15 12:49:17', '2016-12-15 12:49:17');
 
 -- --------------------------------------------------------
 
@@ -274,7 +275,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `hourly_rate` float(5,2) DEFAULT '0.00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=64 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=65 ;
 
 --
 -- Дамп данных таблицы `users`
@@ -288,7 +289,7 @@ INSERT INTO `users` (`id`, `google_id`, `name`, `email`, `password`, `remember_t
 (52, NULL, 'Dev', 'sad@gmail.com1', '$2y$10$Wy8rO31Xp1iI8a.ZmVz9ceh.xBO9THdptcKD897hB2w7vk05xMaGK', NULL, '2016-12-12 05:32:05', '2016-12-12 05:32:17', 'Admin', 0, 0.00),
 (53, NULL, 'test', 'sdasd@wddew.comd', '$2y$10$b3H7jTbkN.87eUnxJo775.rPFjYfBVG/p2.Z9lcxtnhY.kAgI3Xbq', NULL, '2016-12-14 15:08:56', '2016-12-14 15:08:56', 'QA Engineer', 0, 0.00),
 (54, NULL, 'dsfdfdsf', 'terr83@gmail.com', '$2y$10$7CY.XjnLTq6GCsifhjZdJu0ZoxcdIPjWOrHcRn12OhvAcXJIN7yFG', NULL, '2016-12-20 13:52:59', '2016-12-20 13:52:59', 'Admin', 0, 0.00),
-(63, NULL, 'Anton', 'anton.soft.gr@gmail.com', '$2y$10$NWmoHHaov.SLeEu.Et/Bf.F/FdacCkgbbEciQddEaFKX/fw/brfpW', NULL, '2016-12-23 09:42:41', '2016-12-23 09:42:41', 'Admin', 0, 0.00);
+(64, NULL, 'Anton', 'anton.soft.gr@gmail.com', '$2y$10$1uWipr79NzFUeCPUW.VVC.670FJJcayEW7IIcfJOoxjido6Q7vLdq', NULL, '2016-12-26 09:29:45', '2016-12-26 09:29:45', 'Admin', 0, 0.00);
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц

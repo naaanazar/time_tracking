@@ -382,8 +382,12 @@ class TimeTrackController extends Controller
      * */
     public function dailyReport( $id, $date )
     {
+        $data = date_create($date);
+        $data1 = date_modify($data, '+1 day');
+
         $tasks = Task::where('assign_to', '=', $id)
-            ->andWhere('date_finish', '=', $date)
+            ->where('date_finish', '>', $data)
+            ->where('date_finish', '<', $data1)
             ->with('client', 'project', 'user', 'track')
             ->get();
 
@@ -406,6 +410,14 @@ class TimeTrackController extends Controller
      * */
     public function test()
     {
+        $data = date_create('2016-12-06 00:00:00');
+        $data1 = date_modify($data, '+1 day');
+        var_dump($data1);
+        $tasks = Task::where('id', '=', 10)
+            ->where('date_finish', '>', '2016-12-06 00:00:00')
+            ->where('date_finish', '<', $data1)
+            ->get();
 
+        var_dump($tasks);
     }
 }
