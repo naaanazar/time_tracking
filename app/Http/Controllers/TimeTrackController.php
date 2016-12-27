@@ -385,47 +385,10 @@ class TimeTrackController extends Controller
     }
 
     /*
-     * daily report
-     * $id - task id
-     * */
-    public function dailyReport( $id, $date )
-    {
-        $data = date_create($date);
-        $data1 = date_modify($data, '+1 day');
-
-        $tasks = Task::where('assign_to', '=', $id)
-            ->where('date_finish', '>', $data)
-            ->where('date_finish', '<', $data1)
-            ->with('client', 'project', 'user', 'track')
-            ->get();
-
-        $objectTask = new Task();
-
-        foreach( $tasks as $key => $task ) {
-            $total_time = 0;
-            foreach( $task['relations']['track'] as $log) {
-                $total_time += $log['attributes']['total_time'];
-            }
-            $tasks[$key]['total'] = $objectTask->time_hour($total_time); // in second
-            $tasks[$key]['value'] = $total_time*$tasks[$key]['relations']['user']['attributes']['hourly_rate'];
-        }
-
-        return $tasks;
-    }
-
-    /*
      * test action
      * */
     public function test()
     {
-        $data = date_create('2016-12-06 00:00:00');
-        $data1 = date_modify($data, '+1 day');
-        var_dump($data1);
-        $tasks = Task::where('id', '=', 10)
-            ->where('date_finish', '>', '2016-12-06 00:00:00')
-            ->where('date_finish', '<', $data1)
-            ->get();
 
-        var_dump($tasks);
     }
 }
