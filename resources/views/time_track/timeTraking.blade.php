@@ -59,7 +59,7 @@
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
                                 <select name="project_id" class="inputTrackPadding focused my_input"  id="trackProjectId" style="height: 35px;" required>
-                                    <option selected disabled>Select project</option>
+                                    <option selected disabled value="">Select project</option>
                                     @if( isset( $track ) )
                                         <option value="{{ $track[0]->project->id }}" selected>{{ $track[0]->project->project_name }}</option>
                                     @endif
