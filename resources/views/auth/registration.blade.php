@@ -26,7 +26,7 @@
 
                                         <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                             <select name="employe" class="input-xlarge focused my_input" id="selectTeam" style="height: 42px;" required />
-                                                <option selected disabled>Select</option>
+                                                <option selected disabled value="">Select</option>
                                                 @if( old('employe') )
                                                     <option>{{ old('employe') }}</option>
 
@@ -54,7 +54,7 @@
                                         <label class="control-label" for="focusedInput">Name  *</label>
                                         </div>
                                         <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                            <input name="name" class="input-xlarge focused my_input" id="focusedInput"  autofocus type="text" value="{{ old('name') }}">
+                                            <input name="name" class="input-xlarge focused my_input" id="focusedInput"  autofocus type="text" value="{{ old('name') }}" required>
                                             @if ($errors->has('name'))
                                                 <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('name') }}</strong>

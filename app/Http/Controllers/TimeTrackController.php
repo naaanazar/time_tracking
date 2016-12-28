@@ -37,11 +37,6 @@ class TimeTrackController extends Controller
         }
         setcookie('SetDateTracking', $date, time() + (86400 * 30), "/");
 
-        $tracks = TimeTrack::with('task', 'project')
-            ->where('track_date', '=', date('Y-m-d', strtotime($date)))
-            ->get();
-
-
         if( Input::all() == true ) {
             $this->validation_track($request);
             $data = Input::all();
@@ -69,18 +64,26 @@ class TimeTrackController extends Controller
             return redirect('/trecking');
         }
 
+        $tracks = TimeTrack::with('task', 'project')
+            ->where('track_date', '=', date('Y-m-d', strtotime($date)))
+            ->get();
+
+        $projects = Project::with('task')->get();
+
         if( in_array(Auth::user()->employe, $this->users ) ) {
             $tasks = Project::where('lead_id', '=', Auth::user()->id )
                 ->with('task', 'track', 'track_log')->get();
             $tasks = $task->time_counter($tasks);
 
-            return view('time_track.timeTraking', compact('tasks', 'date', 'tracks', 'timeLog'));
+            return view('time_track.timeTraking', compact('tasks', 'date', 'tracks', 'timeLog', 'projects'));
 
         } elseif ( Auth::user()->employe == 'Admin' || Auth::user()->employe == 'Supervisor' ) {
             $tasks = Project::with('task', 'track', 'track_log')->get();
             $tasks = $task->time_counter($tasks);
 
-            return view('time_track.timeTraking', compact('tasks', 'date', 'tracks', 'timeLog'));
+            //echo'<pre>'; var_dump($projects); echo'</pre>';
+
+            return view('time_track.timeTraking', compact('tasks', 'date', 'tracks', 'timeLog', 'projects'));
         }
 
         return redirect('/');
@@ -356,7 +359,7 @@ class TimeTrackController extends Controller
             'duration' => 'required',
             'date_start' => '',
             'date_finish' => '',
-            'description' => 'max:1000',
+            'description' => 'required|max:1000',
             'additional_cost' => 'integer',
             'billable_time' => ''
         ], [

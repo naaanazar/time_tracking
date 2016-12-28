@@ -25,8 +25,13 @@
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
+<<<<<<< HEAD
+                                <input name="company_name" class="input-xlarge focused my_input" id="companeMameId"  autofocus type="text"
+                                        value="<?= isset($client->company_name) ? $client->company_name : ((old('company_name')) ? old('company_name') : '') ?>" required/>
+=======
                                 <input name="company_name" required class="input-xlarge focused my_input" id="companeMameId"  autofocus type="text"
                                         value="<?= isset($client->company_name) ? $client->company_name : ((old('company_name')) ? old('company_name') : '') ?>"/>
+>>>>>>> 84fe9a2dae71cd0603860330297838432a740b9f
                                 @if ($errors->has('company_name'))
                                     <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('company_name') }}</strong>
@@ -71,8 +76,10 @@
                                 <label class="control-label" for="ContactPersonId" style="text-align: left;">Contact Person *</label>
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                <input name="contact_person"  required class="input-xlarge focused my_input" id="ContactPersonId"   type="text"
-                                       value="<?= isset($client->contact_person) ? $client->contact_person : ((old('contact_person')) ? old('contact_person') :'') ?>"/>
+
+                                <input name="contact_person" class="input-xlarge focused my_input" id="ContactPersonId"   type="text"
+                                       value="<?= isset($client->contact_person) ? $client->contact_person : ((old('contact_person')) ? old('contact_person') :'') ?>" required/>
+
                                 @if ($errors->has('contact_person'))
                                     <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('contact_person') }}</strong>

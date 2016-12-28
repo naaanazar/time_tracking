@@ -1,16 +1,6 @@
 @extends('layouts.index_template')
 
 @section('content')
-
-    <?php
-            if (isset($track)){
-                $duration = $track[0]->duration;
-                $duration = explode(":", $track[0]->duration);
-                var_dump($duration[0]) ; var_dump((24));
-
-            }
-    ?>
-
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
     <script type="text/javascript" src="/data/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="/data/daterangepicker.css" />
@@ -68,8 +58,18 @@
                             <label class="control-label labelTrack" for="trackProjectId">Project *</label>
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
-                                <select name="project_id" class="inputTrackPadding focused my_input"  id="trackProjectId" style="height: 35px;" required >
-                                    <option selected disabled>Select project</option>
+
+                                <select name="project_id" class="inputTrackPadding focused my_input"  id="trackProjectId" style="height: 35px;" required>
+                                    <option selected disabled value="">Select project</option>
+
+                                    @if( old() && old('project_id') &&  $projects )
+                                        @foreach( $projects as $project )
+                                           @if( $project['id'] && $project['id'] == old('project_id') )
+                                               <option value="{{ old('project_id') }}" selected>{{ $project['project_name'] }}</option>
+                                           @endif
+                                        @endforeach
+                                    @endif
+
                                     @if( isset( $track ) )
                                         <option value="{{ $track[0]->project->id }}" selected>{{ $track[0]->project->project_name }}</option>
                                     @endif
@@ -92,6 +92,19 @@
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
 
                             <select name="task_id" class="inputTrackPadding focused my_input"  id="trackTaskId"  style="height: 35px;" required >
+
+                                @if( old() && old('task_id') &&  $projects )
+                                    @foreach( $projects as $project )
+                                        @if( $project['id'] && $project['id'] == old('project_id') )
+                                            @foreach( $project['task'] as $task )
+                                                @if( isset($task['id']) && $task['id'] == old('task_id') )
+                                                    <option value="{{ old('task_id') }}" selected>{{ $task['task_titly'] }}</option>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+                                @endif
+
                                 @if( isset( $track ) )
                                     <option value="{{ $track[0]->task->id }}" selected>{{ $track[0]->task->task_titly }}</option>
                                 @endif
@@ -112,7 +125,8 @@
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
                             <div class="col-md-4 col-lg-4" style="padding: 0px">
                             <span class="input-group" >
-                                <input type="text" value="" style="width: 60%" class="inputTrackPadding form-control" id="formTrackStart" placeholder="HH:MM" />
+                                <input type="text" value="<?= (old() && old('date_start') ? ltrim(explode(':', explode(' ', old('date_start'))[4])[0], '0') : '') ?>"
+                                       style="width: 60%" class="inputTrackPadding form-control" id="formTrackStart" placeholder="HH:MM"/>
 
                                 <span class="input-group-btn" style=" float:left ">
                                     <button type="button" class="btn btn-default" id="formTrackStartNow" style="padding:6px 1px">now</button>
@@ -128,7 +142,8 @@
 
                             <div class="col-md-4 col-lg-4" style="padding: 0px">
                             <span class="input-group" >
-                                <input type="text"  style="width: 60%; " class="inputTrackPadding form-control"  id="formTrackFinish" placeholder="HH:MM">
+                                <input type="text" value="<?= (old() && old('date_finish') ? ltrim(explode(':', explode(' ', old('date_finish'))[4])[0], '0') : '') ?>"
+                                       style="width: 60%; " class="inputTrackPadding form-control"  id="formTrackFinish" placeholder="HH:MM">
                                 <span class="input-group-btn" style=" float:left ">
                                     <button type="button" class="btn btn-default" id="formTrackFinishNow" style="padding:6px 1px">now</button>
                                     <button type="button" class="btn btn-default" id="formTrackFinishInc" style="padding:6px 3px">+</button>
@@ -149,7 +164,8 @@
                                 <label class = "labelTrack">
                                     <input type="checkbox" id="nextDay" name="nextDate"
                                            <?php  (isset( $track)) ? $duration = explode(":", $track[0]->duration) : ''; ?>
-                                    <?= isset($track)  ? (floor((strtotime( $track[0]->date_finish) - strtotime( $track[0]->date_start)) / (60 * 60 * 24)) == 1 ||  $duration[0] >  24 ? 'checked' : '' ) : '' ?>
+                                    <?= isset($track)  ? (floor((strtotime( $track[0]->date_finish) - strtotime( $track[0]->date_start)) / (60 * 60 * 24)) == 1 ||  $duration[0] >  24 ? 'checked' : '' ) :
+                                                   ((old() && old('nextDate') == 'on') ? ' checked': '' ) ?>
                                             > Next Day
                                 </label>
                              </span>
@@ -174,7 +190,7 @@
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
                             <input type="text" style="padding: 10px; max-width: 65%;" required  class="inputTrackPadding focused my_input" name="duration" id="timeDuration" placeholder="HH:MM"
-                                    value="<?= ( isset( $track ) ) ? $track[0]->duration : '' ; ?>"/>
+                                    value="<?= ( isset( $track ) ) ? $track[0]->duration : ((old() && old('duration')) ? old('duration') : '') ; ?>"/>
                             <label class="labelTrack" for="" style="padding-top: 10px">Value($) <span id="insertCost"></span></label>
                             @if ($errors->has('duration'))
                                 <span class="help-block">
@@ -191,7 +207,7 @@
                         <div class="controls col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <div class="input-group">
                                 <div class="input-group-btn" >
-                                    <input value="<?= ( isset($track) ) ? $track[0]->additional_cost : '' ; ?>"
+                                    <input value="<?= ( isset($track) ) ? $track[0]->additional_cost : ((old() && old('additional_cost')) ? old('additional_cost') : '') ; ?>"
                                            type="number" steep="0.01" style="padding: 10px; max-width: 89%" class="inputTrackPadding focused my_input form-control " name="additional_cost" id="additionalCost">
                                     <span class="input-group-addon" style="padding: 9px 12px">$</span>
                                 </div>
@@ -206,7 +222,7 @@
                         <span class="" style="display: inline-block">
                             <label  class="labelTrack" for="billableTime">
                                Billable Time <input type="checkbox" name="billable_time" value="1" id="billableTime"
-                                <?= ( isset( $track ) && $track[0]->task->billable == 1 ) ? ' checked' : '' ;?>>
+                                <?= ( isset( $track ) && $track[0]->task->billable == 1 ) ? ' checked' : ((old() && old('billable_time') == '1') ? ' checked': '' ) ;?>>
                             </label>
                          </span>
                         </div>

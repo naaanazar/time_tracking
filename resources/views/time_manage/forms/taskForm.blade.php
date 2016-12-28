@@ -32,7 +32,7 @@
                                         <select name="company_id" class="input-xlarge focused my_input" id="CompanyTaskId" style="height: 42px;" required>
 
                                         @if( !isset( $task ) )
-                                            <option  defaul>Please change Company</option>
+                                            <option  defaul value="">Please change Company</option>
 
                                             @if (isset($client->company_name))
                                                 <option value="{{ $client->id }}" selected>{{ $client->company_name }}</option>
