@@ -81,8 +81,6 @@ class TimeTrackController extends Controller
             $tasks = Project::with('task', 'track', 'track_log')->get();
             $tasks = $task->time_counter($tasks);
 
-            //echo'<pre>'; var_dump($projects); echo'</pre>';
-
             return view('time_track.timeTraking', compact('tasks', 'date', 'tracks', 'timeLog', 'projects'));
         }
 
@@ -359,7 +357,7 @@ class TimeTrackController extends Controller
             'duration' => 'required',
             'date_start' => '',
             'date_finish' => '',
-            'description' => 'required|max:1000',
+            'description' => 'max:1000',
             'additional_cost' => 'integer',
             'billable_time' => ''
         ], [

@@ -24,14 +24,10 @@
                                 <label class="control-label" for="companeMameId" style="text-align: left;">Company Name *</label>
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-
-<<<<<<< HEAD
+                                
                                 <input name="company_name" class="input-xlarge focused my_input" id="companeMameId"  autofocus type="text"
                                         value="<?= isset($client->company_name) ? $client->company_name : ((old('company_name')) ? old('company_name') : '') ?>" required/>
-=======
-                                <input name="company_name" required class="input-xlarge focused my_input" id="companeMameId"  autofocus type="text"
-                                        value="<?= isset($client->company_name) ? $client->company_name : ((old('company_name')) ? old('company_name') : '') ?>"/>
->>>>>>> 84fe9a2dae71cd0603860330297838432a740b9f
+
                                 @if ($errors->has('company_name'))
                                     <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('company_name') }}</strong>
