@@ -43,6 +43,9 @@ class ReportsController extends Controller
 
         $objectTask = new Task();
 
+        $totalTime = 0;
+        $totalValue = 0;
+
         foreach( $tasks as $key => $task ) {
             $total_time = 0;
             $value = 0;
@@ -52,10 +55,16 @@ class ReportsController extends Controller
             }
             $tasks[$key]['total'] = $objectTask->time_add_00($objectTask->time_hour($total_time));
             $tasks[$key]['value'] = $value;
+            $totalTime += $total_time;
+            $totalValue += $tasks[$key]['value'];
         }
+
+        $total['totalTime'] = $objectTask->time_add_00($objectTask->time_hour($totalTime));
+        $total['totalValue'] = $totalValue;
+
         $dayReport = $tasks;
 
-        return view('reports.dayliReport', compact('dayReport', 'date'));
+        return view('reports.dayliReport', compact('dayReport', 'date', 'total'));
     }
 
     /*
