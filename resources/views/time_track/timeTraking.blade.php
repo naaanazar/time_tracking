@@ -126,7 +126,8 @@
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
                             <div class="col-md-4 col-lg-4" style="padding: 0px">
                             <span class="input-group" >
-                                <input type="text" value="" style="width: 60%" class="inputTrackPadding form-control" id="formTrackStart" placeholder="HH:MM" />
+                                <input type="text" value="<?= (old() && old('date_start') ? explode(' ', old('date_start'))[4] : '') ?>"
+                                       style="width: 60%" class="inputTrackPadding form-control" id="formTrackStart" placeholder="HH:MM"/>
 
                                 <span class="input-group-btn" style=" float:left ">
                                     <button type="button" class="btn btn-default" id="formTrackStartNow" style="padding:6px 1px">now</button>
@@ -142,7 +143,8 @@
 
                             <div class="col-md-4 col-lg-4" style="padding: 0px">
                             <span class="input-group" >
-                                <input type="text"  style="width: 60%; " class="inputTrackPadding form-control"  id="formTrackFinish" placeholder="HH:MM">
+                                <input type="text" value="<?= (old() && old('date_finish') ? explode(' ', old('date_finish'))[4] : '') ?>"
+                                       style="width: 60%; " class="inputTrackPadding form-control"  id="formTrackFinish" placeholder="HH:MM">
                                 <span class="input-group-btn" style=" float:left ">
                                     <button type="button" class="btn btn-default" id="formTrackFinishNow" style="padding:6px 1px">now</button>
                                     <button type="button" class="btn btn-default" id="formTrackFinishInc" style="padding:6px 3px">+</button>
@@ -189,7 +191,7 @@
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
                             <input type="text" style="padding: 10px; max-width: 65%;" required  class="inputTrackPadding focused my_input" name="duration" id="timeDuration" placeholder="HH:MM"
-                                    value="<?= ( isset( $track ) ) ? $track[0]->duration : '' ; ?>"/>
+                                    value="<?= ( isset( $track ) ) ? $track[0]->duration : ((old() && old('duration')) ? old('duration') : '') ; ?>"/>
                             <label class="labelTrack" for="" style="padding-top: 10px">Value($) <span id="insertCost"></span></label>
                             @if ($errors->has('duration'))
                                 <span class="help-block">
