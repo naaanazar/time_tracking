@@ -2,14 +2,6 @@
 
 @section('content')
 
-    <?php
-            if (isset($track)){
-                $duration = $track[0]->duration;
-                $duration = explode(":", $track[0]->duration);
-                var_dump($duration[0]) ; var_dump((24));
-
-            }
-    ?>
 
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
     <script type="text/javascript" src="/data/daterangepicker.js"></script>
