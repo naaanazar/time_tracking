@@ -356,7 +356,7 @@ class TimeTrackController extends Controller
             'duration' => 'required',
             'date_start' => '',
             'date_finish' => '',
-            'description' => 'max:1000',
+            'description' => 'required|max:1000',
             'additional_cost' => 'integer',
             'billable_time' => ''
         ], [

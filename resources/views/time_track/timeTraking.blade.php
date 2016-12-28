@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+<?php ( old() ) ? var_dump(old()) : '' ?>
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
     <script type="text/javascript" src="/data/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="/data/daterangepicker.css" />
@@ -143,7 +143,8 @@
                                 <label class = "labelTrack">
                                     <input type="checkbox" id="nextDay" name="nextDate"
                                            <?php  (isset( $track)) ? $duration = explode(":", $track[0]->duration) : ''; ?>
-                                    <?= isset($track)  ? (floor((strtotime( $track[0]->date_finish) - strtotime( $track[0]->date_start)) / (60 * 60 * 24)) == 1 ||  $duration[0] >  24 ? 'checked' : '' ) : '' ?>
+                                    <?= isset($track)  ? (floor((strtotime( $track[0]->date_finish) - strtotime( $track[0]->date_start)) / (60 * 60 * 24)) == 1 ||  $duration[0] >  24 ? 'checked' : '' ) :
+                                                   ((old() && old('nextDate') == 'on') ? ' checked': '' ) ?>
                                             > Next Day
                                 </label>
                              </span>
@@ -185,7 +186,7 @@
                         <div class="controls col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <div class="input-group">
                                 <div class="input-group-btn" >
-                                    <input value="<?= ( isset($track) ) ? $track[0]->additional_cost : '' ; ?>"
+                                    <input value="<?= ( isset($track) ) ? $track[0]->additional_cost : ((old() && old('additional_cost')) ? old('additional_cost') : '') ; ?>"
                                            type="number" steep="0.01" style="padding: 10px; max-width: 89%" class="inputTrackPadding focused my_input form-control " name="additional_cost" id="additionalCost">
                                     <span class="input-group-addon" style="padding: 9px 12px">$</span>
                                 </div>
@@ -200,7 +201,7 @@
                         <span class="" style="display: inline-block">
                             <label  class="labelTrack" for="billableTime">
                                Billable Time <input type="checkbox" name="billable_time" value="1" id="billableTime"
-                                <?= ( isset( $track ) && $track[0]->task->billable == 1 ) ? ' checked' : '' ;?>>
+                                <?= ( isset( $track ) && $track[0]->task->billable == 1 ) ? ' checked' : ((old() && old('billable_time') == '1') ? ' checked': '' ) ;?>>
                             </label>
                          </span>
                         </div>
