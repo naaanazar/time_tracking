@@ -24,7 +24,7 @@
                                 <label class="control-label" for="companeMameId" style="text-align: left;">Company Name *</label>
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                
+
                                 <input name="company_name" class="input-xlarge focused my_input" id="companeMameId"  autofocus type="text"
                                         value="<?= isset($client->company_name) ? $client->company_name : ((old('company_name')) ? old('company_name') : '') ?>" required/>
 
