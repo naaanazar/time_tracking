@@ -82,7 +82,7 @@ class TimeLog extends Model
         TimeTrack::where('id', '=', $id)
             ->update([
                 'total_time' => (int)$count,
-                'value' => (new Task())->time_hour((int)$count) * $userHourleRate
+                'value' => (new Task())->value($count, $userHourleRate)
             ]);
 
         return;

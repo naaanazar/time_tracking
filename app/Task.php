@@ -132,6 +132,14 @@ class Task extends Model
         return $result = $houers . ':' . $minutes;
     }
 
+    public function value($second, $rate)
+    {
+        $minutes = bcmod($second, 60);
+        $houers = (int)($second/3600);
+
+        return $houers * $rate + ($minutes/60) * $rate;
+    }
+
     public function time_add_00($time)
     {
 
