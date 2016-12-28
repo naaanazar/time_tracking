@@ -100,7 +100,7 @@ class ReportsController extends Controller
      * people report
      * $userId - id user
      * */
-    public function peopleReport( $dateStart, $dateFinish )
+    public function peopleReport( $dateStart=false, $dateFinish=false )
     {
         $tasks = Task::where('done', '=', 1)
             ->where('date_finish', '>=', $dateStart)
@@ -124,6 +124,11 @@ class ReportsController extends Controller
             $tasks[ $key ]['economy'] = $tasks[ $key ]['value'] - $tasks[ $key ]['cost'];
         }
 
-        return $tasks;
+        $date['start'] = $dateStart;
+        $date['finish'] = $dateFinish;
+
+        $peopleReport = $tasks;
+
+        return view('reports.peopleReport', compact('peopleReport', 'date'));
     }
 }

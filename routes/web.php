@@ -93,7 +93,7 @@ Route::group(['middleware' => ['permision']], function () {
     Route::get('/reports/daily/{day?}', 'ReportsController@dailyReport');
 
     Route::get('/reports/project/{dateStart}/{dateFinish}', 'ReportsController@projectReport');
-    Route::get('/reports/people/{dateStart}/{dateFinish}/{userId}', 'ReportsController@peopleReport');
+    Route::get('/reports/people/{dateStart?}/{dateFinish?}', 'ReportsController@peopleReport');
 
 
     // for ajax
