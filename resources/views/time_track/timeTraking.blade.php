@@ -1,6 +1,8 @@
 @extends('layouts.index_template')
 
 @section('content')
+
+
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
     <script type="text/javascript" src="/data/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="/data/daterangepicker.css" />
@@ -55,11 +57,13 @@
                     {{ csrf_field() }}
                     <div class="form-group form-group-edit col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                         <div class="col-xs-2 col-sm-4 col-md-3 col-lg-3" style="text-align: right;">
-                            <label class="control-label labelTrack" for="trackProjectId">Project</label>
+                            <label class="control-label labelTrack" for="trackProjectId">Project *</label>
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
+
                                 <select name="project_id" class="inputTrackPadding focused my_input"  id="trackProjectId" style="height: 35px;" required>
                                     <option selected disabled value="">Select project</option>
+
                                     @if( isset( $track ) )
                                         <option value="{{ $track[0]->project->id }}" selected>{{ $track[0]->project->project_name }}</option>
                                     @endif
@@ -77,11 +81,11 @@
 
                     <div class="form-group form-group-edit col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                         <div class="col-xs-2 col-sm-4 col-md-3 col-lg-3" style="text-align: right;">
-                            <label class="control-label labelTrack" for="trackTaskId">Task</label>
+                            <label class="control-label labelTrack" for="trackTaskId">Task *</label>
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
 
-                            <select name="task_id" class="inputTrackPadding focused my_input"  id="trackTaskId"  style="height: 35px;" required>
+                            <select name="task_id" class="inputTrackPadding focused my_input"  id="trackTaskId"  style="height: 35px;" required >
                                 @if( isset( $track ) )
                                     <option value="{{ $track[0]->task->id }}" selected>{{ $track[0]->task->task_titly }}</option>
                                 @endif
@@ -132,10 +136,15 @@
                             <input id="formTrackDate"  type="hidden" name="track_date" value="<?= isset($date) ?  $date : ''?>" >
                             <input id="formTrackDuration" type="hidden" name="date_duration" >
 
+
+
                             <div class="col-md-2 col-lg-2" style="padding: 0px">
                                <span class="" style="display: inline-block">
                                 <label class = "labelTrack">
-                                    <input type="checkbox" id="nextDay" name="nextDate"> Next Day
+                                    <input type="checkbox" id="nextDay" name="nextDate"
+                                           <?php  (isset( $track)) ? $duration = explode(":", $track[0]->duration) : ''; ?>
+                                    <?= isset($track)  ? (floor((strtotime( $track[0]->date_finish) - strtotime( $track[0]->date_start)) / (60 * 60 * 24)) == 1 ||  $duration[0] >  24 ? 'checked' : '' ) : '' ?>
+                                            > Next Day
                                 </label>
                              </span>
                             </div>
@@ -155,11 +164,11 @@
 
                     <div class="form-group form-group-edit col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                         <div class="col-xs-2 col-sm-4 col-md-3 col-lg-3" style="text-align: right;">
-                            <label class="control-label labelTrack" for="timeDuration" style="text-align: left; padding-top: 10px">Duration</label>
+                            <label class="control-label labelTrack" for="timeDuration" style="text-align: left; padding-top: 10px">Duration *</label>
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
-                            <input type="text" style="padding: 10px; max-width: 65%;"   class="inputTrackPadding focused my_input" name="duration" id="timeDuration" placeholder="HH:MM"
-                                    value="<?= ( isset( $track ) ) ? $track[0]->duration : '' ; ?>">
+                            <input type="text" style="padding: 10px; max-width: 65%;" required  class="inputTrackPadding focused my_input" name="duration" id="timeDuration" placeholder="HH:MM"
+                                    value="<?= ( isset( $track ) ) ? $track[0]->duration : '' ; ?>"/>
                             <label class="labelTrack" for="" style="padding-top: 10px">Value($) <span id="insertCost"></span></label>
                             @if ($errors->has('duration'))
                                 <span class="help-block">
@@ -203,8 +212,9 @@
                             <label class="control-label labelTrack" for="trackDescription">Description</label>
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
-                           <textarea class="inputTrackPadding focused my_input " rows="7" name="description" id="trackDescription"><?= ( old('description') ) ? old('description') : (( isset($track) ) ? $track[0]->description : '') ; ?>
-                           </textarea>
+                           <textarea class="inputTrackPadding focused my_input"
+                                     rows="7" name="description" id="trackDescription"
+                                     value="<?= ( old('description') ) ? old('description') : ( isset($track)  ? $track[0]->description : '');  ?>" ></textarea>
                         </div>
                         @if ($errors->has('description'))
                             <span class="help-block">
@@ -274,7 +284,16 @@
                                         {{ ($key->total_time == null) ? '00:00:00' : date('H:i:s', strtotime($totalTime)) }}
                                 </h3>
                                 @if ($key->date_start == null || $key->date_start == null)
-                                    <p class="project" >  {{ ($key->duration == null) ? '00:00' : date('H:i',  mktime(0,$key->duration)) }}</p>
+                                    <?php  $hours = (int)($key->duration/60);
+                                   $minutes = bcmod($key->duration, 60);
+                                            if (strlen($hours) < 2){
+                                                $hours = '0' . $hours;
+                                            }
+                                            if (strlen($minutes) < 2){
+                                                $minutes = '0' . $minutes;
+                                            }
+                                    ?>
+                                    <p class="project" >  {{ ($key->duration == null) ? '00:00' : $hours . ':' . $minutes }}</p>
                                 @else
                                      <p class="project" > {{ date('H:i', strtotime($key->date_start)) }} - {{  date('H:i', strtotime($key->date_finish)) }}</p>
                                 @endif

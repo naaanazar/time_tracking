@@ -19,10 +19,20 @@ class ReportsController extends Controller
      * $id - task id
      * $day - day of reports
      * */
-    public function dailyReport( $day ) // testing
+    public function dailyReport($day=false)
+
     {
+
+        if($day == false) {
+            $day = date('Y-m-d');
+        }
+
+        $day = date('Y-m-d', strtotime($day));
+
+
         $data = date_create($day);
         $data1 = date_modify($data, '+1 day');
+
 
         $tasks = Task::where('done', '=', 1)
             ->where('date_finish', '>=', $data)
@@ -43,7 +53,7 @@ class ReportsController extends Controller
             $tasks[$key]['value'] = $value;
         }
 
-        return $tasks;
+        return view('reports.dayliReport', compact('trasks'));
     }
 
     /*
