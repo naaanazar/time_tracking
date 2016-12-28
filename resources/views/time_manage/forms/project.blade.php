@@ -104,12 +104,11 @@
 
                                         @if( isset( $lead[0] ) )
                                             <option selected value="{{ $lead[0]->id }}">{{ $lead[0]->name }}</option>
+                                            <option  value="0"> </option>
                                         @else
-                                            <option selected value="0">Select</option>
+                                            <option selected value="0">Please select team</option>
                                         @endif
-                                        @if( !isset( $lead[0]))
-                                        <option selected value="0">Select</option>
-                                            @endif
+
 
                                         @if (isset($leads->company_name))
                                             <option value="{{ $leads->id }}" selected>{{ $leads->company_name }}</option>

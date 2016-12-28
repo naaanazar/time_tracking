@@ -4,7 +4,32 @@
 'use strict';
 $(document).ready(function(){
 
-  //  $('#datetimepicker').datetimepicker('setInitialDate', '2016-12-31');
+
+
+    //calendar
+
+
+    var dd = new Calendar({
+        element: $('.one'),
+        earliest_date: 'January 1, 2000',
+        latest_date: moment(),
+        start_date: moment().subtract(29, 'days'),
+        end_date: moment(),
+
+        callback: function() {
+            var start = moment(this.start_date).format('YYYY-MM-DD'),
+                end = moment(this.end_date).format('YYYY-MM-DD');
+
+            window.location.href = "/trecking/" + dateCalendar;
+
+            console.debug('Start Date: '+ start +'\nEnd Date: '+ end);
+        }
+    });
+
+
+
+
+    //  $('#datetimepicker').datetimepicker('setInitialDate', '2016-12-31');
 
   /*  $('.day').on('click', function(){
         var date = setTimeout(" console.log($('#dtp_input2').val());"  , 500);

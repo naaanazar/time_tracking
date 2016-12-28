@@ -34,6 +34,10 @@
    <link href="/css/bootstrap-datetimepicker.css" rel="stylesheet" media="screen">
 
 
+    <link rel="stylesheet" href="/css/application.css" />
+    <link rel="stylesheet" href="/css/calendar-range.css" />
+
+
 
     <link rel="stylesheet" type="text/css" href="/datatables/DataTables-1.10.12/css/dataTables.bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/datatables/Buttons-1.2.2/css/buttons.bootstrap.min.css"/>
@@ -83,7 +87,7 @@
                                 <ul class="dropdown-menu dropdown-menu-my" style="background-color: #ff6d00; top: 58px;" >
                                     <li><a href="/reports/daily">Daily Report</a></li>
                                     <li><a href="/reports/people">Project Report</a></li>
-                                    <li><a href="#">People Report</a></li>
+                                    <li><a href="/reports/people">People Report</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#">------</a></li>
                                 </ul>
@@ -183,6 +187,16 @@
 
     <script src="/bootstrap3/js/bootstrap.min.js"></script>
     <script src="/js/jquery.jgrowl.js"></script>
+
+
+
+
+
+    <script src="/js/Calendar.js"></script>
+
+
+
+
 
 
     <script src="/js/main.js"></script>

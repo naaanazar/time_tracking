@@ -42,7 +42,7 @@
                             </div>
 
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                <input name="company_address" required class="input-xlarge focused my_input" id="AddressId"   type="text"
+                                <input name="company_address"  class="input-xlarge focused my_input" id="AddressId"   type="text"
                                        value="<?= isset($client->company_address) ? $client->company_address : ((old('company_address')) ? old('company_address') :'') ?>"/>
                                 @if ($errors->has('company_address'))
                                     <span class="help-block">

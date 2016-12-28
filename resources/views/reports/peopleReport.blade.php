@@ -20,7 +20,9 @@
          data-log-active = "<?= isset($_COOKIE['logTrackActiveLogId']) ? $_COOKIE['logTrackActiveLogId'] : ''?>">
 
         <div class="row" style="margin-top: 20px">
-            <div class="col-md-2 btn-toolbar" style="vertical-align: inherit">
+            <div class="col-md-2 btn-toolbar" style="vertical-align: inherit; font-size: large ">
+
+                <div class="daterange daterange--double one"></div>
 
             </div>
 
