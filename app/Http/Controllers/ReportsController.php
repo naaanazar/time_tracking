@@ -50,8 +50,10 @@ class ReportsController extends Controller
             $total_time = 0;
             $value = 0;
             foreach( $task['relations']['track'] as $log) {
-                $total_time += $log['attributes']['total_time'];
-                $value += $log['attributes']['value'];
+                if( strtotime($data->format('Y-m-d')) < strtotime($log['attributes']['date_finish']) && strtotime($data1->format('Y-m-d')) > strtotime($log['attributes']['date_finish']) ) {
+                    $total_time += $log['attributes']['total_time'];
+                    $value += $log['attributes']['value'];
+                }
             }
             $tasks[$key]['total'] = $objectTask->time_add_00($objectTask->time_hour($total_time));
             $tasks[$key]['value'] = $value;
