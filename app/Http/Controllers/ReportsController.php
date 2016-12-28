@@ -24,8 +24,9 @@ class ReportsController extends Controller
     {
 
         if($day == false) {
-            $day = date('Y-m-d');
+            $day = date('d-m-Y');
         }
+        $date = $day;
 
         $day = date('Y-m-d', strtotime($day));
 
@@ -53,7 +54,7 @@ class ReportsController extends Controller
             $tasks[$key]['value'] = $value;
         }
 
-        return view('reports.dayliReport', compact('trasks'));
+        return view('reports.dayliReport', compact('trasks', 'date'));
     }
 
     /*

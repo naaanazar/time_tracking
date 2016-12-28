@@ -20,7 +20,7 @@
 
                         <div class="control-group row" >
                             <label class="control-label col-sm-2" for="focusedInput">User type</label>
-                            <div class="controls">
+                            <div class="controls col-sm-10">
                                 <select name="employe" class="input-xlarge focused" id="selectTeam" style="height: 42px;" >
                                     <option>{{ $user->employe }}</option>
                                     @if ($status == 'Admin')
@@ -37,10 +37,10 @@
                         </div>
                         <div class="control-group row">
                             <label class="control-label col-sm-2" for="focusedInput">Name</label>
-                            <div class="controls">
+                            <div class="controls col-sm-10">
                                 <input name="name" class="input-xlarge focused" id="focusedInput" value="{{ $user->name }}"  type="text">
                                 @if ($errors->has('name'))
-                                    <span class="help-block">
+                                    <span class="help-block ">
                                             <strong style="color:#802420">{{ $errors->first('name') }}</strong>
                                         </span>
                                 @endif
@@ -48,7 +48,7 @@
                         </div>
                         <div class="control-group row" id="hourlyRate"  style="display:none;">
                             <label class="control-label col-sm-2" for="hourlyRateId">Hourly rate</label>
-                            <div class="controls">
+                            <div class="controls col-sm-10">
 
                                 <input name="hourlyRate" class="input-xlarge focused"  id="hourlyRateId" value="<?= $user->hourly_rate ?>" type="number" step="0.01">
 
@@ -65,7 +65,7 @@
 
                             @if( $teams == true )
 
-                                <div class="controls">
+                                <div class="controls col-sm-10">
                                     <select name="users_team_id" class="input-xlarge focused" style="height: 42px;">
                                         @if (isset($teamActive))
                                             <option value="{{ $teamActive->id }}" selected>{{ $teamActive->team_name }}</option>
