@@ -1,8 +1,7 @@
 @extends('layouts.index_template')
 
 @section('content')
-
-<?php ( old() ) ? var_dump(old()) : '' ?>
+<?php (old()) ? var_dump(old()) : '' ?>
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
     <script type="text/javascript" src="/data/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="/data/daterangepicker.css" />
@@ -64,6 +63,14 @@
                                 <select name="project_id" class="inputTrackPadding focused my_input"  id="trackProjectId" style="height: 35px;" required>
                                     <option selected disabled value="">Select project</option>
 
+                                    @if( old() && old('project_id') &&  $projects )
+                                        @foreach( $projects as $project )
+                                           @if( $project['id'] && $project['id'] == old('project_id') )
+                                               <option selected>{{ $project['project_name'] }}</option>
+                                           @endif
+                                        @endforeach
+                                    @endif
+
                                     @if( isset( $track ) )
                                         <option value="{{ $track[0]->project->id }}" selected>{{ $track[0]->project->project_name }}</option>
                                     @endif
@@ -86,6 +93,19 @@
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
 
                             <select name="task_id" class="inputTrackPadding focused my_input"  id="trackTaskId"  style="height: 35px;" required >
+
+                                @if( old() && old('task_id') &&  $projects )
+                                    @foreach( $projects as $project )
+                                        @if( $project['id'] && $project['id'] == old('project_id') )
+                                            @foreach( $project['task'] as $task )
+                                                @if( isset($task['id']) && $task['id'] == old('task_id') )
+                                                    <option selected>{{ $task['task_titly'] }}</option>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+                                @endif
+
                                 @if( isset( $track ) )
                                     <option value="{{ $track[0]->task->id }}" selected>{{ $track[0]->task->task_titly }}</option>
                                 @endif
