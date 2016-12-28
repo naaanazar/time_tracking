@@ -37,6 +37,8 @@ $(document).ready(function(){
     });*/
 
 
+
+
     $(".d4").datepicker({
             autoclose: true,
             todayBtn: "linked",
@@ -62,6 +64,37 @@ $(document).ready(function(){
     $(document).on("click", ".calendarPrevDay", function(){
         var dateCalendar = moment($('#conteiner').data('date'), 'DD-MM-YYYY').add('days', -1).format('DD-MM-YYYY');
         window.location.href = "/trecking/" + dateCalendar;
+    });
+
+
+    //report
+
+
+    $(".d5").datepicker({
+            autoclose: true,
+            todayBtn: "linked",
+            todayHighlight: true
+        }
+    ).on('changeDate', function (e) {
+            var dateCalendar = e.format();
+            dateCalendar = moment(dateCalendar, 'MM/DD/YYYY').format('DD-MM-YYYY');
+            window.location.href = "/reports/daily/" + dateCalendar;
+        });
+
+    $('#sandbox-container .input-group.date').datepicker({
+        autoclose: true
+    });
+
+    $('.d5').datepicker('update', new Date(moment($('#conteiner').data('date'), 'DD-MM-YYYY')));
+
+    $(document).on("click", ".calendarNextReport", function(){
+        var dateCalendar = moment($('#conteiner').data('date'), 'DD-MM-YYYY').add('days', 1).format('DD-MM-YYYY');
+        window.location.href = "/reports/daily/" + dateCalendar;
+    });
+
+    $(document).on("click", ".calendarPrevDayReport", function(){
+        var dateCalendar = moment($('#conteiner').data('date'), 'DD-MM-YYYY').add('days', -1).format('DD-MM-YYYY');
+        window.location.href = "/reports/daily/" + dateCalendar;
     });
 
 

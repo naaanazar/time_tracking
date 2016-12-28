@@ -22,13 +22,13 @@
         <div class="row" style="margin-top: 20px">
             <div class="col-md-2 btn-toolbar" style="vertical-align: inherit">
                 <div id="timeStep5" class="btn-group">
-                    <button class="btn btn-sm calendarPrevDay">
+                    <button class="btn btn-sm calendarPrevDayReport">
                         <span class="glyphicon glyphicon-chevron-left"></span>
                     </button>
-                    <button class="btn btn-sm calendarNextDay">
+                    <button class="btn btn-sm calendarNextReport">
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </button>
-                    <button class="btn btn-sm d4">
+                    <button class="btn btn-sm d5">
                         <span class="glyphicon glyphicon-th"></span>
                     </button>
 
@@ -74,21 +74,27 @@
                                 <th class="thFoot" ></th>
                                 <th class="thFoot" ></th>
                                 <th class="thFoot" ></th>
-                                <th class="thFoot" >Cost</th>
+                                <th class="thFoot" ></th>
 
                             </tr>
                             </tfoot>
+
                             <tbody>
 
+
                             @if (isset($dayReport))
+
                                 @foreach( $dayReport as $key )
+
                                     <tr class="odd gradeX">
+                                        <td>{{ $key->user->name }}</td>
+                                        <td>{{ $key->client->company_name }}</td>
                                         <td>{{ $key->project->project_name }}</td>
-                                        <td>{{ $key->project->project_name }}</td>
-                                        <td>{{ $key->project->project_name }}</td>
-                                        <td>{{ $key->project->project_name }}</td>
-                                        <td>{{ $key->project->project_name }}</td>
-                                        <td>{{ $key->project->project_name }}</td>
+
+                                        <td>{{ $key->task_titly }}</td>
+                                        <td>{{ $key->task_type }}</td>
+                                        <td>{{ $key->total }}</td>
+                                        <td>{{ $key->value }}</td>
 
 
                                     </tr>
@@ -98,10 +104,17 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="row">
+                        <strong>Total: Hours</strong><br>
+                        <strong>Total: Value</strong>
+                    </div>
                 </div>
+
             </div>
+
             <!-- /block -->
         </div>
+
 
 
 

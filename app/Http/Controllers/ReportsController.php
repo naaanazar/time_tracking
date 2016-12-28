@@ -32,12 +32,12 @@ class ReportsController extends Controller
 
 
         $data = date_create($day);
-        $data1 = date_modify($data, '+1 day');
 
+        $data1 = date_modify(date_create($day), '+1 day');
 
-        $tasks = Task::where('done', '=', 1)
-            ->where('date_finish', '>=', $data)
-            ->where('date_finish', '<=', $data1)
+       // where('done', '=', 1)
+        $tasks = Task::where('date_finish', '>', $data)
+            ->where('date_finish', '<', $data1)
             ->with('client', 'project', 'user', 'track')
             ->get();
 
@@ -50,7 +50,7 @@ class ReportsController extends Controller
                 $total_time += $log['attributes']['total_time'];
                 $value += $log['attributes']['value'];
             }
-            $tasks[$key]['total'] = $objectTask->time_hour($total_time);
+            $tasks[$key]['total'] = $objectTask->time_add_00($objectTask->time_hour($total_time));
             $tasks[$key]['value'] = $value;
         }
         $dayReport = $tasks;

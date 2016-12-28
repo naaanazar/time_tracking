@@ -129,6 +129,24 @@ class Task extends Model
         $minutes = bcmod($minute, 60);
         $houers = (int)($minute/60);
 
-        return $result = $houers . '.' . $minutes;
+        return $result = $houers . ':' . $minutes;
     }
+
+    public function time_add_00($time)
+    {
+
+        $time= explode(':', $time);
+        $hours =  $time[0];
+        $minutes = $time[1];
+
+        if (strlen($hours) < 2){
+            $hours = '0' . $hours;
+        }
+        if (strlen($minutes) < 2){
+            $minutes = '0' . $minutes;
+        }
+
+        return $result = $hours . ':' . $minutes;
+    }
+
 }
