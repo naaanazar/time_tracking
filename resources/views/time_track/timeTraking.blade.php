@@ -1,7 +1,6 @@
 @extends('layouts.index_template')
 
 @section('content')
-<?php (old()) ? var_dump(old()) : '' ?>
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
     <script type="text/javascript" src="/data/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="/data/daterangepicker.css" />
@@ -66,7 +65,7 @@
                                     @if( old() && old('project_id') &&  $projects )
                                         @foreach( $projects as $project )
                                            @if( $project['id'] && $project['id'] == old('project_id') )
-                                               <option selected>{{ $project['project_name'] }}</option>
+                                               <option value="{{ old('project_id') }}" selected>{{ $project['project_name'] }}</option>
                                            @endif
                                         @endforeach
                                     @endif
@@ -99,7 +98,7 @@
                                         @if( $project['id'] && $project['id'] == old('project_id') )
                                             @foreach( $project['task'] as $task )
                                                 @if( isset($task['id']) && $task['id'] == old('task_id') )
-                                                    <option selected>{{ $task['task_titly'] }}</option>
+                                                    <option value="{{ old('task_id') }}" selected>{{ $task['task_titly'] }}</option>
                                                 @endif
                                             @endforeach
                                         @endif
@@ -126,7 +125,7 @@
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
                             <div class="col-md-4 col-lg-4" style="padding: 0px">
                             <span class="input-group" >
-                                <input type="text" value="<?= (old() && old('date_start') ? explode(' ', old('date_start'))[4] : '') ?>"
+                                <input type="text" value="<?= (old() && old('date_start') ? ltrim(explode(':', explode(' ', old('date_start'))[4])[0], '0') : '') ?>"
                                        style="width: 60%" class="inputTrackPadding form-control" id="formTrackStart" placeholder="HH:MM"/>
 
                                 <span class="input-group-btn" style=" float:left ">
@@ -143,7 +142,7 @@
 
                             <div class="col-md-4 col-lg-4" style="padding: 0px">
                             <span class="input-group" >
-                                <input type="text" value="<?= (old() && old('date_finish') ? explode(' ', old('date_finish'))[4] : '') ?>"
+                                <input type="text" value="<?= (old() && old('date_finish') ? ltrim(explode(':', explode(' ', old('date_finish'))[4])[0], '0') : '') ?>"
                                        style="width: 60%; " class="inputTrackPadding form-control"  id="formTrackFinish" placeholder="HH:MM">
                                 <span class="input-group-btn" style=" float:left ">
                                     <button type="button" class="btn btn-default" id="formTrackFinishNow" style="padding:6px 1px">now</button>
