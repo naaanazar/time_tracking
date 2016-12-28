@@ -36,9 +36,9 @@
                             </div>
                         </div>
                         <div class="control-group row">
-                            <label class="control-label col-sm-2" for="focusedInput">Name</label>
+                            <label class="control-label col-sm-2" for="focusedInput">Name *</label>
                             <div class="controls col-sm-10">
-                                <input name="name" class="input-xlarge focused" id="focusedInput" value="{{ $user->name }}"  type="text">
+                                <input name="name" class="input-xlarge focused" id="focusedInput" value="{{ $user->name }}"  type="text" required />
                                 @if ($errors->has('name'))
                                     <span class="help-block ">
                                             <strong style="color:#802420">{{ $errors->first('name') }}</strong>

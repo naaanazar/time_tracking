@@ -39,6 +39,71 @@
         </div>
 
 
+        <div class="row-fluid">
+
+            <!-- block -->
+            <div class="block" style="border-bottom: 1px solid #ccc; border-left: none; border-right: none">
+
+                <div class="block-content collapse in">
+                    <div class="span12">
+
+
+                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="usersTable">
+                            <thead>
+                            <tr>
+                                <th width="130px">Person Name</th>
+                                <th>Client</th>
+                                <!--  <th>User</th> -->
+                                <th>Project</th>
+                                <!--  <th>Date Start</th>
+                                 <th>Date Finish</th>-->
+                                <th>Task</th>
+                                <th>Task Type</th>
+                                <th>Hours</th>
+                                <th>Value</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th class="thFoot" width="130px"></th>
+                                <th class="thFoot" ></th>
+                                <!-- <th class="thFoot" >User</th>-->
+                                <th class="thFoot" ></th>
+                                <!--  <th class="thFoot" >Date Start</th>
+                                  <th class="thFoot" >Date Finish</th>-->
+                                <th class="thFoot" ></th>
+                                <th class="thFoot" ></th>
+                                <th class="thFoot" ></th>
+                                <th class="thFoot" >Cost</th>
+
+                            </tr>
+                            </tfoot>
+                            <tbody>
+
+                            @if (isset($dayReport))
+                                @foreach( $dayReport as $key )
+                                    <tr class="odd gradeX">
+                                        <td>{{ $key->project->project_name }}</td>
+                                        <td>{{ $key->project->project_name }}</td>
+                                        <td>{{ $key->project->project_name }}</td>
+                                        <td>{{ $key->project->project_name }}</td>
+                                        <td>{{ $key->project->project_name }}</td>
+                                        <td>{{ $key->project->project_name }}</td>
+
+
+                                    </tr>
+                                @endforeach
+                            @endif
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /block -->
+        </div>
+
+
 
     </div>
     <!--    <script src="/js/jquery/jquery-3.1.1.min.js"></script>-->

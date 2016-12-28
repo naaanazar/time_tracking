@@ -53,8 +53,9 @@ class ReportsController extends Controller
             $tasks[$key]['total'] = $objectTask->time_hour($total_time);
             $tasks[$key]['value'] = $value;
         }
+        $dayReport = $tasks;
 
-        return view('reports.dayliReport', compact('trasks', 'date'));
+        return view('reports.dayliReport', compact('dayReport', 'date'));
     }
 
     /*
