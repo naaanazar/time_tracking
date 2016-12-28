@@ -29,7 +29,7 @@
                                     <label class="control-label" for="CompanyTaskId" style="text-align: left;">Client *</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                        <select name="company_id" class="input-xlarge focused my_input" id="CompanyTaskId" style="height: 42px;" required>
+                                        <select name="company_id" class="input-xlarge focused my_input" id="CompanyTaskId" style="height: 42px;" required >
 
                                         @if( !isset( $task ) )
                                             <option  defaul value="">Please select Client</option>
@@ -69,7 +69,7 @@
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                     @if( $status == 'Developer' )
                                         <select name="project_id" class="input-xlarge focused my_input" id="taskProjectId" style="height: 42px;" required
-                                                <?= ( $status == 'Developer') ? ' disabled' : '' ?>>
+                                                <?= ( $status == 'Developer') ? ' disabled' : '' ?> >
                                         @if( isset( $projects ) )
                                             @foreach( $projects as $project )
                                                     <option value="{{ $project->id }}" selected>{{ $project->project_name }}</option>

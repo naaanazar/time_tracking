@@ -14,6 +14,8 @@
         </div>
     </div>
 
+
+
     <div id="conteiner" class="container" data-date="<?= isset($date)? $date : '' ?>"
          data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}"
          data-token="{{ Session::token() }}"
@@ -190,7 +192,9 @@
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
                             <input type="text" style="padding: 10px; max-width: 65%;" required  class="inputTrackPadding focused my_input" name="duration" id="timeDuration" placeholder="HH:MM"
-                                    value="<?= ( isset( $track ) ) ? $track[0]->duration : ((old() && old('duration')) ? old('duration') : '') ; ?>"/>
+                                    value="<?= ( isset( $track ) ) ? $track[0]->duration : ((old() && old('duration')) ? old('duration') : '') ; ?>"
+                                   pattern="(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){1}"
+                                    title="Please match the requested format HH:MM"/>
                             <label class="labelTrack" for="" style="padding-top: 10px">Value($) <span id="insertCost"></span></label>
                             @if ($errors->has('duration'))
                                 <span class="help-block">
@@ -222,7 +226,7 @@
                         <span class="" style="display: inline-block">
                             <label  class="labelTrack" for="billableTime">
                                Billable Time <input type="checkbox" name="billable_time" value="1" id="billableTime"
-                                <?= ( isset( $track ) && $track[0]->task->billable == 1 ) ? ' checked' : ((old() && old('billable_time') == '1') ? ' checked': '' ) ;?>>
+                                <?= ( isset( $track ) && $track[0]->billable_time == 1 ) ? ' checked' : ((old('billable_time') == '1') ? ' checked': '' ) ;?>>
                             </label>
                          </span>
                         </div>
@@ -235,8 +239,8 @@
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
                            <textarea class="inputTrackPadding focused my_input"
-                                     rows="7" name="description" id="trackDescription"
-                                     value="<?= ( old('description') ) ? old('description') : ( isset($track)  ? $track[0]->description : '');  ?>" ></textarea>
+                                     rows="7" name="description" id="trackDescription"><?=
+                               ( old('description') ) ? old('description') : ( isset($track)  ? $track[0]->description : '')  ?></textarea>
                         </div>
                         @if ($errors->has('description'))
                             <span class="help-block">

@@ -37,6 +37,7 @@ class TimeTrackController extends Controller
         }
         setcookie('SetDateTracking', $date, time() + (86400 * 30), "/");
 
+
         if( Input::all() == true ) {
             $this->validation_track($request);
             $data = Input::all();
@@ -130,6 +131,12 @@ class TimeTrackController extends Controller
             $data['track_date'] = date('Y-m-d', strtotime($data['track_date']));
             unset($data['_token']);
             unset($data['date_duration']);
+            unset($data['nextDate']);
+
+            if (!isset($data['billable_time'])){
+                $data['billable_time'] = '0';
+            }
+
 
             TimeTrack::where('id', '=', $track_id)->update( $data );
 
@@ -159,7 +166,7 @@ class TimeTrackController extends Controller
                 ->with('project', 'task')
                 ->get();
 
-            $track[0]['duration'] = $task->time_minute($track[0]['attributes']['duration']);
+            $track[0]['duration'] = $task->time_add_00($task->time_minute($track[0]['attributes']['duration']));
 
             return view('time_track.timeTraking', compact('tasks', 'track', 'date', 'tracks'));
         }

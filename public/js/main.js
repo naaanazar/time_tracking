@@ -993,7 +993,7 @@ $(document).ready(function(){
 
         var clientId = $("#CompanyTaskId option:selected").val();
         if (clientId) {
-            var result = '<option selected disabled>Please change Project</option>';
+            var result = '<option selected disabled value="">Please select Project</option>';
             var urlSend = '/project/getProjects/' + clientId;
             $.get(urlSend, function (response) {
 
@@ -1106,7 +1106,7 @@ var Main = {
         if (clientId) {
 
             var urlSend = '/get/team/' + clientId;
-            var result = '<option selected disabled>Please change User</option>';
+            var result = '<option selected disabled value="null">Please select Assign to</option>';
 
             $.get(urlSend, function (response) {
                 var lead = '<optgroup label="Lead">' +
@@ -1137,7 +1137,7 @@ var Main = {
                     other += '</optgroup>';
                 }
 
-                $("#AssignToId").append(lead + team + qa + other);
+                $("#AssignToId").append(result + lead + team + qa + other);
             });
         } else {
             $("#AssignToId").html('');
