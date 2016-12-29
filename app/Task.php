@@ -134,18 +134,18 @@ class Task extends Model
 
     public function secondToHour( $second )
     {
-        $minutes = bcmod($second, 60);
         $houers = (int)($second/3600);
+        $minutes =  (int)(($second - ($houers * 3600)) / 60);
 
         return $houers . ':' . $minutes;
     }
 
     public function value($second, $rate)
     {
-        $minutes = bcmod($second, 60);
         $houers = (int)($second/3600);
+        $minutes =  ($second - ($houers * 3600)) / 60;
 
-        return $houers * $rate + ($minutes/60) * $rate;
+        return $houers * $rate + ((float)($minutes/60)) * $rate;
     }
 
     public function time_add_00($time)

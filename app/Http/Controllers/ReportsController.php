@@ -37,7 +37,7 @@ class ReportsController extends Controller
         $data1 = date_modify(date_create($day), '+1 day');
 
        // where('done', '=', 1)
-        $tasks = Task::where('date_finish', '>=', $data)
+        $tasks = Task::where('date_finish', '>', $data)
             ->where('date_finish', '<=', $data1)
             ->with('client', 'project', 'user', 'track')
             ->get();
@@ -66,7 +66,7 @@ class ReportsController extends Controller
         $total['totalValue'] = $totalValue;
 
         $dayReport = $tasks;
-
+        //echo'<pre>'; var_dump($tasks); echo'</pre>';
         return view('reports.dayliReport', compact('dayReport', 'date', 'total'));
     }
 

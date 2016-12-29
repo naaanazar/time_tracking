@@ -70,7 +70,7 @@ class TimeLog extends Model
             $count += $log['attributes']['total_time'];
         }
 
-        $taskId = TimeTrack::where('id', '=', 22)
+        $taskId = TimeTrack::where('id', '=', $id)
             ->with('task')
             ->first();
 
