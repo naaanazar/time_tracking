@@ -74,7 +74,6 @@
                                         @endif
 
                                         @foreach( $teams as $team )
-
                                                 <!--<input name="team_name" class="input-xlarge focused" id="focusedInput"  type="textl" required> -->
                                             @if( isset( $teamActive ) && $teamActive->id == $team->id )
 
