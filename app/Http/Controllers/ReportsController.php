@@ -55,13 +55,13 @@ class ReportsController extends Controller
                     $value += $log['attributes']['value'];
                 }
             }
-            $tasks[$key]['total'] = $objectTask->time_add_00($objectTask->time_hour($total_time));
+            $tasks[$key]['total'] = $objectTask->time_add_00($objectTask->secondToHour($total_time));
             $tasks[$key]['value'] = $value;
             $totalTime += $total_time;
             $totalValue += $tasks[$key]['value'];
         }
 
-        $total['totalTime'] = $objectTask->time_add_00($objectTask->time_hour($totalTime));
+        $total['totalTime'] = $objectTask->time_add_00($objectTask->secondToHour($totalTime));
         $total['totalValue'] = $totalValue;
 
         $dayReport = $tasks;
