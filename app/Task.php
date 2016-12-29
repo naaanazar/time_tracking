@@ -132,6 +132,14 @@ class Task extends Model
         return $result = $houers . ':' . $minutes;
     }
 
+    public function secondToHour( $second )
+    {
+        $minutes = bcmod($second, 60);
+        $houers = (int)($second/3600);
+
+        return $houers . ':' . $minutes;
+    }
+
     public function value($second, $rate)
     {
         $minutes = bcmod($second, 60);
@@ -157,4 +165,12 @@ class Task extends Model
         return $result = $hours . ':' . $minutes;
     }
 
+    /**
+        $date = string
+     * return string HH:MM
+     */
+    public function dateParse( $date )
+    {
+        return substr(explode(' ', $date)[1], 0, 5 );
+    }
 }

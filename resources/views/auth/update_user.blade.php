@@ -22,15 +22,15 @@
                             <label class="control-label col-sm-2" for="focusedInput">User type</label>
                             <div class="controls col-sm-10">
                                 <select name="employe" class="input-xlarge focused" id="selectTeam" style="height: 42px;" >
+                                    <?php $users = ['Admin', 'Supervisor', 'HR Manager', 'Lead', 'Developer', 'QA Engineer']; ?>
                                     <option>{{ $user->employe }}</option>
-                                    @if ($status == 'Admin')
-                                        <option>Admin</option>
-                                        <option>Supervisor</option>
-                                        <option>HR Manager</option>
-                                    @endif
-                                    <option>Lead</option>
-                                    <option>Developer</option>
-                                    <option>QA Engineer</option>
+                                    @foreach( $users as $val )
+                                        @if( $user->employe != $val )
+                                            @if ($status == 'Admin')
+                                                <option><?= $val?></option>
+                                            @endif
+                                        @endif
+                                    @endforeach
                                 </select>
 
                             </div>
@@ -74,12 +74,13 @@
                                         @endif
 
                                         @foreach( $teams as $team )
-
                                                 <!--<input name="team_name" class="input-xlarge focused" id="focusedInput"  type="textl" required> -->
-                                        <option value="{{ $team->id }}">{{ $team->team_name }}</option>
+                                            @if( isset( $teamActive ) && $teamActive->id == $team->id )
 
+                                            @else
+                                                <option value="{{ $team->id }}">{{ $team->team_name }}</option>
+                                            @endif
                                         @endforeach
-                                            <option></option>
 
                                     </select>
                                 </div>

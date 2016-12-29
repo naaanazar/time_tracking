@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <?php var_dump($peopleReport) ?>
+
 
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
     <script type="text/javascript" src="/data/daterangepicker.js"></script>
@@ -23,17 +23,18 @@
          data-log-active = "<?= isset($_COOKIE['logTrackActiveLogId']) ? $_COOKIE['logTrackActiveLogId'] : ''?>">
 
         <div class="row" style="margin-top: 20px">
-            <div class="col-md-3 btn-toolbar" style="vertical-align: inherit; font-size: large ">
+            <span class="col-md-4 col-lg-3   btn-toolbar" style="vertical-align: inherit; font-size: large ">
 
-                <div class="daterange daterange--double one"></div>
+                <div class="daterange daterange--double one" style=""></div>
 
-            </div>
-            <div class="col-md-3 " style="vertical-align: inherit; padding: 20px 20px">
+            </span>
+            <div class="col-md-3 col-lg-3" style=" padding: 20px 20px">
 
 
-                <select name="assign_to" class=" input-xlarge focused my_input "   id="SelectAllUserReport" style="height: 42px; " data-all="true">
+                <select name="users" class=" input-xlarge focused my_input "   id="SelectAllUserReport" style="height: 42px; " data-all="true">
+                    <option selected disabled >Please select Person</option>
                     @if(isset($users))
-                        <option selected disabled value="">Please select Person</option>
+
                         <optgroup label="Lead">
                             @if (isset($users['Lead']))
                                 @foreach($users['Lead'] as $key)
@@ -142,12 +143,13 @@
 
                                     <tr class="odd gradeX">
                                         <td>{{ $key->user->name }}</td>
-                                        <td>{{ $key->client->company_name }}</td>
                                         <td>{{ $key->project->project_name }}</td>
                                         <td>{{ $key->task_titly }}</td>
                                         <td>{{ $key->task_type }}</td>
-                                        <td>{{ $key->total }}</td>
+                                        <td></td>
                                         <td>{{ $key->value }}</td>
+                                        <td>{{ $key->cost }}</td>
+                                        <td>{{ $key->economy }}</td>
                                     </tr>
                                 @endforeach
                             @endif
@@ -156,9 +158,12 @@
                         </table>
                     </div>
                     <div class="row">
+
                         <strong>Total:</strong><br>
-                        <strong>Hours </strong><br>
-                        <strong>Value </strong>
+                        <strong>Value: <?= $total['totalValue'] ?> </strong> |
+                        <strong>Cost: <?= $total['totalCost'] ?> </strong> |
+                        <strong>Economy: <?= $total['totalEconomy'] ?> </strong>
+
                     </div>
                 </div>
 

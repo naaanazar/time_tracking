@@ -28,17 +28,22 @@
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
 
                                     <select name="company_id" class="input-xlarge focused my_input"  id="CompanyNameProjectId" style="height: 42px;" required>
-                                        <option selected disabled value="">Select</option>
                                         @if (isset($client->company_name))
                                         <option value="{{ $client->id }}" selected>{{ $client->company_name }}</option>
                                         @endif
 
                                         @if( isset( $project[0]->client_id ) && $project[0]->client_id == $project_client[0]->id )
                                             <option  value="{{ $project[0]->client_id }}" selected>{{ $project_client[0]->company_name }}</option>
+                                        @else
+                                            <option selected disabled value="">Select</option>
                                         @endif
 
                                         @foreach( $client as $key )
+                                            @if( isset( $project[0]->client_id ) &&  $project[0]->client_id == $key->id )
+
+                                            @else
                                                 <option  value="{{ $key->id}}">{{ $key->company_name }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                     @if ($errors->has('company_id'))

@@ -106,8 +106,8 @@
                     </div>
                     <div class="row">
                         <strong>Total:</strong><br>
-                            <strong>Hours {{ $total['totalTime'] }}</strong><br>
-                        <strong>Value {{ $total['totalValue'] }} </strong>
+                            <strong>Hours: {{ $total['totalTime'] }}</strong> |
+                        <strong>Value: {{ $total['totalValue'] }} </strong>
                     </div>
                 </div>
 
