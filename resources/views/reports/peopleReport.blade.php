@@ -146,7 +146,7 @@
                                         <td>{{ $key->project->project_name }}</td>
                                         <td>{{ $key->task_titly }}</td>
                                         <td>{{ $key->task_type }}</td>
-                                        <td></td>
+                                        <td>{{ $key->hours }}</td>
                                         <td>{{ $key->value }}</td>
                                         <td>{{ $key->cost }}</td>
                                         <td>{{ $key->economy }}</td>
