@@ -36,8 +36,8 @@ class ReportsController extends Controller
         $data1 = date_modify(date_create($day), '+1 day');
 
        // where('done', '=', 1)
-        $tasks = Task::where('date_finish', '>', $data)
-            ->where('date_finish', '<', $data1)
+        $tasks = Task::where('date_finish', '>=', $data)
+            ->where('date_finish', '<=', $data1)
             ->with('client', 'project', 'user', 'track')
             ->get();
 
@@ -81,6 +81,11 @@ class ReportsController extends Controller
 
         $objectTask = new Task();
 
+        $totalValue = 0;
+        $totalTime = 0;
+        $totalCost = 0;
+        $totalEconomy = 0;
+
         foreach( $projects as $key => $project ) {
             $totalTime = 0;
             $value = 0;
@@ -93,7 +98,17 @@ class ReportsController extends Controller
             $projects[ $key ]['total_time'] = $objectTask->secondToHour($totalTime);
             $projects[ $key ]['cost'] = $objectTask->secondToHour($totalTime) * $projects[ $key ]['original']['hourly_rate'];
             $projects[ $key ]['economy'] = $projects[ $key ]['value'] - $projects[ $key ]['cost'];
+
+            $totalValue += $projects[ $key ]['value'];
+            $totalTime += $projects[ $key ]['total_time'];
+            $totalCost += $projects[ $key ]['cost'];
+            $totalEconomy += $projects[ $key ]['economy'];
         }
+
+        $projects['totalValue'] = $totalValue;
+        $projects['totalTime'] = $totalTime;
+        $projects['totalCost'] = $totalCost;
+        $projects['totalCost'] = $totalCost;
 
         return $projects;
     }
@@ -112,6 +127,10 @@ class ReportsController extends Controller
 
         $objectTask = new Task();
 
+        $totalValue = 0;
+        $totalCost = 0;
+        $totalEconomy = 0;
+
         foreach( $tasks as $key => $task ) {
             $totalTime = 0;
 
@@ -124,7 +143,15 @@ class ReportsController extends Controller
             $tasks[ $key ]['value'] = $task['relations']['project']['attributes']['hourly_rate'] * $totalTime;
             $tasks[ $key ]['cost'] = $totalTime * $task['relations']['user']['attributes']['hourly_rate'];
             $tasks[ $key ]['economy'] = $tasks[ $key ]['value'] - $tasks[ $key ]['cost'];
+
+            $totalValue = $tasks[ $key ]['value'];
+            $totalCost = $tasks[ $key ]['cost'];
+            $totalEconomy = $tasks[ $key ]['economy'];
         }
+
+        $tasks['totalValue'] = $totalValue;
+        $tasks['totalCost'] = $totalCost;
+        $tasks['totalEconomy'] = $totalEconomy;
 
         $date['start'] = $dateStart;
         $date['finish'] = $dateFinish;
