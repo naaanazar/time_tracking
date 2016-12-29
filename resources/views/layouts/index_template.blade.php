@@ -51,7 +51,7 @@
 
     <!-- Scripts -->
     <script>
-        window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(), ]); ?>
+        window.Laravel = '<?php echo json_encode(['csrfToken' => csrf_token(), ]); ?>'
     </script>
 </head>
 <body id="bodyData" data-msg="<?=isset($msg) ? $msg : '' ?>" data-theme="<?=isset($theme) ? $theme : '' ?>">
@@ -86,8 +86,8 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-my" style="background-color: #ff6d00; top: 58px;" >
                                     <li><a href="/reports/daily">Daily Report</a></li>
-                                    <li><a href="/reports/people">Project Report</a></li>
-                                    <li><a href="/reports/people">People Report</a></li>
+                                  <!--  <li><a href="/reports/people">Project Report</a></li>
+                                    <li><a href="/reports/people">People Report</a></li>-->
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#">------</a></li>
                                 </ul>
