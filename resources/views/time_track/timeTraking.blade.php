@@ -193,7 +193,7 @@
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
                             <input type="text" style="padding: 10px; max-width: 65%;" required  class="inputTrackPadding focused my_input" name="duration" id="timeDuration" placeholder="HH:MM"
                                     value="<?= ( isset( $track ) ) ? $track[0]->duration : ((old() && old('duration')) ? old('duration') : '') ; ?>"
-                                   pattern="(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){1}"
+                                   pattern="(0[0-9]|1[0-9]|2[0-9])(:[0-5][0-9]){1}"
                                     title="Please match the requested format HH:MM"/>
                             <label class="labelTrack" for="" style="padding-top: 10px">Value($) <span id="insertCost"></span></label>
                             @if ($errors->has('duration'))
