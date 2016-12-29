@@ -127,7 +127,7 @@
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
                             <div class="col-md-4 col-lg-4" style="padding: 0px">
                             <span class="input-group" >
-                                <input type="text" value="<?= (old() && old('date_start') ? ltrim(explode(':', explode(' ', old('date_start'))[4])[0], '0') : '') ?>"
+                                <input type="text" value="<?= ( isset($data['start']) ) ? $data['start'] : ((old() && old('date_start') ? ltrim(explode(':', explode(' ', old('date_start'))[4])[0], '0') : '')) ; ?>"
                                        style="width: 60%" class="inputTrackPadding form-control" id="formTrackStart" placeholder="HH:MM"/>
 
                                 <span class="input-group-btn" style=" float:left ">
@@ -144,7 +144,7 @@
 
                             <div class="col-md-4 col-lg-4" style="padding: 0px">
                             <span class="input-group" >
-                                <input type="text" value="<?= (old() && old('date_finish') ? ltrim(explode(':', explode(' ', old('date_finish'))[4])[0], '0') : '') ?>"
+                                <input type="text" value="<?= ( isset( $data['finish'] ) ) ? $data['finish'] : ((old() && old('date_finish') ? ltrim(explode(':', explode(' ', old('date_finish'))[4])[0], '0') : '')) ; ?>"
                                        style="width: 60%; " class="inputTrackPadding form-control"  id="formTrackFinish" placeholder="HH:MM">
                                 <span class="input-group-btn" style=" float:left ">
                                     <button type="button" class="btn btn-default" id="formTrackFinishNow" style="padding:6px 1px">now</button>

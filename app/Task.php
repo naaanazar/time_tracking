@@ -165,4 +165,12 @@ class Task extends Model
         return $result = $hours . ':' . $minutes;
     }
 
+    /**
+        $date = string
+     * return string HH:MM
+     */
+    public function dateParse( $date )
+    {
+        return substr(explode(' ', $date)[1], 0, 5 );
+    }
 }
