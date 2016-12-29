@@ -31,6 +31,28 @@ $(document).ready(function(){
         }
     });
 
+    var ds = new Calendar({
+        element: $('.one2'),
+        earliest_date: 'January 1, 2000',
+        latest_date: moment(),
+        start_date: moment().subtract(29, 'days'),
+        end_date: moment(),
+
+        callback: function() {
+            var start = moment(this.start_date).format('YYYY-MM-DD'),
+                end = moment(this.end_date).format('YYYY-MM-DD');
+
+            var userId = $("#SelectAllProjectReport option:selected").val();
+
+            if (userId.length > 0) {
+
+                window.location.href = "/reports/project/" + start + '/' + end + '/' + userId;
+            }
+
+            console.debug('Start Date: '+ start +'\nEnd Date: '+ end);
+        }
+    });
+
 
 
     //reports

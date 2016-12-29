@@ -73,11 +73,12 @@ class ReportsController extends Controller
     /*
      * project report
      * */
-    public function projectReport( $dateStart, $dateFinish ) // testing
+    public function projectReport( $dateStart=false, $dateFinish=false, $projectId=false )
     {
         $projects = Project::where('created_at', '>=', $dateStart)
             ->where('created_at', '<=', $dateFinish)
-            ->with('user', 'task', 'track')
+            ->with('user', 'track')
+
             ->get();
 
         $objectTask = new Task();
@@ -106,12 +107,20 @@ class ReportsController extends Controller
             $totalEconomy += $projects[ $key ]['economy'];
         }
 
-        $projects['totalValue'] = $totalValue;
-        $projects['totalTime'] = $totalTime;
-        $projects['totalCost'] = $totalCost;
-        $projects['totalCost'] = $totalCost;
+        $total['totalValue'] = $totalValue;
+        $total['totalTime'] = $totalTime;
+        $total['totalCost'] = $totalCost;
 
-        return $projects;
+
+        $date['start'] = $dateStart;
+        $date['finish'] = $dateFinish;
+
+        $projectsList = DB::table('Project')
+            ->select('Project.project_name',
+                'Project.id')
+            ->get();
+
+        return view('reports.projectReport', compact('projects', 'date', 'projectsList', 'total'));
     }
 
     /*

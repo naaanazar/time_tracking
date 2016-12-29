@@ -25,57 +25,19 @@
         <div class="row" style="margin-top: 20px">
             <span class="col-md-4 col-lg-3   btn-toolbar" style="vertical-align: inherit; font-size: large ">
 
-                <div class="daterange daterange--double one" style=""></div>
+                <div class="daterange daterange--double one2" style=""></div>
 
             </span>
             <div class="col-md-3 col-lg-3" style=" padding: 20px 20px">
 
 
-                <select name="users" class=" input-xlarge focused my_input "   id="SelectAllUserReport" style="height: 42px; " data-all="true">
-                    <option selected disabled >Please select Person</option>
-                    @if(isset($users))
+                <select name="users" class=" input-xlarge focused my_input "   id="SelectAllProjectReport" style="height: 42px; " data-all="true">
+                    <option selected disabled >Please select Project</option>
+                    @if(isset($projectsList))
 
-                        <optgroup label="Lead">
-                            @if (isset($users['Lead']))
-                                @foreach($users['Lead'] as $key)
-                                    <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                                @endforeach
-                            @endif
-
-                        </optgroup>
-                        <optgroup label="Developer">
-                            @if (isset($users['Developer']))
-                                @foreach($users['Developer'] as $key)
-                                    <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                                @endforeach
-                            @endif
-
-                        </optgroup>
-                        <optgroup label="QA Engineer">
-                            @if (isset($users['QA Engineer']))
-                                @foreach($users['QA Engineer'] as $key)
-                                    <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                                @endforeach
-                            @endif
-
-                        </optgroup>
-                        <optgroup label="Supervisor">
-                            @if (isset($users['Supervisor']))
-                                @foreach($users['Supervisor'] as $key)
-                                    <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                                @endforeach
-                            @endif
-
-                        </optgroup>
-                        <optgroup label="Admin">
-                            @if (isset($users['Admin']))
-                                @foreach($users['Admin'] as $key)
-                                    <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                                @endforeach
-                            @endif
-
-                        </optgroup>
-
+                            @foreach($projectsList as $key)
+                                <option value="<?= $key->id ?>"><?= $key->project_name ?></option>
+                            @endforeach
 
                     @endif
 
@@ -85,7 +47,7 @@
 
             </div>
 
-           <!-- <h2  class="col-md-10 showDate"  id="timeTrackShowDate"></h2>-->
+            <!-- <h2  class="col-md-10 showDate"  id="timeTrackShowDate"></h2>-->
         </div>
 
 
@@ -102,7 +64,7 @@
                         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="usersTable">
                             <thead>
                             <tr>
-                                <th width="130px">Person Name</th>
+                                <th width="130px">Person</th>
                                 <th>Project</th>
                                 <!--  <th>User</th> -->
 
@@ -137,19 +99,18 @@
                             <tbody>
 
 
-                            @if (isset($peopleReport))
+                            @if (isset($projects))
 
-                                @foreach( $peopleReport as $key )
+                                @foreach( $projects as $key )
+                                   <?php echo '<pre>'; var_dump($key->task); die; ?>
 
                                     <tr class="odd gradeX">
-                                        <td>{{ $key->user->name }}</td>
-                                        <td>{{ $key->project->project_name }}</td>
-                                        <td>{{ $key->task_titly }}</td>
-                                        <td>{{ $key->task_type }}</td>
-                                        <td></td>
-                                        <td>{{ $key->value }}</td>
-                                        <td>{{ $key->cost }}</td>
-                                        <td>{{ $key->economy }}</td>
+                                        <?php echo '<pre>'; var_dump($key) ?>
+                                            <td>{{ $key->user->name }}</td>
+
+                                        <td>{{ $key->project_name }}</td>
+                                        <td>{{ isset($key->task[0]->task_titly) ? $key->task->task_titly : '' }}</td>
+
                                     </tr>
                                 @endforeach
                             @endif
@@ -161,8 +122,9 @@
 
                         <strong>Total:</strong><br>
                         <strong>Value: <?= $total['totalValue'] ?> </strong> |
-                        <strong>Cost: <?= $total['totalCost'] ?> </strong> |
-                        <strong>Economy: <?= $total['totalEconomy'] ?> </strong>
+                        <strong>Economy: <?= $total['totalTime'] ?> </strong> |
+                        <strong>Cost: <?= $total['totalCost'] ?> </strong>
+
 
                     </div>
                 </div>
