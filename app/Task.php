@@ -124,10 +124,10 @@ class Task extends Model
         return $result = $houers . ':' . $minutes;
     }
 
-    public function time_hour($minute)
+    public function time_hour($second)
     {
-        $minutes = bcmod($minute, 60);
-        $houers = (int)($minute/60);
+        $houers = (int)($second/3600);
+        $minutes =  (int)(($second - ($houers * 3600)) / 60);
 
         return $result = $houers . ':' . $minutes;
     }
@@ -145,7 +145,7 @@ class Task extends Model
         $houers = (int)($second/3600);
         $minutes =  ($second - ($houers * 3600)) / 60;
 
-        return $houers * $rate + ((float)($minutes/60)) * $rate;
+        return round((float)($houers * $rate + ((float)($minutes/60)) * $rate), 2);
     }
 
     public function time_add_00($time)
