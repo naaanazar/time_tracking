@@ -90,8 +90,8 @@ class ReportsController extends Controller
             }
 
             $projects[ $key ]['value'] = $value;
-            $projects[ $key ]['total_time'] = $objectTask->time_hour($totalTime);
-            $projects[ $key ]['cost'] = $objectTask->time_hour($totalTime) * $projects[ $key ]['original']['hourly_rate'];
+            $projects[ $key ]['total_time'] = $objectTask->secondToHour($totalTime);
+            $projects[ $key ]['cost'] = $objectTask->secondToHour($totalTime) * $projects[ $key ]['original']['hourly_rate'];
             $projects[ $key ]['economy'] = $projects[ $key ]['value'] - $projects[ $key ]['cost'];
         }
 
