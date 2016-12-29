@@ -86,8 +86,8 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-my" style="background-color: #ff6d00; top: 58px;" >
                                     <li><a href="/reports/daily">Daily Report</a></li>
-                                  <!--  <li><a href="/reports/people">Project Report</a></li>
-                                    <li><a href="/reports/people">People Report</a></li>-->
+                                    <li><a href="/reports/people">Project Report</a></li>
+                                    <li><a href="/reports/people">People Report</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#">------</a></li>
                                 </ul>

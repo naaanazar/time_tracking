@@ -83,9 +83,8 @@ class LoginController extends Controller
                 //return redirect()->route('/home');
 
             } else {
-
-               // return view('auth.login', ['loginStatus' => 'You account do not register']);
-                return redirect('?loginStatus=You account do not register');
+    //   return view('auth.login', ['loginStatus' => 'You account do not register']);
+                return redirect('/login/?loginStatus=YOUR GOOGLE EMAIL IS NOT REGISTERED IN THE SYSTEM');
 
             }
         }

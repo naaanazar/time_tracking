@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 use App\Project;
 use App\Task;
 use App\TimeTrack;
@@ -102,35 +103,77 @@ class ReportsController extends Controller
      * people report
      * $userId - id user
      * */
-    public function peopleReport( $dateStart=false, $dateFinish=false )
+    public function peopleReport( $dateStart=false, $dateFinish=false, $userId=false)
     {
-        $tasks = Task::where('done', '=', 1)
-            ->where('date_finish', '>=', $dateStart)
-            ->where('date_finish', '<=', $dateFinish)
-            ->with('project', 'user', 'track')
-            ->get();
+        if (!isset($dateStart) && !isset($dateFinish) && !isset($userId)){
+             return back();
+        }
+            $tasks = Task::where('done', '=', 1)
+                ->where('assign_to', '=', $userId)
+                ->where('date_finish', '>=', $dateStart)
+                ->where('date_finish', '<=', $dateFinish)
+                ->with('project', 'user', 'track')
+                ->get();
 
-        $objectTask = new Task();
+            $objectTask = new Task();
 
-        foreach( $tasks as $key => $task ) {
-            $totalTime = 0;
+            foreach ($tasks as $key => $task) {
+                $totalTime = 0;
 
-            foreach( $task['relations']['track'] as $track ) {
-                $totalTime += $track['attributes']['total_time'];
+                foreach ($task['relations']['track'] as $track) {
+                    $totalTime += $track['attributes']['total_time'];
+                }
+
+                $totalTime = $objectTask->time_hour($totalTime);
+
+                $tasks[$key]['value'] = $task['relations']['project']['attributes']['hourly_rate'] * $totalTime;
+                $tasks[$key]['cost'] = $totalTime * $task['relations']['user']['attributes']['hourly_rate'];
+                $tasks[$key]['economy'] = $tasks[$key]['value'] - $tasks[$key]['cost'];
             }
 
-            $totalTime = $objectTask->time_hour($totalTime);
+            $date['start'] = $dateStart;
+            $date['finish'] = $dateFinish;
 
-            $tasks[ $key ]['value'] = $task['relations']['project']['attributes']['hourly_rate'] * $totalTime;
-            $tasks[ $key ]['cost'] = $totalTime * $task['relations']['user']['attributes']['hourly_rate'];
-            $tasks[ $key ]['economy'] = $tasks[ $key ]['value'] - $tasks[ $key ]['cost'];
+            $peopleReport = $tasks;
+
+            $users = $this->allUsersJson();
+
+            return view('reports.peopleReport', compact('peopleReport', 'date', 'users'));
+
+    }
+
+    public function allUsersJson(){
+
+        $users = DB::table('users')
+            ->select('users.id',
+                'users.name',
+                'users.email',
+                'users.users_team_id',
+                'users.hourly_rate',
+                'users.created_at',
+                'users.employe'
+            )
+            ->get();
+
+        foreach ($users as $key){
+
+            if ($key->employe == 'Lead'){
+                 $allUsers['Lead'][] = $key;
+            }
+            if ($key->employe == 'Developer'){
+                $allUsers['Developer'][] = $key;
+            }
+            if ($key->employe == 'QA Engineer'){
+                $allUsers['QA Engineer'][] = $key;
+            }
+            if ($key->employe == 'Supervisor'){
+                $allUsers['Supervisor'][] = $key;
+            }
+            if ($key->employe == 'Admin'){
+                $allUsers['Admin'][] = $key;
+            }
         }
 
-        $date['start'] = $dateStart;
-        $date['finish'] = $dateFinish;
-
-        $peopleReport = $tasks;
-
-        return view('reports.peopleReport', compact('peopleReport', 'date'));
+        return $allUsers;
     }
 }

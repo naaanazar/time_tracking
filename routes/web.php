@@ -22,6 +22,7 @@ Route::group(['middleware' => ['permision']], function () {
     Route::post('/user/update/{id}', 'UsersController@update')->where(['id' => '[0-9]+']);
     Route::get('/user/all', 'TimeManageController@all');
     Route::get('/user/all/{team}', 'TimeManageController@all');
+    Route::get('/user/all-json', 'TimeManageController@allUsersJson');
 
     // TimeManage Controller
 
@@ -93,7 +94,8 @@ Route::group(['middleware' => ['permision']], function () {
     Route::get('/reports/daily/{day?}', 'ReportsController@dailyReport');
 
     Route::get('/reports/project/{dateStart}/{dateFinish}', 'ReportsController@projectReport');
-    Route::get('/reports/people/{dateStart?}/{dateFinish?}', 'ReportsController@peopleReport');
+    Route::get('/reports/people/{dateStart?}/{dateFinish?}/{userId?}', 'ReportsController@peopleReport');
+
 
 
     // for ajax

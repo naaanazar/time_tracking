@@ -20,12 +20,24 @@ $(document).ready(function(){
             var start = moment(this.start_date).format('YYYY-MM-DD'),
                 end = moment(this.end_date).format('YYYY-MM-DD');
 
-            window.location.href = "/trecking/" + dateCalendar;
+            var userId = $("#SelectAllUserReport option:selected").val();
+
+            if (userId.length > 0) {
+
+                window.location.href = "/reports/people/" + start + '/' + end + '/' + userId;
+            }
 
             console.debug('Start Date: '+ start +'\nEnd Date: '+ end);
         }
     });
 
+
+
+    //reports
+
+    $(document).on("change", "#SelectAllUserReport", function () {
+
+    });
 
 
 
@@ -1143,5 +1155,6 @@ var Main = {
             $("#AssignToId").html('');
         }
     }
+
 
 };

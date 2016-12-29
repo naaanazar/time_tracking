@@ -30,8 +30,7 @@ class TimeManageController extends Controller
     {
         if (Auth::guest()) {
             return view('auth.login');
-        }
-        else {
+        } else {
             return view('layouts.index_template');
         }
     }
@@ -39,9 +38,9 @@ class TimeManageController extends Controller
     /*
      * return all users
      * */
-    public function all( $team = false )
+    public function all($team = false)
     {
-        if( $team != false ) {
+        if ($team != false) {
 
             $users = User::where('team_name', '=', $team)
                 ->orderBy('id', 'desc')
@@ -65,7 +64,7 @@ class TimeManageController extends Controller
 
         }
 
-       return view('time_manage.users', compact('users'));
+        return view('time_manage.users', compact('users'));
     }
 
     /*
@@ -74,13 +73,13 @@ class TimeManageController extends Controller
     public function team_all()
     {
         $teams = DB::table('teams')
-                ->orderBy('id', 'desc')
-                ->leftjoin('users', 'teams.teams_lead_id', '=', 'users.id')
-                ->select('teams.id',
+            ->orderBy('id', 'desc')
+            ->leftjoin('users', 'teams.teams_lead_id', '=', 'users.id')
+            ->select('teams.id',
                 'users.name',
                 'teams.teams_lead_id',
                 'teams.team_name')
-                ->get();
+            ->get();
 
         return view('time_manage.teams', compact('teams'));
     }
@@ -102,12 +101,12 @@ class TimeManageController extends Controller
      * */
     public function create_client(Request $request)
     {
-        if(Input::all() == true) {
+        if (Input::all() == true) {
             $this->validation_client($request);
 
             $client = Input::all();
 
-            if(parse_url($client['website'], PHP_URL_SCHEME) == "http" || parse_url($client['website'], PHP_URL_SCHEME) == "https") {
+            if (parse_url($client['website'], PHP_URL_SCHEME) == "http" || parse_url($client['website'], PHP_URL_SCHEME) == "https") {
                 $website = $client['website'];
             } else {
                 $website = 'http://' . $client['website'];
@@ -134,12 +133,12 @@ class TimeManageController extends Controller
      * */
     public function update_client(Request $request, $id)
     {
-        if( Input::all() == true && Client::where('id', '=', $id) == true ) {
+        if (Input::all() == true && Client::where('id', '=', $id) == true) {
             $this->validation_client($request);
 
             $client = Input::all();
 
-            if(parse_url($client['website'], PHP_URL_SCHEME) == "http" || parse_url($client['website'], PHP_URL_SCHEME) == "https") {
+            if (parse_url($client['website'], PHP_URL_SCHEME) == "http" || parse_url($client['website'], PHP_URL_SCHEME) == "https") {
                 $website = $client['website'];
             } else {
                 $website = 'http://' . $client['website'];
@@ -189,12 +188,12 @@ class TimeManageController extends Controller
      * */
     public function create_project(Request $request)
     {
-        if(Input::all() == true) {
+        if (Input::all() == true) {
             $this->validation_project($request);
 
             $project = Input::all();
 
-            if( $project['hourly_rate'] == '' ) {
+            if ($project['hourly_rate'] == '') {
                 $project['hourly_rate'] = '0';
             }
 
@@ -213,7 +212,7 @@ class TimeManageController extends Controller
         $client = Client::all();
         $leads = User::where('employe', '=', 'Lead')->get();
 
-        return view('time_manage.forms.project', compact('client' ,'leads'));
+        return view('time_manage.forms.project', compact('client', 'leads'));
     }
 
     /*
@@ -221,7 +220,7 @@ class TimeManageController extends Controller
      * */
     public function update_project(Request $request, $id)
     {
-        if( Input::all() == true && Project::where( 'id', '=', $id) == true ) {
+        if (Input::all() == true && Project::where('id', '=', $id) == true) {
             $this->validation_project($request);
 
             $project = Input::all();
@@ -311,51 +310,51 @@ class TimeManageController extends Controller
      * return all projects
      * with client id
      */
-     public function client_projects(Request $request, $id)
-     {
-         $projects = Project::where('client_id', '=', $id)
-             ->leftJoin('users', 'Project.lead_id', '=', 'users.id')
-             ->join('Clients', 'Project.client_id', '=', 'Clients.id')
-             ->select('Project.project_name',
-                 'Project.id',
-                 'Project.hourly_rate',
-                 'Project.notes',
-                 'Project.created_at',
-                 'users.name', 'Clients.company_name' )
-             ->get();
+    public function client_projects(Request $request, $id)
+    {
+        $projects = Project::where('client_id', '=', $id)
+            ->leftJoin('users', 'Project.lead_id', '=', 'users.id')
+            ->join('Clients', 'Project.client_id', '=', 'Clients.id')
+            ->select('Project.project_name',
+                'Project.id',
+                'Project.hourly_rate',
+                'Project.notes',
+                'Project.created_at',
+                'users.name', 'Clients.company_name')
+            ->get();
 
-         $client = Client::where('id', '=', $id)->first();
-         $projectsForClient = true;
+        $client = Client::where('id', '=', $id)->first();
+        $projectsForClient = true;
 
-         return view('time_manage.projects', compact('projects', 'client', 'projectsForClient'));
-     }
+        return view('time_manage.projects', compact('projects', 'client', 'projectsForClient'));
+    }
 
     /*
      * create tack for project
      * */
     public function create_task(Request $request)
     {
-        if(Input::all() == true) {
+        if (Input::all() == true) {
             $this->validation_task($request);
 
             $task = Input::all();
-            if( !isset( $task['company_id'] ) ) {
+            if (!isset($task['company_id'])) {
                 $client_id = Project::where('id', '=', $task['project_id'])
                     ->select('client_id')->first();
 
                 $task['company_id'] = Client::where('id', '=', $client_id->client_id)
-                        ->select('id')->first()->id;
+                    ->select('id')->first()->id;
             }
-            if ( !isset($task['alloceted_hours']) || $task['alloceted_hours'] == '' )  {
+            if (!isset($task['alloceted_hours']) || $task['alloceted_hours'] == '') {
                 $task['alloceted_hours'] = 0;
             }
-            if ( !isset($task['assign_to']) || $task['assign_to'] == '') {
+            if (!isset($task['assign_to']) || $task['assign_to'] == '') {
                 $task['assign_to'] = 0;
             }
-            if ( !isset($task['task_description']) || $task['task_description'] == '') {
+            if (!isset($task['task_description']) || $task['task_description'] == '') {
                 $task['task_description'] = '';
             }
-            if( !isset( $task['billable'] ) ) {
+            if (!isset($task['billable'])) {
                 $task['billable'] = false;
             }
 
@@ -373,17 +372,17 @@ class TimeManageController extends Controller
             return redirect('/task/all');
         }
 
-        if( Auth::user()->employe == 'Developer' ) {
-            if( Auth::user()->users_team_id == 0 ) {
+        if (Auth::user()->employe == 'Developer') {
+            if (Auth::user()->users_team_id == 0) {
                 return redirect('/task/all/You aren\'t invited to the team/jgrowl-warning');
             }
 
             $lead_id = DB::table('teams')->where('id', '=', Auth::user()->users_team_id)
-                    ->select('teams_lead_id')->first();
+                ->select('teams_lead_id')->first();
 
             $projects = Project::where('lead_id', '=', $lead_id->teams_lead_id)
-                            ->with('client')
-                            ->get();
+                ->with('client')
+                ->get();
 
             return view('time_manage.forms.taskForm', compact('projects'));
         }
@@ -400,26 +399,26 @@ class TimeManageController extends Controller
      * */
     public function update_task(Request $request, $id)
     {
-        if( Input::all() == true && Task::where( 'id', '=', $id ) == true ) {
+        if (Input::all() == true && Task::where('id', '=', $id) == true) {
             $this->validation_task($request);
 
             $task = Input::all();
 
 
-            if ( !isset($task['alloceted_hours']) || $task['alloceted_hours'] == '' )  {
+            if (!isset($task['alloceted_hours']) || $task['alloceted_hours'] == '') {
                 $task['alloceted_hours'] = 0;
             }
-            if ( !isset($task['assign_to']) || $task['assign_to'] == '') {
+            if (!isset($task['assign_to']) || $task['assign_to'] == '') {
                 $task['assign_to'] = 0;
             }
-            if ( !isset($task['task_description']) || $task['task_description'] == '') {
+            if (!isset($task['task_description']) || $task['task_description'] == '') {
                 $task['task_description'] = '';
             }
-            if( !isset( $task['billable'] ) ) {
+            if (!isset($task['billable'])) {
                 $task['billable'] = false;
             }
 
-            Task::where( 'id', '=', $id )->update([
+            Task::where('id', '=', $id)->update([
                 'company_id' => $task['company_id'],
                 'project_id' => $task['project_id'],
                 'task_titly' => $task['task_titly'],
@@ -433,8 +432,8 @@ class TimeManageController extends Controller
             return redirect('/task/all');
         }
 
-        if( Auth::user()->employe == 'Developer' ) {
-            if( Auth::user()->users_team_id == 0 ) {
+        if (Auth::user()->employe == 'Developer') {
+            if (Auth::user()->users_team_id == 0) {
                 return redirect('/task/all/You aren\'t invited to the team/jgrowl-warning');
             }
 
@@ -445,13 +444,13 @@ class TimeManageController extends Controller
                 ->with('client')
                 ->get();
 
-            $task = Task::where( [['assign_to', '=', Auth::user()->id], ['id', '=', $id]] )
+            $task = Task::where([['assign_to', '=', Auth::user()->id], ['id', '=', $id]])
                 ->with('project')->get();
 
             return view('time_manage.forms.taskForm', compact('projects', 'task'));
         }
 
-        $task = Task::where( 'id', '=', $id )->get();
+        $task = Task::where('id', '=', $id)->get();
         $user = User::where('id', '=', $task[0]->assign_to)->first();
         $client = Client::all();
         $project = Project::all();
@@ -480,18 +479,18 @@ class TimeManageController extends Controller
                 ->with(['Project', 'client'])->get();
         }
 
-        if(Auth::user()['original']['employe'] == 'Supervisor' || Auth::user()['original']['employe'] == 'Admin' || Auth::user()['original']['employe'] == 'Lead') {
+        if (Auth::user()['original']['employe'] == 'Supervisor' || Auth::user()['original']['employe'] == 'Admin' || Auth::user()['original']['employe'] == 'Lead') {
 
             $tasks = Task::orderBy('id', 'desc')
                 ->with(['Project', 'client'])->get();
         }
 
 
-        $i=0;
-        foreach($tasks as $task){
+        $i = 0;
+        foreach ($tasks as $task) {
 
             $user = User::where('id', '=', $task->assign_to)->first();
-            if (isset($user) ) {
+            if (isset($user)) {
                 $user_name = $user->name;
             } else {
                 $user_name = '';
@@ -512,7 +511,7 @@ class TimeManageController extends Controller
 
         }
 
-           return view('time_manage.tasks', compact('tasksRes', 'msg', 'theme'));
+        return view('time_manage.tasks', compact('tasksRes', 'msg', 'theme'));
     }
 
     /*
@@ -521,14 +520,14 @@ class TimeManageController extends Controller
     public function get_project_tasks($project_id)
     {
         $tasks = Task::where('project_id', '=', $project_id)
-        ->with(['Project','client'])
-        ->get();
-        $i=0;
+            ->with(['Project', 'client'])
+            ->get();
+        $i = 0;
 
-        foreach($tasks as $task){
+        foreach ($tasks as $task) {
 
             $user = User::where('id', '=', $task->assign_to)->first();
-            if (isset($user) ) {
+            if (isset($user)) {
                 $user_name = $user->name;
             } else {
                 $user_name = '';
@@ -557,7 +556,7 @@ class TimeManageController extends Controller
                 'Project.hourly_rate',
                 'Project.notes',
                 'Project.created_at',
-                'users.name', 'Clients.company_name' )
+                'users.name', 'Clients.company_name')
             ->first();
 
         $tasksForProject = true;
@@ -579,10 +578,10 @@ class TimeManageController extends Controller
     /*
      * finish task
      * */
-    public function taskDone( $id )
+    public function taskDone($id)
     {
         Task::where('id', '=', $id)
-            ->update(['done' => 1 ]);
+            ->update(['done' => 1]);
 
         return back();
     }
@@ -590,10 +589,10 @@ class TimeManageController extends Controller
     /*
      * again return task to work
      * */
-    public function taskReturnToWork( $id )
+    public function taskReturnToWork($id)
     {
         Task::where('id', '=', $id)
-            ->update(['done' => 0 ]);
+            ->update(['done' => 0]);
 
         return back();
     }
@@ -602,10 +601,10 @@ class TimeManageController extends Controller
      * get team on project id
      *
      * */
-    public function get_team( $project_id )
+    public function get_team($project_id)
     {
         $result = Project::where('id', '=', $project_id)
-                ->get()[0]->lead_id;
+            ->get()[0]->lead_id;
 
         $lead = User::where('id', '=', $result)->get();
 
@@ -618,7 +617,7 @@ class TimeManageController extends Controller
             ['employe', '<>', 'QA Engineer'],
         ])->get();
 
-        $result = ['lead' =>$lead, 'team' => $team, 'qa' => $qa, 'other' => $other];
+        $result = ['lead' => $lead, 'team' => $team, 'qa' => $qa, 'other' => $other];
 
         if ($result) {
             return response()->json(['data' => (object)$result]);
@@ -632,11 +631,11 @@ class TimeManageController extends Controller
      * */
     public function create_team(Request $request)
     {
-        if(Input::all() == true) {
+        if (Input::all() == true) {
             $this->validation_team($request);
             $team = Input::all();
 
-            if( !isset($team['teams_lead_id']) ) {
+            if (!isset($team['teams_lead_id'])) {
                 $team['teams_lead_id'] = 0;
             }
 
@@ -645,7 +644,7 @@ class TimeManageController extends Controller
                 'teams_lead_id' => $team['teams_lead_id']
             ]);
 
-           return redirect('/team/all');
+            return redirect('/team/all');
         }
         $leads = User::where('employe', '=', 'Lead')->get();
 
@@ -734,4 +733,5 @@ class TimeManageController extends Controller
         Auth::logout();
         return redirect('/');
     }
+
 }
