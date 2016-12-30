@@ -32,13 +32,15 @@
 
 
                 <select name="users" class=" input-xlarge focused my_input "   id="SelectAllUserReport" style="height: 42px; " data-all="true">
-                    <option selected disabled >Please select Person</option>
+                    @if (empty($active['userId']))
+                    <option selected disabled value="">Please select Person</option>
+                    @endif
                     @if(isset($users))
 
                         <optgroup label="Lead">
                             @if (isset($users['Lead']))
                                 @foreach($users['Lead'] as $key)
-                                    <option value="<?= $key->id ?>"><?= $key->name ?></option>
+                                    <option value="<?= $key->id ?>" <?= ( isset($active['userId']) && $key->id == $active['userId']) ? 'selected' : '' ?>><?= $key->name ?></option>
                                 @endforeach
                             @endif
 
@@ -46,7 +48,7 @@
                         <optgroup label="Developer">
                             @if (isset($users['Developer']))
                                 @foreach($users['Developer'] as $key)
-                                    <option value="<?= $key->id ?>"><?= $key->name ?></option>
+                                    <option value="<?= $key->id ?>" <?= ( isset($active['userId']) && $key->id == $active['userId']) ? 'selected' : '' ?>><?= $key->name ?></option>
                                 @endforeach
                             @endif
 
@@ -54,7 +56,7 @@
                         <optgroup label="QA Engineer">
                             @if (isset($users['QA Engineer']))
                                 @foreach($users['QA Engineer'] as $key)
-                                    <option value="<?= $key->id ?>"><?= $key->name ?></option>
+                                    <option value="<?= $key->id ?>" <?= ( isset($active['userId']) && $key->id == $active['userId']) ? 'selected' : '' ?>><?= $key->name ?></option>
                                 @endforeach
                             @endif
 
@@ -62,7 +64,7 @@
                         <optgroup label="Supervisor">
                             @if (isset($users['Supervisor']))
                                 @foreach($users['Supervisor'] as $key)
-                                    <option value="<?= $key->id ?>"><?= $key->name ?></option>
+                                    <option value="<?= $key->id ?>" <?= ( isset($active['userId']) && $key->id == $active['userId']) ? 'selected' : '' ?>><?= $key->name ?></option>
                                 @endforeach
                             @endif
 
@@ -70,7 +72,7 @@
                         <optgroup label="Admin">
                             @if (isset($users['Admin']))
                                 @foreach($users['Admin'] as $key)
-                                    <option value="<?= $key->id ?>"><?= $key->name ?></option>
+                                    <option value="<?= $key->id ?>" <?= ( isset($active['userId']) && $key->id == $active['userId']) ? 'selected' : '' ?>><?= $key->name ?></option>
                                 @endforeach
                             @endif
 
@@ -79,7 +81,7 @@
 
                     @endif
 
-                        <option selected disabled></option>
+
 
                 </select>
 

@@ -116,13 +116,13 @@ class ReportsController extends Controller
             $totalCost += $cost;
             $totalEconomy += $economy;
         }
-
+        
         $total['totalCost'] = $totalCost;
         $total['totalTime'] = $objectTask-> secondToHour($totalTime);
         $total['totalValue'] = $totalValue;
         $total['totalEconomy'] = $totalEconomy;
 
-        return view('', compact('projectReport', 'total'));
+        return view('reports.projectReport', compact('projectReport', 'total'));
     }
 
     /*
@@ -178,7 +178,11 @@ class ReportsController extends Controller
 
         $users = $this->allUsersJson();
 
-        return view('reports.peopleReport', compact('peopleReport', 'date', 'users', 'total'));
+        $active['userId'] = $userId;
+        $active['start'] = $dateStart;
+        $active['finish'] =$dateFinish;
+
+        return view('reports.peopleReport', compact('peopleReport', 'date', 'users', 'total', 'active'));
 
     }
 

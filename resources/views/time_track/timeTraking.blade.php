@@ -2,7 +2,7 @@
 
 @section('content')
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
-    <script type="text/javascript" src="/data/daterangepicker.js"></script>
+    <script type="text/javascript" src="/data/daterangepicker.js" xmlns="http://www.w3.org/1999/html"></script>
     <link rel="stylesheet" type="text/css" href="/data/daterangepicker.css" />
 
     <div class="modal fade" id="delete-track" role="dialog">
@@ -195,6 +195,7 @@
                                     value="<?= ( isset( $track ) ) ? $track[0]->duration : ((old() && old('duration')) ? old('duration') : '') ; ?>"
                                    pattern="(0[0-9]|1[0-9]|2[0-9])(:[0-5][0-9]){1}"
                                     title="Please match the requested format HH:MM"/>
+                            <button class="btn btn-default btn-small"  id="resetTime" style="padding-bottom: 4px; padding-top: 5px; margin-bottom: 2px;"><span class="glyphicon glyphicon-repeat" ></span></button>
                             <label class="labelTrack" for="" style="padding-top: 10px">Value($) <span id="insertCost"></span></label>
                             @if ($errors->has('duration'))
                                 <span class="help-block">

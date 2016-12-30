@@ -31,13 +31,52 @@ $(document).ready(function(){
         }
     });
 
+    var ds = new Calendar({
+        element: $('.one2'),
+        earliest_date: 'January 1, 2000',
+        latest_date: moment(),
+        start_date: moment().subtract(29, 'days'),
+        end_date: moment(),
+
+        callback: function() {
+            var start = moment(this.start_date).format('YYYY-MM-DD'),
+                end = moment(this.end_date).format('YYYY-MM-DD');
+
+            var userId = $("#SelectAllProjectReport option:selected").val();
+
+            if (userId.length > 0) {
+
+                window.location.href = "/reports/project/" + start + '/' + end + '/' + userId;
+            }
+
+            console.debug('Start Date: '+ start +'\nEnd Date: '+ end);
+        }
+    });
+
 
 
     //reports
 
     $(document).on("change", "#SelectAllUserReport", function () {
 
+        var userId = $("#SelectAllUserReport option:selected").val();
+        var start = moment($('.dr-date-start').text(), 'MMMM D, YYYY').format('YYYY-MM-DD');
+        var end = moment($('.dr-date-end').text(), 'MMMM D, YYYY').format('YYYY-MM-DD');
+        console.debug('Start Date: '+ start +'\nEnd Date: '+ end);
+        window.location.href = "/reports/people/" + start + '/' + end + '/' + userId;
+
     });
+
+    $(document).on("change", "#SelectAllProjectReport", function () {
+
+        var userId = $("#SelectAllProjectReport option:selected").val();
+        var start = moment($('.dr-date-start').text(), 'MMMM D, YYYY').format('YYYY-MM-DD');
+        var end = moment($('.dr-date-end').text(), 'MMMM D, YYYY').format('YYYY-MM-DD');
+        console.debug('Start Date: '+ start +'\nEnd Date: '+ end);
+        window.location.href = "/reports/project/" + start + '/' + end + '/' + userId;
+
+    });
+
 
 
 
@@ -225,6 +264,8 @@ $(document).ready(function(){
 
 
 
+
+
     // button now
     var dStart,
         dFinish,
@@ -264,6 +305,23 @@ $(document).ready(function(){
         addTime('#formTrackFinish' , -10);
         trackFinish();
     });
+    $(document).on('click', '#resetTime', function(){
+        event.preventDefault();
+        $('#formTrackStart').val('');
+        $('#formTrackDuration').val('');
+        $('#formTrackFinishSend').val('');
+        $('#formTrackStartSend').val('');
+        $('#formTrackFinish').val('');
+        $('#formTrackStart').val('');
+        $('#timeDuration').val('');
+        $('#timeDuration').removeAttr('readonly');
+
+        dStart ='';
+        dFinish = '';
+
+    });
+
+
 
     $(document).on('change', '#nextDay', function() {
         if(this.checked) {

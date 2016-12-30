@@ -156,8 +156,10 @@ class TimeTrackController extends Controller
                 ->get();
 
             $track[0]['duration'] = $task->time_minute($track[0]['attributes']['duration']);
-            $data['start'] = $task->dateParse($track[0]['attributes']['date_start']);
-            $data['finish'] = $task->dateParse($track[0]['attributes']['date_finish']);
+
+                $data['start'] = $task->dateParse($track[0]['attributes']['date_start']);
+                $data['finish'] = $task->dateParse($track[0]['attributes']['date_finish']);
+
 
             return view('time_track.timeTraking', compact('tasks', 'track', 'date', 'tracks', 'data'));
 
@@ -169,8 +171,10 @@ class TimeTrackController extends Controller
                 ->get();
 
             $track[0]['duration'] = $task->time_add_00($task->time_minute($track[0]['attributes']['duration']));
-            $data['start'] = $task->dateParse($track[0]['attributes']['date_start']);
-            $data['finish'] = $task->dateParse($track[0]['attributes']['date_finish']);
+            if (!$track[0]['attributes']['date_start'] == null) {
+                $data['start'] = $task->dateParse($track[0]['attributes']['date_start']);
+                $data['finish'] = $task->dateParse($track[0]['attributes']['date_finish']);
+            }
 
             return view('time_track.timeTraking', compact('tasks', 'track', 'date', 'tracks', 'data'));
         }
