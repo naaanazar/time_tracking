@@ -5,6 +5,57 @@
 $(document).ready(function(){
 
 
+    $(window).load(function(){
+
+        //report calendar
+        var dateStart = $('#conteiner').data('start');
+        var dateEnd = $('#conteiner').data('end');
+        console.log(dateStart);
+        console.log(dateEnd);
+
+        if(dateStart.length > 0 && dateEnd.length > 0){
+
+            $('.dr-date-start').text(moment(dateStart, 'YYYY-MM-DD').format('MMMM D, YYYY'));
+            $('.dr-date-end').text(moment(dateEnd, 'YYYY-MM-DD').format('MMMM D, YYYY'));
+
+        }
+
+
+        if (t) {
+            var idActiveLog = $('#conteiner').data('log-active');
+            $.get('/get/timestart/' + idActiveLog, function (date) {
+                console.log('blablablablabla');
+                console.log(date.data.now);
+                var duration = SecondsTohhmmss((moment(date.data.now, "YYYY-MM-DD hh:mm:ss") - moment(date.data.start, "YYYY-MM-DD hh:mm:ss")) / 1000);
+                console.log(duration);
+
+                seconds = duration.slice(6,7) == 0 ? duration.slice(7) : duration.slice(6);
+                minutes = duration.slice(3,4) == 0 ? duration.slice(4,5) : duration.slice(3,5);
+                hours = duration.slice(1,2) == 0 ? duration.slice(1,2) : duration.slice(0,2);
+            });
+        }
+
+
+
+        $(".removeSelect").html('');
+
+        if (($('#bodyData').data('msg').length > 0) && ($('#bodyData').data('theme').length > 0)) {
+            $.jGrowl($('#bodyData').data('msg'), {
+                theme: $('#bodyData').data('theme'),
+                life: 4000,
+                position:'center',
+            });
+        };
+
+        if (($('#conteiner').data('msg').length > 0) && ($('#conteiner').data('theme').length > 0)) {
+            $.jGrowl($('#conteiner').data('msg'), {
+                theme: $('#conteiner').data('theme'),
+                life: 4000,
+                position:'center',
+            });
+        }
+    });
+
 
     //calendar
 
@@ -179,42 +230,7 @@ $(document).ready(function(){
 
 
 
-    $(window).load(function(){
 
-        if (t) {
-            var idActiveLog = $('#conteiner').data('log-active');
-            $.get('/get/timestart/' + idActiveLog, function (date) {
-                console.log('blablablablabla');
-                console.log(date.data.now);
-                var duration = SecondsTohhmmss((moment(date.data.now, "YYYY-MM-DD hh:mm:ss") - moment(date.data.start, "YYYY-MM-DD hh:mm:ss")) / 1000);
-                console.log(duration);
-
-                seconds = duration.slice(6,7) == 0 ? duration.slice(7) : duration.slice(6);
-                minutes = duration.slice(3,4) == 0 ? duration.slice(4,5) : duration.slice(3,5);
-                hours = duration.slice(1,2) == 0 ? duration.slice(1,2) : duration.slice(0,2);
-            });
-        }
-
-
-
-        $(".removeSelect").html('');
-
-        if (($('#bodyData').data('msg').length > 0) && ($('#bodyData').data('theme').length > 0)) {
-            $.jGrowl($('#bodyData').data('msg'), {
-                theme: $('#bodyData').data('theme'),
-                life: 4000,
-                position:'center',
-            });
-        };
-
-        if (($('#conteiner').data('msg').length > 0) && ($('#conteiner').data('theme').length > 0)) {
-            $.jGrowl($('#conteiner').data('msg'), {
-                theme: $('#conteiner').data('theme'),
-                life: 4000,
-                position:'center',
-            });
-        }
-    });
 
 
 

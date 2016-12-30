@@ -132,6 +132,10 @@ class ReportsController extends Controller
         if (!isset($dateStart) && !isset($dateFinish) && !isset($userId)){
              return back();
         }
+        $active['userId'] = $userId;
+        $active['start'] = $dateStart;
+        $active['end'] =$dateFinish;
+
         $dateFinish = date_modify(date_create($dateFinish), '+1 day');
         //where('done', '=', 1)
             $tasks = Task::where('assign_to', '=', $userId)
@@ -175,10 +179,6 @@ class ReportsController extends Controller
         $peopleReport = $tasks;
 
         $users = $this->allUsersJson();
-
-        $active['userId'] = $userId;
-        $active['start'] = $dateStart;
-        $active['finish'] =$dateFinish;
 
         return view('reports.peopleReport', compact('peopleReport', 'date', 'users', 'total', 'active'));
 

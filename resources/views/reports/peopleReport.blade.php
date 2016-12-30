@@ -20,7 +20,9 @@
     <div id="conteiner" class="container" data-date=""
          data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}"
          data-token="{{ Session::token() }}"
-         data-log-active = "<?= isset($_COOKIE['logTrackActiveLogId']) ? $_COOKIE['logTrackActiveLogId'] : ''?>">
+         data-log-active = "<?= isset($_COOKIE['logTrackActiveLogId']) ? $_COOKIE['logTrackActiveLogId'] : ''?>"
+         data-start = "<?=  isset($active['start']) ? $active['start'] : '' ?>"
+         data-end = "<?=  isset($active['end']) ? $active['end'] : '' ?>">
 
         <div class="row" style="margin-top: 20px">
             <span class="col-md-4 col-lg-3   btn-toolbar" style="vertical-align: inherit; font-size: large ">
@@ -86,6 +88,9 @@
                 </select>
 
             </div>
+            <div class="col-md-5 col-lg-6" style=" padding: 20px 20px">
+                <span style="font-size: 30px; float:right; color: #999;">People Report</span>
+                </div>
 
            <!-- <h2  class="col-md-10 showDate"  id="timeTrackShowDate"></h2>-->
         </div>
