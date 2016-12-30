@@ -30,17 +30,14 @@
 
 
                 <select name="users" class=" input-xlarge focused my_input "   id="SelectAllProjectReport" style="height: 42px; " data-all="true">
-                    @if( isset( $projectReport[0]['relations']['project']['attributes']['project_name'] ) )
-                        <option value="{{ $projectReport[0]['relations']['project']['attributes']['id'] }}" selected>
-                            {{ $projectReport[0]['relations']['project']['attributes']['project_name'] }}
-                        </option>
-                    @else
+                   
                         <option selected disabled >Please select Project</option>
-                    @endif
                     @if(isset($projectsList))
 
                             @foreach($projectsList as $key)
-                                <option value="<?= $key->id ?>"><?= $key->project_name ?></option>
+
+                                    <option value="<?= $key->id ?>"><?= $key->project_name ?></option>
+
                             @endforeach
 
                     @endif
@@ -120,13 +117,17 @@
                         </table>
                     </div>
                     <div class="row">
-
+                    @if( isset( $total ) )
                         <strong>Total:</strong><br>
                         <strong>Value: <?= $total['totalValue'] ?> </strong> |
                         <strong>Cost: <?= $total['totalCost'] ?> </strong> |
                         <strong>Economy: <?= $total['totalEconomy'] ?> </strong>
-
-
+                    @else
+                        <strong>Total:</strong><br>
+                        <strong>Value: 0 </strong> |
+                        <strong>Cost: 0 </strong> |
+                        <strong>Economy: 0 </strong>
+                    @endif
                     </div>
                 </div>
 
