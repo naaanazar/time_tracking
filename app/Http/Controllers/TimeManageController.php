@@ -134,7 +134,7 @@ class TimeManageController extends Controller
     public function update_client(Request $request, $id)
     {
         if (Input::all() == true && Client::where('id', '=', $id) == true) {
-            $this->validation_client($request);
+            $this->validationClientEdit($request);
 
             $client = Input::all();
 
@@ -678,6 +678,18 @@ class TimeManageController extends Controller
             'website' => 'string',
             'contact_person' => 'required|min:4|max:30',
             'email' => 'required|unique:Clients|email',
+            'phone_number' => 'regex:/[0-9-]+/|max:30'
+        ]);
+    }
+
+    private function validationClientEdit($request)
+    {
+        $this->validate($request, [
+            'company_name' => 'required|min:4|max:30',
+            'company_address' => 'min:4|max:100',
+            'website' => 'string',
+            'contact_person' => 'required|min:4|max:30',
+            'email' => 'required|email',
             'phone_number' => 'regex:/[0-9-]+/|max:30'
         ]);
     }
