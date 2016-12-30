@@ -176,7 +176,9 @@ class ReportsController extends Controller
 
         $users = $this->allUsersJson();
 
-        return view('reports.peopleReport', compact('peopleReport', 'date', 'users', 'total'));
+        $active['userId'] = $userId;
+
+        return view('reports.peopleReport', compact('peopleReport', 'date', 'users', 'total', 'active'));
 
     }
 

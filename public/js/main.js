@@ -59,6 +59,12 @@ $(document).ready(function(){
 
     $(document).on("change", "#SelectAllUserReport", function () {
 
+        var userId = $("#SelectAllUserReport option:selected").val();
+        var start = moment($('.dr-date-start').text(), 'MMMM D, YYYY').format('YYYY-MM-DD');
+        var end = moment($('.dr-date-end').text(), 'MMMM D, YYYY').format('YYYY-MM-DD');
+        console.debug('Start Date: '+ start +'\nEnd Date: '+ end);
+        window.location.href = "/reports/people/" + start + '/' + end + '/' + userId;
+
     });
 
 

@@ -19,6 +19,7 @@
          data-token="{{ Session::token() }}"
          data-log-active = "<?= isset($_COOKIE['logTrackActiveLogId']) ? $_COOKIE['logTrackActiveLogId'] : ''?>">
 
+
         <div class="row" style="margin-top: 20px">
             <div class="col-md-2 btn-toolbar" style="vertical-align: inherit">
                 <div id="timeStep5" class="btn-group">
@@ -35,7 +36,12 @@
                 </div>
             </div>
 
-            <h2  class="col-md-10 showDate"  id="timeTrackShowDate"></h2>
+            <h2  class="col-md-6 showDate"  id="timeTrackShowDate"></h2>
+
+
+                <div class="col-md-4" style="color: #999;text-align: right; font-size: 30px;">Dayli Report</div>
+
+
         </div>
 
 
