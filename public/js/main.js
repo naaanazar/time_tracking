@@ -67,6 +67,17 @@ $(document).ready(function(){
 
     });
 
+    $(document).on("change", "#SelectAllProjectReport", function () {
+
+        var userId = $("#SelectAllProjectReport option:selected").val();
+        var start = moment($('.dr-date-start').text(), 'MMMM D, YYYY').format('YYYY-MM-DD');
+        var end = moment($('.dr-date-end').text(), 'MMMM D, YYYY').format('YYYY-MM-DD');
+        console.debug('Start Date: '+ start +'\nEnd Date: '+ end);
+        window.location.href = "/reports/project/" + start + '/' + end + '/' + userId;
+
+    });
+
+
 
 
     //  $('#datetimepicker').datetimepicker('setInitialDate', '2016-12-31');
@@ -253,6 +264,8 @@ $(document).ready(function(){
 
 
 
+
+
     // button now
     var dStart,
         dFinish,
@@ -292,6 +305,23 @@ $(document).ready(function(){
         addTime('#formTrackFinish' , -10);
         trackFinish();
     });
+    $(document).on('click', '#resetTime', function(){
+        event.preventDefault();
+        $('#formTrackStart').val('');
+        $('#formTrackDuration').val('');
+        $('#formTrackFinishSend').val('');
+        $('#formTrackStartSend').val('');
+        $('#formTrackFinish').val('');
+        $('#formTrackStart').val('');
+        $('#timeDuration').val('');
+        $('#timeDuration').removeAttr('readonly');
+
+        dStart ='';
+        dFinish = '';
+
+    });
+
+
 
     $(document).on('change', '#nextDay', function() {
         if(this.checked) {

@@ -177,6 +177,8 @@ class ReportsController extends Controller
         $users = $this->allUsersJson();
 
         $active['userId'] = $userId;
+        $active['start'] = $dateStart;
+        $active['finish'] =$dateFinish;
 
         return view('reports.peopleReport', compact('peopleReport', 'date', 'users', 'total', 'active'));
 

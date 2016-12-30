@@ -33,7 +33,7 @@
 
                 <select name="users" class=" input-xlarge focused my_input "   id="SelectAllUserReport" style="height: 42px; " data-all="true">
                     @if (empty($active['userId']))
-                    <option selected disabled >Please select Person</option>
+                    <option selected disabled value="">Please select Person</option>
                     @endif
                     @if(isset($users))
 
