@@ -196,6 +196,8 @@
                                    pattern="(0[0-9]|1[0-9]|2[0-9])(:[0-5][0-9]){1}"
                                     title="Please match the requested format HH:MM"/>
                             <button class="btn btn-default btn-small"  id="resetTime" style="padding-bottom: 4px; padding-top: 5px; margin-bottom: 2px;"><span class="glyphicon glyphicon-repeat" ></span></button>
+
+
                             <label class="labelTrack" for="" style="padding-top: 10px">Value($) <span id="insertCost"></span></label>
                             @if ($errors->has('duration'))
                                 <span class="help-block">

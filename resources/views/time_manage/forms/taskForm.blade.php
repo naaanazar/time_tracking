@@ -106,6 +106,10 @@
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                     <select name="task_type" class="input-xlarge focused my_input"  id="taskTypeId" style="height: 42px;"
                                     <?= ( $status == 'Developer') ? ' disabled' : '' ?>>
+                                     @if (!isset($task))
+                                    <option selected disabled value = ''>Please select task type</option>
+                                    @endif
+
 
                                         @if( isset( $task ) )
                                             <?php $array = ['New Feature', 'Bug Fixing', 'Quality Assurance', 'Estimates Required']; ?>
