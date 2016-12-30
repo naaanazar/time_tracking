@@ -2,8 +2,6 @@
 
 @section('content')
 
-
-
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
     <script type="text/javascript" src="/data/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="/data/daterangepicker.css" />
@@ -32,7 +30,13 @@
 
 
                 <select name="users" class=" input-xlarge focused my_input "   id="SelectAllProjectReport" style="height: 42px; " data-all="true">
-                    <option selected disabled >Please select Project</option>
+                    @if( isset( $projectReport[0]['relations']['project']['attributes']['project_name'] ) )
+                        <option value="{{ $projectReport[0]['relations']['project']['attributes']['id'] }}" selected>
+                            {{ $projectReport[0]['relations']['project']['attributes']['project_name'] }}
+                        </option>
+                    @else
+                        <option selected disabled >Please select Project</option>
+                    @endif
                     @if(isset($projectsList))
 
                             @foreach($projectsList as $key)
@@ -65,7 +69,6 @@
                             <thead>
                             <tr>
                                 <th width="130px">Person</th>
-                                <th>Project</th>
                                 <!--  <th>User</th> -->
 
                                 <!--  <th>Date Start</th>
@@ -86,7 +89,7 @@
 
                                 <!--  <th class="thFoot" >Date Start</th>
                                   <th class="thFoot" >Date Finish</th>-->
-                                <th class="thFoot" ></th>
+
                                 <th class="thFoot" ></th>
                                 <th class="thFoot" ></th>
                                 <th class="thFoot" ></th>
@@ -99,18 +102,16 @@
                             <tbody>
 
 
-                            @if (isset($projects))
-
-                                @foreach( $projects as $key )
-                                   <?php echo '<pre>'; var_dump($key->task); die; ?>
-
+                            @if (isset($projectReport))
+                                @foreach( $projectReport as $key => $task )
                                     <tr class="odd gradeX">
-                                        <?php echo '<pre>'; var_dump($key) ?>
-                                            <td>{{ $key->user->name }}</td>
-
-                                        <td>{{ $key->project_name }}</td>
-                                        <td>{{ isset($key->task[0]->task_titly) ? $key->task->task_titly : '' }}</td>
-
+                                        <td>{{ $task->user->name }}</td>
+                                        <td>{{ $task->task_titly }}</td>
+                                        <td>{{ $task->task_type }}</td>
+                                        <td>{{ $task->hours }}</td>
+                                        <td>{{ $task->value }}</td>
+                                        <td>{{ $task->cost }}</td>
+                                        <td>{{ $task->economy }}</td>
                                     </tr>
                                 @endforeach
                             @endif
@@ -122,8 +123,8 @@
 
                         <strong>Total:</strong><br>
                         <strong>Value: <?= $total['totalValue'] ?> </strong> |
-                        <strong>Economy: <?= $total['totalTime'] ?> </strong> |
-                        <strong>Cost: <?= $total['totalCost'] ?> </strong>
+                        <strong>Cost: <?= $total['totalCost'] ?> </strong> |
+                        <strong>Economy: <?= $total['totalEconomy'] ?> </strong>
 
 
                     </div>

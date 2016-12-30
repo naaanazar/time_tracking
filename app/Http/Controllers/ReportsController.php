@@ -116,13 +116,20 @@ class ReportsController extends Controller
             $totalCost += $cost;
             $totalEconomy += $economy;
         }
-        
+
         $total['totalCost'] = $totalCost;
         $total['totalTime'] = $objectTask-> secondToHour($totalTime);
         $total['totalValue'] = $totalValue;
         $total['totalEconomy'] = $totalEconomy;
 
-        return view('reports.projectReport', compact('projectReport', 'total'));
+        $date['start'] = $dateStart;
+        $date['finish'] = $dateFinish;
+
+        $projectsList = DB::table('Project')
+            ->select('Project.project_name', 'Project.id')
+            ->get();
+
+        return view('reports.projectReport', compact('projectReport', 'total', 'date', 'projectsList'));
     }
 
     /*
