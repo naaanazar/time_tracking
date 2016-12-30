@@ -73,11 +73,18 @@ class ReportsController extends Controller
     /*
      * project report
      * */
-    public function projectReport( $dateStart, $dateFinish ) // testing
+    public function projectReport( $dateStart = false, $dateFinish = false, $projectId = false) // testing
     {
-        $projects = Project::where('created_at', '>=', $dateStart)
-            ->where('created_at', '<=', $dateFinish)
-            ->with('user', 'task', 'track')
+        if (!isset($dateStart) && !isset($dateFinish) && !isset($projectId)){
+            return back();
+        }
+
+        $dateFinish = date_modify(date_create($dateFinish), '+1 day');
+
+        $projectReport = Task::where('project_id', '=', $projectId)
+            ->where('date_finish', '>=', $dateStart)
+            ->where('date_finish', '<=', $dateFinish)
+            ->with('user', 'project', 'track')
             ->get();
 
         $objectTask = new Task();
@@ -87,31 +94,35 @@ class ReportsController extends Controller
         $totalCost = 0;
         $totalEconomy = 0;
 
-        foreach( $projects as $key => $project ) {
-            $totalTime = 0;
+        foreach( $projectReport as $key => $task ) {
+            $hours = 0;
             $value = 0;
-            foreach( $project['relations']['track'] as $track ) {
-                $totalTime += $track['attributes']['total_time'];
-                $value += $track['attributes']['value'];
+            $cost = 0;
+            $economy = 0;
+            foreach($task['relations']['track'] as $track) {
+                $hours += $track['attributes']['total_time']; // seconds
+                $value += $objectTask->value($track['attributes']['total_time'], $projectReport[$key]['relations']['project']['attributes']['hourly_rate']);
+                $cost += $objectTask->value($track['attributes']['total_time'], $projectReport[$key]['relations']['user']['attributes']['hourly_rate']);
+                $economy += ($value - $cost);
             }
 
-            $projects[ $key ]['value'] = $value;
-            $projects[ $key ]['total_time'] = $objectTask->secondToHour($totalTime);
-            $projects[ $key ]['cost'] = $objectTask->secondToHour($totalTime) * $projects[ $key ]['original']['hourly_rate'];
-            $projects[ $key ]['economy'] = $projects[ $key ]['value'] - $projects[ $key ]['cost'];
+            $projectReport[$key]['hours'] = $objectTask-> secondToHour($hours);
+            $projectReport[$key]['value'] = $value;
+            $projectReport[$key]['cost'] = $cost;
+            $projectReport[$key]['economy'] = $economy;
 
-            $totalValue += $projects[ $key ]['value'];
-            $totalTime += $projects[ $key ]['total_time'];
-            $totalCost += $projects[ $key ]['cost'];
-            $totalEconomy += $projects[ $key ]['economy'];
+            $totalTime += $hours;
+            $totalValue += $value;
+            $totalCost += $cost;
+            $totalEconomy += $economy;
         }
 
-        $projects['totalValue'] = $totalValue;
-        $projects['totalTime'] = $totalTime;
-        $projects['totalCost'] = $totalCost;
-        $projects['totalCost'] = $totalCost;
+        $total['totalCost'] = $totalCost;
+        $total['totalTime'] = $objectTask-> secondToHour($totalTime);
+        $total['totalValue'] = $totalValue;
+        $total['totalEconomy'] = $totalEconomy;
 
-        return $projects;
+        return view('', compact('projectReport', 'total'));
     }
 
     /*
