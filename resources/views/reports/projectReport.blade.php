@@ -30,7 +30,7 @@
 
 
                 <select name="users" class=" input-xlarge focused my_input "   id="SelectAllProjectReport" style="height: 42px; " data-all="true">
-                   
+
                         <option selected disabled >Please select Project</option>
                     @if(isset($projectsList))
 
