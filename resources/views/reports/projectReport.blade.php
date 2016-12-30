@@ -18,7 +18,9 @@
     <div id="conteiner" class="container" data-date=""
          data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}"
          data-token="{{ Session::token() }}"
-         data-log-active = "<?= isset($_COOKIE['logTrackActiveLogId']) ? $_COOKIE['logTrackActiveLogId'] : ''?>">
+         data-log-active = "<?= isset($_COOKIE['logTrackActiveLogId']) ? $_COOKIE['logTrackActiveLogId'] : ''?>"
+         data-start = "<?=  isset($active['start']) ? $active['start'] : '' ?>"
+         data-end = "<?=  isset($active['end']) ? $active['end'] : '' ?>">
 
         <div class="row" style="margin-top: 20px">
             <span class="col-md-4 col-lg-3   btn-toolbar" style="vertical-align: inherit; font-size: large ">
@@ -30,22 +32,24 @@
 
 
                 <select name="users" class=" input-xlarge focused my_input "   id="SelectAllProjectReport" style="height: 42px; " data-all="true">
-                   
-                        <option selected disabled >Please select Project</option>
+                    @if (empty($active['projectId']))
+                        <option selected disabled value="" >Please select Project</option>
+                    @endif
                     @if(isset($projectsList))
 
                             @foreach($projectsList as $key)
 
-                                    <option value="<?= $key->id ?>"><?= $key->project_name ?></option>
+                                    <option value="<?= $key->id ?>" <?= ( isset($active['projectId']) && $key->id == $active['projectId']) ? 'selected' : '' ?>><?= $key->project_name ?></option>
 
                             @endforeach
 
                     @endif
 
-
-
                 </select>
 
+            </div>
+            <div class="col-md-5 col-lg-6" style=" padding: 20px 20px">
+                <span style="font-size: 30px; float:right; color: #999;">Project Report</span>
             </div>
 
             <!-- <h2  class="col-md-10 showDate"  id="timeTrackShowDate"></h2>-->
