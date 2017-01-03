@@ -19,13 +19,13 @@
 
 <img src="http://<?= $_SERVER['SERVER_NAME'] ?>/images/ignatiuz-logo.png" width="250" height="102">
 <div>
-    <h3>Hello, {{ $name }} </h3>
-    <p>Your account is registered!</p>
-    <p>Your login: {{ $email }}</p>
-    <p>Your password: {{ $password }}</p>
-    <p>Click here to <a href="http://<?= $_SERVER['SERVER_NAME'] ?>">Login</a></p><br><br>
+    <h3>Hello {{ $name }} </h3>
+    <p>You have been invited to collaborate with your team members on myHub. Please find the login details below</p>
+    <p>Login: {{ $email }}</p>
+    <p>Password: {{ $password }}</p>
+    <p>Visit myHub portal at  <a href="http://<?= $_SERVER['SERVER_NAME'] ?>">http://myhub.ignatiuz.com</a> to get started.</p><br><br>
 
-    Regards,<br>Ignatiuz
+    Cheers!<br>Team Ignatiuz
 </div>
 
 </body>

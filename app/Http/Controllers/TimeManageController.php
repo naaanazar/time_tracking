@@ -106,10 +106,14 @@ class TimeManageController extends Controller
 
             $client = Input::all();
 
-            if (parse_url($client['website'], PHP_URL_SCHEME) == "http" || parse_url($client['website'], PHP_URL_SCHEME) == "https") {
-                $website = $client['website'];
+            if (!empty($client['website'])) {
+                if (parse_url($client['website'], PHP_URL_SCHEME) == "http" || parse_url($client['website'], PHP_URL_SCHEME) == "https") {
+                    $website = $client['website'];
+                } else {
+                    $website = 'http://' . $client['website'];
+                }
             } else {
-                $website = 'http://' . $client['website'];
+                $website = '';
             }
 
             Client::create([
