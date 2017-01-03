@@ -18,7 +18,7 @@
 
     <link href="/css/main.css" rel="stylesheet" media="screen">
 
-    <link rel="shortcut icon" href="http://faviconka.ru/ico/faviconka_ru_1127.png" type="image/png">
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/png">
     <link href="/css/jquery.jgrowl.css" rel="stylesheet" media="screen">
 
     <link rel="stylesheet" href="/assets/font-awesome.css">
