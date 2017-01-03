@@ -125,10 +125,10 @@
                         </div>
 
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
-                            <div class="col-md-4 col-lg-4" style="padding: 0px">
+                            <div class="col-md-4 col-lg-3" style="padding: 0px">
                             <span class="input-group" >
                                 <input type="text" value="<?= ( isset($data['start']) ) ? $data['start'] : ((old() && old('date_start') ? ltrim(explode(':', explode(' ', old('date_start'))[4])[0], '0') : '')) ; ?>"
-                                       style="width: 60%" class="inputTrackPadding form-control" id="formTrackStart" placeholder="HH:MM"/>
+                                       style="width: 57%" class="inputTrackPadding form-control" id="formTrackStart" placeholder="HH:MM"/>
 
                                 <span class="input-group-btn" style=" float:left ">
                                     <button type="button" class="btn btn-default" id="formTrackStartNow" style="padding:6px 1px">now</button>
@@ -138,14 +138,14 @@
                             </span>
                             </div>
 
-                            <div class="col-sm-12 col-md-2 col-lg-2" style="padding: 0px; text-align: center;">
+                            <div class="col-sm-12 col-md-2 col-lg-2" style="padding: 0px; text-align: right;">
                                 <label class="labelTrack" for="formTrackFinish">Finish</label>
                             </div>
 
-                            <div class="col-md-4 col-lg-4" style="padding: 0px">
+                            <div class="col-md-4 col-lg-3" style="padding: 0px">
                             <span class="input-group" >
                                 <input type="text" value="<?= ( isset( $data['finish'] ) ) ? $data['finish'] : ((old() && old('date_finish') ? ltrim(explode(':', explode(' ', old('date_finish'))[4])[0], '0') : '')) ; ?>"
-                                       style="width: 60%; " class="inputTrackPadding form-control"  id="formTrackFinish" placeholder="HH:MM">
+                                       style="width: 57%; " class="inputTrackPadding form-control"  id="formTrackFinish" placeholder="HH:MM">
                                 <span class="input-group-btn" style=" float:left ">
                                     <button type="button" class="btn btn-default" id="formTrackFinishNow" style="padding:6px 1px">now</button>
                                     <button type="button" class="btn btn-default" id="formTrackFinishInc" style="padding:6px 3px">+</button>
@@ -161,7 +161,7 @@
 
 
 
-                            <div class="col-md-2 col-lg-2" style="padding: 0px">
+                            <div class="col-md-2 col-lg-3 col-lg-offset-1" style="padding: 0px">
                                <span class="" style="display: inline-block">
                                 <label class = "labelTrack">
                                     <input type="checkbox" id="nextDay" name="nextDate"
@@ -215,7 +215,7 @@
                             <div class="input-group">
                                 <div class="input-group-btn" >
                                     <input value="<?= ( isset($track) ) ? $track[0]->additional_cost : ((old() && old('additional_cost')) ? old('additional_cost') : '') ; ?>"
-                                           type="number" steep="0.01" style="padding: 10px; max-width: 89%" class="inputTrackPadding focused my_input form-control " name="additional_cost" id="additionalCost">
+                                           type="number" steep="0.01" style="padding: 10px; max-width: 83%" class="inputTrackPadding focused my_input form-control " name="additional_cost" id="additionalCost">
                                     <span class="input-group-addon" style="padding: 9px 12px">$</span>
                                 </div>
                             </div>
