@@ -232,6 +232,14 @@
     var ul_presets = $('<ul class="dr-preset-list" style="display: none;"></ul>');
     var presets = typeof self.settings.presets === 'object' ? self.settings.presets :
     [{
+        label: 'This week',
+        start: moment(self.latest_date).weekday(0),
+        end: moment(self.latest_date).weekday(6)
+      },{
+      label: 'Last week',
+      start: moment(self.latest_date).weekday(-7),
+      end: moment(self.latest_date).weekday(-1)
+    },{
       label: 'Last 30 days',
       start: moment(self.latest_date).subtract(29, 'days'),
       end: self.latest_date
@@ -260,7 +268,7 @@
     if (moment(self.latest_date).diff(moment(self.latest_date).startOf('month'), 'days') >= 6 &&
         typeof self.settings.presets !== 'object'
     ) {
-      presets.splice(1, 0, {
+      presets.splice(2, 0, {
         label: 'This month',
         start: moment(self.latest_date).startOf('month'),
         end: self.latest_date
