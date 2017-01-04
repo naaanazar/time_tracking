@@ -14,12 +14,10 @@
         </div>
     </div>
 
-
-
     <div id="conteiner" class="container" data-date="<?= isset($date)? $date : '' ?>"
          data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}"
          data-token="{{ Session::token() }}"
-            data-log-active = "<?= isset($_COOKIE['logTrackActiveLogId']) ? $_COOKIE['logTrackActiveLogId'] : ''?>">
+        data-log-active = "<?= isset($_COOKIE['logTrackActiveLogId']) ? $_COOKIE['logTrackActiveLogId'] : ''?>">
 
         <div class="row" style="margin-top: 20px">
             <div class="col-md-2 btn-toolbar" style="vertical-align: inherit">
@@ -33,12 +31,11 @@
                     <button class="btn btn-sm d4">
                         <span class="glyphicon glyphicon-th"></span>
                     </button>
-
                 </div>
             </div>
-
             <h2  class="col-md-10 showDate"  id="timeTrackShowDate"></h2>
         </div>
+
         <div class="row" style="margin-top: 20px;     color: #999; font-size: 18px">
             <div class="col-md-6" >
                 Add track log
@@ -55,35 +52,35 @@
 
                 <form  method="POST" action="<?php (isset( $track )) ? '/track/update/' . $track[0]->id : '/trecking' ;?>" id="addTrackForm">
                     {{ csrf_field() }}
+
                     <div class="form-group form-group-edit col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                         <div class="col-xs-2 col-sm-4 col-md-3 col-lg-3" style="text-align: right;">
                             <label class="control-label labelTrack" for="trackProjectId">Project *</label>
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
+                            <select name="project_id" class="inputTrackPadding focused my_input"  id="trackProjectId" style="height: 35px;" required>
+                                <option selected disabled value="">Select project</option>
 
-                                <select name="project_id" class="inputTrackPadding focused my_input"  id="trackProjectId" style="height: 35px;" required>
-                                    <option selected disabled value="">Select project</option>
-
-                                    @if( old() && old('project_id') &&  $projects )
-                                        @foreach( $projects as $project )
-                                           @if( $project['id'] && $project['id'] == old('project_id') )
-                                               <option value="{{ old('project_id') }}" selected>{{ $project['project_name'] }}</option>
-                                           @endif
-                                        @endforeach
-                                    @endif
-
-                                    @if( isset( $track ) )
-                                        <option value="{{ $track[0]->project->id }}" selected>{{ $track[0]->project->project_name }}</option>
-                                    @endif
-                                    @foreach( $tasks as $task )
-                                        <option value="{{ $task->id }}">{{ $task->project_name }}</option>
+                                @if( old() && old('project_id') &&  $projects )
+                                    @foreach( $projects as $project )
+                                       @if( $project['id'] && $project['id'] == old('project_id') )
+                                           <option value="{{ old('project_id') }}" selected>{{ $project['project_name'] }}</option>
+                                       @endif
                                     @endforeach
-                                </select>
-                                @if ($errors->has('project_id'))
-                                    <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('project_id') }}</strong>
-                                            </span>
                                 @endif
+
+                                @if( isset( $track ) )
+                                    <option value="{{ $track[0]->project->id }}" selected>{{ $track[0]->project->project_name }}</option>
+                                @endif
+                                @foreach( $tasks as $task )
+                                    <option value="{{ $task->id }}">{{ $task->project_name }}</option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('project_id'))
+                                <span class="help-block">
+                                            <strong style="color:#802420">{{ $errors->first('project_id') }}</strong>
+                                        </span>
+                            @endif
                         </div>
                     </div>
 
@@ -92,7 +89,6 @@
                             <label class="control-label labelTrack" for="trackTaskId">Task *</label>
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
-
                             <select name="task_id" class="inputTrackPadding focused my_input"  id="trackTaskId"  style="height: 35px;" required >
 
                                 @if( old() && old('task_id') &&  $projects )
@@ -113,8 +109,8 @@
                             </select>
                             @if ($errors->has('task_id'))
                                 <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('task_id') }}</strong>
-                                            </span>
+                                    <strong style="color:#802420">{{ $errors->first('task_id') }}</strong>
+                                </span>
                             @endif
                         </div>
                     </div>
@@ -123,7 +119,6 @@
                         <div class="col-xs-2 col-sm-4 col-md-3 col-lg-3" style="text-align: right;">
                             <label class="control-label labelTrack" for="formTrackStart" >Start</label>
                         </div>
-
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
                             <div class="col-md-4 col-lg-3" style="padding: 0px">
                             <span class="input-group" >
@@ -158,8 +153,6 @@
                             <input id="formTrackFinishSend" type="hidden" name="date_finish" >
                             <input id="formTrackDate"  type="hidden" name="track_date" value="<?= isset($date) ?  $date : ''?>" >
                             <input id="formTrackDuration" type="hidden" name="date_duration" >
-
-
 
                             <div class="col-md-2 col-lg-3 col-lg-offset-1" style="padding: 0px">
                                <span class="" style="display: inline-block">
@@ -221,8 +214,8 @@
                             </div>
                             @if ($errors->has('additional_cost'))
                                 <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('additional_cost') }}</strong>
-                                            </span>
+                                    <strong style="color:#802420">{{ $errors->first('additional_cost') }}</strong>
+                                </span>
                             @endif
                         </div>
                         <div class="controls col-xs-12 col-sm-3 col-md-3 col-lg-3">
@@ -247,8 +240,8 @@
                         </div>
                         @if ($errors->has('description'))
                             <span class="help-block">
-                                                <strong style="color:#802420">{{ $errors->first('description') }}</strong>
-                                            </span>
+                                <strong style="color:#802420">{{ $errors->first('description') }}</strong>
+                            </span>
                         @endif
                     </div>
 
@@ -260,8 +253,6 @@
                           <button type="submit" id="" class="btn button-orange">Submit</button>
                         </div>
                     </div>
-
-
                 </form>
 
 
@@ -385,14 +376,8 @@
                     @endforeach
                    </tbody>
                 </table>
-
-
-
             </div>
-
-
-
-</div>
+        </div>
     </div>
 <!--    <script src="/js/jquery/jquery-3.1.1.min.js"></script>-->
     <script src="/js/tasks.js"></script>
