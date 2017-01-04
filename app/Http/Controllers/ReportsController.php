@@ -54,7 +54,6 @@ class ReportsController extends Controller
                 if( strtotime($data->format('Y-m-d')) < strtotime($log['attributes']['finish_track']) && strtotime($data1->format('Y-m-d')) > strtotime($log['attributes']['finish_track']) ) {
                     $total_time += $log['attributes']['total_time'];
                     $value += $log['attributes']['value'];
-                    echo '1';
                 }
             }
             $tasks[$key]['total'] = $objectTask->time_add_00($objectTask->secondToHour($total_time));
