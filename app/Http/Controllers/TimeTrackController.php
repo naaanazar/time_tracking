@@ -59,7 +59,7 @@ class TimeTrackController extends Controller
                 $data['duration'] = $task->parse_duration($data['date_duration']);
             }
             $data['track_date'] = date('Y-m-d', strtotime($data['track_date']));
-            
+
             TimeTrack::create( $data );
 
             return redirect('/trecking');

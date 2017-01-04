@@ -256,10 +256,15 @@
       start: moment(self.latest_date).subtract(6, 'month').startOf('month'),
       end: moment(self.latest_date).subtract(1, 'month').endOf('month')
     },{
+        label: 'This year',
+        start: moment().startOf('year'),
+      end: self.latest_date
+      },{
       label: 'Last year',
       start: moment(self.latest_date).subtract(12, 'month').startOf('month'),
       end: moment(self.latest_date).subtract(1, 'month').endOf('month')
-    },{
+    },
+      {
       label: 'All time',
       start: self.earliest_date,
       end: self.latest_date

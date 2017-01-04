@@ -7,6 +7,12 @@ $(document).ready(function(){
 
     $(window).load(function(){
 
+        if($('#additionalCost').val().length >0 &&  $("#timeDuration").val().length > 0){
+            var cost =  $('#additionalCost').val() / 60 * moment.duration($("#timeDuration").val()).asMinutes();
+            console.log(cost);
+            $('#insertCost').html(Math.round(cost * 100) / 100);
+        }
+
         //report calendar
         var dateStart = $('#conteiner').data('start');
         var dateEnd = $('#conteiner').data('end');
@@ -262,6 +268,24 @@ $(document).ready(function(){
     });
 
     $(document).on('mousemove', '#additionalCost', function(){
+
+        var attr = $('#billableTime').prop('checked');
+        console.log(attr)
+        if (typeof attr !== typeof undefined && attr !== false) {
+            console.log('1');
+            if($('#additionalCost').val().length >0 &&  $("#timeDuration").val().length > 0){
+                var cost =  $('#additionalCost').val() / 60 * moment.duration($("#timeDuration").val()).asMinutes();
+                console.log(cost);
+                $('#insertCost').html(Math.round(cost * 100) / 100);
+            }
+        } else {
+            $('#insertCost').html('');
+
+        }
+    });
+
+
+    $(document).on('mousemove', '#timeDuration', function(){
 
         var attr = $('#billableTime').prop('checked');
         console.log(attr)
