@@ -51,7 +51,7 @@ class ReportsController extends Controller
             $total_time = 0;
             $value = 0;
             foreach( $task['relations']['track'] as $log) {
-                if( strtotime($data->format('Y-m-d')) < strtotime($log['attributes']['date_finish']) && strtotime($data1->format('Y-m-d')) > strtotime($log['attributes']['date_finish']) ) {
+                if( strtotime($data->format('Y-m-d')) < strtotime($log['attributes']['finish_track']) && strtotime($data1->format('Y-m-d')) > strtotime($log['attributes']['finish_track']) ) {
                     $total_time += $log['attributes']['total_time'];
                     $value += $log['attributes']['value'];
                 }
@@ -64,7 +64,6 @@ class ReportsController extends Controller
 
         $total['totalTime'] = $objectTask->time_add_00($objectTask->secondToHour($totalTime));
         $total['totalValue'] = $totalValue;
-
         $dayReport = $tasks;
         //echo'<pre>'; var_dump($tasks); echo'</pre>';
         return view('reports.dayliReport', compact('dayReport', 'date', 'total'));

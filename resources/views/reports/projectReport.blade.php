@@ -32,9 +32,11 @@
 
 
                 <select name="users" class=" input-xlarge focused my_input "   id="SelectAllProjectReport" style="height: 42px; " data-all="true">
+
                     @if (empty($active['projectId']))
                         <option selected disabled value="" >Please select Project</option>
                     @endif
+
                     @if(isset($projectsList))
 
                             @foreach($projectsList as $key)

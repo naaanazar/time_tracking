@@ -86,10 +86,10 @@
 
                         <div class="control-group row">
                             <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2" style="text-align: right;">
-                                <label class="control-label" for="emailClientId" style="text-align: left;">Email *</label>
+                                <label class="control-label" for="emailClientId" style="text-align: left;">Email</label>
                             </div>
                             <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                <input type="email" name="email" class="input-xlarge focused my_input" id="emailClientId"  required
+                                <input type="email" name="email" class="input-xlarge focused my_input" id="emailClientId"
                                        value="<?= isset($client->email) ? $client->email : ((old('email')) ? old('email') :'') ?>"/>
                                 @if ($errors->has('email'))
                                     <span class="help-block">
