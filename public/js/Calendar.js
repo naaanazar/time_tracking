@@ -239,11 +239,13 @@
       label: 'Last week',
       start: moment(self.latest_date).weekday(-7),
       end: moment(self.latest_date).weekday(-1)
-    },{
+    },
+    /*{
       label: 'Last 30 days',
       start: moment(self.latest_date).subtract(29, 'days'),
       end: self.latest_date
-    },{
+    },*/
+      {
       label: 'Last month',
       start: moment(self.latest_date).subtract(1, 'month').startOf('month'),
       end: moment(self.latest_date).subtract(1, 'month').endOf('month')
