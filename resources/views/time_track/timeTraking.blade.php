@@ -115,21 +115,19 @@
                         </div>
                     </div>
 
+
                     <div class="form-group form-group-edit col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                         <div class="col-xs-2 col-sm-4 col-md-3 col-lg-3" style="text-align: right;">
-                            <label class="control-label labelTrack" for="trackDescription">Description</label>
+                            <label class="control-label labelTrack" for="trakingTaskDescription">Description</label>
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
-                           <textarea class="inputTrackPadding focused my_input"
-                                     rows="7" name="description" id="trackDescription"><?=
-                               ( old('description') ) ? old('description') : ( isset($track)  ? $track[0]->description : '')  ?></textarea>
+                           <textarea class="inputTrackPadding focused my_input" readonly
+                                     rows="7" name="description" id="trakingTaskDescription"><?=
+                               isset($track)  ? $track[0]->task->task_description : ''  ?></textarea>
                         </div>
-                        @if ($errors->has('description'))
-                            <span class="help-block">
-                                <strong style="color:#802420">{{ $errors->first('description') }}</strong>
-                            </span>
-                        @endif
                     </div>
+
+
 
                    <!-- <div class="form-group form-group-edit col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                         <div class="col-xs-2 col-sm-4 col-md-3 col-lg-3" style="text-align: right;">
@@ -254,6 +252,23 @@
                              </span>
                             </div>
                         </div> -->
+
+
+                    <div class="form-group form-group-edit col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+                        <div class="col-xs-2 col-sm-4 col-md-3 col-lg-3" style="text-align: right;">
+                            <label class="control-label labelTrack" for="trackDescription">Coments</label>
+                        </div>
+                        <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
+                           <textarea class="inputTrackPadding focused my_input"
+                                     rows="7" name="description" id="trackDescription"><?=
+                               ( old('description') ) ? old('description') : ( isset($track)  ? $track[0]->description : '')  ?></textarea>
+                        </div>
+                        @if ($errors->has('description'))
+                            <span class="help-block">
+                                <strong style="color:#802420">{{ $errors->first('description') }}</strong>
+                            </span>
+                        @endif
+                    </div>
 
 
 

@@ -238,13 +238,22 @@ $(document).ready(function(){
 
 
 
+    $(document).on("change", "#trackTaskId", function () {
+
+        var taskId = $("#trackTaskId option:selected").val();
+        if (taskId) {
+
+            var urlSend = '/track/getdesckription/' + taskId;
+            $.get(urlSend, function (response) {
 
 
+                $("#trakingTaskDescription").html(response.data[0].task_description);
+            });
+        } else {
+            $("#trakingTaskDescription").html('');
+        }
 
-
-
-
-
+    });
 
 
     $(document).on('click', '.webClick', function(e){

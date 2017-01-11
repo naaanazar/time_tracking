@@ -86,6 +86,9 @@ Route::group(['middleware' => ['permision']], function () {
     Route::get('/trask/reject/{id}', 'TimeTrackController@rejectTrask')->where(['id' => '[0-9]+']);
     Route::get('/trask/done/{id}', 'TimeTrackController@trackDone')->where(['id' => '[0-9]+']);
     Route::get('/trask/start/{id}', 'TimeTrackController@trackReturnToWork')->where(['id' => '[0-9]+']);
+    Route::get('/track/getdesckription/{id}', 'TimeTrackController@getTaskDescription')->where(['id' => '[0-9]+']);
+
+
 
 
     // ReportsController
