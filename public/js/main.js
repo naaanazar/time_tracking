@@ -7,10 +7,13 @@ $(document).ready(function(){
 
     $(window).load(function(){
 
-        if($('#additionalCost').val().length >0 &&  $("#timeDuration").val().length > 0){
-            var cost =  $('#additionalCost').val() / 60 * moment.duration($("#timeDuration").val()).asMinutes();
-            console.log(cost);
-            $('#insertCost').html(Math.round(cost * 100) / 100);
+        if ($('#additionalCost').val()) {
+
+            if ($('#additionalCost').val().length > 0 && $("#timeDuration").val().length > 0) {
+                var cost = $('#additionalCost').val() / 60 * moment.duration($("#timeDuration").val()).asMinutes();
+                console.log(cost);
+                $('#insertCost').html(Math.round(cost * 100) / 100);
+            }
         }
 
         //report calendar
@@ -19,11 +22,13 @@ $(document).ready(function(){
         console.log(dateStart);
         console.log(dateEnd);
 
-        if(dateStart.length > 0 && dateEnd.length > 0){
+        if(dateStart && dateEnd) {
+            if (dateStart.length > 0 && dateEnd.length > 0) {
 
-            $('.dr-date-start').text(moment(dateStart, 'YYYY-MM-DD').format('MMMM D, YYYY'));
-            $('.dr-date-end').text(moment(dateEnd, 'YYYY-MM-DD').format('MMMM D, YYYY'));
+                $('.dr-date-start').text(moment(dateStart, 'YYYY-MM-DD').format('MMMM D, YYYY'));
+                $('.dr-date-end').text(moment(dateEnd, 'YYYY-MM-DD').format('MMMM D, YYYY'));
 
+            }
         }
 
 
@@ -42,7 +47,6 @@ $(document).ready(function(){
         }
 
 
-
         $(".removeSelect").html('');
 
         if (($('#bodyData').data('msg').length > 0) && ($('#bodyData').data('theme').length > 0)) {
@@ -53,12 +57,14 @@ $(document).ready(function(){
             });
         };
 
-        if (($('#conteiner').data('msg').length > 0) && ($('#conteiner').data('theme').length > 0)) {
-            $.jGrowl($('#conteiner').data('msg'), {
-                theme: $('#conteiner').data('theme'),
-                life: 4000,
-                position:'center',
-            });
+        if ($('#conteiner').data('msg')) {
+            if (($('#conteiner').data('msg').length > 0) && ($('#conteiner').data('theme').length > 0)) {
+                $.jGrowl($('#conteiner').data('msg'), {
+                    theme: $('#conteiner').data('theme'),
+                    life: 4000,
+                    position: 'center',
+                });
+            }
         }
     });
 

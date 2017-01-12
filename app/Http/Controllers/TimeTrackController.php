@@ -42,16 +42,23 @@ class TimeTrackController extends Controller
             $this->validation_track($request);
             $data = Input::all();
 
-            if( $data['date_start'] != '' && $data['date_finish'] != '' ) {
-                $data['date_start'] =  $task->time_parser_from_js($data['date_start']);
-                $data['date_finish'] = $task->time_parser_from_js($data['date_finish']);
-            } elseif( $data['date_start'] == '' && $data['date_finish'] == '' ) {
-                unset($data['date_start']);
-                unset($data['date_finish']);
+            IF (ISSET($data['date_start']) && ISSET($data['date_finish'])) {
+                if ($data['date_start'] != '' && $data['date_finish'] != '') {
+
+                    $data['date_start'] = $task->time_parser_from_js($data['date_start']);
+                    $data['date_finish'] = $task->time_parser_from_js($data['date_finish']);
+                } elseif ($data['date_start'] == '' && $data['date_finish'] == '') {
+                    unset($data['date_start']);
+                    unset($data['date_finish']);
+                }
             }
-            if( $data['additional_cost'] == '') {
-                $data['additional_cost'] = 0;
+
+            IF (ISSET($data['additional_cost'])) {
+                if ($data['additional_cost'] == '') {
+                    $data['additional_cost'] = 0;
+                }
             }
+
             if( isset( $data['duration'] ) ){
                 $data['duration'] = $task->parse_duration($data['duration']);
             }
