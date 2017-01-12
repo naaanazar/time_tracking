@@ -31,20 +31,26 @@ $(document).ready(function(){
             }
         }
 
+        var i = 0;
+        setInterval(function () {
+            if (t) {
+                var idActiveLog = $('#conteiner').data('log-active');
+                $.get('/get/timestart/' + idActiveLog, function (date) {
+                    console.log('blablablablabla');
+                    console.log(date.data.now);
+                    var duration = SecondsTohhmmss((moment(date.data.now, "YYYY-MM-DD hh:mm:ss") - moment(date.data.start, "YYYY-MM-DD hh:mm:ss")) / 1000);
+                    console.log(duration);
 
-        if (t) {
-            var idActiveLog = $('#conteiner').data('log-active');
-            $.get('/get/timestart/' + idActiveLog, function (date) {
-                console.log('blablablablabla');
-                console.log(date.data.now);
-                var duration = SecondsTohhmmss((moment(date.data.now, "YYYY-MM-DD hh:mm:ss") - moment(date.data.start, "YYYY-MM-DD hh:mm:ss")) / 1000);
-                console.log(duration);
+                    seconds = duration.slice(6,7) == 0 ? duration.slice(7) : duration.slice(6);
+                    minutes = duration.slice(3,4) == 0 ? duration.slice(4,5) : duration.slice(3,5);
+                    hours = duration.slice(1,2) == 0 ? duration.slice(1,2) : duration.slice(0,2);
+                });
+            }
+            console.log(i);
+            i++;
+        },1000)
 
-                seconds = duration.slice(6,7) == 0 ? duration.slice(7) : duration.slice(6);
-                minutes = duration.slice(3,4) == 0 ? duration.slice(4,5) : duration.slice(3,5);
-                hours = duration.slice(1,2) == 0 ? duration.slice(1,2) : duration.slice(0,2);
-            });
-        }
+
 
 
         $(".removeSelect").html('');
