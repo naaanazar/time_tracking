@@ -87,7 +87,7 @@
                                         }
                                         ?>
                                         <td>{{ $key->duration ==null ? '-' :  $hours . ':' . $minutes }}</td>
-                                        <td>{{ $key->total_time ==null ? '-' : date('H:i',  mktime(0,$key->total_time)) }}</td>
+                                        <td>{{ $key->total_time ==null ? '-' : date('H:i:s', $key->total_time) }}</td>
                                         <td>{{ $key->billable_time == 1 ? 'Yes' : '-' }}</td>
                                         <td>{{ $key->additional_cost }}</td>
                                         <td>{{ $key->done == 1 ? 'Done' : 'In proccess' }}</td>
