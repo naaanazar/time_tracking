@@ -1,6 +1,8 @@
 @extends('layouts.index_template')
 
 @section('content')
+
+
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
     <script type="text/javascript" src="/data/daterangepicker.js" xmlns="http://www.w3.org/1999/html"></script>
     <link rel="stylesheet" type="text/css" href="/data/daterangepicker.css" />

@@ -18,7 +18,10 @@ class TimeTrackController extends Controller
      * permission for trecking time
      * */
     protected $users = [
-        'Lead'
+        'Lead',
+        'QA Engineer',
+        'Developer'
+
     ];
 
     /*
@@ -27,6 +30,7 @@ class TimeTrackController extends Controller
     public function trecking(Request $request, $date=false)
     {
         $task = new Task();
+
 
         if (!$date) {
             if (isset($_COOKIE['SetDateTracking'])){

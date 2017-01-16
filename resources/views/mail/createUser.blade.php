@@ -22,7 +22,7 @@
     <h3>Hello {{ $name }} </h3>
     <p>You have been invited to collaborate with your team members on myHub. Please find the login details below</p>
     <p>   Login: {{ $email }}<br>Password: {{ $password }} <br><br>
-        Visit myHub portal at  <a href="http://<?= $_SERVER['SERVER_NAME'] ?>:<?= $_SERVER['SERVER_PORT'] ?>">http://myhub.ignatiuz.com</a> to get started.<br><br>
+        Visit myHub portal at  <a href="http://<?= $_SERVER['SERVER_NAME'] ?>:<?= $_SERVER['SERVER_PORT'] ?>">http://<?= $_SERVER['SERVER_NAME'] ?></a> to get started.<br><br>
     </p>
 
 

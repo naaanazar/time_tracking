@@ -39,7 +39,7 @@
             <h2  class="col-md-6 showDate"  id="timeTrackShowDate"></h2>
 
 
-                <div class="col-md-4" style="color: #999;text-align: right; font-size: 30px;">Dayli Report</div>
+                <div class="col-md-4" style="color: #999;text-align: right; font-size: 30px;">Daily Report</div>
 
 
         </div>

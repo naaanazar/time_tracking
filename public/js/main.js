@@ -36,8 +36,7 @@ $(document).ready(function(){
             if (t) {
                 var idActiveLog = $('#conteiner').data('log-active');
                 $.get('/get/timestart/' + idActiveLog, function (date) {
-                    console.log('blablablablabla');
-                    console.log(date.data.now);
+
                     var duration = SecondsTohhmmss((moment(date.data.now, "YYYY-MM-DD hh:mm:ss") - moment(date.data.start, "YYYY-MM-DD hh:mm:ss")) / 1000);
                     console.log(duration);
 
@@ -46,7 +45,7 @@ $(document).ready(function(){
                     hours = duration.slice(1,2) == 0 ? duration.slice(1,2) : duration.slice(0,2);
                 });
             }
-            console.log(i);
+
             i++;
         },1000)
 
