@@ -147,14 +147,13 @@
                             @if (isset($peopleReport))
 
                                 @foreach( $peopleReport as $key )
-
                                     <tr class="odd gradeX">
                                         <td>{{ $key->user->name }}</td>
                                         <td>{{ $key->project->project_name }}</td>
                                         <td>{{ $key->task_titly }}</td>
                                         <td>{{ $key->task_type }}</td>
                                         <td>{{ $key->hours }}</td>
-                                        <td>{{ $key->value }}</td>
+                                        <td>{{ $key->volue }}</td>
                                         <td>{{ $key->cost }}</td>
                                         <td>{{ $key->economy }}</td>
                                     </tr>

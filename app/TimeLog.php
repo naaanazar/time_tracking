@@ -74,15 +74,14 @@ class TimeLog extends Model
             ->with('task')
             ->first();
 
-        $userHourleRate = Task::where('id', '=', $taskId['original']['task_id'])
-            ->with('user')
-            ->first()['relations']['user']['attributes']['hourly_rate'];
-
+        $projectHourleRate = Task::where('id', '=', $taskId['original']['task_id'])
+            ->with('project')
+            ->first()['relations']['project']['attributes']['hourly_rate'];
 
         TimeTrack::where('id', '=', $id)
             ->update([
                 'total_time' => (int)$count,
-                'value' => (new Task())->value($count, $userHourleRate),
+                'value' => (new Task())->value($count, $projectHourleRate),
                 'finish_track' => date('Y-m-d H:i:s')
             ]);
 

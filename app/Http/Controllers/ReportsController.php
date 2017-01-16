@@ -105,24 +105,21 @@ class ReportsController extends Controller
                 $hours += $track['attributes']['total_time']; // seconds
                 $value += $objectTask->value($track['attributes']['total_time'], $projectReport[$key]['relations']['project']['attributes']['hourly_rate']);
                 $cost += $objectTask->value($track['attributes']['total_time'], $projectReport[$key]['relations']['user']['attributes']['hourly_rate']);
-                $economy += ($value - $cost);
             }
 
             $projectReport[$key]['hours'] = $objectTask-> secondToHour($hours);
-            $projectReport[$key]['value'] = $value;
-            $projectReport[$key]['cost'] = $cost;
-            $projectReport[$key]['economy'] = $economy;
-
+            $projectReport[$key]['value'] = round($value, 0, PHP_ROUND_HALF_UP);
+            $projectReport[$key]['cost'] = round($cost, 0, PHP_ROUND_HALF_UP);
+            $projectReport[$key]['economy'] = $projectReport[$key]['value'] - $projectReport[$key]['cost'];
             $totalTime += $hours;
-            $totalValue += $value;
-            $totalCost += $cost;
-            $totalEconomy += $economy;
+            $totalValue += round($value, 0, PHP_ROUND_HALF_UP);
+            $totalCost += round($cost, 0, PHP_ROUND_HALF_UP);
         }
 
         $total['totalCost'] = $totalCost;
         $total['totalTime'] = $objectTask-> secondToHour($totalTime);
         $total['totalValue'] = $totalValue;
-        $total['totalEconomy'] = $totalEconomy;
+        $total['totalEconomy'] = $totalValue - $totalCost;;
 
         $date['start'] = $dateStart;
         $date['finish'] = $dateFinish;
@@ -170,14 +167,29 @@ class ReportsController extends Controller
                 $hours += $track['attributes']['total_time'];
             }
 
-            $tasks[ $key ]['hours'] = $objectTask->time_hour($hours);
-            $tasks[ $key ]['value'] = $objectTask->value($totalTime, $task['relations']['project']['attributes']['hourly_rate']);
-            $tasks[ $key ]['cost'] =  $objectTask->value( $totalTime, $task['relations']['user']['attributes']['hourly_rate'] );
-            $tasks[ $key ]['economy'] = $tasks[ $key ]['value'] - $tasks[ $key ]['cost'];
+            foreach( $task['relations']['project']['track'] as $keys => $trask ) {
+                if ( $task['relations']['project']['track'][$keys]['approve'] == 1 ) {
+                    $tasks[$key]['hours'] = $objectTask->time_hour($hours);
+                    $tasks[$key]['volue'] = $objectTask->value($totalTime, $task['relations']['project']['attributes']['hourly_rate']);
+                    $tasks[$key]['cost'] = $objectTask->value($totalTime, $task['relations']['user']['attributes']['hourly_rate']);
+                    $tasks[$key]['economy'] = $tasks[$key]['value'] - $tasks[$key]['cost'];
 
-            $totalValue += $tasks[ $key ]['value'];
-            $totalCost += $tasks[ $key ]['cost'];
-            $totalEconomy += $tasks[ $key ]['economy'];
+                    $totalValue += $tasks[$key]['volue'];
+                    $totalCost += $tasks[$key]['cost'];
+                    $totalEconomy += $tasks[$key]['economy'];
+                }
+            }
+
+            if ( !isset($tasks[$key]['hours'])) {
+                $tasks[$key]['hours'] = '-';
+                $tasks[$key]['volue'] = '-';
+                $tasks[$key]['cost'] = '-';
+                $tasks[$key]['economy'] = '-';
+
+                $totalValue += 0;
+                $totalCost += 0;
+                $totalEconomy += 0;
+           }
         }
 
         $total['totalValue'] = $totalValue;
@@ -188,7 +200,6 @@ class ReportsController extends Controller
         $date['finish'] = $dateFinish;
 
         $peopleReport = $tasks;
-
         $users = $this->allUsersJson();
 
         return view('reports.peopleReport', compact('peopleReport', 'date', 'users', 'total', 'active'));
