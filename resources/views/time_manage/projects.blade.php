@@ -173,7 +173,7 @@
 
                                                     <a href="/project/update/{{ $project->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
                                                     <button type="button" class="btn btn-danger  deleteProject" data-url="/project/delete/{{ $project->id }}" data-element="{{  $project->project_name  }}">
-                                                        <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
+                                                        <span class="glyphicon glyphicon-floppy-remove span_no_event" aria-hidden="true"></span> Delete</button>
                                                 @endif
                                             </td>
                                         @endif

@@ -168,7 +168,7 @@
 
                                                 @if ($status == 'Admin' || $status == 'Lead' || $status == 'Supervisor')
                                                     <button type="button" class="btn btn-danger  deleteTask" data-url="/task/delete/{{ $key['id'] }}" data-element="{{  $key['title'] }}">
-                                                        <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
+                                                        <span class="glyphicon glyphicon-floppy-remove span_no_event" aria-hidden="true"></span> Delete</button>
                                                 @endif
                                             </td>
                                         @endif

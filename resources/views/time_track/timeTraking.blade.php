@@ -258,7 +258,7 @@
 
                     <div class="form-group form-group-edit col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                         <div class="col-xs-2 col-sm-4 col-md-3 col-lg-3" style="text-align: right;">
-                            <label class="control-label labelTrack" for="trackDescription">Coments</label>
+                            <label class="control-label labelTrack" for="trackDescription">Comments</label>
                         </div>
                         <div class="controls col-xs-12 col-sm-8 col-md-9 col-lg-9">
                            <textarea class="inputTrackPadding focused my_input"

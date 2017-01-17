@@ -46,7 +46,7 @@
 
                                     <td style="text-align: center">
                      <button type="button" class="btn btn-danger  deleteTeam" data-url="/team/delete/{{ $team->id }}" data-element="{{ $team->team_name }}">
-                                            <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
+                                            <span class="glyphicon glyphicon-floppy-remove span_no_event" aria-hidden="true"></span> Delete</button>
 
                                     </td>
                                 </tr>

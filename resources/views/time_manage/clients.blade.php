@@ -81,7 +81,7 @@
 
                                                 <a href="/client/update/{{ $client->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
                                                 <button type="button" class="btn btn-danger  deleteClient" data-url="/client/delete/{{ $client->id }}" data-element="{{  $client->company_name  }}">
-                                                    <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
+                                                    <span class="glyphicon glyphicon-floppy-remove span_no_event" aria-hidden="true"></span> Delete</button>
                                             @endif
                                         </td>
                                     @endif

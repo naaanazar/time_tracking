@@ -78,7 +78,7 @@
                                          ($user->employe == "Developer" || $user->employe == "QA Engineer" || $user->employe == "Lead")))
                                             <a href="/user/update/{{ $user->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
                                             <button type="button" class="btn btn-danger  deleteUser" data-url="/user/delete/{{ $user->id }}" data-element="{{ $user->name }}">
-                                                <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
+                                                <span class="glyphicon glyphicon-floppy-remove span_no_event" aria-hidden="true"></span> Delete</button>
                                         @endif
                                     </td>
                                 @endif

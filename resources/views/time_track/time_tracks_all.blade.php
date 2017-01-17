@@ -45,6 +45,8 @@
                                 <th>Billable</th>
                                 <th>Cost</th>
                                 <th>Status</th>
+                                <th>Created at</th>
+                                <th>Finish at</th>
                                 @if ($status == 'Lead' || $status == 'Admin' || $status == 'Supervisor')
                                     <th style="min-width:250px; width: 250px;" class="center">Action</th>
                                 @endif
@@ -62,7 +64,9 @@
                                 <th class="thFoot" >total_time</th>
                                 <th class="thFoot" >Billable</th>
                                 <th class="thFoot" >Cost</th>
-                                <th>Status</th>
+                                <th class="thFoot" >Status</th>
+                                <th class="thFoot" >Created at</th>
+                                <th class="thFoot" >Finish at</th>
                                 @if ($status == 'Lead' || $status == 'Admin' || $status == 'Supervisor')
                                     <th  class="removeSelect">Action</th>
                                 @endif
@@ -91,6 +95,8 @@
                                         <td>{{ $key->billable_time == 1 ? 'Yes' : '-' }}</td>
                                         <td>{{ $key->additional_cost }}</td>
                                         <td>{{ $key->done == 1 ? 'Done' : 'In proccess' }}</td>
+                                        <td>{{ $key->created_at }}</td>
+                                        <td>{{ $key->date_finish }}</td>
 
                                         @if ($status == 'Lead' || $status == 'Admin' || $status == 'Supervisor')
                                             <td>
@@ -98,18 +104,18 @@
                                                 <button  type="button" class="btn btn-success approvTrack"
                                                          <?= $key->done == 0 ? 'disabled' : '' ?>
                                                          data-url="/trask/approve/{{ $key->id }}" data-element="{{ $key->project->project_name . '-' . $key->task->task_titly}}">
-                                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Approve
+                                                    <span class="glyphicon glyphicon-ok span_no_event" aria-hidden="true"></span> Approve
                                                 </button>
                                                 @endif
                                                 @if($key->approve == 1)
                                                     <button  type="button" class="btn btn-warning  rejectTrack" data-url="/trask/reject/{{ $key->id }}" data-element="{{ $key->project->project_name . '-' . $key->task->task_titly}}">
-                                                        &nbsp&nbsp<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Reject &nbsp
+                                                        &nbsp&nbsp<span class="glyphicon glyphicon-remove span_no_event" aria-hidden="true"></span> Reject &nbsp
                                                     </button>
                                                 @endif
 
                                                 <a href="/track/update/{{ $key->id }}"  class="btn btn-info"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
                                                     <button type="button" class="btn btn-danger deleteTrack" data-url="/track/delete/{{ $key->id }}" data-element="{{ $key->project->project_name . '-' . $key->task->task_titly}}">
-                                                        <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button>
+                                                        <span class="glyphicon glyphicon-floppy-remove span_no_event" aria-hidden="true"></span> Delete</button>
                                             </td>
                                         @endif
                                     </tr>
