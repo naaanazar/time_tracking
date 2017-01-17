@@ -57,13 +57,13 @@ class ReportsController extends Controller
                 }
             }
             $tasks[$key]['total'] = $objectTask->time_add_00($objectTask->secondToHour($total_time));
-            $tasks[$key]['value'] = $value;
+            $tasks[$key]['value'] = round($value, 0, PHP_ROUND_HALF_UP);
             $totalTime += $total_time;
             $totalValue += $tasks[$key]['value'];
         }
 
         $total['totalTime'] = $objectTask->time_add_00($objectTask->secondToHour($totalTime));
-        $total['totalValue'] = $totalValue;
+        $total['totalValue'] = round($totalValue, 0, PHP_ROUND_HALF_UP);
         $dayReport = $tasks;
         //echo'<pre>'; var_dump($tasks); echo'</pre>';
         return view('reports.dayliReport', compact('dayReport', 'date', 'total'));
