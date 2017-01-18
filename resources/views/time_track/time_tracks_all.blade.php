@@ -96,7 +96,7 @@
                                         <td>{{ $key->additional_cost }}</td>
                                         <td>{{ $key->done == 1 ? 'Done' : 'In proccess' }}</td>
                                         <td>{{ $key->created_at }}</td>
-                                        <td>{{ $key->date_finish }}</td>
+                                        <td>{{ $key->finish_track }}</td>
 
                                         @if ($status == 'Lead' || $status == 'Admin' || $status == 'Supervisor')
                                             <td>

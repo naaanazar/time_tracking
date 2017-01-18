@@ -38,7 +38,7 @@ $(document).ready(function(){
                 $.get('/get/timestart/' + idActiveLog, function (date) {
 
                     var duration = SecondsTohhmmss((moment(date.data.now, "YYYY-MM-DD hh:mm:ss") - moment(date.data.start, "YYYY-MM-DD hh:mm:ss")) / 1000);
-                    console.log(duration);
+                    //console.log(duration);
 
                     seconds = duration.slice(6,7) == 0 ? duration.slice(7) : duration.slice(6);
                     minutes = duration.slice(3,4) == 0 ? duration.slice(4,5) : duration.slice(3,5);
