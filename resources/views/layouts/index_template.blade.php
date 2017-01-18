@@ -81,20 +81,20 @@
 
                             </li>
                     @endif
-                    @if ($status == 'Admin')
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Report <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-my" style="background-color: #ff6d00; top: 58px;" >
                                 <li><a href="/reports/daily">Daily Report</a></li>
+                                @if ($status == 'Admin')
                                 <li><a href="/reports/project">Project Report</a></li>
                                 <li><a href="/reports/people">People Report</a></li>
                                 <li role="separator" class="divider"></li>
-
+                                @endif
                             </ul>
                         </li>
-                    @endif
+
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
