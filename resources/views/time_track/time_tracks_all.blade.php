@@ -61,7 +61,7 @@
                               <!--  <th class="thFoot" >Date Start</th>
                                 <th class="thFoot" >Date Finish</th>-->
                                 <th class="thFoot" >Duration</th>
-                                <th class="thFoot" >total_time</th>
+                                <th class="thFoot" >Total_time</th>
                                 <th class="thFoot" >Billable</th>
                                 <th class="thFoot" >Cost</th>
                                 <th class="thFoot" >Status</th>

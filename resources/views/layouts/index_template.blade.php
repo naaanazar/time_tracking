@@ -75,7 +75,7 @@
                     @if ($status != 'HR Manager')
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle menuFirst" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
-                                   onclick="event.preventDefault();   window.location = '/trecking';">
+                                   onclick="event.preventDefault();   window.location = '/tracking';">
                                     TRACK
                                 </a>
 
