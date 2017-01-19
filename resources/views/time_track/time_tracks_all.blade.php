@@ -41,7 +41,7 @@
                                <!--  <th>Date Start</th>
                                 <th>Date Finish</th>-->
                                 <th>Duration</th>
-                                <th>total_time</th>
+                                <th>Total_time</th>
                                 <th>Billable</th>
                                 <th>Cost</th>
                                 <th>Status</th>
