@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
     <script type="text/javascript" src="/data/daterangepicker.js" xmlns="http://www.w3.org/1999/html"></script>
     <link rel="stylesheet" type="text/css" href="/data/daterangepicker.css" />
@@ -52,7 +51,7 @@
 
             <div class="col-sm-6 col-md-6 col-lg-6" style="border-right: 1px solid #ccc; padding-top: 20px">
 
-                <form  method="POST" action="<?php (isset( $track )) ? '/track/update/' . $track[0]->id : '/trecking' ;?>" id="addTrackForm">
+                <form  method="POST" action="<?= (isset( $track )) ? '/track/update/' . $track[0]->id : '/tracking' ;?>" id="addTrackForm">
                     {{ csrf_field() }}
 
                     <div class="form-group form-group-edit col-xs-12 col-sm-12 col-md-12 col-lg-12" >

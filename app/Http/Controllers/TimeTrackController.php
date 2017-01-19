@@ -81,7 +81,7 @@ class TimeTrackController extends Controller
 
             TimeTrack::create( $data );
 
-            return redirect('/trecking');
+            return redirect('/tracking');
         }
 
         $tracks = TimeTrack::with('task', 'project')
@@ -166,10 +166,10 @@ class TimeTrackController extends Controller
             TimeTrack::where('id', '=', $track_id)->update( $data );
 
             if (isset($_COOKIE['SetDateTracking'])){
-                return redirect('/trecking/' . $_COOKIE['SetDateTracking']);
+                return redirect('/tracking/' . $_COOKIE['SetDateTracking']);
             }
 
-            return redirect('/trecking/');
+            return redirect('/tracking/');
         }
 
         if( in_array(Auth::user()->employe, $this->users ) ) {
