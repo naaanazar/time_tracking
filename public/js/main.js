@@ -1238,6 +1238,10 @@ var Main = {
             var urlSend = '/get/team/' + clientId;
             var result = '<option selected disabled value="null">Please select Assign to</option>';
 
+            if ('' != ($("#username").text())) {
+                result = null;
+            }
+
             $.get(urlSend, function (response) {
                 var lead = '<optgroup label="Lead">' +
                     '<option value="' + response.data.lead[0].id + '">' + response.data.lead[0].name + ' - ' + response.data.lead[0].employe + '</option>' +
