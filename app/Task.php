@@ -148,6 +148,16 @@ class Task extends Model
         return round((float)($houers * $rate + ((float)($minutes/60)) * $rate), 2);
     }
 
+    public function timeToSecond($time)
+    {
+        $time = explode(':', $time);
+        $time[0] = (int)($time[0]) * 3600;
+        $time[1] = (int)($time[1]) * 60;
+        $time = $time[0] + $time[1];
+
+        return $time;
+    }
+
     public function time_add_00($time)
     {
 

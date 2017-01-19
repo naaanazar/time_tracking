@@ -56,9 +56,10 @@ class ReportsController extends Controller
                     $value += $log['attributes']['value'];
                 }
             }
+
             $tasks[$key]['total'] = $objectTask->time_add_00($objectTask->secondToHour($total_time));
             $tasks[$key]['value'] = round($value, 0, PHP_ROUND_HALF_UP);
-            $totalTime += $total_time;
+            $totalTime += $objectTask->timeToSecond($tasks[$key]['total']);
             $totalValue += $tasks[$key]['value'];
         }
 
