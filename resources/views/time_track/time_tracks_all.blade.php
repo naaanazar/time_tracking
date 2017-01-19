@@ -80,7 +80,7 @@
                                     <tr class="odd gradeX <?= $key->approve == 1 ? 'done_tr' : ($key->done == 1 ? 'done_tr2' : '')?>">
                                         <td>{{ $key->project->project_name }}</td>
                                         <td>{{ $key->task->task_titly }}</td>
-                                        <td>{{ $key->approve == 1 ? 'Yes' : '-' }}</td>
+                                        <td>{{ $key->approve == 1 ? 'Yes' : 'No' }}</td>
                                         <?php  $hours = (int)($key->duration/60);
                                         $minutes = bcmod($key->duration, 60);
                                         if (strlen($hours) < 2){
@@ -92,7 +92,7 @@
                                         ?>
                                         <td>{{ $key->duration ==null ? '-' :  $hours . ':' . $minutes }}</td>
                                         <td>{{ $key->total_time ==null ? '-' : date('H:i:s', $key->total_time) }}</td>
-                                        <td>{{ $key->billable_time == 1 ? 'Yes' : '-' }}</td>
+                                        <td>{{ $key->billable_time == 1 ? 'Yes' : 'No' }}</td>
                                         <td>{{ $key->additional_cost }}</td>
                                         <td>{{ $key->done == 1 ? 'Done' : 'In proccess' }}</td>
                                         <td>{{ $key->created_at }}</td>
