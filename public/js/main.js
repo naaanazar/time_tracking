@@ -19,8 +19,8 @@ $(document).ready(function(){
         //report calendar
         var dateStart = $('#conteiner').data('start');
         var dateEnd = $('#conteiner').data('end');
-        console.log(dateStart);
-        console.log(dateEnd);
+        //console.log(dateStart);
+        //console.log(dateEnd);
 
         if(dateStart && dateEnd) {
             if (dateStart.length > 0 && dateEnd.length > 0) {
