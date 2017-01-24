@@ -647,6 +647,9 @@ class TimeManageController extends Controller
                 'teams_lead_id' => $team['teams_lead_id']
             ]);
 
+            $teamId = DB::table('teams')->where('teams_lead_id', '=', $team['teams_lead_id'])->first()->id;
+            DB::table('users')->where('id', '=', $team['teams_lead_id'])->update(['users_team_id' => $teamId]);
+
             return redirect('/team/all');
         }
         $leads = User::where('employe', '=', 'Lead')->get();
