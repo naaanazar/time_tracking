@@ -433,7 +433,7 @@ class TimeManageController extends Controller
                 'billable' => $task['billable']
             ]);
 
-            return redirect('/task/all');
+            //return redirect('/task/all');
         }
 
         if (Auth::user()->employe == 'Developer') {
