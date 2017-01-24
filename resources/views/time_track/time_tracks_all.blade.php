@@ -41,11 +41,11 @@
                                <!--  <th>Date Start</th>
                                 <th>Date Finish</th>-->
                                 <th>Duration</th>
-                                <th>total_time</th>
+                                <th>Total Time</th>
                                 <th>Billable</th>
                                 <th>Cost</th>
                                 <th>Status</th>
-                                <th>Created at</th>
+                                <th>Started at</th>
                                 <th>Finish at</th>
                                 @if ($status == 'Lead' || $status == 'Admin' || $status == 'Supervisor')
                                     <th style="min-width:250px; width: 250px;" class="center">Action</th>
