@@ -19,8 +19,8 @@ $(document).ready(function(){
         //report calendar
         var dateStart = $('#conteiner').data('start');
         var dateEnd = $('#conteiner').data('end');
-        console.log(dateStart);
-        console.log(dateEnd);
+        //console.log(dateStart);
+        //console.log(dateEnd);
 
         if(dateStart && dateEnd) {
             if (dateStart.length > 0 && dateEnd.length > 0) {
@@ -38,7 +38,7 @@ $(document).ready(function(){
                 $.get('/get/timestart/' + idActiveLog, function (date) {
 
                     var duration = SecondsTohhmmss((moment(date.data.now, "YYYY-MM-DD hh:mm:ss") - moment(date.data.start, "YYYY-MM-DD hh:mm:ss")) / 1000);
-                    console.log(duration);
+                    //console.log(duration);
 
                     seconds = duration.slice(6,7) == 0 ? duration.slice(7) : duration.slice(6);
                     minutes = duration.slice(3,4) == 0 ? duration.slice(4,5) : duration.slice(3,5);
@@ -191,7 +191,7 @@ $(document).ready(function(){
     ).on('changeDate', function (e) {
             var dateCalendar = e.format();
             dateCalendar = moment(dateCalendar, 'MM/DD/YYYY').format('DD-MM-YYYY');
-            window.location.href = "/trecking/" + dateCalendar;
+            window.location.href = "/tracking/" + dateCalendar;
     });
 
     $('#sandbox-container .input-group.date').datepicker({
@@ -202,12 +202,12 @@ $(document).ready(function(){
 
     $(document).on("click", ".calendarNextDay", function(){
         var dateCalendar = moment($('#conteiner').data('date'), 'DD-MM-YYYY').add('days', 1).format('DD-MM-YYYY');
-        window.location.href = "/trecking/" + dateCalendar;
+        window.location.href = "/tracking/" + dateCalendar;
     });
 
     $(document).on("click", ".calendarPrevDay", function(){
         var dateCalendar = moment($('#conteiner').data('date'), 'DD-MM-YYYY').add('days', -1).format('DD-MM-YYYY');
-        window.location.href = "/trecking/" + dateCalendar;
+        window.location.href = "/tracking/" + dateCalendar;
     });
 
 
@@ -332,14 +332,14 @@ $(document).ready(function(){
         duration ;
 
     $(document).on('click', '#formTrackStartNow', function(){
-        $.get('/trecking-getTime', function (response) {
+        $.get('/tracking-getTime', function (response) {
             $('#formTrackStart').val(moment(response.data, "YYYY-MM-DD hh:mm:ss").format('HH:mm'));
             trackStart();
         });
     });
 
     $(document).on('click', '#formTrackFinishNow', function(){
-        $.get('/trecking-getTime', function (response) {
+        $.get('/tracking-getTime', function (response) {
             $('#formTrackFinish').val(moment(response.data, "YYYY-MM-DD hh:mm:ss").format('HH:mm'));
             trackFinish();
         });
@@ -734,7 +734,7 @@ $(document).ready(function(){
                  create: true },
              function (response){
          console.log(response);
-                 window.location ='/trecking/' + $('#conteiner').data('date');
+                 window.location ='/tracking/' + $('#conteiner').data('date');
             /* var responseDate = response.data;
              var dateStartTrack = moment(responseDate * 1000).format('HH:mm')
 
@@ -828,7 +828,7 @@ $(document).ready(function(){
 
                         console.log('dddddddddddddddddddddd');
 
-                        $.get('/trecking-getTime', function (date) {
+                        $.get('/tracking-getTime', function (date) {
                         console.log('blablablablabla');
                           var duration = SecondsTohhmmss((moment(date.data, "YYYY-MM-DD hh:mm:ss") - moment(response.data[key].start, "YYYY-MM-DD hh:mm:ss")) / 1000)
 
@@ -1154,7 +1154,7 @@ $(document).ready(function(){
 });
 
 function getServerTime() {
-    $.get('/trecking-getTime', function (response) {
+    $.get('/tracking-getTime', function (response) {
         console.log(response.data);
         return response.data;
     });
@@ -1237,6 +1237,10 @@ var Main = {
 
             var urlSend = '/get/team/' + clientId;
             var result = '<option selected disabled value="null">Please select Assign to</option>';
+
+            if ('' != ($("#username").text())) {
+                result = null;
+            }
 
             $.get(urlSend, function (response) {
                 var lead = '<optgroup label="Lead">' +

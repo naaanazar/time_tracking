@@ -190,7 +190,7 @@
                                     <select name="assign_to" class=" input-xlarge focused my_input "   id="AssignToId" style="height: 42px;" data-all="true">
                                         @if( isset( $task[0]->assign_to ) )
                                             @if (isset($user->name))
-                                            <option value="{{ $user->id }}" selected>{{ $user->name }}</option>
+                                                <option id="username" value="{{ $user->id }}" selected disabled>{{ $user->name }}</option>
                                             @endif
                                         @else
                                             <option selected disabled></option>

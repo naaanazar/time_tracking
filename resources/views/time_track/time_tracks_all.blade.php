@@ -61,7 +61,7 @@
                               <!--  <th class="thFoot" >Date Start</th>
                                 <th class="thFoot" >Date Finish</th>-->
                                 <th class="thFoot" >Duration</th>
-                                <th class="thFoot" >total_time</th>
+                                <th class="thFoot" >Total_time</th>
                                 <th class="thFoot" >Billable</th>
                                 <th class="thFoot" >Cost</th>
                                 <th class="thFoot" >Status</th>
@@ -80,7 +80,7 @@
                                     <tr class="odd gradeX <?= $key->approve == 1 ? 'done_tr' : ($key->done == 1 ? 'done_tr2' : '')?>">
                                         <td>{{ $key->project->project_name }}</td>
                                         <td>{{ $key->task->task_titly }}</td>
-                                        <td>{{ $key->approve == 1 ? 'Yes' : '-' }}</td>
+                                        <td>{{ $key->approve == 1 ? 'Yes' : 'No' }}</td>
                                         <?php  $hours = (int)($key->duration/60);
                                         $minutes = bcmod($key->duration, 60);
                                         if (strlen($hours) < 2){
@@ -92,11 +92,11 @@
                                         ?>
                                         <td>{{ $key->duration ==null ? '-' :  $hours . ':' . $minutes }}</td>
                                         <td>{{ $key->total_time ==null ? '-' : date('H:i:s', $key->total_time) }}</td>
-                                        <td>{{ $key->billable_time == 1 ? 'Yes' : '-' }}</td>
+                                        <td>{{ $key->billable_time == 1 ? 'Yes' : 'No' }}</td>
                                         <td>{{ $key->additional_cost }}</td>
                                         <td>{{ $key->done == 1 ? 'Done' : 'In proccess' }}</td>
                                         <td>{{ $key->created_at }}</td>
-                                        <td>{{ $key->date_finish }}</td>
+                                        <td>{{ $key->finish_track }}</td>
 
                                         @if ($status == 'Lead' || $status == 'Admin' || $status == 'Supervisor')
                                             <td>

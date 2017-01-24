@@ -24,6 +24,14 @@ class TimeTrackController extends Controller
 
     ];
 
+    /**
+     * @var array
+     */
+    protected $user = [
+        'Lead',
+        'Developer'
+    ];
+
     /*
      * trecing time action
      * */
@@ -73,7 +81,7 @@ class TimeTrackController extends Controller
 
             TimeTrack::create( $data );
 
-            return redirect('/trecking');
+            return redirect('/tracking');
         }
 
         $tracks = TimeTrack::with('task', 'project')
@@ -82,14 +90,14 @@ class TimeTrackController extends Controller
 
         $projects = Project::with('task')->get();
 
-        if( in_array(Auth::user()->employe, $this->users ) ) {
+        if( in_array(Auth::user()->employe, $this->user ) ) {
             $tasks = Project::where('lead_id', '=', Auth::user()->id )
                 ->with('task', 'track', 'track_log')->get();
             $tasks = $task->time_counter($tasks);
 
             return view('time_track.timeTraking', compact('tasks', 'date', 'tracks', 'timeLog', 'projects'));
 
-        } elseif ( Auth::user()->employe == 'Admin' || Auth::user()->employe == 'Supervisor' ) {
+        } elseif ( Auth::user()->employe == 'Admin' || Auth::user()->employe == 'Supervisor' || Auth::user()->employe == 'QA Engineer' ) {
             $tasks = Project::with('task', 'track', 'track_log')->get();
             $tasks = $task->time_counter($tasks);
 
@@ -158,10 +166,10 @@ class TimeTrackController extends Controller
             TimeTrack::where('id', '=', $track_id)->update( $data );
 
             if (isset($_COOKIE['SetDateTracking'])){
-                return redirect('/trecking/' . $_COOKIE['SetDateTracking']);
+                return redirect('/tracking/' . $_COOKIE['SetDateTracking']);
             }
 
-            return redirect('/trecking/');
+            return redirect('/tracking/');
         }
 
         if( in_array(Auth::user()->employe, $this->users ) ) {
