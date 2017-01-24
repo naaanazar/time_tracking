@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 use App\Project;
 use App\Task;
 use App\TimeTrack;
@@ -91,7 +92,10 @@ class TimeTrackController extends Controller
         $projects = Project::with('task')->get();
 
         if( in_array(Auth::user()->employe, $this->user ) ) {
-            $tasks = Project::where('lead_id', '=', Auth::user()->id )
+
+            $teamId = User::where('id', '=', Auth::user()->id)->first()['attributes']['users_team_id'];
+            $teamLeadId = DB::table('teams')->where('id', '=', $teamId)->first()->teams_lead_id;
+            $tasks = Project::where('lead_id', '=', $teamLeadId )
                 ->with('task', 'track', 'track_log')->get();
             $tasks = $task->time_counter($tasks);
 
