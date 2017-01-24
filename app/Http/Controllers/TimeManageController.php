@@ -61,9 +61,7 @@ class TimeManageController extends Controller
                     'teams.teams_lead_id',
                     'teams.team_name')
                 ->get();
-
         }
-
         return view('time_manage.users', compact('users'));
     }
 
@@ -607,6 +605,7 @@ class TimeManageController extends Controller
      * */
     public function get_team($project_id)
     {
+
         $result = Project::where('id', '=', $project_id)
             ->get()[0]->lead_id;
 

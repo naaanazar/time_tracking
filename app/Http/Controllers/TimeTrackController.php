@@ -94,7 +94,7 @@ class TimeTrackController extends Controller
         if( in_array(Auth::user()->employe, $this->user ) ) {
 
             $teamId = User::where('id', '=', Auth::user()->id)->first()['attributes']['users_team_id'];
-            $teamLeadId = DB::table('teams')->where('id', '=', $teamId)->first()->teams_lead_id;
+            @$teamLeadId = DB::table('teams')->where('id', '=', $teamId)->first()->teams_lead_id;
             $tasks = Project::where('lead_id', '=', $teamLeadId )
                 ->with('task', 'track', 'track_log')->get();
             $tasks = $task->time_counter($tasks);
