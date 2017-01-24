@@ -146,18 +146,21 @@
 
                             @if (isset($peopleReport))
 
-                                @foreach( $peopleReport as $key )
-                                    <tr class="odd gradeX">
-                                        <td>{{ $key->user->name }}</td>
-                                        <td>{{ $key->project->project_name }}</td>
-                                        <td>{{ $key->task_titly }}</td>
-                                        <td>{{ $key->task_type }}</td>
-                                        <td>{{ $key->hours }}</td>
-                                        <td>{{ $key->volue }}</td>
-                                        <td>{{ $key->cost }}</td>
-                                        <td>{{ $key->economy }}</td>
-                                    </tr>
-                                @endforeach
+                                     @foreach( $peopleReport as $key )
+
+                                        <tr class="odd gradeX">
+                                            <td>{{ isset($key->user->name) ? $key->user->name : '//Person deleted' }}</td>
+                                            <td>{{ isset($key->project->project_name) ? $key->project->project_name : '' }}</td>
+                                            <td>{{ isset($key->task_titly) ? $key->task_titly  : ''  }}</td>
+                                            <td>{{ isset($key->task_type) ? $key->task_type : ''  }}</td>
+                                            <td>{{ isset($key->hours) ? $key->hours : ''  }}</td>
+                                            <td>{{ isset($key->volue) ? $key->volue : ''  }}</td>
+                                            <td>{{ isset($key->cost) ? $key->cost : ''  }}</td>
+                                            <td>{{ isset($key->economy) ? $key->economy : ''  }}</td>
+                                        </tr>
+                                    @endforeach
+
+
                             @endif
 
                             </tbody>

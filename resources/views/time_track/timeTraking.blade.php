@@ -2,7 +2,8 @@
 
 @section('content')
 
-    <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
+    <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'];
+    $idActiveUser = \Illuminate\Support\Facades\Auth::user()['original']['id']?>
     <script type="text/javascript" src="/data/daterangepicker.js" xmlns="http://www.w3.org/1999/html"></script>
     <link rel="stylesheet" type="text/css" href="/data/daterangepicker.css" />
 
@@ -291,116 +292,123 @@
 
                     <tbody>
                     @foreach( $tracks as $key)
-                        <?php
-                        $totalTime = '';
-                        if($key->total_time != null){
 
-                            $hours = floor($key->total_time / 3600);
-                            $minutes = floor(($key->total_time / 60) % 60);
-                            $seconds = $key->total_time % 60;
+                            <?php
 
-                            $totalTime =  "$hours:$minutes:$seconds";
-                        }
-                        ?>
+                            if($status == 'Developer' || $status == 'QA Engineer' && $idActiveUser !== $key->task->assign_to){
+                                continue;
+                            }
+                            $totalTime = '';
+                            if($key->total_time != null){
+                            if($status == 'Developer' || $status == 'QA Engineer')
 
-                        <tr class="trackLog trackLogFirst <?= $key->approve == 1 ? 'done_tr' : ($key->done == 1 ? 'done_tr2' : '')?>" id="track-<?= $key->id ?>"
-                            data-id ="<?= $key->id ?>"
-                            data-project_name ="<?= $key->project->project_name  ?>"
-                            data-project_id ="<?= $key->project->id  ?>"
-                            data-task_titly ="<?= $key->task->task_titly ?>"
-                            data-task_id ="<?= $key->task->id ?>"
-                            data-total_time ="<?= ($key->total_time == null) ? '00:00:00' : date('H:i:s', strtotime($totalTime))  ?>"
-                            data-duration ="<?= ($key->duration == null) ? '00:00' : date('H:i',  mktime(0,$key->duration)) ?>"
-                            data-date_start ="<?= date('H:i', strtotime($key->date_start))?>"
-                            data-date_start = "<?= date('H:i', strtotime($key->date_finish)) ?>">
-                            <td>
-                                <a href="#"  class="showTimelog"> <span class="glyphicon glyphicon-plus"></span>
-                                </a>
+                                $hours = floor($key->total_time / 3600);
+                                $minutes = floor(($key->total_time / 60) % 60);
+                                $seconds = $key->total_time % 60;
 
-                                <a href="#"  class="hideTimelog" style="display: none;"> <span class="glyphicon glyphicon-minus" ></span>
-                                </a>
-                            </td>
-                            <td class="">
-                                <span class="ng-binding"></span>
-                                <p class="projecttask"> - {{ $key->project->project_name }} - {{ $key->task->task_titly }}</p>
-                            </td>
-                            <td class="text-right">
-                                <h3 id="timeTrackSegmentTotal"
-                                    class="timeTrackSegmentTotal <?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'timeTrackSegmentTotalActive' : '' ?>"
-                                    style="margin: 7px 0px "
-                                    data-total="<?= date('H:i:s', strtotime($totalTime)) ?>">
-                                        {{ ($key->total_time == null) ? '00:00:00' : date('H:i:s', strtotime($totalTime)) }}
-                                </h3>
-                                @if ($key->date_start == null || $key->date_start == null)
-                                    <?php  $hours = (int)($key->duration/60);
-                                   $minutes = bcmod($key->duration, 60);
-                                            if (strlen($hours) < 2){
-                                                $hours = '0' . $hours;
-                                            }
-                                            if (strlen($minutes) < 2){
-                                                $minutes = '0' . $minutes;
-                                            }
-                                    ?>
-                                    <p class="project" >  {{ ($key->duration == null) ? '00:00' : $hours . ':' . $minutes }}</p>
-                                @else
-                                     <p class="project" > {{ date('H:i', strtotime($key->date_start)) }} - {{  date('H:i', strtotime($key->date_finish)) }}</p>
-                                @endif
-                            </td>
-                            <td class="text-right table-cell-actions">
-                                <div class="btn-group">
-                                    <span class="stop-start-button">
+                                $totalTime =  "$hours:$minutes:$seconds";
+                            }
+                            ?>
+
+                            <tr class="trackLog trackLogFirst <?= $key->approve == 1 ? 'done_tr' : ($key->done == 1 ? 'done_tr2' : '')?>" id="track-<?= $key->id ?>"
+                                data-id ="<?= $key->id ?>"
+                                data-project_name ="<?= $key->project->project_name  ?>"
+                                data-project_id ="<?= $key->project->id  ?>"
+                                data-task_titly ="<?= $key->task->task_titly ?>"
+                                data-task_id ="<?= $key->task->id ?>"
+                                data-total_time ="<?= ($key->total_time == null) ? '00:00:00' : date('H:i:s', strtotime($totalTime))  ?>"
+                                data-duration ="<?= ($key->duration == null) ? '00:00' : date('H:i',  mktime(0,$key->duration)) ?>"
+                                data-date_start ="<?= date('H:i', strtotime($key->date_start))?>"
+                                data-date_start = "<?= date('H:i', strtotime($key->date_finish)) ?>">
+                                <td>
+                                    <a href="#"  class="showTimelog"> <span class="glyphicon glyphicon-plus"></span>
+                                    </a>
+
+                                    <a href="#"  class="hideTimelog" style="display: none;"> <span class="glyphicon glyphicon-minus" ></span>
+                                    </a>
+                                </td>
+                                <td class="">
+                                    <span class="ng-binding"></span>
+                                    <p class="projecttask"> - {{ $key->project->project_name }} - {{ $key->task->task_titly }}</p>
+                                </td>
+                                <td class="text-right">
+                                    <h3 id="timeTrackSegmentTotal"
+                                        class="timeTrackSegmentTotal <?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'timeTrackSegmentTotalActive' : '' ?>"
+                                        style="margin: 7px 0px "
+                                        data-total="<?= date('H:i:s', strtotime($totalTime)) ?>">
+                                            {{ ($key->total_time == null) ? '00:00:00' : date('H:i:s', strtotime($totalTime)) }}
+                                    </h3>
+                                    @if ($key->date_start == null || $key->date_start == null)
+                                        <?php  $hours = (int)($key->duration/60);
+                                       $minutes = bcmod($key->duration, 60);
+                                                if (strlen($hours) < 2){
+                                                    $hours = '0' . $hours;
+                                                }
+                                                if (strlen($minutes) < 2){
+                                                    $minutes = '0' . $minutes;
+                                                }
+                                        ?>
+                                        <p class="project" >  {{ ($key->duration == null) ? '00:00' : $hours . ':' . $minutes }}</p>
+                                    @else
+                                         <p class="project" > {{ date('H:i', strtotime($key->date_start)) }} - {{  date('H:i', strtotime($key->date_finish)) }}</p>
+                                    @endif
+                                </td>
+                                <td class="text-right table-cell-actions">
+                                    <div class="btn-group">
+                                        <span class="stop-start-button">
+                                            @if ($key->done == 0)
+                                                 <a  href='/trask/done/<?= $key->id ?>'  class="btn btn-success" id="doneTrack" style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'display:none' : '' ?>" >
+                                                     <span class="glyphicon glyphicon-ok"></span> Done
+                                                 </a>
+                                            @else
+                                                <a  href='/trask/start/<?= $key->id ?>'  class="btn btn-warning" id="doneReject" style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'display:none' : '' ?>" >
+                                                    <span class="glyphicon glyphicon-ok"></span> In process
+                                                </a>
+                                            @endif
+                                            @if ($key->done == 0)
+                                                <button class="btn btn-default" id="startTrack" style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'display:none' : '' ?>" >
+                                                    <span class="glyphicon glyphicon-play"></span>
+                                                </button>
+                                            @endif
+                                            <button href="#" class="btn btn-danger" id="stopTrack2"  style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? '' : 'display:none' ?>">
+                                                <span class="glyphicon glyphicon-stop"></span>
+                                            </button>
+                                            <span class="addTrackFinishForm">
+                                            @if(isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id)
+                                                <form id="stop-form-track" action="/create/timelog/" method="POST" style="display: none;">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" id="stop-form-track-id" name="id" value="<?=  $_COOKIE['logTrackActiveLogId'] ?>">
+                                                 </form>
+                                            @endif
+                                            </span>
+
+                                        </span>
+                                        <span>
                                         @if ($key->done == 0)
-                                             <a  href='/trask/done/<?= $key->id ?>'  class="btn btn-success" id="doneTrack" style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'display:none' : '' ?>" >
-                                                 <span class="glyphicon glyphicon-ok"></span> Done
-                                             </a>
-                                        @else
-                                            <a  href='/trask/start/<?= $key->id ?>'  class="btn btn-warning" id="doneReject" style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'display:none' : '' ?>" >
-                                                <span class="glyphicon glyphicon-ok"></span> In process
+                                            <a href="/track/update/<?= $key->id ?>" class="btn btn-default" id="editTrack">
+                                                <span class="glyphicon glyphicon-pencil span_no_event"></span>
                                             </a>
                                         @endif
-                                        @if ($key->done == 0)
-                                            <button class="btn btn-default" id="startTrack" style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'display:none' : '' ?>" >
-                                                <span class="glyphicon glyphicon-play"></span>
-                                            </button>
-                                        @endif
-                                        <button href="#" class="btn btn-danger" id="stopTrack2"  style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? '' : 'display:none' ?>">
-                                            <span class="glyphicon glyphicon-stop"></span>
-                                        </button>
-                                        <span class="addTrackFinishForm">
-                                        @if(isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id)
-                                            <form id="stop-form-track" action="/create/timelog/" method="POST" style="display: none;">
-                                                {{ csrf_field() }}
-                                                <input type="hidden" id="stop-form-track-id" name="id" value="<?=  $_COOKIE['logTrackActiveLogId'] ?>">
-                                             </form>
-                                        @endif
-                                        </span>
 
-                                    </span>
-                                    <span>
-                                    @if ($key->done == 0)
-                                        <a href="/track/update/<?= $key->id ?>" class="btn btn-default" id="editTrack">
-                                            <span class="glyphicon glyphicon-pencil span_no_event"></span>
-                                        </a>
-                                    @endif
+                                             <button type="button" class="btn btn-default deleteTrack" data-url="/track/delete/{{ $key->id }}" data-element="{{ $key->project->project_name }} - {{ $key->task->task_titly }}">
+                                                 <span class="glyphicon glyphicon-trash span_no_event" aria-hidden="true"></span></button>
 
-                                         <button type="button" class="btn btn-default deleteTrack" data-url="/track/delete/{{ $key->id }}" data-element="{{ $key->project->project_name }} - {{ $key->task->task_titly }}">
-                                             <span class="glyphicon glyphicon-trash span_no_event" aria-hidden="true"></span></button>
+                                            </span>
+                                    </div>
+                                </td>
+                            </tr>
 
-                                        </span>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr  style="display:none"  id ="add-<?= $key->id ?>">
+                            <tr  style="display:none"  id ="add-<?= $key->id ?>">
 
 
-                            <td colspan="4" style="    padding-left: 30px;">
-                            <table width="100%">
+                                <td colspan="4" style="    padding-left: 30px;">
+                                <table width="100%">
 
 
-                            </table>
-                            </td>
-                        </tr>
+                                </table>
+                                </td>
+                            </tr>
+
                     @endforeach
                    </tbody>
                 </table>

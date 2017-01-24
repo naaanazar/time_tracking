@@ -1242,27 +1242,41 @@ var Main = {
                 result = null;
             }
 
+
+            var idActiveuser = null;
+            if($('#username').data('id')){
+                 idActiveuser = $('#username').data('id');
+            }
+
             $.get(urlSend, function (response) {
-                var lead = '<optgroup label="Lead">' +
-                    '<option value="' + response.data.lead[0].id + '">' + response.data.lead[0].name + ' - ' + response.data.lead[0].employe + '</option>' +
-                    '</optgroup>';
+
+                    var lead = '<optgroup label="Lead">';
+
+                console.log(response.data.lead[0].id + '-----' + idActiveuser);
+                if ( idActiveuser !== response.data.lead[0].id) {
+                       lead += '<option value="' + response.data.lead[0].id + '">' + response.data.lead[0].name + ' - ' + response.data.lead[0].employe + '</option>';
+                }
+                lead += '</optgroup>';
+
 
                 var team = '<optgroup label="Team">';
                 for ( var i  in response.data.team) {
-                    if ( response.data.team[i].employe != 'Lead')
+                    if ( response.data.team[i].employe != 'Lead' &&  idActiveuser !== response.data.team[i].id)
                         team += '<option value="' + response.data.team[i].id + '">' + response.data.team[i].name + ' - ' + response.data.team[i].employe + '</option>';
-                };
-                team += '</optgroup>';
+                    };
+                    team += '</optgroup>';
 
                 var qa = '<optgroup label="QA Engineer">';
                 for ( var i  in response.data.qa) {
-                    qa += '<option value="' + response.data.qa[i].id + '">' + response.data.qa[i].name + ' - ' + response.data.qa[i].employe + '</option>';
+                    if ( idActiveuser !== response.data.qa[i].id) {
+                        qa += '<option value="' + response.data.qa[i].id + '">' + response.data.qa[i].name + ' - ' + response.data.qa[i].employe + '</option>';
+                    }
                 };
                 qa += '</optgroup>';
 
                 console.log(employe);
 
-                if (employe == 'Admin' || employe == 'Lead' || employe == 'Supervisor') {
+                if (employe == 'Admin' || employe == 'Lead' || employe == 'Supervisor' &&  idActiveuser !== response.data.other[i].id){
                     var other = '<optgroup label="Other">';
                     for (var i  in response.data.other) {
                         other += '<option value="' + response.data.other[i].id + '">' + response.data.other[i].name + ' - ' + response.data.other[i].employe + '</option>';
