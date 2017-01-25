@@ -148,6 +148,7 @@ class ReportsController extends Controller
         $dateFinish = date_modify(date_create($dateFinish), '+1 day');
         //where('done', '=', 1)
             $tasks = Task::where('assign_to', '=', $userId)
+                ->where('done', '=', 1)
                 ->where('date_finish', '>=', $dateStart)
                 ->where('date_finish', '<=', $dateFinish)
                 ->with('project', 'user', 'track')
@@ -174,13 +175,14 @@ class ReportsController extends Controller
                     $tasks[$key]['volue'] = round($objectTask->value($totalTime, $task['relations']['project']['attributes']['hourly_rate']), 0, PHP_ROUND_HALF_UP);
                     $tasks[$key]['cost'] = round($objectTask->value($totalTime, $task['relations']['user']['attributes']['hourly_rate']), 0, PHP_ROUND_HALF_UP);
                     $tasks[$key]['economy'] = round($tasks[$key]['volue'] - $tasks[$key]['cost'], 0, PHP_ROUND_HALF_UP);
-                    $totalValue += $tasks[$key]['volue'];
-                    $totalCost += $tasks[$key]['cost'];
-                    $totalEconomy += $tasks[$key]['economy'];
                 }
             }
 
-            if ( !isset($tasks[$key]['hours'])) {
+            if (isset($tasks[$key]['hours'])) {
+                $totalValue += $tasks[$key]['volue'];
+                $totalCost += $tasks[$key]['cost'];
+                $totalEconomy += $tasks[$key]['economy'];
+            } else {
                 $tasks[$key]['hours'] = '-';
                 $tasks[$key]['volue'] = '-';
                 $tasks[$key]['cost'] = '-';
@@ -189,7 +191,7 @@ class ReportsController extends Controller
                 $totalValue += 0;
                 $totalCost += 0;
                 $totalEconomy += 0;
-           }
+            }
         }
 
         $total['totalValue'] = $totalValue;
