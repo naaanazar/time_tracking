@@ -171,10 +171,9 @@ class ReportsController extends Controller
             foreach( $task['relations']['project']['track'] as $keys => $trask ) {
                 if ( $task['relations']['project']['track'][$keys]['approve'] == 1 ) {
                     $tasks[$key]['hours'] = $objectTask->time_hour($hours);
-                    $tasks[$key]['volue'] = $objectTask->value($totalTime, $task['relations']['project']['attributes']['hourly_rate']);
-                    $tasks[$key]['cost'] = $objectTask->value($totalTime, $task['relations']['user']['attributes']['hourly_rate']);
-                    $tasks[$key]['economy'] = $tasks[$key]['value'] - $tasks[$key]['cost'];
-
+                    $tasks[$key]['volue'] = round($objectTask->value($totalTime, $task['relations']['project']['attributes']['hourly_rate']), 0, PHP_ROUND_HALF_UP);
+                    $tasks[$key]['cost'] = round($objectTask->value($totalTime, $task['relations']['user']['attributes']['hourly_rate']), 0, PHP_ROUND_HALF_UP);
+                    $tasks[$key]['economy'] = round($tasks[$key]['volue'] - $tasks[$key]['cost'], 0, PHP_ROUND_HALF_UP);
                     $totalValue += $tasks[$key]['volue'];
                     $totalCost += $tasks[$key]['cost'];
                     $totalEconomy += $tasks[$key]['economy'];
