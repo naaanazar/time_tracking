@@ -108,13 +108,13 @@
                             @if (isset($projectReport))
                                 @foreach( $projectReport as $key => $task )
                                     <tr class="odd gradeX">
-                                        <td>{{ $task->user->name }}</td>
-                                        <td>{{ $task->task_titly }}</td>
-                                        <td>{{ $task->task_type }}</td>
-                                        <td>{{ $task->hours }}</td>
-                                        <td>{{ $task->value }}</td>
-                                        <td>{{ $task->cost }}</td>
-                                        <td>{{ $task->economy }}</td>
+                                        <td>{{ isset($task->user->name) ? $task->user->name : 'No Person' }}</td>
+                                        <td>{{ isset($task->task_titly) ? $task->task_titly : 'No task title'}}</td>
+                                        <td>{{ isset($task->task_type) ? $task->task_type : 'No task type' }}</td>
+                                        <td>{{ isset($task->hours) ? $task->hours : 'No time' }}</td>
+                                        <td>{{ isset($task->value) ? $task->value : 'No value' }}</td>
+                                        <td>{{ isset($task->cost) ? $task->cost : 'No cost' }}</td>
+                                        <td>{{ isset($task->economy) ? $task->economy : 'No economy' }}</td>
                                     </tr>
                                 @endforeach
                             @endif
