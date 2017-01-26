@@ -679,10 +679,10 @@ class TimeManageController extends Controller
     private function validation_client($request)
     {
         $this->validate($request, [
-            'company_name' => 'required|min:4|max:30',
+            'company_name' => 'required|min:4|max:100',
             'company_address' => 'min:4|max:100',
             'website' => 'string',
-            'contact_person' => 'required|min:4|max:30',
+            'contact_person' => 'required|min:4|max:100',
             'email' => 'unique:Clients|email',
             'phone_number' => 'regex:/[0-9-]+/|max:30'
         ]);
@@ -691,10 +691,10 @@ class TimeManageController extends Controller
     private function validationClientEdit($request)
     {
         $this->validate($request, [
-            'company_name' => 'required|min:4|max:30',
+            'company_name' => 'required|min:4|max:100',
             'company_address' => 'min:4|max:100',
             'website' => 'string',
-            'contact_person' => 'required|min:4|max:30',
+            'contact_person' => 'required|min:4|max:100',
             'email' => 'required|email',
             'phone_number' => 'regex:/[0-9-]+/|max:30'
         ]);
@@ -708,7 +708,7 @@ class TimeManageController extends Controller
         $this->validate($request, [
             'company_id' => 'required|integer',
             'lead_id' => 'integer',
-            'project_name' => 'required|min:2|max:30',
+            'project_name' => 'required|min:2|max:100',
             'hourly_rate' => 'numeric',
             'notes' => 'regex:/[a-zA-Z0-9]+/|max:1000'
         ], [
