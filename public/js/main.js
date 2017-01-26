@@ -759,7 +759,7 @@ $(document).ready(function(){
      //clearTimeout(t);
     var actibeTimetrackId = false;
 
-     $(document).on('click' , '#stopTrack',  function(){
+     $(document).on('click' , '#stopTrack',  function(event){
          console.log('stop');
          event.preventDefault();
 
@@ -769,7 +769,7 @@ $(document).ready(function(){
 
      });
 
-    $(document).on('click' , '#stopTrack2',  function(){
+    $(document).on('click' , '#stopTrack2',  function(event){
         console.log('stop');
         event.preventDefault();
         clearTimeout(t);

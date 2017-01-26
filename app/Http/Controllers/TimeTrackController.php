@@ -166,7 +166,7 @@ class TimeTrackController extends Controller
                 $data['billable_time'] = '0';
             }
 
-
+            var_dump($data);
             TimeTrack::where('id', '=', $track_id)->update( $data );
 
             if (isset($_COOKIE['SetDateTracking'])){

@@ -730,6 +730,8 @@ class TimeManageController extends Controller
             'alloceted_hours' => 'numeric',
             'assign_to' => 'min:2|max:30',
             'billable' => 'boolean'
+        ], [
+            'task_titly.max' => 'The task title may not greater than 200 characters.'
         ]);
     }
 
