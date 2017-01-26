@@ -65,6 +65,7 @@
                                  <th>Date Finish</th>-->
                                 <th>Task</th>
                                 <th>Task Type</th>
+                                <th>Billable</th>
                                 <th>Hours</th>
                                 <th>Value</th>
                             </tr>
@@ -77,6 +78,7 @@
                                 <th class="thFoot" ></th>
                                 <!--  <th class="thFoot" >Date Start</th>
                                   <th class="thFoot" >Date Finish</th>-->
+                                <th class="thFoot" ></th>
                                 <th class="thFoot" ></th>
                                 <th class="thFoot" ></th>
                                 <th class="thFoot" ></th>
@@ -99,6 +101,7 @@
 
                                         <td>{{ $key->task_titly }}</td>
                                         <td>{{ $key->task_type }}</td>
+                                        <td>{{ isset($key->billable) ? (($key->billable == 1) ? 'YES' : 'NO') : '' }}</td>
                                         <td>{{ $key->total }}</td>
                                         <td>{{ $key->value }}</td>
 

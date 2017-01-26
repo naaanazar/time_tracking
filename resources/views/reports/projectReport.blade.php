@@ -79,6 +79,7 @@
                                 <th>Task</th>
                                 <th>Task Type</th>
                                 <th>Hours</th>
+                                <th>Billable</th>
                                 <th>Value</th>
                                 <th>Cost</th>
                                 <th>Economy</th>
@@ -98,6 +99,7 @@
                                 <th class="thFoot" ></th>
                                 <th class="thFoot" ></th>
                                 <th class="thFoot" ></th>
+                                <th class="thFoot" ></th>
 
                             </tr>
                             </tfoot>
@@ -112,6 +114,7 @@
                                         <td>{{ isset($task->task_titly) ? $task->task_titly : 'No task title'}}</td>
                                         <td>{{ isset($task->task_type) ? $task->task_type : 'No task type' }}</td>
                                         <td>{{ isset($task->hours) ? $task->hours : 'No time' }}</td>
+                                        <td>{{ isset($task->billable) ? (($task->billable == 1) ? 'YES' : 'NO') : '' }}</td>
                                         <td>{{ isset($task->value) ? $task->value : 'No value' }}</td>
                                         <td>{{ isset($task->cost) ? $task->cost : 'No cost' }}</td>
                                         <td>{{ isset($task->economy) ? $task->economy : 'No economy' }}</td>
