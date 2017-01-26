@@ -301,7 +301,9 @@
                             $totalTime = '';
                             if($key->total_time != null){
                             if($status == 'Developer' || $status == 'QA Engineer')
-
+                                if(!isset($hours)) {
+                                    $hours = 0;
+                                }
                                 $hours = floor($key->total_time / 3600);
                                 $minutes = floor(($key->total_time / 60) % 60);
                                 $seconds = $key->total_time % 60;
