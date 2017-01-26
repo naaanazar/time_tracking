@@ -171,9 +171,9 @@
                                     <label class="control-label" for="HourlyRateProhectId" style="text-align: left;">Allocated Hours</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <input name="alloceted_hours" class="input-xlarge focused my_input" id="HourlyRateProhectId"  type="number"
+                                    <input name="alloceted_hours" class="input-xlarge focused my_input" id="HourlyRateProhectId" pattern="([01]?[0-9]{1}|2[0-3]{1}).[0-5]{1}[0-9]{1}"  step="0.15" type="number"
                                             value="<?= ( isset( $task[0]->alloceted_hours ) ) ? $task[0]->alloceted_hours : '' ;?>"
-                                        <?= ( $status == 'Developer') ? ' disabled' : '' ?>/>
+                                        <?= ( $status == 'Developer') ? ' disabled' : '' ?> />
                                     @if ($errors->has('alloceted_hours'))
                                         <span class="help-block">
                                                 <strong style="color:#802420">{{ $errors->first('alloceted_hours') }}</strong>
