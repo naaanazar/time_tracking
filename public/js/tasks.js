@@ -16,8 +16,8 @@ $(document).ready(function(){
                         result += '<option value="' + response.data[key].id + '">' + response.data[key].task_titly + '</option>';
                     }
                 } else {
-                    if ($('#conteiner').data('idActiveUser') == response.data[key].assign_to ){
-                        for (var key in response.data) {
+                    for (var key in response.data) {
+                        if ($('#conteiner').data('idActiveUser') == response.data[key].assign_to ){
                             result += '<option value="' + response.data[key].id + '">' + response.data[key].task_titly + '</option>';
                         }
                     }
