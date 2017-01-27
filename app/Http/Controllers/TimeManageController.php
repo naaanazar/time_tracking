@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -608,19 +609,36 @@ class TimeManageController extends Controller
 
         $result = Project::where('id', '=', $project_id)
             ->get()[0]->lead_id;
+        $collection = null;
+            $team = null;
+        if($result) {
+            /** @var Collection $collection */
+            $collection = User::where('id', '=', $result)->get();
 
-        $lead = User::where('id', '=', $result)->get();
+        }
+        if(($lead = $collection->get(0)) !== null) {
+            $team = User::where('users_team_id', '=', $lead->users_team_id)->get();
 
-        $team = User::where('users_team_id', '=', $lead[0]->users_team_id)->get();
+        }
 
         $qa = User::where('employe', '=', 'QA Engineer')->get();
-        $other = User::where([
-            ['id', '<>', $result],
-            ['users_team_id', '<>', $lead[0]->users_team_id],
-            ['employe', '<>', 'QA Engineer'],
-        ])->get();
+        if($team) {
 
-        $result = ['lead' => $lead, 'team' => $team, 'qa' => $qa, 'other' => $other];
+            $other = User::where([
+                ['id', '<>', $result],
+                ['users_team_id', '<>', $collection[0]->users_team_id],
+                ['employe', '<>', 'QA Engineer'],
+            ])->get();
+        } else {
+            $other = User::where([
+                ['id', '<>', $result],
+                ['employe', '<>', 'QA Engineer'],
+            ])->get();
+        }
+
+
+
+        $result = ['lead' => $collection, 'team' => $team, 'qa' => $qa, 'other' => $other];
 
         if ($result) {
             return response()->json(['data' => (object)$result]);
