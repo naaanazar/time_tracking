@@ -11,13 +11,12 @@ $(document).ready(function(){
             var result = '<option selected disabled value="">Please select task</option>';
             var urlSend = '/tasks/get/' + clientId;
             $.get(urlSend, function (response) {
-                if ( $('.conteiner').data('status') !== 'QA Engineer']){
+                if ( $('#conteiner').data('status') != 'QA Engineer'){
                     for (var key in response.data) {
                         result += '<option value="' + response.data[key].id + '">' + response.data[key].task_titly + '</option>';
                     }
                 } else {
-
-                    if ($('.conteiner').data('idActiveUser') == response.data[key].assign_to ){
+                    if ($('#conteiner').data('idActiveUser') == response.data[key].assign_to ){
                         for (var key in response.data) {
                             result += '<option value="' + response.data[key].id + '">' + response.data[key].task_titly + '</option>';
                         }

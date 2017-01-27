@@ -389,6 +389,7 @@ $(document).ready(function(){
                 dFinish = new Date();
             }
             dFinish.setDate(new Date().getDate()+ 1);
+
             trackFinish();
         } else {
             if(dFinish){
