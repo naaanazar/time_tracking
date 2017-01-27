@@ -12,16 +12,20 @@ $(document).ready(function(){
             var urlSend = '/tasks/get/' + clientId;
             var at = $('#conteiner').data('status');
             $.get(urlSend, function (response) {
+
                 if ( String(at) != 'QA Engineer'){
 
                     console.log("22222222");
+
                     for (var key in response.data) {
                         result += '<option value="' + response.data[key].id + '">' + response.data[key].task_titly + '</option>';
                     }
                 } else {
+
                     console.log("qqqqqqqqqqqqqqqqqqqqqq");
                     for (var key in response.data) {
                         if ($('.conteiner').data('idActiveUser') == response.data[key].assign_to ){
+
 
                             result += '<option value="' + response.data[key].id + '">' + response.data[key].task_titly + '</option>';
                         }

@@ -389,6 +389,7 @@ $(document).ready(function(){
                 dFinish = new Date();
             }
             dFinish.setDate(new Date().getDate()+ 1);
+
             trackFinish();
         } else {
             if(dFinish){
@@ -759,7 +760,7 @@ $(document).ready(function(){
      //clearTimeout(t);
     var actibeTimetrackId = false;
 
-     $(document).on('click' , '#stopTrack',  function(){
+     $(document).on('click' , '#stopTrack',  function(event){
          console.log('stop');
          event.preventDefault();
 
@@ -769,7 +770,7 @@ $(document).ready(function(){
 
      });
 
-    $(document).on('click' , '#stopTrack2',  function(){
+    $(document).on('click' , '#stopTrack2',  function(event){
         console.log('stop');
         event.preventDefault();
         clearTimeout(t);
@@ -1251,20 +1252,25 @@ var Main = {
             $.get(urlSend, function (response) {
 
                     var lead = '<optgroup label="Lead">';
+  
 
-              //  console.log(response.data.lead[0].id + '-----' + idActiveuser);
-                if ( idActiveuser !== response.data.lead[0].id) {
-                       lead += '<option value="' + response.data.lead[0].id + '">' + response.data.lead[0].name + ' - ' + response.data.lead[0].employe + '</option>';
+                if( response.data.lead.hasOwnProperty('id') ) {
+                    //  console.log(response.data.lead[0].id + '-----' + idActiveuser);
+                    if (idActiveuser !== response.data.lead[0].id) {
+                        lead += '<option value="' + response.data.lead[0].id + '">' + response.data.lead[0].name + ' - ' + response.data.lead[0].employe + '</option>';
+                    }
                 }
                 lead += '</optgroup>';
 
 
                 var team = '<optgroup label="Team">';
-                for ( var i  in response.data.team) {
-                    if (response.data.team[i].employe != 'Lead') {
+                if(response.data.team !== undefined) {
+                    for (var i  in response.data.team) {
+                        if (response.data.team[i].employe != 'Lead') {
 
-                        if (idActiveuser !== response.data.team[i].id) {
-                            team += '<option value="' + response.data.team[i].id + '">' + response.data.team[i].name + ' - ' + response.data.team[i].employe + '</option>';
+                            if (idActiveuser !== response.data.team[i].id) {
+                                team += '<option value="' + response.data.team[i].id + '">' + response.data.team[i].name + ' - ' + response.data.team[i].employe + '</option>';
+                            }
                         }
                     }
                 }
