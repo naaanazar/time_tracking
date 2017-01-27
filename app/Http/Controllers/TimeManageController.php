@@ -617,7 +617,7 @@ class TimeManageController extends Controller
 
         }
         if(($lead = $collection->get(0) !== null)) {
-            var_dump('asdasdasd');
+
 
 
             $team = User::where('users_team_id', '=', $lead->users_team_id)->get();
@@ -626,7 +626,7 @@ class TimeManageController extends Controller
 
         $qa = User::where('employe', '=', 'QA Engineer')->get();
         if($team) {
-            var_dump('2');
+
             $other = User::where([
                 ['id', '<>', $result],
                 ['users_team_id', '<>', $collection[0]->users_team_id],

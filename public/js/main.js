@@ -1252,7 +1252,7 @@ var Main = {
             $.get(urlSend, function (response) {
 
                     var lead = '<optgroup label="Lead">';
-  
+
 
                 if( response.data.lead.hasOwnProperty('id') ) {
                     //  console.log(response.data.lead[0].id + '-----' + idActiveuser);
