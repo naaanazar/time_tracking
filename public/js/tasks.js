@@ -10,15 +10,19 @@ $(document).ready(function(){
         if (clientId) {
             var result = '<option selected disabled value="">Please select task</option>';
             var urlSend = '/tasks/get/' + clientId;
+            var at = $('#conteiner').data('status');
             $.get(urlSend, function (response) {
-                if ( $('.conteiner').data('status') !== 'QA Engineer']){
+                if ( String(at) != 'QA Engineer'){
+
+                    console.log("22222222");
                     for (var key in response.data) {
                         result += '<option value="' + response.data[key].id + '">' + response.data[key].task_titly + '</option>';
                     }
                 } else {
+                    console.log("qqqqqqqqqqqqqqqqqqqqqq");
+                    for (var key in response.data) {
+                        if ($('.conteiner').data('idActiveUser') == response.data[key].assign_to ){
 
-                    if ($('.conteiner').data('idActiveUser') == response.data[key].assign_to ){
-                        for (var key in response.data) {
                             result += '<option value="' + response.data[key].id + '">' + response.data[key].task_titly + '</option>';
                         }
                     }
