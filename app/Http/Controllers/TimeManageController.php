@@ -616,6 +616,7 @@ class TimeManageController extends Controller
             $collection = User::where('id', '=', $result)->get();
 
         }
+
         if(($lead = $collection->get(0)) !== null) {
             $team = User::where('users_team_id', '=', $lead->users_team_id)->get();
 

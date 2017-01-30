@@ -18,7 +18,7 @@
 
     <div id="conteiner" class="container" data-date="<?= isset($date)? $date : '' ?>"
          data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}"
-         data-idActiveUser="{{\Illuminate\Support\Facades\Auth::user()['original']['id']}}"
+         data-idactiveuser="{{\Illuminate\Support\Facades\Auth::user()['original']['id']}}"
          data-token="{{ Session::token() }}"
         data-log-active = "<?= isset($_COOKIE['logTrackActiveLogId']) ? $_COOKIE['logTrackActiveLogId'] : ''?>">
 
