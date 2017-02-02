@@ -988,7 +988,9 @@ $(document).ready(function(){
                         });
 
                     column.data().unique().sort().each(function (d, j) {
-                        select.append('<option value="' + d + '">' + d + '</option>')
+                        if (!(d.length < 1) ) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        }
                     });
                 });
             }
@@ -1141,7 +1143,7 @@ $(document).ready(function(){
     });
 
     $(document).on("change", "#taskProjectId", function () {
-        Main.all_users();
+        Main.all_users2();
     });
 
     var list = $('#AssignToId').data('all');
@@ -1149,7 +1151,7 @@ $(document).ready(function(){
     if(list) {
         //  $(document).on("mouseenter", "#AssignToId", function () {
         console.log('asdsd');
-        Main.all_users();
+        Main.all_users2();
     }
    // });
 });
@@ -1245,18 +1247,18 @@ var Main = {
 
 
             var idActiveuser = null;
-            if($('#username').data('id')){
-                 idActiveuser = $('#username').data('id');
+            if ($('#username').data('id')) {
+                idActiveuser = $('#username').data('id');
             }
 
             $.get(urlSend, function (response) {
                 console.log($('#conteiner').data('type-action'));
-                    var lead = '<optgroup label="Lead">';
+                var lead = '<optgroup label="Lead">';
 
 
-                if( response.data.lead[0].hasOwnProperty('id') ) {
+                if (response.data.lead[0].hasOwnProperty('id')) {
                     //  console.log(response.data.lead[0].id + '-----' + idActiveuser);
-                    if ($('#conteiner').data('type-action') == 'add'  || (idActiveuser !== response.data.lead[0].id)) {
+                    if ($('#conteiner').data('type-action') == 'add' || (idActiveuser !== response.data.lead[0].id)) {
                         lead += '<option value="' + response.data.lead[0].id + '">' + response.data.lead[0].name + ' - ' + response.data.lead[0].employe + '</option>';
                     }
                 }
@@ -1264,29 +1266,30 @@ var Main = {
 
 
                 var team = '<optgroup label="Team">';
-                if(response.data.team !== undefined) {
+                if (response.data.team !== undefined) {
                     for (var i  in response.data.team) {
                         if (response.data.team[i].employe != 'Lead') {
 
-                            if ($('#conteiner').data('type-action') == 'add'  || (idActiveuser !== response.data.team[i].id)) {
+                            if ($('#conteiner').data('type-action') == 'add' || (idActiveuser !== response.data.team[i].id)) {
                                 team += '<option value="' + response.data.team[i].id + '">' + response.data.team[i].name + ' - ' + response.data.team[i].employe + '</option>';
                             }
                         }
                     }
                 }
-                    team += '</optgroup>';
+                team += '</optgroup>';
 
                 var qa = '<optgroup label="QA Engineer">';
-                for ( var i  in response.data.qa) {
-                    if ($('#conteiner').data('type-action') == 'add'  || ( idActiveuser !== response.data.qa[i].id)) {
+                for (var i  in response.data.qa) {
+                    if ($('#conteiner').data('type-action') == 'add' || ( idActiveuser !== response.data.qa[i].id)) {
                         qa += '<option value="' + response.data.qa[i].id + '">' + response.data.qa[i].name + ' - ' + response.data.qa[i].employe + '</option>';
                     }
-                };
+                }
+                ;
                 qa += '</optgroup>';
 
                 console.log(employe);
 
-                if ((employe == 'Admin' || employe == 'Lead' || employe == 'Supervisor') &&  ($('#conteiner').data('type-action') == 'add'  || (idActiveuser !== response.data.other[i].id))){
+                if ((employe == 'Admin' || employe == 'Lead' || employe == 'Supervisor') && ($('#conteiner').data('type-action') == 'add' || (idActiveuser !== response.data.other[i].id))) {
                     var other = '<optgroup label="Other">';
                     for (var i  in response.data.other) {
                         other += '<option value="' + response.data.other[i].id + '">' + response.data.other[i].name + ' - ' + response.data.other[i].employe + '</option>';
@@ -1300,7 +1303,63 @@ var Main = {
         } else {
             $("#AssignToId").html('');
         }
-    }
+
+    },
+
+        all_users2: function() {
+            var clientId = $("#taskProjectId option:selected").val();
+            var employe = ($('#conteiner').data('status'));
+            if (clientId) {
+
+                var urlSend = '/get/get-users/';
+                var result = '<option selected disabled value="null">Please select Assign to</option>';
+
+                if ('' != ($("#username").text())) {
+                    result = null;
+                }
+
+                var idActiveuser = null;
+                if ($('#username').data('id')) {
+                    idActiveuser = $('#username').data('id');
+                }
+
+                $.get(urlSend, function (response) {
+                    console.log($('#conteiner').data('type-action'));
+
+                    var lead = '<optgroup label="Leads">';
+                    var developer = '<optgroup label="Developers">';
+                    var qa = '<optgroup label="QA Engineers">';
+                    var other = '<optgroup label="Other">';
+                    if (response.data.users !== undefined) {
+                        for (var i  in response.data.users) {
+                            if ($('#conteiner').data('type-action') == 'add' || (idActiveuser !== response.data.users[i].id)) {
+                                if (response.data.users[i].employe == 'Developer') {
+                                    developer += '<option value="' + response.data.users[i].id + '">' + response.data.users[i].name + ' - ' + response.data.users[i].employe + '</option>';
+
+                            } else if (response.data.users[i].employe == 'Lead') {
+                                    lead += '<option value="' + response.data.users[i].id + '">' + response.data.users[i].name + ' - ' + response.data.users[i].employe + '</option>';
+
+                            } else if (response.data.users[i].employe == 'QA Engineer') {
+                                    qa += '<option value="' + response.data.users[i].id + '">' + response.data.users[i].name + ' - ' + response.data.users[i].employe + '</option>';
+
+                            } else {
+                                    other += '<option value="' + response.data.users[i].id + '">' + response.data.users[i].name + ' - ' + response.data.users[i].employe + '</option>';
+                            }
+                        }
+                        }
+                    }
+
+                    lead  += '</optgroup>';
+                    developer   += '</optgroup>';
+                    qa   += '</optgroup>';
+                    other   += '</optgroup>';
+
+                    $("#AssignToId").append(result + lead + developer + qa +  other);
+                });
+            } else {
+                $("#AssignToId").html('');
+            }
+        }
 
 
 };

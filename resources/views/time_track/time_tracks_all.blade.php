@@ -1,7 +1,9 @@
 @extends('layouts.index_template')
 
 @section('content')
-    <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
+    <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'];
+    $id = \Illuminate\Support\Facades\Auth::user()['original']['id'];
+    ?>
 
     <div class="modal fade" id="delete-track" role="dialog">
         <div class="modal-dialog"  >
@@ -77,6 +79,10 @@
 
                             @if (isset($tracks))
                                 @foreach( $tracks as $key )
+                                    @if($key->task->assign_to != $id && ($status == 'Lead' || $status == 'QA Engineer'))
+
+                                        @continue
+                                    @endif
                                     <tr class="odd gradeX <?= $key->approve == 1 ? 'done_tr' : ($key->done == 1 ? 'done_tr2' : '')?>">
                                         <td>{{ $key->project->project_name }}</td>
                                         <td>{{ $key->task->task_titly }}</td>
