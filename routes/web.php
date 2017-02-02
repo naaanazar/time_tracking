@@ -55,6 +55,10 @@ Route::group(['middleware' => ['permision']], function () {
     Route::post('/task/update/{id}', 'TimeManageController@update_task')->where(['id' => '[0-9]+']);
     Route::get('/task/delete/{id}', 'TimeManageController@delete_task')->where(['id' => '[0-9]+']);
     Route::get('/get/team/{id}', 'TimeManageController@get_team')->where(['id' => '[0-9]+']);
+    Route::get('/get/get-users/', 'TimeManageController@get_users');
+
+
+
     Route::get('/task/all/{msg?}/{theme?}', 'TimeManageController@all_tasks');
     Route::get('/project/tasks/{id}', 'TimeManageController@get_project_tasks')->where(['id' => '[0-9]+']);
     Route::get('/client/tasks/{id}', 'TimeManageController@get_client_tasks')->where(['id' => '[0-9]+']);

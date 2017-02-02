@@ -647,6 +647,19 @@ class TimeManageController extends Controller
 
         return response()->json(['data' => 'false']);
     }
+//edits
+    public function get_users()
+    {
+
+        $users = User::get();
+        $result = ['users' => $users];
+
+        if ($result) {
+            return response()->json(['data' => (object)$result]);
+        }
+
+        return response()->json(['data' => 'false']);
+    }
 
     /*
      * create new team
