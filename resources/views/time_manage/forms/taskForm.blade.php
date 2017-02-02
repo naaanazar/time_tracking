@@ -2,7 +2,8 @@
 
 @section('content')
     <?php $status = \Illuminate\Support\Facades\Auth::user()['original']['employe'] ?>
-    <div class="container" id="conteiner" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}">
+    <div class="container" id="conteiner" data-status="{{\Illuminate\Support\Facades\Auth::user()['original']['employe']}}"
+            data-type-action="<?= isset( $task )  ? 'edit' : 'add'?>">
 
         <div class="row">
             <div class="row-fluid">
@@ -171,7 +172,7 @@
                                     <label class="control-label" for="HourlyRateProhectId" style="text-align: left;">Allocated Hours</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-                                    <input name="alloceted_hours" class="input-xlarge focused my_input" id="HourlyRateProhectId" pattern="([01]?[0-9]{1}|2[0-3]{1}).[0-5]{1}[0-9]{1}"  step="0.15" type="number"
+                                    <input name="alloceted_hours" class="input-xlarge focused my_input" id="HourlyRateProhectId" title="00:00, 00:15, 00:30, 00:45"  pattern="[0-9]{1}[0-9]{1}.[0134]{1}[05]{1}" placeholder="00:00, 00:15, 00:30, 00:45"  step="0.15" type="text"
                                             value="<?= ( isset( $task[0]->alloceted_hours ) ) ? $task[0]->alloceted_hours : '' ;?>"
                                         <?= ( $status == 'Developer') ? ' disabled' : '' ?> />
                                     @if ($errors->has('alloceted_hours'))
