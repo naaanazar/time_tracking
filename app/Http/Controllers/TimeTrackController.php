@@ -183,7 +183,7 @@ class TimeTrackController extends Controller
                 ->with('project', 'task')
                 ->get();
 
-            $track[0]['duration'] = $task->time_minute($track[0]['attributes']['duration']);
+            $track[0]['duration'] = $task->time_add_00($task->time_minute($track[0]['attributes']['duration']));
 
                 if (!$track[0]['attributes']['date_start'] == null) {
                     $data['start'] = $task->dateParse($track[0]['attributes']['date_start']);

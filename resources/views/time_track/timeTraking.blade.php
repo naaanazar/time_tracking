@@ -356,7 +356,8 @@
                                          <p class="project" > {{ date('H:i', strtotime($key->date_start)) }} - {{  date('H:i', strtotime($key->date_finish)) }}</p>
                                     @endif
                                 </td>
-                                <td class="text-right table-cell-actions">
+                                <td class="text-right table-cell-actions"     style="min-width: 220px;
+                                    padding-left: 10px;" valign="bottom">
                                     <div class="btn-group">
                                         <span class="stop-start-button">
                                             @if ($key->done == 0)
