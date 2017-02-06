@@ -26,7 +26,8 @@
 
         <div class="row-fluid">
 
-            <!-- block -->
+            <!-- block -->989dsfd
+            9898f$3eeDEDEEES986555555554
             <div class="block" style="border-bottom: 1px solid #ccc; border-left: none; border-right: none">
 
                 <div class="block-content collapse in">
@@ -79,7 +80,7 @@
 
                             @if (isset($tracks))
                                 @foreach( $tracks as $key )
-                                    @if($key->task->assign_to != $id && ($status == 'Lead' || $status == 'QA Engineer'))
+                                    @if($key->task->assign_to != $id && ($status == 'QA Engineer' || $status == 'Developer'))
 
                                         @continue
                                     @endif
