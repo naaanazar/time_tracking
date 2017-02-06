@@ -259,6 +259,7 @@ class TimeTrackController extends Controller
      * */
     public function trackDone( $id )
     {
+
         TimeTrack::where('id', '=', $id)
             ->update(['done' => 1 ]);
 
@@ -267,7 +268,10 @@ class TimeTrackController extends Controller
             ->first()['attributes']['task_id'];
 
         Task::where('id', '=', $trackId)
-            ->update(['date_finish' => date('Y-m-d H:i:s')]);
+            ->update([
+                'date_finish' => date('Y-m-d H:i:s'),
+                'done' => 1
+            ]);
 
         return back();
     }
@@ -285,7 +289,10 @@ class TimeTrackController extends Controller
             ->first()['attributes']['task_id'];
 
         Task::where('id', '=', $trackId)
-            ->update(['date_finish' => null ]);
+            ->update([
+                'date_finish' => null,
+                'done' => 0
+            ]);
 
         return back();
     }
@@ -311,7 +318,6 @@ class TimeTrackController extends Controller
      * */
     public function create_time_log( $id = false )
     {
-
 
         $data =  Input::all();
         if( isset($data['id'])) {

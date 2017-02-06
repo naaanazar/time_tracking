@@ -7,6 +7,7 @@ $(document).ready(function(){
     $(document).on("change", "#trackProjectId", function () {
 
         var clientId = $("#trackProjectId option:selected").val();
+
         if (clientId) {
             var result = '<option selected disabled value="">Please select task</option>';
             var urlSend = '/tasks/get/' + clientId;

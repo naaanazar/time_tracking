@@ -146,6 +146,7 @@ class ReportsController extends Controller
         $active['end'] =$dateFinish;
 
         $dateFinish = date_modify(date_create($dateFinish), '+1 day');
+
         //where('done', '=', 1)
             $tasks = Task::where('assign_to', '=', $userId)
                 ->where('done', '=', 1)

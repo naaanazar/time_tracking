@@ -295,7 +295,6 @@
                     @foreach( $tracks as $key)
 
                             <?php
-
                             if($status == 'Developer' || $status == 'QA Engineer' && $idActiveUser !== $key->task->assign_to){
                                 continue;
                             }
@@ -361,7 +360,7 @@
                                     <div class="btn-group">
                                         <span class="stop-start-button">
                                             @if ($key->done == 0)
-                                                 <a  href='/trask/done/<?= $key->id ?>'  class="btn btn-success" id="doneTrack" style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'display:none' : '' ?>" >
+                                                 <a  href='/trask/done/<?= $key->id //$key['relations']['task']['attributes']['assign_to'] ?>'  class="btn btn-success" id="doneTrack" style="<?= isset($_COOKIE['logTrackActiveTrackId']) && $_COOKIE['logTrackActiveTrackId'] == $key->id ? 'display:none' : '' ?>" >
                                                      <span class="glyphicon glyphicon-ok"></span> Done
                                                  </a>
                                             @else
