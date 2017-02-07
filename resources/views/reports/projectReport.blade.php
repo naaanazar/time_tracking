@@ -109,6 +109,7 @@
 
                             @if (isset($projectReport))
                                 @foreach( $projectReport as $key => $task )
+
                                     <tr class="odd gradeX">
                                         <td>{{ isset($task->user->name) ? $task->user->name : 'No Person' }}</td>
                                         <td>{{ isset($task->task_titly) ? $task->task_titly : 'No task title'}}</td>

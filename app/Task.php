@@ -137,6 +137,13 @@ class Task extends Model
         $houers = (int)($second/3600);
         $minutes =  (int)(($second - ($houers * 3600)) / 60);
 
+        if (0 == $houers) {
+            $houers = '00';
+        }
+        if ( 2 > strlen($minutes) ) {
+            $minutes = '0' . $minutes;
+        }
+
         return $houers . ':' . $minutes;
     }
 

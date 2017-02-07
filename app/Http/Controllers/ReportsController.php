@@ -38,6 +38,7 @@ class ReportsController extends Controller
 
        // where('done', '=', 1)
         $tasks = Task::where('date_finish', '>', $data)
+            ->where('billable', '=', 1)
             ->where('date_finish', '<=', $data1)
             ->with('client', 'project', 'user', 'track')
             ->get();
@@ -50,6 +51,7 @@ class ReportsController extends Controller
         foreach( $tasks as $key => $task ) {
             $total_time = 0;
             $value = 0;
+
             foreach( $task['relations']['track'] as $log) {
                 if( strtotime($data->format('Y-m-d')) < strtotime($log['attributes']['finish_track']) && strtotime($data1->format('Y-m-d')) > strtotime($log['attributes']['finish_track']) ) {
                     $total_time += $log['attributes']['total_time'];
@@ -95,26 +97,31 @@ class ReportsController extends Controller
         $totalValue = 0;
         $totalTime = 0;
         $totalCost = 0;
-        $totalEconomy = 0;
 
         foreach( $projectReport as $key => $task ) {
             $hours = 0;
             $value = 0;
             $cost = 0;
-            $economy = 0;
-            foreach($task['relations']['track'] as $track) {
+
+            foreach ($task['relations']['track'] as $track) {
                 $hours += $track['attributes']['total_time']; // seconds
                 $value += $objectTask->value($track['attributes']['total_time'], $projectReport[$key]['relations']['project']['attributes']['hourly_rate']);
                 $cost += $objectTask->value($track['attributes']['total_time'], $projectReport[$key]['relations']['user']['attributes']['hourly_rate']);
             }
 
-            $projectReport[$key]['hours'] = $objectTask-> secondToHour($hours);
+            $projectReport[$key]['hours'] = $objectTask->secondToHour($hours);
             $projectReport[$key]['value'] = round($value, 0, PHP_ROUND_HALF_UP);
             $projectReport[$key]['cost'] = round($cost, 0, PHP_ROUND_HALF_UP);
             $projectReport[$key]['economy'] = $projectReport[$key]['value'] - $projectReport[$key]['cost'];
             $totalTime += $hours;
             $totalValue += round($value, 0, PHP_ROUND_HALF_UP);
             $totalCost += round($cost, 0, PHP_ROUND_HALF_UP);
+
+            if( 0 == $task['billable']) {
+                $projectReport[$key]['value'] = 0;
+                $projectReport[$key]['cost'] = 0;
+                $projectReport[$key]['economy'] = 0;
+            }
         }
 
         $total['totalCost'] = $totalCost;
@@ -149,6 +156,7 @@ class ReportsController extends Controller
 
         //where('done', '=', 1)
             $tasks = Task::where('assign_to', '=', $userId)
+                ->where('billable', '=', 1)
                 ->where('done', '=', 1)
                 ->where('date_finish', '>=', $dateStart)
                 ->where('date_finish', '<=', $dateFinish)
