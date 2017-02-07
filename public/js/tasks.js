@@ -13,12 +13,14 @@ $(document).ready(function(){
             var urlSend = '/tasks/get/' + clientId;
             var at = $('#conteiner').data('status');
             $.get(urlSend, function (response) {
-                if ( String(at) != 'QA Engineer'){
+                console.log(at);
+                if ( String(at) != 'QA Engineer' && String(at) != 'Developer'){
                     for (var key in response.data) {
                         result += '<option value="' + response.data[key].id + '">' + response.data[key].task_titly + '</option>';
                     }
                 } else {
                     for (var key in response.data) {
+                        console.log('dadas');
                         if ($('#conteiner').data('idactiveuser') == response.data[key].assign_to ){
                             result += '<option value="' + response.data[key].id + '">' + response.data[key].task_titly + '</option>';
                         }

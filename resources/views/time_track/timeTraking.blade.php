@@ -295,7 +295,7 @@
                     @foreach( $tracks as $key)
 
                             <?php
-                            if($status == 'Developer' || $status == 'QA Engineer' && $idActiveUser !== $key->task->assign_to){
+                            if($status == 'Developer' && $idActiveUser !== $key->task->assign_to || $status == 'QA Engineer' && $idActiveUser !== $key->task->assign_to){
                                 continue;
                             }
                             $totalTime = '';
