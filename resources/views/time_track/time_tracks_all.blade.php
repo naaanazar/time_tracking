@@ -26,8 +26,8 @@
 
         <div class="row-fluid">
 
-            <!-- block -->989dsfd
-            9898f$3eeDEDEEES986555555554
+            <!-- block -->
+
             <div class="block" style="border-bottom: 1px solid #ccc; border-left: none; border-right: none">
 
                 <div class="block-content collapse in">
