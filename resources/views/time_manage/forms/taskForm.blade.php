@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
                                     <select name="task_type" class="input-xlarge focused my_input"  id="taskTypeId" style="height: 42px;"
-                                    <?= ( $status == 'Developer') ? ' disabled' : '' ?>>
+                                    <?= ( $status == 'Developer') ? ' disabled' : '' ?> required />
                                      @if (!isset($task))
                                     <option selected disabled value = ''>Please select task type</option>
                                     @endif
@@ -172,11 +172,8 @@
                                     <label class="control-label" for="HourlyRateProhectId" style="text-align: left;">Allocated Hours</label>
                                 </div>
                                 <div class="controls col-xs-8 col-sm-6 col-md-5 col-lg-4">
-<<<<<<< HEAD
                                     <input name="alloceted_hours" class="input-xlarge focused my_input" id="HourlyRateProhectId" title="00.00, 00.15, 00.30, 00.45"  pattern="[0-9]{1}[0-9]{1}.[0134]{1}[05]{1}" placeholder="00.00, 00.15, 00.30, 00.45"  step="0.15" type="text"
-=======
-                                    <input name="alloceted_hours" class="input-xlarge focused my_input" id="HourlyRateProhectId" title="00.00, 00.15, 00.30, 00.45"  pattern="[0-9]{1}[0-9]{1}.[0134]{1}[05]{1}" placeholder="00:00, 00:15, 00:30, 00:45"  step="0.15" type="text"
->>>>>>> 03624d9e4ba7d7dce30ffc49e529c0de5052a24c
+
                                             value="<?= ( isset( $task[0]->alloceted_hours ) ) ? $task[0]->alloceted_hours : '' ;?>"
                                         <?= ( $status == 'Developer') ? ' disabled' : '' ?> />
                                     @if ($errors->has('alloceted_hours'))
