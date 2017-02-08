@@ -108,20 +108,23 @@ class ReportsController extends Controller
                 $value += $objectTask->value($track['attributes']['total_time'], $projectReport[$key]['relations']['project']['attributes']['hourly_rate']);
                 $cost += $objectTask->value($track['attributes']['total_time'], $projectReport[$key]['relations']['user']['attributes']['hourly_rate']);
             }
-
-            $projectReport[$key]['hours'] = $objectTask->secondToHour($hours);
-            $projectReport[$key]['value'] = round($value, 0, PHP_ROUND_HALF_UP);
-            $projectReport[$key]['cost'] = round($cost, 0, PHP_ROUND_HALF_UP);
-            $projectReport[$key]['economy'] = $projectReport[$key]['value'] - $projectReport[$key]['cost'];
-            $totalTime += $hours;
-            $totalValue += round($value, 0, PHP_ROUND_HALF_UP);
-            $totalCost += round($cost, 0, PHP_ROUND_HALF_UP);
-
-            if( 0 == $task['billable']) {
+            var_dump($task['done']);
+            if( 0 == $task['billable'] || 0 == $task['done']) {
                 $projectReport[$key]['value'] = 0;
                 $projectReport[$key]['cost'] = 0;
                 $projectReport[$key]['economy'] = 0;
+                $value = 0;
+                $cost = 0;
+            } else {
+                $projectReport[$key]['value'] = round($value, 0, PHP_ROUND_HALF_UP);
+                $projectReport[$key]['cost'] = round($cost, 0, PHP_ROUND_HALF_UP);
+                $projectReport[$key]['economy'] = $projectReport[$key]['value'] - $projectReport[$key]['cost'];
             }
+
+            $projectReport[$key]['hours'] = $objectTask->secondToHour($hours);
+            $totalTime += $hours;
+            $totalValue += round($value, 0, PHP_ROUND_HALF_UP);
+            $totalCost += round($cost, 0, PHP_ROUND_HALF_UP);
         }
 
         $total['totalCost'] = $totalCost;

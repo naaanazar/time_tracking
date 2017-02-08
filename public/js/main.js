@@ -1234,6 +1234,7 @@ var Main = {
     },
 
     all_users: function() {
+
         var clientId = $("#taskProjectId option:selected").val();
         var employe = ($('#conteiner').data('status'));
         if (clientId) {
@@ -1307,6 +1308,7 @@ var Main = {
     },
 
         all_users2: function() {
+
             var clientId = $("#taskProjectId option:selected").val();
             var employe = ($('#conteiner').data('status'));
             if (clientId) {
@@ -1322,6 +1324,8 @@ var Main = {
                 if ($('#username').data('id')) {
                     idActiveuser = $('#username').data('id');
                 }
+
+                $("#AssignToId").html('');
 
                 $.get(urlSend, function (response) {
                     console.log($('#conteiner').data('type-action'));
